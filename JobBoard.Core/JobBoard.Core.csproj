@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JobBoard.Data\JobBoard.Data.csproj" />
+    <ProjectReference Include="..\JobBoard.Service\JobBoard.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Feutures\Categories\Commands\Validations\" />
+    <Folder Include="Feutures\Categories\Commands\Handler\" />
+    <Folder Include="Feutures\Categories\Commands\Models\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JobBoard.Data\JobBoard.Data.csproj" />
+    <ProjectReference Include="..\JobBoard.Infrastructure\JobBoard.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

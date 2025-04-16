@@ -1,0 +1,64 @@
+﻿using System.Linq.Expressions;
+using AutoMapper;
+using JobBoard.Core.Bases;
+using JobBoard.Core.Feutures.Companies.Queries.Models;
+using JobBoard.Core.Feutures.Companies.Queries.Results;
+using JobBoard.Core.Wrapers;
+using JobBoard.Data.Entities;
+using JobBoard.Service.Abstractions;
+using MediatR;
+
+namespace JobBoard.Core.Feutures.Companies.Queries.Handler
+{
+	public class CompanyQueryHandler : ResponseHandler, IRequestHandler<GetSingleCompanyQuery, Response<GetSingleCompanyQueryResponse>>,
+														IRequestHandler<GetAllCompaiesQuery, Response<List<GetSingleCompanyQueryResponse>>>,
+														IRequestHandler<GetPaginatedListCompanyQuery, PaginatedResponse<List<GetPaginatedListCompaniesQueryResponse>>>
+	{
+		#region Fields
+		private readonly ICompanyService _companyService;
+		private readonly IMapper _mapper;
+		#endregion
+
+		#region Constructors
+		public CompanyQueryHandler(ICompanyService companyService, IMapper mapper)
+		{
+			_companyService = companyService;
+			_mapper = mapper;
+		}
+		#endregion
+
+		#region Handlers
+		public async Task<Response<GetSingleCompanyQueryResponse>> Handle(GetSingleCompanyQuery request, CancellationToken cancellationToken)
+		{
+			var company = await _companyService.GetCompanyByIdAsync(request.Id);
+			if (company == null) return NotFound<GetSingleCompanyQueryResponse>($"No Company With Id = {request.Id}");
+
+			var companyResponse = _mapper.Map<GetSingleCompanyQueryResponse>(company);
+			return Success(companyResponse);
+		}
+
+		public async Task<Response<List<GetSingleCompanyQueryResponse>>> Handle(GetAllCompaiesQuery request, CancellationToken cancellationToken)
+		{
+			var companies = await _companyService.GetAllAsync();
+
+			return Success(_mapper.Map<List<GetSingleCompanyQueryResponse>>(companies));
+		}
+
+		public async Task<PaginatedResponse<List<GetPaginatedListCompaniesQueryResponse>>> Handle(GetPaginatedListCompanyQuery request, CancellationToken cancellationToken)
+		{
+			Expression<Func<Company, GetPaginatedListCompaniesQueryResponse>>
+					expression = comp => new GetPaginatedListCompaniesQueryResponse(comp.CompanyId, comp.CompanyName, comp.Description,
+													comp.WebsiteUrl, comp.Location, comp.PhoneNumber,
+													comp.Email, comp.Fax);
+
+			var queryable = _companyService.FilterPaginatedQueryable(request.Order);
+
+			var result = await queryable.Select(expression).ToPaginatedAsync(request.PageNumber, request.PageSize);
+
+			return result;
+		}
+
+		#endregion
+
+	}
+}

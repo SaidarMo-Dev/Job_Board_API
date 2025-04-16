@@ -1,0 +1,17 @@
+C:\visual projects\JobBoard.Api\JobBoard.Infrastructure\bin\Debug\net8.0\JobBoard.Infrastructure.deps.json
+C:\visual projects\JobBoard.Api\JobBoard.Infrastructure\bin\Debug\net8.0\JobBoard.Infrastructure.runtimeconfig.json
+C:\visual projects\JobBoard.Api\JobBoard.Infrastructure\bin\Debug\net8.0\JobBoard.Infrastructure.dll
+C:\visual projects\JobBoard.Api\JobBoard.Infrastructure\bin\Debug\net8.0\JobBoard.Infrastructure.pdb
+C:\visual projects\JobBoard.Api\JobBoard.Infrastructure\bin\Debug\net8.0\JobBoard.Data.dll
+C:\visual projects\JobBoard.Api\JobBoard.Infrastructure\bin\Debug\net8.0\JobBoard.Data.pdb
+C:\visual projects\JobBoard.Api\JobBoard.Infrastructure\obj\Debug\net8.0\JobBoard.Infrastructure.csproj.AssemblyReference.cache
+C:\visual projects\JobBoard.Api\JobBoard.Infrastructure\obj\Debug\net8.0\JobBoard.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\visual projects\JobBoard.Api\JobBoard.Infrastructure\obj\Debug\net8.0\JobBoard.Infrastructure.AssemblyInfoInputs.cache
+C:\visual projects\JobBoard.Api\JobBoard.Infrastructure\obj\Debug\net8.0\JobBoard.Infrastructure.AssemblyInfo.cs
+C:\visual projects\JobBoard.Api\JobBoard.Infrastructure\obj\Debug\net8.0\JobBoard.Infrastructure.csproj.CoreCompileInputs.cache
+C:\visual projects\JobBoard.Api\JobBoard.Infrastructure\obj\Debug\net8.0\JobBoard.8B27D21A.Up2Date
+C:\visual projects\JobBoard.Api\JobBoard.Infrastructure\obj\Debug\net8.0\JobBoard.Infrastructure.dll
+C:\visual projects\JobBoard.Api\JobBoard.Infrastructure\obj\Debug\net8.0\refint\JobBoard.Infrastructure.dll
+C:\visual projects\JobBoard.Api\JobBoard.Infrastructure\obj\Debug\net8.0\JobBoard.Infrastructure.pdb
+C:\visual projects\JobBoard.Api\JobBoard.Infrastructure\obj\Debug\net8.0\JobBoard.Infrastructure.genruntimeconfig.cache
+C:\visual projects\JobBoard.Api\JobBoard.Infrastructure\obj\Debug\net8.0\ref\JobBoard.Infrastructure.dll
