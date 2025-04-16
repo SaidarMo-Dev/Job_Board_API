@@ -8,7 +8,6 @@ namespace JobBoard.Core.Mapping.UserMapping
 		public void UpdateUserCommandMapping()
 		{
 			CreateMap<UpdateUserCommand, User>();
-
 		}
 	}
 }

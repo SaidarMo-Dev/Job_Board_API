@@ -1,0 +1,89 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Projects\\Job_Board_API\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{367E4DA6-2142-474F-B8D5-C47DFF86BC8A}|JobBoard.Infrastructure\\JobBoard.Infrastructure.csproj|c:\\projects\\job_board_api\\jobboard.infrastructure\\data\\configuration\\joblistingconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{367E4DA6-2142-474F-B8D5-C47DFF86BC8A}|JobBoard.Infrastructure\\JobBoard.Infrastructure.csproj|solutionrelative:jobboard.infrastructure\\data\\configuration\\joblistingconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{367E4DA6-2142-474F-B8D5-C47DFF86BC8A}|JobBoard.Infrastructure\\JobBoard.Infrastructure.csproj|c:\\projects\\job_board_api\\jobboard.infrastructure\\data\\configuration\\userconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{367E4DA6-2142-474F-B8D5-C47DFF86BC8A}|JobBoard.Infrastructure\\JobBoard.Infrastructure.csproj|solutionrelative:jobboard.infrastructure\\data\\configuration\\userconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79D9DDE7-61D3-45DB-8E5A-81646E3C13E2}|JobBoard.Data\\JobBoard.Data.csproj|c:\\projects\\job_board_api\\jobboard.data\\entities\\identity\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79D9DDE7-61D3-45DB-8E5A-81646E3C13E2}|JobBoard.Data\\JobBoard.Data.csproj|solutionrelative:jobboard.data\\entities\\identity\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 382,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "JobListingConfiguration.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Infrastructure\\Data\\Configuration\\JobListingConfiguration.cs",
+              "RelativeDocumentMoniker": "JobBoard.Infrastructure\\Data\\Configuration\\JobListingConfiguration.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Infrastructure\\Data\\Configuration\\JobListingConfiguration.cs*",
+              "RelativeToolTip": "JobBoard.Infrastructure\\Data\\Configuration\\JobListingConfiguration.cs*",
+              "ViewState": "AgIAABwAAAAAAAAAAAAQwCoAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T17:59:13.818Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserConfiguration.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Infrastructure\\Data\\Configuration\\UserConfiguration.cs",
+              "RelativeDocumentMoniker": "JobBoard.Infrastructure\\Data\\Configuration\\UserConfiguration.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Infrastructure\\Data\\Configuration\\UserConfiguration.cs",
+              "RelativeToolTip": "JobBoard.Infrastructure\\Data\\Configuration\\UserConfiguration.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwBMAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T17:55:09.764Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Data\\Entities\\Identity\\User.cs",
+              "RelativeDocumentMoniker": "JobBoard.Data\\Entities\\Identity\\User.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Data\\Entities\\Identity\\User.cs",
+              "RelativeToolTip": "JobBoard.Data\\Entities\\Identity\\User.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAA9wBgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T17:53:32.5Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            }
+          ]
+        },
+        {
+          "DockedHeight": 452,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
