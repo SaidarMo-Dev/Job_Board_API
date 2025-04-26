@@ -1,6 +1,6 @@
 ﻿using JobBoard.Data.Entities;
 using JobBoard.Infrastructure.Abstractions;
-using JobBoard.Infrastructure.Data;
+using JobBoard.Infrastructure.context;
 using JobBoard.Infrastructure.InfrastructureBases;
 using Microsoft.EntityFrameworkCore;
 

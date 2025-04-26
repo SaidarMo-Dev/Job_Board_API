@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\visual projects\\JobBoard.Api\\JobBoard.Data\\JobBoard.Data.csproj": {}
+    "C:\\Projects\\Job_Board_API\\JobBoard.Data\\JobBoard.Data.csproj": {}
   },
   "projects": {
-    "C:\\visual projects\\JobBoard.Api\\JobBoard.Data\\JobBoard.Data.csproj": {
+    "C:\\Projects\\Job_Board_API\\JobBoard.Data\\JobBoard.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\visual projects\\JobBoard.Api\\JobBoard.Data\\JobBoard.Data.csproj",
+        "projectUniqueName": "C:\\Projects\\Job_Board_API\\JobBoard.Data\\JobBoard.Data.csproj",
         "projectName": "JobBoard.Data",
-        "projectPath": "C:\\visual projects\\JobBoard.Api\\JobBoard.Data\\JobBoard.Data.csproj",
+        "projectPath": "C:\\Projects\\Job_Board_API\\JobBoard.Data\\JobBoard.Data.csproj",
         "packagesPath": "C:\\Users\\moham\\.nuget\\packages\\",
-        "outputPath": "C:\\visual projects\\JobBoard.Api\\JobBoard.Data\\obj\\",
+        "outputPath": "C:\\Projects\\Job_Board_API\\JobBoard.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -10,6 +10,7 @@ namespace JobBoard.Core.Mapping.JobMapping
 			GetJobByIdQueryMapping();
 			GetPaginatedJobsQueryMapping();
 			GetJobSkillsMapping();
+			UpdateJobCommandMapping();
 		}
 	}
 }

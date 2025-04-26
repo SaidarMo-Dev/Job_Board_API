@@ -16,6 +16,9 @@ namespace JobBoard.Infrastructure
 			services.AddScoped<IJobRepository, JobRepository>();
 			services.AddScoped<IJobSkillRepository, JobSkillRepository>();
 			services.AddScoped<IJobCategoryRepository, JobCategoryRepository>();
+			services.AddScoped<IBookMarkRepository, BookMarkRepository>();
+			services.AddScoped<IUserRefreshTokenRepository, UserRefreshTokenRepository>();
+			services.AddScoped<IApplicationRepository, ApplicationRepository>();
 
 			return services;
 		}

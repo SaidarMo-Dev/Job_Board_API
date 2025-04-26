@@ -1,6 +1,6 @@
 ﻿using JobBoard.Core.Feutures.Jobs.Commands.Models;
 using JobBoard.Data.Entities;
-using JobBoard.Data.Helpers.enums;
+using JobBoard.Data.enums;
 
 namespace JobBoard.Core.Mapping.JobMapping
 {

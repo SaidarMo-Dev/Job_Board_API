@@ -18,5 +18,6 @@ namespace JobBoard.Infrastructure.InfrastructureBases
 		void Commit();
 		void RollBack();
 
+		public Task SaveChangesAsync();
 	}
 }

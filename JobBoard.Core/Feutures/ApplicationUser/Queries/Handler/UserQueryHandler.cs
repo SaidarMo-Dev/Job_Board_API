@@ -12,7 +12,8 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 {
 	public class UserQueryHandler : ResponseHandler,
 									IRequestHandler<GetUserByIdQuery, Response<GetUserByIdQueryResponse>>,
-									IRequestHandler<GetPaginatedListUsersQuery, PaginatedResponse<List<GetPaginatedListUsersQueryResponse>>>
+									IRequestHandler<GetPaginatedListUsersQuery, PaginatedResponse<List<GetPaginatedListUsersQueryResponse>>>,
+									IRequestHandler<GetUserBookmarksQuery, Response<List<GetUseBookmarksQueryResponse>>>
 	{
 
 		#region Fields
@@ -20,6 +21,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 		private readonly UserManager<User> _userManager;
 		private readonly IMapper _mapper;
 		private readonly IUserService _userService;
+		private readonly IBookmarkService _bookmarkService;
 
 		#endregion
 
@@ -27,12 +29,13 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 
 		public UserQueryHandler(UserManager<User> userManager,
 								IMapper mapper,
-								IUserService userService
-								)
+								IUserService userService,
+								IBookmarkService bookmarkService)
 		{
 			_userManager = userManager;
 			_mapper = mapper;
 			_userService = userService;
+			_bookmarkService = bookmarkService;
 		}
 
 		#endregion
@@ -57,6 +60,16 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 
 			return usersResponse;
 
+		}
+
+		public async Task<Response<List<GetUseBookmarksQueryResponse>>> Handle(GetUserBookmarksQuery request, CancellationToken cancellationToken)
+		{
+			var user = await _userManager.FindByIdAsync(request.UserId.ToString());
+			if (user is null) return NotFound<List<GetUseBookmarksQueryResponse>>();
+
+			var bookmarks = await _bookmarkService.GetUserBookmarks(request.UserId);
+
+			return Success(_mapper.Map<List<GetUseBookmarksQueryResponse>>(bookmarks));
 		}
 
 		#endregion

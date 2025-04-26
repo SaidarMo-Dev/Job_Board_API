@@ -2,11 +2,13 @@
 using JobBoard.Core.Feutures.Skills.Commands.Models;
 using JobBoard.Core.Feutures.Skills.Queries.Models;
 using JobBoard.Data.Metadata;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobBoard.Api.Controllers
 {
 	[ApiController]
+	[AllowAnonymous]
 	public class SkillController : AppControllerbase
 	{
 		[HttpGet(Router.SkillRoute.GetByID)]

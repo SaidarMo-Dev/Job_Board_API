@@ -1,6 +1,9 @@
-﻿namespace JobBoard.Infrastructure.Abstractions
+﻿using JobBoard.Data.Entities;
+using JobBoard.Infrastructure.InfrastructureBases;
+
+namespace JobBoard.Infrastructure.Abstractions
 {
-	public interface IBookMarkRepository
+	public interface IBookMarkRepository : IGenericRepository<Bookmark>
 	{
 	}
 

@@ -51,7 +51,7 @@ namespace JobBoard.Service.Implementations
 
 		}
 
-		public async Task<string> AddNewUser(User User, string Password)
+		public async Task<string> AddNewUserAsync(User User, string Password)
 		{
 			var trans = _userRepository.BeginTransaction();
 			try
@@ -67,7 +67,7 @@ namespace JobBoard.Service.Implementations
 			}
 		}
 
-		public async Task<string> UpdateUser(User user)
+		public async Task<string> UpdateUserAsync(User user)
 		{
 
 			var trans = _userRepository.BeginTransaction();
@@ -83,6 +83,36 @@ namespace JobBoard.Service.Implementations
 				return "Error When Updating User: " + ex.Message;
 			}
 		}
+
+		public async Task<bool> DeleteUsersAsync(User user)
+		{
+			var trans = _userRepository.BeginTransaction();
+			try
+			{
+				user.IsDeleted = true;
+				user.DeletedAt = DateTime.Now;
+
+				await _userRepository.SaveChangesAsync();
+				await trans.CommitAsync();
+				return true;
+			}
+			catch (Exception ex)
+			{
+				await trans.RollbackAsync();
+				return false;
+			}
+		}
+
+		public async Task<bool> IsExistByIdAync(int UserId)
+		{
+			var user = await _userRepository.GetTableAsNoTracking()
+				.Where(x => x.Id.Equals(UserId))
+				.FirstOrDefaultAsync();
+
+			return user != null;
+		}
+
+
 		#endregion
 	}
 }

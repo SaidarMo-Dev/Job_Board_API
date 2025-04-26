@@ -1,6 +1,6 @@
 ﻿using JobBoard.Core.Feutures.Companies.Queries.Results;
 using JobBoard.Core.Wrapers;
-using JobBoard.Data.Helpers.enums;
+using JobBoard.Data.enums;
 using MediatR;
 
 namespace JobBoard.Core.Feutures.Companies.Queries.Models

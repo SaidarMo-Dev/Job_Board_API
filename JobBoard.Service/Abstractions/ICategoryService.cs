@@ -7,5 +7,7 @@ namespace JobBoard.Service.Abstractions
 		Task<Category> GetCategoryByIdAsync(int Id);
 		Task<ICollection<Category>> GetAllAsync();
 		IQueryable<Category> GetJobCategories(int JobId);
+		Task<bool> IsExistByIdAsync(int Id);
+		bool IsExistById(int Id);
 	}
 }

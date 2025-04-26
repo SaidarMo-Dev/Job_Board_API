@@ -49,6 +49,10 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 
 		public async Task<Response<List<GetJobSkillsQueryResponse>>> Handle(GetJobSkillsQuery request, CancellationToken cancellationToken)
 		{
+			bool Exist = await _jobService.IsExistByIdAsync(request.JobId);
+
+			if (!Exist) return NotFound<List<GetJobSkillsQueryResponse>>();
+
 			var skills = await _jobService.GetJobSkillsAsync(request.JobId);
 
 			var skillsMapping = _mapper.Map<List<GetJobSkillsQueryResponse>>(skills);
@@ -58,6 +62,10 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 
 		public async Task<Response<List<GetJobCategoriesQueryResponse>>> Handle(GetJobCategoriesQuery request, CancellationToken cancellationToken)
 		{
+			bool Exist = await _jobService.IsExistByIdAsync(request.JobId);
+
+			if (!Exist) return NotFound<List<GetJobCategoriesQueryResponse>>();
+
 			var Categries = await _jobService.GetJobCategoriesAsync(request.JobId);
 
 			var skillsMapping = _mapper.Map<List<GetJobCategoriesQueryResponse>>(Categries);

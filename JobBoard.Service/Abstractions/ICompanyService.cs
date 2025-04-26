@@ -1,5 +1,5 @@
 ﻿using JobBoard.Data.Entities;
-using JobBoard.Data.Helpers.enums;
+using JobBoard.Data.enums;
 
 namespace JobBoard.Service.Abstractions
 {

@@ -82,6 +82,16 @@ namespace JobBoard.Service.Implementations
 			return _skillRepository.GetJobSkills(JobId);
 		}
 
+		public bool IsExistById(int Id)
+		{
+			var skill = _skillRepository.GetTableAsNoTracking()
+						.Where(x => x.SkillId.Equals(Id))
+						.FirstOrDefault();
+
+			return skill != null;
+
+		}
+
 
 		#endregion
 	}

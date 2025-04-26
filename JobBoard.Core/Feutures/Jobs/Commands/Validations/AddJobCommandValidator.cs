@@ -11,9 +11,10 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Validations
 		public AddJobCommandValidator(ICompanyService companyService)
 		{
 			_companyService = companyService;
+			AddValidations();
 		}
 
-		public void AddValidation()
+		public void AddValidations()
 		{
 			RuleFor(x => x.Title)
 					.NotNull().WithMessage("Title Cannot be Null")

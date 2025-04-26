@@ -11,7 +11,9 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 {
 	public class UserCommandHandler : ResponseHandler,
 			IRequestHandler<AddUserCommand, Response<int>>,
-			IRequestHandler<UpdateUserCommand, Response<string>>
+			IRequestHandler<UpdateUserCommand, Response<string>>,
+			IRequestHandler<DeleteUserCommand, Response<string>>,
+			IRequestHandler<ChangeUserPasswordCommand, Response<string>>
 	{
 
 		#region Fields 
@@ -39,28 +41,29 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 		public async Task<Response<int>> Handle(AddUserCommand request, CancellationToken cancellationToken)
 		{
 
+			// verify the username and email to be unique
 			var Exist = await _userManager.Users.AnyAsync(x => x.Email == request.Email);
 
 			if (Exist) return BadRequest<int>("Email Already exist!");
 
-			//var UserByUsername = await _userManager.FindByNameAsync(request.UserName);
 			Exist = await _userManager.Users.AnyAsync(x => x.UserName == request.UserName);
 
 			if (Exist) return BadRequest<int>("Username Already Exits");
 
-			var TargetUser = _mapper.Map<User>(request);
+			// map request with user
+			var user = _mapper.Map<User>(request);
 
 			// get user country Id 
-			TargetUser.CountryId = await _countryService.GetCountryIdAsync(request.CountryName);
+			user.CountryId = await _countryService.GetCountryIdAsync(request.CountryName);
 
-			var result = await _userManager.CreateAsync(TargetUser, request.Password);
+			var result = await _userManager.CreateAsync(user, request.Password);
 
 			if (!result.Succeeded)
-			{
 				return BadRequest<int>(result?.Errors?.FirstOrDefault()?.Description);
-			}
 
-			return Created(TargetUser.Id);
+			await _userManager.AddToRoleAsync(user, "User");
+
+			return Created(user.Id);
 
 		}
 
@@ -76,6 +79,40 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 				return BadRequest<string>("Cannot Update User :" + result?.Errors?.FirstOrDefault()?.Description);
 
 			return Success("");
+		}
+
+		public async Task<Response<string>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+		{
+			var user = await _userManager.FindByIdAsync(request.Id.ToString());
+			if (user == null) return NotFound("");
+
+			//var result = await _userManager.DeleteAsync(user);
+
+			//if (!result.Succeeded) return BadRequest<string>(result.Errors.FirstOrDefault().Description);
+
+			var IsDeleted = await _userService.DeleteUsersAsync(user);
+			if (!IsDeleted) return BadRequest<string>("Cannot delete this User");
+
+			return Success("");
+		}
+
+		public async Task<Response<string>> Handle(ChangeUserPasswordCommand request, CancellationToken cancellationToken)
+		{
+
+			var user = await _userManager.FindByIdAsync(request.Id.ToString());
+			if (user == null) return NotFound("");
+
+			//var passwordCorrect = await _userManager.CheckPasswordAsync(user, request.CurrentPassword);
+			//if (!passwordCorrect) return BadRequest<string>("Wrong Id Or Password!");
+
+			var result = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
+			if (!result.Succeeded)
+			{
+				return BadRequest<string>(result.Errors.FirstOrDefault().Description);
+
+			}
+
+			return Success<string>();
 		}
 
 		#endregion

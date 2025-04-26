@@ -1,4 +1,4 @@
-﻿using JobBoard.Data.Helpers.enums;
+﻿using JobBoard.Data.enums;
 using Microsoft.AspNetCore.Identity;
 
 namespace JobBoard.Data.Entities.Identity
@@ -8,8 +8,8 @@ namespace JobBoard.Data.Entities.Identity
 		public User()
 		{
 			applications = new HashSet<Application>();
-			bookmarks = new HashSet<BookMark>();
-			jobs = new HashSet<JobListing>();
+			bookmarks = new HashSet<Bookmark>();
+			createdJobs = new HashSet<JobListing>();
 		}
 
 		public string FirstName { get; set; }
@@ -19,12 +19,17 @@ namespace JobBoard.Data.Entities.Identity
 		public required DateTime DateOfBirth { get; set; }
 		public string? Address { get; set; }
 		public string? ImagePath { get; set; }
+		public bool IsDeleted { get; set; }
+		public DateTime? DeletedAt { get; set; }
+
 		public int CountryId { get; set; }
+
 
 		public Country Country { get; set; }
 		public ICollection<Application> applications { get; set; }
-		public ICollection<BookMark> bookmarks { get; set; }
-		public ICollection<JobListing> jobs { get; set; }
+		public ICollection<Bookmark> bookmarks { get; set; }
+		public ICollection<JobListing> createdJobs { get; set; }
+		public ICollection<UserRefreshToken> userRefreshTokens { get; set; }
 
 	}
 }

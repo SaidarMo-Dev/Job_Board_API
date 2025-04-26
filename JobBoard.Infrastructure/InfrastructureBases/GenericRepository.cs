@@ -1,4 +1,4 @@
-﻿using JobBoard.Infrastructure.Data;
+﻿using JobBoard.Infrastructure.context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
@@ -74,6 +74,11 @@ namespace JobBoard.Infrastructure.InfrastructureBases
 		public async void RollBack()
 		{
 			await _context.Database.RollbackTransactionAsync();
+		}
+
+		public async Task SaveChangesAsync()
+		{
+			await _context.SaveChangesAsync();
 		}
 		#endregion
 

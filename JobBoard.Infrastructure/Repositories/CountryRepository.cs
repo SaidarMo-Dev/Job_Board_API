@@ -1,6 +1,6 @@
 ﻿using JobBoard.Data.Entities;
 using JobBoard.Infrastructure.Abstractions;
-using JobBoard.Infrastructure.Data;
+using JobBoard.Infrastructure.context;
 using Microsoft.EntityFrameworkCore;
 
 namespace JobBoard.Infrastructure.Repositories

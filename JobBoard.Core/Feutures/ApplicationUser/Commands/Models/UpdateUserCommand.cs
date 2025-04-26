@@ -1,5 +1,5 @@
 ﻿using JobBoard.Core.Bases;
-using JobBoard.Data.Helpers.enums;
+using JobBoard.Data.enums;
 using MediatR;
 
 namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Models

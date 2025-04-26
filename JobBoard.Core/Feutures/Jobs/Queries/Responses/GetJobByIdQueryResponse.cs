@@ -8,7 +8,7 @@
 		public required string CompanyName { get; set; }
 		public required string Location { get; set; }
 		public required string JobType { get; set; }
-		public double SalaryRange { get; set; }
+		public string? SalaryRange { get; set; }
 		public required string DatePosted { get; set; }
 		public required string status { get; set; }
 		public required string CretaedByUser { get; set; }

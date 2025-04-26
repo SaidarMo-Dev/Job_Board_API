@@ -55,6 +55,17 @@
 				Meta = meta
 			};
 		}
+		public Response<TEntity> Success<TEntity>(string message = null!, object meta = null)
+		{
+			return new Response<TEntity>()
+			{
+
+				StatusCode = System.Net.HttpStatusCode.OK,
+				Succeeded = true,
+				Message = message is null ? "Completed Successfully" : message,
+				Meta = meta
+			};
+		}
 
 		public Response<TEntity> Unauthorized<TEntity>(string message = null!)
 		{

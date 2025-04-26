@@ -1,0 +1,195 @@
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
+using JobBoard.Data.Entities.Identity;
+using JobBoard.Data.Helpers;
+using JobBoard.Infrastructure.Abstractions;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+
+namespace JobBoard.Service.Authentication
+{
+	public class AuthenticationService : IAuthenticationService
+	{
+		#region Fields
+		private readonly JwtSettings _jwtSettings;
+		private readonly IUserRefreshTokenRepository _userRefreshTokenRepository;
+		private readonly UserManager<User> _userManager;
+		#endregion
+
+		#region Constructors
+		public AuthenticationService(JwtSettings jwtSettings,
+									 IUserRefreshTokenRepository userRefreshTokenRepository,
+									 UserManager<User> userManager
+									)
+		{
+			_jwtSettings = jwtSettings;
+			_userRefreshTokenRepository = userRefreshTokenRepository;
+			_userManager = userManager;
+		}
+
+		#endregion
+
+		#region Methods
+		public async Task<AuthResponse> GenerateUserToken(User user)
+		{
+			// Create access token
+
+			var accessToken = await GenerateAccessTokenAsync(user);
+
+			// Generate and save user refresh token
+
+			var refreshToken = new RefreshTokenResponse
+			{
+				Username = user.UserName,
+				RefreshToken = GenerateRefreshToken(), // refresh token value 
+				ExpirationDate = DateTime.UtcNow.AddDays(_jwtSettings.RefreshTokenExpirationDuration)
+			};
+
+			// check if user has an active refresh token
+
+			var oldUserRefreshToken = await _userRefreshTokenRepository.GetTableAsNoTracking()
+									.FirstOrDefaultAsync(x => x.UserId == user.Id &&
+															x.RevokedOn == null);
+
+			if (!(oldUserRefreshToken == null) && oldUserRefreshToken.IsActive)
+			{
+				oldUserRefreshToken.RevokedOn = DateTime.UtcNow;
+				await _userRefreshTokenRepository.UpdateAsync(oldUserRefreshToken);
+			}
+
+			var userRefreshToken = new UserRefreshToken
+			{
+				UserId = user.Id,
+				RefreshToken = refreshToken.RefreshToken,
+				AccessToken = accessToken,
+				CreatedOn = DateTime.UtcNow,
+				ExpiresOn = refreshToken.ExpirationDate
+
+			};
+
+			await _userRefreshTokenRepository.AddAsync(userRefreshToken);
+
+			// return response of access and refresh tokens 
+			return new AuthResponse
+			{
+				AccessToken = accessToken,
+				RefreshToken = refreshToken
+			};
+
+		}
+
+		public async Task<AuthResponse> GetRefreshToken(string refreshToken, string accessToken)
+		{
+			var jwtToken = ReadJwtToken(accessToken);
+
+			if (jwtToken is null || !jwtToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256))
+				throw new SecurityTokenException("Invalid Token Info");
+
+			if (jwtToken.ValidTo > DateTime.UtcNow)
+				throw new SecurityTokenException("Token Not Expired");
+
+			var userId = jwtToken.Claims.Where(x => x.Type.Equals(nameof(JwtClaimModel.UserId)))
+							.FirstOrDefault()?.Value;
+
+			if (string.IsNullOrEmpty(userId))
+				throw new ArgumentNullException(nameof(userId));
+
+			var userrefreshToken = await _userRefreshTokenRepository.GetTableAsTracking()
+								.FirstOrDefaultAsync(x => x.RefreshToken.Equals(refreshToken) &&
+													x.AccessToken.Equals(accessToken) &&
+													x.UserId == int.Parse(userId));
+
+			if (userrefreshToken is null)
+				throw new SecurityTokenException("Invalid Token Info");
+
+			if (!userrefreshToken.IsActive)
+				throw new SecurityTokenException("Refresh token Is Expired");
+
+			var user = await _userManager.FindByIdAsync(userId);
+			if (user is null)
+				throw new ArgumentNullException("User Not Found");
+
+			var newAccessToken = await GenerateAccessTokenAsync(user);
+
+			// Update Access token
+			userrefreshToken.AccessToken = newAccessToken;
+			await _userRefreshTokenRepository.UpdateAsync(userrefreshToken);
+
+			// return AuthResponse 
+			return new AuthResponse
+			{
+				AccessToken = newAccessToken,
+				RefreshToken = new RefreshTokenResponse
+				{
+					Username = user.UserName,
+					RefreshToken = userrefreshToken.RefreshToken,
+					ExpirationDate = userrefreshToken.ExpiresOn
+				}
+			};
+
+		}
+
+		public JwtSecurityToken ReadJwtToken(string accessToken)
+		{
+			if (string.IsNullOrEmpty(accessToken))
+				throw new ArgumentNullException(nameof(accessToken));
+
+			var handler = new JwtSecurityTokenHandler();
+			return handler.ReadJwtToken(accessToken);
+
+		}
+
+
+		private async Task<string> GenerateAccessTokenAsync(User user)
+		{
+			var userRoles = await _userManager.GetRolesAsync(user);
+
+			var claims = GetUserClaims(user, userRoles.ToList());
+
+			var jwtToken = new JwtSecurityToken(
+						_jwtSettings.Issuer,
+						_jwtSettings.Audience,
+						 claims,
+						expires: DateTime.UtcNow.AddMinutes(_jwtSettings.AccesTokenExpirationDuration),
+						signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtSettings.Secret)), SecurityAlgorithms.HmacSha256));
+
+			var accessToken = new JwtSecurityTokenHandler().WriteToken(jwtToken);
+
+			return accessToken;
+		}
+		private string GenerateRefreshToken()
+		{
+			var RandomNumber = new byte[32];
+			var generator = RandomNumberGenerator.Create();
+
+			generator.GetBytes(RandomNumber);
+
+			return Convert.ToBase64String(RandomNumber);
+		}
+		private List<Claim> GetUserClaims(User user, List<string> roles)
+		{
+
+			var claims = new List<Claim>()
+			{
+				new Claim(nameof(JwtClaimModel.UserId), user?.Id.ToString()),
+				new Claim(ClaimTypes.Name.ToString(), user.UserName),
+				new Claim(ClaimTypes.Email.ToString(), user.Email),
+				new Claim(nameof(JwtClaimModel.FirstName), user.FirstName),
+				new Claim(nameof(JwtClaimModel.LastName), user.LastName)
+			};
+
+			foreach (var role in roles)
+			{
+				claims.Add(new Claim(ClaimTypes.Role, role));
+			}
+
+			return claims;
+
+		}
+
+		#endregion
+	}
+}

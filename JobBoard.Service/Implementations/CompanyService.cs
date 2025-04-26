@@ -1,5 +1,5 @@
 ﻿using JobBoard.Data.Entities;
-using JobBoard.Data.Helpers.enums;
+using JobBoard.Data.enums;
 using JobBoard.Infrastructure.Abstractions;
 using JobBoard.Service.Abstractions;
 using Microsoft.EntityFrameworkCore;

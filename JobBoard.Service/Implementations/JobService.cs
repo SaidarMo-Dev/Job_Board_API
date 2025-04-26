@@ -38,9 +38,9 @@ namespace JobBoard.Service.Implementations
 		{
 			var result = await _jobRepository.GetTableAsNoTracking()
 					.Include(x => x.company)
-					.Include(x => x.UserInfo)
+					.Include(x => x.UserInfo).IgnoreQueryFilters()
 					.Include(x => x.jobCategories)
-					.Include(x => x.Jobskills).ThenInclude(x => x.skillInfo)
+					.Include(x => x.Jobkills).ThenInclude(x => x.skillInfo)
 					.FirstOrDefaultAsync(x => x.JobId == Id);
 
 			return result;
@@ -48,7 +48,7 @@ namespace JobBoard.Service.Implementations
 
 		public IQueryable<JobListing> GetJobsQueryable()
 		{
-			return _jobRepository.GetTableAsNoTracking().AsQueryable();
+			return _jobRepository.GetTableAsNoTracking().AsQueryable().IgnoreQueryFilters();
 		}
 
 
@@ -60,6 +60,56 @@ namespace JobBoard.Service.Implementations
 		public async Task<List<Skill>> GetJobSkillsAsync(int JobId)
 		{
 			return await _skillService.GetJobSkills(JobId).ToListAsync();
+		}
+
+		public async Task<JobListing> GetJobByIdAsync(int Id)
+		{
+			var result = await _jobRepository.GetTableAsNoTracking()
+								.Where(x => x.JobId.Equals(Id))
+								.FirstOrDefaultAsync();
+
+			return result;
+		}
+
+		public async Task<JobListing> UpdateAsync(JobListing job)
+		{
+			await _jobRepository.UpdateAsync(job);
+			return job;
+		}
+
+		public async Task<bool> DeleteJobAsync(JobListing job)
+		{
+			var trans = _jobRepository.BeginTransaction();
+			try
+			{
+				await _jobRepository.DeleteAsync(job);
+				await trans.CommitAsync();
+				return true;
+			}
+			catch (Exception ex)
+			{
+				await trans.RollbackAsync();
+				return false;
+			}
+		}
+
+		public async Task<bool> IsExistByIdAsync(int JobId)
+		{
+			var job = await _jobRepository.GetTableAsNoTracking()
+									.Where(x => x.JobId.Equals(JobId))
+									.FirstOrDefaultAsync();
+			return job != null;
+		}
+
+		public async Task<JobListing> GetJobByIdWithEncludeSkillsAndCategoriesAsync(int Id)
+		{
+			var result = await _jobRepository.GetTableAsNoTracking()
+								.Include(x => x.Jobkills)
+								.Include(x => x.jobCategories)
+								.Where(x => x.JobId.Equals(Id))
+								.FirstOrDefaultAsync();
+
+			return result;
 		}
 
 		#endregion

@@ -10,6 +10,7 @@ namespace JobBoard.Core.Mapping.UserMapping
 			AddGetByIdMapping();
 			GetPaginatedListUsersQuery();
 			UpdateUserCommandMapping();
+			GetUseBookmarksMapping();
 		}
 	}
 }

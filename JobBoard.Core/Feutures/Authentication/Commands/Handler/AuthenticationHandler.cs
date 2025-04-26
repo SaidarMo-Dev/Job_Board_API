@@ -1,0 +1,58 @@
+﻿using JobBoard.Core.Bases;
+using JobBoard.Core.Feutures.Authentication.Commands.Models;
+using JobBoard.Data.Entities.Identity;
+using JobBoard.Data.Helpers;
+using JobBoard.Service.Authentication;
+using MediatR;
+using Microsoft.AspNetCore.Identity;
+
+namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
+{
+	public class AuthenticationHandler : ResponseHandler,
+			IRequestHandler<SignInCommand, Response<AuthResponse>>,
+			IRequestHandler<RefreshNewAccessToken, Response<AuthResponse>>
+	{
+		#region Fields
+		private readonly SignInManager<User> _signInManager;
+		private readonly UserManager<User> _userManager;
+		private readonly IAuthenticationService _authenticationService;
+		#endregion
+
+		#region Constructors
+		public AuthenticationHandler(SignInManager<User> signInManager,
+									UserManager<User> userManager,
+									IAuthenticationService authenticationService)
+		{
+			_signInManager = signInManager;
+			_userManager = userManager;
+			_authenticationService = authenticationService;
+		}
+
+		#endregion
+
+		#region Handles
+		public async Task<Response<AuthResponse>> Handle(SignInCommand request, CancellationToken cancellationToken)
+		{
+			var user = await _userManager.FindByNameAsync(request.Username);
+			if (user == null) return NotFound<AuthResponse>("Incorect Username Or Password!");
+
+			var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
+			if (!result.Succeeded) return NotFound<AuthResponse>($"Incorect Username Or Password!");
+
+			// generate token
+
+			var TokneResult = await _authenticationService.GenerateUserToken(user);
+
+			return Success(TokneResult);
+		}
+
+		public async Task<Response<AuthResponse>> Handle(RefreshNewAccessToken request, CancellationToken cancellationToken)
+		{
+
+			var response = await _authenticationService.GetRefreshToken(request.RefreshToken, request.AccessToken);
+
+			return Success(response);
+		}
+		#endregion
+	}
+}

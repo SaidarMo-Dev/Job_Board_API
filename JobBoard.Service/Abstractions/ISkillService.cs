@@ -10,6 +10,7 @@ namespace JobBoard.Service.Abstractions
 		Task UpdateAsnyc(Skill entity);
 		Task<bool> IsExistByNameAsync(string name);
 		Task<bool> IsExistByIdAsync(int Id);
+		bool IsExistById(int Id);
 		Task<bool> IsExistByNameExcludeSelfAsync(int Id, string name);
 		Task DeleteAsync(Skill entity);
 		IQueryable<Skill> GetJobSkills(int JobId);

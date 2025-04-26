@@ -15,6 +15,7 @@ namespace JobBoard.Core.Wrapers
 			TotalRecords = totalRecords;
 			PageSize = size;
 			Message = message == null ? "Success" : message;
+			Succeeded = true;
 			StatusCode = HttpStatusCode.OK;
 			CurrentPage = page > TotalPages ? TotalPages : page;
 		}

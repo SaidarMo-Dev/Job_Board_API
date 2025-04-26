@@ -1,6 +1,7 @@
 ﻿using JobBoard.Data.Entities;
 using JobBoard.Infrastructure.Abstractions;
 using JobBoard.Service.Abstractions;
+using Microsoft.EntityFrameworkCore;
 
 namespace JobBoard.Service.Implementations
 {
@@ -32,6 +33,27 @@ namespace JobBoard.Service.Implementations
 			await _jobSkillRepository.AddRangeAsync(entities);
 		}
 
+		public async Task DeleteAsync(JobSkill jobSkill)
+		{
+			await _jobSkillRepository.DeleteAsync(jobSkill);
+		}
+
+		public async Task DeleteJobSkillsAsync(int JobId)
+		{
+			var jobSkills = await _jobSkillRepository.GetTableAsNoTracking()
+								.Where(x => x.JobListingId.Equals(JobId)).ToListAsync();
+
+			await _jobSkillRepository.DeleteRangeAsync(jobSkills);
+		}
+
+		public async Task<bool> IsExistById(int JobId, int SkillId)
+		{
+			var result = await _jobSkillRepository.GetTableAsNoTracking()
+					.Where(x => x.JobListingId.Equals(JobId) && x.SkillId.Equals(SkillId))
+					.FirstOrDefaultAsync();
+
+			return result != null;
+		}
 		#endregion
 	}
 }

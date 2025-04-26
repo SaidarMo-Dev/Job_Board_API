@@ -1,6 +1,7 @@
 ﻿using JobBoard.Data.Entities;
 using JobBoard.Infrastructure.Abstractions;
 using JobBoard.Service.Abstractions;
+using Microsoft.EntityFrameworkCore;
 
 namespace JobBoard.Service.Implementations
 {
@@ -34,6 +35,25 @@ namespace JobBoard.Service.Implementations
 		public IQueryable<Category> GetJobCategories(int JobId)
 		{
 			return _categoryRepository.GetJobCategories(JobId);
+		}
+
+		public bool IsExistById(int Id)
+		{
+			var category = _categoryRepository.GetTableAsNoTracking()
+							.Where(x => x.CategoryId.Equals(Id))
+							.FirstOrDefault();
+
+			return category != null;
+		}
+
+		public async Task<bool> IsExistByIdAsync(int Id)
+		{
+			var category = await _categoryRepository.GetTableAsNoTracking()
+							.Where(x => x.CategoryId.Equals(Id))
+							.FirstOrDefaultAsync();
+
+			return category != null;
+
 		}
 		#endregion
 	}
