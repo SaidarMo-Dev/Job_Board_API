@@ -72,6 +72,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 			return Success(_mapper.Map<List<GetUseBookmarksQueryResponse>>(bookmarks));
 		}
 
+
 		#endregion
 
 	}

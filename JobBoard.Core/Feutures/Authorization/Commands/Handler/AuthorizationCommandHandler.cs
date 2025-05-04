@@ -10,7 +10,8 @@ namespace JobBoard.Core.Feutures.Authorization.Commands.Handler
 	public class AuthorizationCommandHandler : ResponseHandler,
 					IRequestHandler<AddRoleCommand, Response<int>>,
 					IRequestHandler<UpdateRoleCommand, Response<string>>,
-					IRequestHandler<DeleteRoleCommand, Response<string>>
+					IRequestHandler<DeleteRoleCommand, Response<string>>,
+					IRequestHandler<UpdateUserRolesCommand, Response<string>>
 	{
 		#region Fields 
 		private readonly IAuthorizationService _authorizationService;
@@ -60,15 +61,32 @@ namespace JobBoard.Core.Feutures.Authorization.Commands.Handler
 
 		public async Task<Response<string>> Handle(DeleteRoleCommand request, CancellationToken cancellationToken)
 		{
+
 			var role = await _roleManager.FindByIdAsync(request.Id.ToString());
-			if (role is null) return NotFound<string>();
+			if (role == null) return NotFound<string>();
+
+			if (await _authorizationService.IsRoleLinkedToUserAsync(role.Name))
+				return BadRequest<string>("This role is linked to user you cannot Delete it");
+
 
 			var result = await _roleManager.DeleteAsync(role);
+
 			if (!result.Succeeded)
 				return BadRequest<string>(result.Errors.FirstOrDefault().Description);
 
 			return Deleted<string>();
 
+		}
+
+		public async Task<Response<string>> Handle(UpdateUserRolesCommand request, CancellationToken cancellationToken)
+		{
+			var result = await _authorizationService.UpdateUserRolesAsnyc(request.UserId, request.Roles.Select(x => x.Name));
+
+			throw new NotImplementedException();
+			//switch(result)
+			//{
+			//	case ""
+			//}
 		}
 
 		#endregion

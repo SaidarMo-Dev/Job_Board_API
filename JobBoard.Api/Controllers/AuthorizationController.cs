@@ -30,6 +30,17 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(new GetSingleRoleQuery { Id = Id }));
 		}
 
+		// manage user roles
+		[HttpGet(Router.AuthorizationRoute.ManageUserRoles)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		[ProducesResponseType(StatusCodes.Status403Forbidden)]
+		public async Task<IActionResult> ManageUserRoles([FromRoute] int Id)
+		{
+			return NewResult(await Mediator.Send(new ManageUserRolesQuery { UserId = Id }));
+		}
+
 		[HttpPost(Router.AuthorizationRoute.Create)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]

@@ -12,6 +12,7 @@ namespace JobBoard.Service.Implementations
 	{
 		#region Fields
 		private readonly UserManager<User> _userManager;
+		private readonly RoleManager<Role> _roleManager;
 		private readonly IUserRepository _userRepository;
 		#endregion
 
@@ -26,7 +27,8 @@ namespace JobBoard.Service.Implementations
 							IServiceProvider serviceProvider,
 							ILogger<UserManager<User>> logger,
 							IUserRepository userRepository,
-							UserManager<User> userManager
+							UserManager<User> userManager,
+							RoleManager<Role> roleManager
 
 						)
 						: base(userStore, options,
@@ -36,7 +38,8 @@ namespace JobBoard.Service.Implementations
 							logger)
 		{
 			_userRepository = userRepository;
-			_userManager = userManager; ;
+			_userManager = userManager;
+			_roleManager = roleManager;
 		}
 
 

@@ -58,7 +58,6 @@
 			public const string Paginate = Prefex + "/Paginate";
 			public const string ChangePassword = Prefex + "/ChangePassword";
 			public const string Bookmarks = Prefex + "/Bookmarks/{Id}";
-
 		}
 		public static class JobRoute
 		{
@@ -118,7 +117,8 @@
 			public const string Update = Prefex + "/Roles/Update-Role";
 			public const string DeleteById = Prefex + "/Roles" + Single;
 			public const string GetAllRoles = Prefex + "/Roles/GetAll";
-			public const string GetRoleById = Prefex + Single;
+			public const string GetRoleById = Prefex + "/Roles" + Single;
+			public const string ManageUserRoles = Prefex + "/Roles/ManageUserRoles/{Id}";
 
 		}
 
