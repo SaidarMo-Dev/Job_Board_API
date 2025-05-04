@@ -2,8 +2,10 @@
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Categories.Queries.Models;
 using JobBoard.Core.Feutures.Categories.Queries.Results;
+using JobBoard.Core.Resources;
 using JobBoard.Service.Abstractions;
 using MediatR;
+using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Categories.Queries.Handler
 {
@@ -17,7 +19,8 @@ namespace JobBoard.Core.Feutures.Categories.Queries.Handler
 		#endregion
 
 		#region Constructors
-		public CategoryQueryHandler(ICategoryService categoryService, IMapper mapper)
+		public CategoryQueryHandler(ICategoryService categoryService, IMapper mapper,
+			IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
 		{
 			_categoryService = categoryService;
 			_mapper = mapper;

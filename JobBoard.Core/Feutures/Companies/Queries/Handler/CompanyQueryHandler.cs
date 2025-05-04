@@ -3,10 +3,12 @@ using AutoMapper;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Companies.Queries.Models;
 using JobBoard.Core.Feutures.Companies.Queries.Results;
+using JobBoard.Core.Resources;
 using JobBoard.Core.Wrapers;
 using JobBoard.Data.Entities;
 using JobBoard.Service.Abstractions;
 using MediatR;
+using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 {
@@ -20,7 +22,7 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 		#endregion
 
 		#region Constructors
-		public CompanyQueryHandler(ICompanyService companyService, IMapper mapper)
+		public CompanyQueryHandler(ICompanyService companyService, IMapper mapper, IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
 		{
 			_companyService = companyService;
 			_mapper = mapper;

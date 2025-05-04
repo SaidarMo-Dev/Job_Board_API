@@ -2,9 +2,11 @@
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Jobs.Queries.Models;
 using JobBoard.Core.Feutures.Jobs.Queries.Responses;
+using JobBoard.Core.Resources;
 using JobBoard.Core.Wrapers;
 using JobBoard.Service.Abstractions;
 using MediatR;
+using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 {
@@ -20,7 +22,8 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 		#endregion
 
 		#region Constructors
-		public JobQueryHandler(IJobService jobService, IMapper mapper)
+		public JobQueryHandler(IJobService jobService, IMapper mapper,
+			IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
 		{
 			_jobService = jobService;
 			_mapper = mapper;

@@ -2,11 +2,13 @@
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.ApplicationUser.Queries.Models;
 using JobBoard.Core.Feutures.ApplicationUser.Queries.Responses;
+using JobBoard.Core.Resources;
 using JobBoard.Core.Wrapers;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Service.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 {
@@ -30,7 +32,8 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 		public UserQueryHandler(UserManager<User> userManager,
 								IMapper mapper,
 								IUserService userService,
-								IBookmarkService bookmarkService)
+								IBookmarkService bookmarkService,
+								IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
 		{
 			_userManager = userManager;
 			_mapper = mapper;

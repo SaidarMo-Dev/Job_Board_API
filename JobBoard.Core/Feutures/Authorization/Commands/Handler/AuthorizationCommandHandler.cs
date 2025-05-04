@@ -1,9 +1,11 @@
 ﻿using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Authorization.Commands.Models;
+using JobBoard.Core.Resources;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Service.Authorization;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Authorization.Commands.Handler
 {
@@ -23,8 +25,8 @@ namespace JobBoard.Core.Feutures.Authorization.Commands.Handler
 
 		#region Constructors
 		public AuthorizationCommandHandler(IAuthorizationService authorizationService,
-									RoleManager<Role> roleManager
-									)
+									RoleManager<Role> roleManager,
+									IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
 		{
 			_authorizationService = authorizationService;
 			_roleManager = roleManager;
@@ -83,10 +85,11 @@ namespace JobBoard.Core.Feutures.Authorization.Commands.Handler
 			var result = await _authorizationService.UpdateUserRolesAsnyc(request.UserId, request.Roles.Select(x => x.Name));
 
 			throw new NotImplementedException();
-			//switch(result)
+			//switch (result)
 			//{
 			//	case ""
 			//}
+
 		}
 
 		#endregion

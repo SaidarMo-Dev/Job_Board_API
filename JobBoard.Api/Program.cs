@@ -1,3 +1,4 @@
+using System.Globalization;
 using JobBoard.Core;
 using JobBoard.Core.Middleware;
 using JobBoard.Core.Seeders;
@@ -6,7 +7,9 @@ using JobBoard.Infrastructure;
 using JobBoard.Infrastructure.context;
 using JobBoard.Service;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,6 +52,31 @@ builder.Services.AddInfrastuctureDependencies()
 
 #endregion
 
+#region Localization Configurations
+
+builder.Services.AddControllersWithViews();
+builder.Services.AddLocalization(opt =>
+{
+	opt.ResourcesPath = "";
+
+});
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+	List<CultureInfo> supportedCultures = new()
+	{
+		new CultureInfo("en-US"),
+		new CultureInfo("ar-MA"),
+		new CultureInfo("fr-FR"),
+		new CultureInfo("de-DE")
+	};
+
+	options.DefaultRequestCulture = new RequestCulture("ar-MO");
+	options.SupportedCultures = supportedCultures;
+	options.SupportedUICultures = supportedCultures;
+
+});
+#endregion
 
 var app = builder.Build();
 
@@ -77,6 +105,13 @@ if (app.Environment.IsDevelopment())
 
 }
 
+#region Localization Midllware
+
+var options = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
+
+app.UseRequestLocalization(options.Value);
+
+#endregion
 app.UseHttpsRedirection();
 
 app.UseCors("MyPolicy");

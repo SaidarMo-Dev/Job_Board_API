@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Jobs.Commands.Models;
+using JobBoard.Core.Resources;
 using JobBoard.Data.Entities;
 using JobBoard.Service.Abstractions;
 using MediatR;
+using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 {
@@ -29,7 +31,8 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 							IJobSkillService jobSkillService,
 							IJobCategoryService jobCategoryService,
 							ISkillService skillService,
-							ICategoryService categoryService)
+							ICategoryService categoryService,
+							IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
 		{
 			_jobService = jobService;
 			_mapper = mapper;

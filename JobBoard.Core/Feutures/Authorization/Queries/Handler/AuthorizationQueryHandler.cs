@@ -2,11 +2,13 @@
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Authorization.Queries.Models;
 using JobBoard.Core.Feutures.Authorization.Queries.Responses;
+using JobBoard.Core.Resources;
 using JobBoard.Data.DTOs;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Service.Authorization;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Authorization.Queries.Handler
 {
@@ -27,7 +29,8 @@ namespace JobBoard.Core.Feutures.Authorization.Queries.Handler
 
 		#region Constructors
 		public AuthorizationQueryHandler(IAuthorizationService authorizationService, IMapper mapper,
-										UserManager<User> userManager)
+										UserManager<User> userManager,
+										IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
 		{
 			_authorizationService = authorizationService;
 			_mapper = mapper;

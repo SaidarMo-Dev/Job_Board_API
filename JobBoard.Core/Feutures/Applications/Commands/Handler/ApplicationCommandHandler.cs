@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Applications.Commands.Models;
+using JobBoard.Core.Resources;
 using JobBoard.Data.Entities;
 using JobBoard.Data.enums;
 using JobBoard.Service.Abstractions;
 using MediatR;
+using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Applications.Commands.Handler
 {
@@ -18,14 +20,17 @@ namespace JobBoard.Core.Feutures.Applications.Commands.Handler
 		#region Fields
 		private readonly IApplicationService _applicationService;
 		private readonly IMapper _mapper;
+		private readonly IStringLocalizer<SharedResources> _localizer;
 
 		#endregion
 
 		#region Constructors
-		public ApplicationCommandHandler(IApplicationService applicationService, IMapper mapper)
+		public ApplicationCommandHandler(IApplicationService applicationService, IMapper mapper,
+										IStringLocalizer<SharedResources> localizer) : base(localizer)
 		{
 			_applicationService = applicationService;
 			_mapper = mapper;
+			_localizer = localizer;
 		}
 
 		#endregion
@@ -38,11 +43,11 @@ namespace JobBoard.Core.Feutures.Applications.Commands.Handler
 
 			var hasApp = await _applicationService.HasActiveOrAcceptedApplicationAsnyc(request.UserId);
 
-			if (hasApp) return BadRequest<int>("User already has an active or Accepted application");
+			if (hasApp) return BadRequest<int>(_localizer[SharedResourcesKeys.UserHasActiveApplication]);
 
 			var success = await _applicationService.AddAsync(application);
 
-			if (!success) return BadRequest<int>("Cannot Add this Application");
+			if (!success) return BadRequest<int>(_localizer[SharedResourcesKeys.FailedAddApplication]);
 
 			return Created(application.ApplicationId);
 

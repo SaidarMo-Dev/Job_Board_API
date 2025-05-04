@@ -2,8 +2,10 @@
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Applications.Queries.Models;
 using JobBoard.Core.Feutures.Applications.Queries.Responses;
+using JobBoard.Core.Resources;
 using JobBoard.Service.Abstractions;
 using MediatR;
+using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Applications.Queries.Handler
 {
@@ -16,7 +18,7 @@ namespace JobBoard.Core.Feutures.Applications.Queries.Handler
 		#endregion
 
 		#region Constructors 
-		public ApplicationQueryHandler(IApplicationService applicationService, IMapper mapper)
+		public ApplicationQueryHandler(IApplicationService applicationService, IMapper mapper, IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
 		{
 			_applicationService = applicationService;
 			_mapper = mapper;
@@ -31,7 +33,6 @@ namespace JobBoard.Core.Feutures.Applications.Queries.Handler
 			if (application is null) return NotFound<GetSingleApplictionQueryResponse>();
 
 			return Success(_mapper.Map<GetSingleApplictionQueryResponse>(application));
-
 
 		}
 		#endregion

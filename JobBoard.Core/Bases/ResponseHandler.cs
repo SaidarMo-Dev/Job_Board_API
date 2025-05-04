@@ -1,13 +1,23 @@
-﻿namespace JobBoard.Core.Bases
+﻿using JobBoard.Core.Resources;
+using Microsoft.Extensions.Localization;
+
+namespace JobBoard.Core.Bases
 {
 	public class ResponseHandler
 	{
+		private readonly IStringLocalizer<SharedResources> _stringLocalizer;
+
+		public ResponseHandler(IStringLocalizer<SharedResources> stringLocalizer)
+		{
+			_stringLocalizer = stringLocalizer;
+		}
+
 		public Response<T> Deleted<T>()
 		{
 			return new Response<T>()
 			{
 				StatusCode = System.Net.HttpStatusCode.OK,
-				Message = "Deleted Successfully",
+				Message = _stringLocalizer[SharedResourcesKeys.Deleted],
 				Succeeded = true
 			};
 		}
@@ -17,16 +27,16 @@
 			{
 				Data = data,
 				StatusCode = System.Net.HttpStatusCode.OK,
-				Message = "Deleted Successfully",
+				Message = _stringLocalizer[SharedResourcesKeys.Deleted],
 				Succeeded = true
 			};
 		}
-		public Response<T> NotFound<T>(string message = "Not Found")
+		public Response<T> NotFound<T>(string message = null)
 		{
 			return new Response<T>()
 			{
 				StatusCode = System.Net.HttpStatusCode.NotFound,
-				Message = message,
+				Message = message is null ? _stringLocalizer[SharedResourcesKeys.NotFound] : message,
 				Succeeded = false,
 
 			};
@@ -38,7 +48,7 @@
 			{
 				Data = entity,
 				StatusCode = System.Net.HttpStatusCode.NotFound,
-				Message = message == null ? "Not Found" : message,
+				Message = message == null ? _stringLocalizer[SharedResourcesKeys.NotFound] : message,
 				Succeeded = false
 			};
 		}
@@ -51,7 +61,7 @@
 				Data = entity,
 				StatusCode = System.Net.HttpStatusCode.OK,
 				Succeeded = true,
-				Message = message is null ? "Completed Successfully" : message,
+				Message = message is null ? _stringLocalizer[SharedResourcesKeys.Completed] : message,
 				Meta = meta
 			};
 		}
@@ -62,7 +72,7 @@
 
 				StatusCode = System.Net.HttpStatusCode.OK,
 				Succeeded = true,
-				Message = message is null ? "Completed Successfully" : message,
+				Message = message is null ? _stringLocalizer[SharedResourcesKeys.Completed] : message,
 				Meta = meta
 			};
 		}

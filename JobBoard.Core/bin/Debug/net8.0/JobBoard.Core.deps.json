@@ -18,6 +18,14 @@
         },
         "runtime": {
           "JobBoard.Core.dll": {}
+        },
+        "resources": {
+          "Ar/JobBoard.Core.resources.dll": {
+            "locale": "Ar"
+          },
+          "En/JobBoard.Core.resources.dll": {
+            "locale": "En"
+          }
         }
       },
       "AutoMapper/14.0.0": {

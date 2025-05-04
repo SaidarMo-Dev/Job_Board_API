@@ -2,8 +2,10 @@
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Skills.Queries.Models;
 using JobBoard.Core.Feutures.Skills.Queries.Results;
+using JobBoard.Core.Resources;
 using JobBoard.Service.Abstractions;
 using MediatR;
+using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Skills.Queries.Handler
 {
@@ -17,7 +19,8 @@ namespace JobBoard.Core.Feutures.Skills.Queries.Handler
 
 		#endregion
 		#region Constructors
-		public SkillQueryHandler(ISkillService skillService, IMapper mapper)
+		public SkillQueryHandler(ISkillService skillService, IMapper mapper,
+								IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
 		{
 			this._skillService = skillService;
 			this._mapper = mapper;

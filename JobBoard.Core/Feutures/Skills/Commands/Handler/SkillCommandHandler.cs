@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Skills.Commands.Models;
+using JobBoard.Core.Resources;
 using JobBoard.Data.Entities;
 using JobBoard.Service.Abstractions;
 using MediatR;
+using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Skills.Commands.Handler
 {
@@ -19,7 +21,8 @@ namespace JobBoard.Core.Feutures.Skills.Commands.Handler
 		#endregion
 
 		#region Constructors
-		public SkillCommandHandler(ISkillService skillService, IMapper mapper)
+		public SkillCommandHandler(ISkillService skillService, IMapper mapper,
+								IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
 		{
 			_skillService = skillService;
 			_mapper = mapper;

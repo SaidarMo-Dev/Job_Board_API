@@ -1,10 +1,12 @@
 ﻿using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Authentication.Commands.Models;
+using JobBoard.Core.Resources;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Data.Helpers;
 using JobBoard.Service.Authentication;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 {
@@ -21,7 +23,8 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 		#region Constructors
 		public AuthenticationHandler(SignInManager<User> signInManager,
 									UserManager<User> userManager,
-									IAuthenticationService authenticationService)
+									IAuthenticationService authenticationService,
+									IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
 		{
 			_signInManager = signInManager;
 			_userManager = userManager;

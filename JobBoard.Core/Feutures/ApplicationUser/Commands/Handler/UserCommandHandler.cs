@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.ApplicationUser.Commands.Models;
+using JobBoard.Core.Resources;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Service.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 {
@@ -25,9 +27,10 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 
 		#region Construtors
 		public UserCommandHandler(UserManager<User> userManager,
-						IMapper mapper,
-						ICountryService countryService,
-						IUserService userService)
+		IMapper mapper,
+		ICountryService countryService,
+						IUserService userService,
+						IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
 		{
 			_userManager = userManager;
 			_mapper = mapper;

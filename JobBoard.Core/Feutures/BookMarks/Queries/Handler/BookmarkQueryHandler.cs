@@ -2,9 +2,11 @@
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.BookMarks.Queries.Models;
 using JobBoard.Core.Feutures.BookMarks.Queries.Responses;
+using JobBoard.Core.Resources;
 using JobBoard.Core.Wrapers;
 using JobBoard.Service.Abstractions;
 using MediatR;
+using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
 {
@@ -19,7 +21,9 @@ namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
 		#endregion
 
 		#region Constructors
-		public BookmarkQueryHandler(IBookmarkService bookmarkService, IMapper mapper)
+		public BookmarkQueryHandler(IBookmarkService bookmarkService,
+									IMapper mapper,
+									IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
 		{
 			_bookmarkService = bookmarkService;
 			_mapper = mapper;

@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Companies.Commands.Models;
+using JobBoard.Core.Resources;
 using JobBoard.Data.Entities;
 using JobBoard.Service.Abstractions;
 using MediatR;
+using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 {
@@ -18,7 +20,7 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 		#endregion
 
 		#region constructors
-		public CompanyCommandHandler(ICompanyService companyService, IMapper mapper)
+		public CompanyCommandHandler(ICompanyService companyService, IMapper mapper, IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
 		{
 			_companyService = companyService;
 			_mapper = mapper;

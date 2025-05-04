@@ -407,3 +407,5 @@ C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\refint\JobBoard.Api.dll
 C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\JobBoard.Api.pdb
 C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\JobBoard.Api.genruntimeconfig.cache
 C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\ref\JobBoard.Api.dll
+C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\Ar\JobBoard.Core.resources.dll
+C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\En\JobBoard.Core.resources.dll
