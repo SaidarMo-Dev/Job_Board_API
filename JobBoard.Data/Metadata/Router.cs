@@ -113,12 +113,17 @@
 		public static class AuthorizationRoute
 		{
 			private const string Prefex = Rule + "/Authorization";
-			public const string Create = Prefex + "/Roles/Add-Role";
-			public const string Update = Prefex + "/Roles/Update-Role";
-			public const string DeleteById = Prefex + "/Roles" + Single;
-			public const string GetAllRoles = Prefex + "/Roles/GetAll";
-			public const string GetRoleById = Prefex + "/Roles" + Single;
-			public const string ManageUserRoles = Prefex + "/Roles/ManageUserRoles/{Id}";
+			private const string Roles = Prefex + "/Roles";
+			private const string Claims = Prefex + "/Claims";
+
+			public const string Create = Roles + "/Add-Role";
+			public const string Update = Roles + "/Update-Role";
+			public const string DeleteById = Roles + Single;
+			public const string GetAllRoles = Roles + "/GetAll";
+			public const string GetRoleById = Roles + Single;
+			public const string GetManageUserRoles = Roles + "/ManageUserRoles/{Id}";
+			public const string UpdateUserRoles = Roles + "/UpdateUserRoles";
+			public const string ManageUserClaims = Claims + "/Manage-user-claims/{Id}";
 
 		}
 

@@ -1,5 +1,6 @@
-﻿using JobBoard.Data.DTOs;
-using JobBoard.Data.Entities.Identity;
+﻿using JobBoard.Data.Entities.Identity;
+using JobBoard.Data.Requests;
+using JobBoard.Data.Responses;
 
 namespace JobBoard.Service.Authorization
 {
@@ -10,7 +11,10 @@ namespace JobBoard.Service.Authorization
 		Task<List<Role>> GetListRolesAsync();
 		Task<Role> GetRoleByIdAsync(int Id);
 		Task<bool> IsRoleLinkedToUserAsync(string RoleName);
-		Task<ManageUserRolesDto> GetManageUserRolesAsync(User User);
+		Task<ManageUserRolesDto> ManageUserRolesAsync(User User);
 		Task<string> UpdateUserRolesAsnyc(int UserId, IEnumerable<string> Roles);
+		Task<ManageUserClaimsResponse> ManageUserClaimsAsync(User User);
+		Task<string> UpdateUserClaimsAsnyc(UpdateUserClaimRequest request);
+
 	}
 }

@@ -101,9 +101,9 @@ namespace JobBoard.Core.Feutures.Applications.Commands.Handler
 		{
 			var succeded = await _applicationService.UpdateAsnyc(application);
 
-			if (!succeded) return BadRequest<string>("Cannot Update this application");
+			if (!succeded) return BadRequest<string>(_localizer[SharedResourcesKeys.FailedUpdateApplication]);
 
-			return Success("Updated Successfully");
+			return Success<string>();
 		}
 		#endregion
 

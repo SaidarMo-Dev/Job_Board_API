@@ -61,7 +61,7 @@ namespace JobBoard.Core.Bases
 				Data = entity,
 				StatusCode = System.Net.HttpStatusCode.OK,
 				Succeeded = true,
-				Message = message is null ? _stringLocalizer[SharedResourcesKeys.Completed] : message,
+				Message = message is null ? _stringLocalizer[SharedResourcesKeys.Success] : message,
 				Meta = meta
 			};
 		}
@@ -72,7 +72,7 @@ namespace JobBoard.Core.Bases
 
 				StatusCode = System.Net.HttpStatusCode.OK,
 				Succeeded = true,
-				Message = message is null ? _stringLocalizer[SharedResourcesKeys.Completed] : message,
+				Message = message is null ? _stringLocalizer[SharedResourcesKeys.Success] : message,
 				Meta = meta
 			};
 		}

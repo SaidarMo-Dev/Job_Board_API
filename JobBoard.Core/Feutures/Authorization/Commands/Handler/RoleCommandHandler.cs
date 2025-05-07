@@ -9,7 +9,7 @@ using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Authorization.Commands.Handler
 {
-	public class AuthorizationCommandHandler : ResponseHandler,
+	public class RoleCommandHandler : ResponseHandler,
 					IRequestHandler<AddRoleCommand, Response<int>>,
 					IRequestHandler<UpdateRoleCommand, Response<string>>,
 					IRequestHandler<DeleteRoleCommand, Response<string>>,
@@ -18,18 +18,20 @@ namespace JobBoard.Core.Feutures.Authorization.Commands.Handler
 		#region Fields 
 		private readonly IAuthorizationService _authorizationService;
 		private readonly RoleManager<Role> _roleManager;
+		private readonly IStringLocalizer<SharedResources> _stringLocalizer;
 
 		#endregion
 
 
 
 		#region Constructors
-		public AuthorizationCommandHandler(IAuthorizationService authorizationService,
+		public RoleCommandHandler(IAuthorizationService authorizationService,
 									RoleManager<Role> roleManager,
 									IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
 		{
 			_authorizationService = authorizationService;
 			_roleManager = roleManager;
+			_stringLocalizer = stringLocalizer;
 		}
 		#endregion
 
@@ -82,13 +84,28 @@ namespace JobBoard.Core.Feutures.Authorization.Commands.Handler
 
 		public async Task<Response<string>> Handle(UpdateUserRolesCommand request, CancellationToken cancellationToken)
 		{
-			var result = await _authorizationService.UpdateUserRolesAsnyc(request.UserId, request.Roles.Select(x => x.Name));
 
-			throw new NotImplementedException();
-			//switch (result)
-			//{
-			//	case ""
-			//}
+			var result = await _authorizationService
+								.UpdateUserRolesAsnyc(request.UserId,
+										request.Roles.Where(x => x.HasRodle).Select(x => x.Name));
+
+			switch (result)
+			{
+				case "UserNotFound":
+					return NotFound<string>(_stringLocalizer[SharedResourcesKeys.UserNotFound]);
+
+				case "FailedToRemoveUserRoles":
+					return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedToRemoveUserRoles]);
+
+				case "FailedToAddUserRoles":
+					return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedToAddUserRoles]);
+
+				case "Success":
+					return Success<string>();
+
+				default:
+					return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedToAddUserRoles]);
+			}
 
 		}
 

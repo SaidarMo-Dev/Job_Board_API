@@ -1,4 +1,4 @@
-﻿namespace JobBoard.Data.DTOs
+﻿namespace JobBoard.Data.Responses
 {
 	public class ManageUserRolesDto
 	{

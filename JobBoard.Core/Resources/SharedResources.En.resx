@@ -117,14 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Completed" xml:space="preserve">
+  <data name="Success" xml:space="preserve">
     <value>Completed Successfully</value>
   </data>
   <data name="Deleted" xml:space="preserve">
     <value>Deleted Successfully</value>
   </data>
+  <data name="EmailExist" xml:space="preserve">
+    <value>Email Already  Exist</value>
+  </data>
   <data name="FailedAddApplication" xml:space="preserve">
     <value>Cannot Add This Application</value>
+  </data>
+  <data name="FailedUpdateApplication" xml:space="preserve">
+    <value>Update Application Failed</value>
   </data>
   <data name="Not Found" xml:space="preserve">
     <value>Not Found</value>
@@ -134,5 +140,17 @@
   </data>
   <data name="UserHasActiveApplication" xml:space="preserve">
     <value>User already has an active or Accepted application</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>User not found</value>
+  </data>
+  <data name="FailedToRemoveUserRoles" xml:space="preserve">
+    <value>Faild To Remove User Roles</value>
+  </data>
+  <data name="FaildeToAddUserRoles" xml:space="preserve">
+    <value>Faild To Add User Roles</value>
+  </data>
+  <data name="FailedToDeleteUserClaims" xml:space="preserve">
+    <value>Failed To Delete User Claims</value>
   </data>
 </root>

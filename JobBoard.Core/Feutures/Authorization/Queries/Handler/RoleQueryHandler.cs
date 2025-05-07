@@ -12,7 +12,7 @@ using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Authorization.Queries.Handler
 {
-	public class AuthorizationQueryHandler : ResponseHandler,
+	public class RoleQueryHandler : ResponseHandler,
 				IRequestHandler<GetListRolesQuery, Response<List<GetListRolesQueryRsponse>>>,
 				IRequestHandler<GetSingleRoleQuery, Response<GetSingleRoleQueryResponse>>,
 				IRequestHandler<ManageUserRolesQuery, Response<ManageUserRolesDto>>
@@ -28,7 +28,7 @@ namespace JobBoard.Core.Feutures.Authorization.Queries.Handler
 
 
 		#region Constructors
-		public AuthorizationQueryHandler(IAuthorizationService authorizationService, IMapper mapper,
+		public RoleQueryHandler(IAuthorizationService authorizationService, IMapper mapper,
 										UserManager<User> userManager,
 										IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
 		{
@@ -61,7 +61,7 @@ namespace JobBoard.Core.Feutures.Authorization.Queries.Handler
 			var user = await _userManager.FindByIdAsync(request.UserId.ToString());
 			if (user is null) return NotFound<ManageUserRolesDto>("User Not Found");
 
-			var result = await _authorizationService.GetManageUserRolesAsync(user);
+			var result = await _authorizationService.ManageUserRolesAsync(user);
 
 			return Success(result);
 

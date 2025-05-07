@@ -1,6 +1,8 @@
-﻿
-using JobBoard.Data.DTOs;
+﻿using System.Security.Claims;
 using JobBoard.Data.Entities.Identity;
+using JobBoard.Data.Helpers;
+using JobBoard.Data.Requests;
+using JobBoard.Data.Responses;
 using JobBoard.Infrastructure.context;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -63,7 +65,7 @@ namespace JobBoard.Service.Authorization
 
 			return result != null;
 		}
-		public async Task<ManageUserRolesDto> GetManageUserRolesAsync(User user)
+		public async Task<ManageUserRolesDto> ManageUserRolesAsync(User user)
 		{
 			var result = new ManageUserRolesDto();
 			result.Roles = new List<RoleResponse>();
@@ -104,11 +106,11 @@ namespace JobBoard.Service.Authorization
 
 				var result = await _userManager.RemoveFromRolesAsync(user, userRoles);
 
-				if (!result.Succeeded) return "FaildToRemoveUserRoles";
+				if (!result.Succeeded) return "FailedToRemoveUserRoles";
 
 				var AddRolesResult = await _userManager.AddToRolesAsync(user, Roles);
 
-				if (!AddRolesResult.Succeeded) return "FaildToAddUserRoles";
+				if (!AddRolesResult.Succeeded) return "FailedToAddUserRoles";
 
 				await trans.CommitAsync();
 				return "Success";
@@ -116,7 +118,67 @@ namespace JobBoard.Service.Authorization
 			catch
 			{
 				await trans.RollbackAsync();
-				return "Failed";
+				return "FailedToAddUserRoles";
+			}
+
+		}
+
+		public async Task<ManageUserClaimsResponse> ManageUserClaimsAsync(User User)
+		{
+			var manageUserClaims = new ManageUserClaimsResponse();
+			manageUserClaims.UserId = User.Id;
+
+			manageUserClaims.claimsResponse = new List<ClaimResponse>();
+
+			var userClaims = await _userManager.GetClaimsAsync(User);
+
+			foreach (var claim in ClaimStore.Claims)
+			{
+				var claimResponse = new ClaimResponse() { ClaimType = claim.Type, ClaimValue = claim.Value };
+
+
+				if (userClaims.Any(x => x.Value == claim.Value))
+				{
+					claimResponse.HasClaim = true;
+				}
+
+				manageUserClaims.claimsResponse.Add(claimResponse);
+			}
+
+			return manageUserClaims;
+		}
+
+		public async Task<string> UpdateUserClaimsAsnyc(UpdateUserClaimRequest request)
+		{
+			var trans = await _context.Database.BeginTransactionAsync();
+
+			try
+			{
+				var user = await _userManager.FindByIdAsync(request.UserId.ToString());
+				if (user is null) return "NotFound";
+
+				var userClaims = await _userManager.GetClaimsAsync(user);
+				// delete all claims
+				var result = await _userManager.RemoveClaimsAsync(user, userClaims);
+				if (!result.Succeeded) return "FailedToDeleteUserClaims";
+
+				var newClaims = request.claimsResponse.Where(claim => claim.HasClaim)
+							.Select(claim => new Claim(claim.ClaimType, claim.ClaimValue));
+
+				var addResult = await _userManager.AddClaimsAsync(user, newClaims);
+
+
+				if (!addResult.Succeeded) return "FailedToAddClaims";
+
+				await trans.CommitAsync();
+
+				return "Success";
+
+			}
+			catch
+			{
+				await trans.RollbackAsync();
+				return "ErrorUpdateClaims";
 			}
 
 		}

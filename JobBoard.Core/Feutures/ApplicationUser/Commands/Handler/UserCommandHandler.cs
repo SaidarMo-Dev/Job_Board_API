@@ -23,6 +23,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 		private readonly IMapper _mapper;
 		private readonly ICountryService _countryService;
 		private readonly IUserService _userService;
+		private readonly IStringLocalizer<SharedResources> _stringLocalizer;
 		#endregion
 
 		#region Construtors
@@ -36,6 +37,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 			_mapper = mapper;
 			_countryService = countryService;
 			_userService = userService;
+			_stringLocalizer = stringLocalizer;
 		}
 
 		#endregion
@@ -47,7 +49,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 			// verify the username and email to be unique
 			var Exist = await _userManager.Users.AnyAsync(x => x.Email == request.Email);
 
-			if (Exist) return BadRequest<int>("Email Already exist!");
+			if (Exist) return BadRequest<int>(_stringLocalizer[SharedResourcesKeys.EmailExist]);
 
 			Exist = await _userManager.Users.AnyAsync(x => x.UserName == request.UserName);
 
