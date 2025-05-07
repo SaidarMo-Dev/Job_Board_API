@@ -1,5 +1,5 @@
 ﻿using JobBoard.Core.Bases;
-using JobBoard.Data.DTOs;
+using JobBoard.Data.Responses;
 using MediatR;
 
 namespace JobBoard.Core.Feutures.Authorization.Queries.Models

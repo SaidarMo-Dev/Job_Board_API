@@ -15,5 +15,10 @@
 		public static string FailedToRemoveUserRoles = "FailedToRemoveUserRoles";
 		public static string FailedToAddUserRoles = "FailedToAddUserRoles";
 
+		public static string FailedToDeleteUserClaims = "FailedToDeleteUserClaims";
+		public static string FailedToAddClaims = "FailedToAddClaims";
+		public static string ErrorUpdateClaims = "ErrorUpdateClaims";
+
+
 	}
 }

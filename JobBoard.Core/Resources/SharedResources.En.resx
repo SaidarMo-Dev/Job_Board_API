@@ -153,4 +153,10 @@
   <data name="FailedToDeleteUserClaims" xml:space="preserve">
     <value>Failed To Delete User Claims</value>
   </data>
+  <data name="FailedToAddClaims" xml:space="preserve">
+    <value>Failed To Add User Claims</value>
+  </data>
+  <data name="ErrorUpdateClaims" xml:space="preserve">
+    <value>Error Update Claims</value>
+  </data>
 </root>

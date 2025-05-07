@@ -124,6 +124,7 @@
 			public const string GetManageUserRoles = Roles + "/ManageUserRoles/{Id}";
 			public const string UpdateUserRoles = Roles + "/UpdateUserRoles";
 			public const string ManageUserClaims = Claims + "/Manage-user-claims/{Id}";
+			public const string UpdateUserClaims = Claims + "/Update-user-claims";
 
 		}
 

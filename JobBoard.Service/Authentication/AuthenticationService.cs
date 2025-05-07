@@ -147,7 +147,7 @@ namespace JobBoard.Service.Authentication
 		{
 			var userRoles = await _userManager.GetRolesAsync(user);
 
-			var claims = GetUserClaims(user, userRoles.ToList());
+			var claims = await GetUserClaimsAsync(user, userRoles.ToList());
 
 			var jwtToken = new JwtSecurityToken(
 						_jwtSettings.Issuer,
@@ -169,8 +169,10 @@ namespace JobBoard.Service.Authentication
 
 			return Convert.ToBase64String(RandomNumber);
 		}
-		private List<Claim> GetUserClaims(User user, List<string> roles)
+		private async Task<List<Claim>> GetUserClaimsAsync(User user, List<string> roles)
 		{
+
+			var userClaims = await _userManager.GetClaimsAsync(user);
 
 			var claims = new List<Claim>()
 			{
@@ -185,6 +187,8 @@ namespace JobBoard.Service.Authentication
 			{
 				claims.Add(new Claim(ClaimTypes.Role, role));
 			}
+
+			claims.AddRange(userClaims);
 
 			return claims;
 

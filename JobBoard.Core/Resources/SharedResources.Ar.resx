@@ -151,6 +151,12 @@
     <value>فشل في إضافة صلاحيات المستخدم</value>
   </data>
   <data name="FailedToDeleteUserClaims" xml:space="preserve">
-    <value>فشل في إزالة  المستخدم</value>
+    <value>فشل في إزالة بيانات المستخدم</value>
+  </data>
+  <data name="FailedToAddClaims" xml:space="preserve">
+    <value>فشل في اضافة بيانات المستخدم</value>
+  </data>
+  <data name="ErrorUpdateClaims" xml:space="preserve">
+    <value>تعذر إضافة بيانات المستخدم </value>
   </data>
 </root>

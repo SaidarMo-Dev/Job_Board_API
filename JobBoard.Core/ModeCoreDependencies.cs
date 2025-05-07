@@ -22,6 +22,20 @@ namespace JobBoard.Core
 			services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
 
+			services.AddAuthorization(option =>
+			{
+				option.AddPolicy("Edit", policy =>
+				{
+					policy.RequireClaim("Edit", ["EditJob", "EditUser", "EditCompany"]);
+
+				});
+
+				option.AddPolicy("Get", policy =>
+				{
+					policy.RequireClaim("Get", "GetJob");
+				});
+			});
+
 			return services;
 		}
 	}

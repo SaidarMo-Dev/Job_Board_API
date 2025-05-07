@@ -22,10 +22,12 @@ namespace JobBoard.Api.Controllers
 		}
 
 
+
 		[HttpGet(Router.JobRoute.GetByID)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		[Authorize(policy: "Get")]
 
 		public async Task<IActionResult> GetJobById([FromRoute] int Id)
 		{
