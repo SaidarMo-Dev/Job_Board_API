@@ -3,8 +3,32 @@
   "WorkspaceRootPath": "C:\\Projects\\Job_Board_API\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{CF1BC049-6506-4CA2-93DC-CC0E7D8BD67E}|JobBoard.Service\\JobBoard.Service.csproj|c:\\projects\\job_board_api\\jobboard.service\\implementations\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF1BC049-6506-4CA2-93DC-CC0E7D8BD67E}|JobBoard.Service\\JobBoard.Service.csproj|solutionrelative:jobboard.service\\implementations\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{367E4DA6-2142-474F-B8D5-C47DFF86BC8A}|JobBoard.Infrastructure\\JobBoard.Infrastructure.csproj|c:\\projects\\job_board_api\\jobboard.infrastructure\\addregistrations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{367E4DA6-2142-474F-B8D5-C47DFF86BC8A}|JobBoard.Infrastructure\\JobBoard.Infrastructure.csproj|solutionrelative:jobboard.infrastructure\\addregistrations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79D9DDE7-61D3-45DB-8E5A-81646E3C13E2}|JobBoard.Data\\JobBoard.Data.csproj|c:\\projects\\job_board_api\\jobboard.data\\helpers\\emailsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79D9DDE7-61D3-45DB-8E5A-81646E3C13E2}|JobBoard.Data\\JobBoard.Data.csproj|solutionrelative:jobboard.data\\helpers\\emailsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|c:\\projects\\job_board_api\\jobboard.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|solutionrelative:jobboard.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CF1BC049-6506-4CA2-93DC-CC0E7D8BD67E}|JobBoard.Service\\JobBoard.Service.csproj|c:\\projects\\job_board_api\\jobboard.service\\abstractions\\iemailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CF1BC049-6506-4CA2-93DC-CC0E7D8BD67E}|JobBoard.Service\\JobBoard.Service.csproj|solutionrelative:jobboard.service\\abstractions\\iemailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\email\\commands\\handlers\\emailommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\email\\commands\\handlers\\emailommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\email\\commands\\models\\sendemailcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\email\\commands\\models\\sendemailcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CF1BC049-6506-4CA2-93DC-CC0E7D8BD67E}|JobBoard.Service\\JobBoard.Service.csproj|c:\\projects\\job_board_api\\jobboard.service\\authentication\\authenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -46,8 +70,34 @@
       "DocumentGroups": [
         {
           "DockedHeight": 382,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EmailSettings.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Data\\Helpers\\EmailSettings.cs",
+              "RelativeDocumentMoniker": "JobBoard.Data\\Helpers\\EmailSettings.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Data\\Helpers\\EmailSettings.cs",
+              "RelativeToolTip": "JobBoard.Data\\Helpers\\EmailSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-08T09:24:19.256Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AddRegistrations.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Infrastructure\\AddRegistrations.cs",
+              "RelativeDocumentMoniker": "JobBoard.Infrastructure\\AddRegistrations.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Infrastructure\\AddRegistrations.cs",
+              "RelativeToolTip": "JobBoard.Infrastructure\\AddRegistrations.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAMwCcAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-08T09:23:38.259Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
@@ -58,20 +108,72 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\appsettings.json",
+              "RelativeDocumentMoniker": "JobBoard.Api\\appsettings.json",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\appsettings.json",
+              "RelativeToolTip": "JobBoard.Api\\appsettings.json",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAEwBgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-08T09:06:09.783Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "EmailService.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Implementations\\EmailService.cs",
+              "RelativeDocumentMoniker": "JobBoard.Service\\Implementations\\EmailService.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Implementations\\EmailService.cs",
+              "RelativeToolTip": "JobBoard.Service\\Implementations\\EmailService.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAIAwwBwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-08T09:04:39.992Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SendEmailCommand.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Email\\commands\\Models\\SendEmailCommand.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Email\\commands\\Models\\SendEmailCommand.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Email\\commands\\Models\\SendEmailCommand.cs",
+              "RelativeToolTip": "JobBoard.Core\\Feutures\\Email\\commands\\Models\\SendEmailCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-08T08:59:02.783Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EmailommandHandler.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Email\\commands\\handlers\\EmailommandHandler.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Email\\commands\\handlers\\EmailommandHandler.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Email\\commands\\handlers\\EmailommandHandler.cs",
+              "RelativeToolTip": "JobBoard.Core\\Feutures\\Email\\commands\\handlers\\EmailommandHandler.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAD4vxAAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-08T08:58:31.785Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "IEmailService.cs",
               "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Abstractions\\IEmailService.cs",
               "RelativeDocumentMoniker": "JobBoard.Service\\Abstractions\\IEmailService.cs",
               "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Abstractions\\IEmailService.cs",
               "RelativeToolTip": "JobBoard.Service\\Abstractions\\IEmailService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAQAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-07T20:47:17.273Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "AuthenticationService.cs",
               "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Authentication\\AuthenticationService.cs",
               "RelativeDocumentMoniker": "JobBoard.Service\\Authentication\\AuthenticationService.cs",
@@ -84,7 +186,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 8,
               "Title": "AuthenticationHandler.cs",
               "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Authentication\\Commands\\Handler\\AuthenticationHandler.cs",
               "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Authentication\\Commands\\Handler\\AuthenticationHandler.cs",
@@ -92,11 +194,12 @@
               "RelativeToolTip": "JobBoard.Core\\Feutures\\Authentication\\Commands\\Handler\\AuthenticationHandler.cs",
               "ViewState": "AgIAACIAAAAAAAAAAAAawC4AAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-07T17:42:00.304Z"
+              "WhenOpened": "2025-05-07T17:42:00.304Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 10,
               "Title": "JobController.cs",
               "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\Controllers\\JobController.cs",
               "RelativeDocumentMoniker": "JobBoard.Api\\Controllers\\JobController.cs",
@@ -104,11 +207,12 @@
               "RelativeToolTip": "JobBoard.Api\\Controllers\\JobController.cs",
               "ViewState": "AgIAABkAAAAAAAAAAAD4vx0AAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-07T17:32:54.018Z"
+              "WhenOpened": "2025-05-07T17:32:54.018Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 9,
               "Title": "ModeCoreDependencies.cs",
               "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\ModeCoreDependencies.cs",
               "RelativeDocumentMoniker": "JobBoard.Core\\ModeCoreDependencies.cs",
@@ -116,11 +220,12 @@
               "RelativeToolTip": "JobBoard.Core\\ModeCoreDependencies.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAUwBgAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-07T17:27:02.981Z"
+              "WhenOpened": "2025-05-07T17:27:02.981Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 11,
               "Title": "RoleQueryHandler.cs",
               "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Authorization\\Queries\\Handler\\RoleQueryHandler.cs",
               "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Authorization\\Queries\\Handler\\RoleQueryHandler.cs",
@@ -128,11 +233,12 @@
               "RelativeToolTip": "JobBoard.Core\\Feutures\\Authorization\\Queries\\Handler\\RoleQueryHandler.cs",
               "ViewState": "AgIAAAIAAAAAAAAAAAAkwA4AAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-07T17:22:37.813Z"
+              "WhenOpened": "2025-05-07T17:22:37.813Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 12,
               "Title": "UpdateUserRolesCommand.cs",
               "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Authorization\\Commands\\Models\\UpdateUserRolesCommand.cs",
               "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Authorization\\Commands\\Models\\UpdateUserRolesCommand.cs",
@@ -140,11 +246,12 @@
               "RelativeToolTip": "JobBoard.Core\\Feutures\\Authorization\\Commands\\Models\\UpdateUserRolesCommand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-07T17:22:25.666Z"
+              "WhenOpened": "2025-05-07T17:22:25.666Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 13,
               "Title": "Router.cs",
               "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Data\\Metadata\\Router.cs",
               "RelativeDocumentMoniker": "JobBoard.Data\\Metadata\\Router.cs",
@@ -152,11 +259,12 @@
               "RelativeToolTip": "JobBoard.Data\\Metadata\\Router.cs",
               "ViewState": "AgIAAHgAAAAA8dNiGz/3v34AAABHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-06T17:49:53.38Z"
+              "WhenOpened": "2025-05-06T17:49:53.38Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 14,
               "Title": "AuthorizationService.cs",
               "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Authorization\\AuthorizationService.cs",
               "RelativeDocumentMoniker": "JobBoard.Service\\Authorization\\AuthorizationService.cs",
@@ -164,7 +272,8 @@
               "RelativeToolTip": "JobBoard.Service\\Authorization\\AuthorizationService.cs",
               "ViewState": "AgIAAKYAAAAAAAAAAAAwwLQAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-06T17:33:45.861Z"
+              "WhenOpened": "2025-05-06T17:33:45.861Z",
+              "EditorCaption": ""
             }
           ]
         },

@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MailKit" Version="4.12.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\JobBoard.Data\JobBoard.Data.csproj" />
     <ProjectReference Include="..\JobBoard.Infrastructure\JobBoard.Infrastructure.csproj" />
   </ItemGroup>

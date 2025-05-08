@@ -69,6 +69,10 @@
               "target": "Package",
               "version": "[11.11.0, )"
             },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.12.0, )"
+            },
             "MediatR": {
               "target": "Package",
               "version": "[12.4.1, )"
@@ -332,6 +336,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.12.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

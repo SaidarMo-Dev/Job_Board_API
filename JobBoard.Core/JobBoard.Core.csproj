@@ -10,6 +10,7 @@
     <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="FluentValidation" Version="11.11.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
+    <PackageReference Include="MailKit" Version="4.12.0" />
     <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
   </ItemGroup>
@@ -24,8 +25,10 @@
     <Folder Include="Feutures\Categories\Commands\Validations\" />
     <Folder Include="Feutures\Categories\Commands\Handler\" />
     <Folder Include="Feutures\Categories\Commands\Models\" />
-    <Folder Include="Feutures\Email\commands\" />
-    <Folder Include="Feutures\Email\Queries\" />
+    <Folder Include="Feutures\Email\commands\Validations\" />
+    <Folder Include="Feutures\Email\Queries\handlers\" />
+    <Folder Include="Feutures\Email\Queries\Models\" />
+    <Folder Include="Feutures\Email\Queries\Responses\" />
     <Folder Include="Mapping\AuthorizationMapping\Commands\" />
   </ItemGroup>
 

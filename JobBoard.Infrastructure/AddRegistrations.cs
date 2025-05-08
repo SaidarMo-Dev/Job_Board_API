@@ -30,10 +30,17 @@ namespace JobBoard.Infrastructure
 
 			}).AddEntityFrameworkStores<appDbContext>().AddDefaultTokenProviders();
 
+			// add jwt settings
 			var jwtSettings = new JwtSettings();
 			configuration.GetSection(nameof(jwtSettings)).Bind(jwtSettings);
 
 			services.AddSingleton(jwtSettings);
+
+			// add email settings
+			var emailSettings = new EmailSettings();
+			configuration.GetSection(nameof(emailSettings)).Bind(emailSettings);
+
+			services.AddSingleton(emailSettings);
 
 
 			// configuration Authentication
