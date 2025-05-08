@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Feutures\Email\**" />
+    <EmbeddedResource Remove="Feutures\Email\**" />
+    <None Remove="Feutures\Email\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="FluentValidation" Version="11.11.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
@@ -25,10 +31,6 @@
     <Folder Include="Feutures\Categories\Commands\Validations\" />
     <Folder Include="Feutures\Categories\Commands\Handler\" />
     <Folder Include="Feutures\Categories\Commands\Models\" />
-    <Folder Include="Feutures\Email\commands\Validations\" />
-    <Folder Include="Feutures\Email\Queries\handlers\" />
-    <Folder Include="Feutures\Email\Queries\Models\" />
-    <Folder Include="Feutures\Email\Queries\Responses\" />
     <Folder Include="Mapping\AuthorizationMapping\Commands\" />
   </ItemGroup>
 

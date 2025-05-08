@@ -159,4 +159,7 @@
   <data name="ErrorUpdateClaims" xml:space="preserve">
     <value>تعذر إضافة بيانات المستخدم </value>
   </data>
+  <data name="FailedSendEmail" xml:space="preserve">
+    <value>حدث خطأ أثناء إرسال الإيميل</value>
+  </data>
 </root>

@@ -159,4 +159,7 @@
   <data name="ErrorUpdateClaims" xml:space="preserve">
     <value>Error Update Claims</value>
   </data>
+  <data name="FailedSendEmail" xml:space="preserve">
+    <value>Failed Send Email</value>
+  </data>
 </root>

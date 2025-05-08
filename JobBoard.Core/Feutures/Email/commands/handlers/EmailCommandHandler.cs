@@ -7,7 +7,7 @@ using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Email.commands.handlers
 {
-	public class EmailommandHandler : ResponseHandler,
+	public class EmailCommandHandler : ResponseHandler,
 							IRequestHandler<SendEmailCommand, Response<string>>
 
 
@@ -18,7 +18,7 @@ namespace JobBoard.Core.Feutures.Email.commands.handlers
 		#endregion
 
 		#region Constructors
-		public EmailommandHandler(IStringLocalizer<SharedResources> stringLocalizer,
+		public EmailCommandHandler(IStringLocalizer<SharedResources> stringLocalizer,
 								IEmailService emailService) : base(stringLocalizer)
 		{
 			_stringLocalizer = stringLocalizer;
@@ -29,10 +29,13 @@ namespace JobBoard.Core.Feutures.Email.commands.handlers
 		#endregion
 
 		#region Handle Methods
-		public Task<Response<string>> Handle(SendEmailCommand request, CancellationToken cancellationToken)
+		public async Task<Response<string>> Handle(SendEmailCommand request, CancellationToken cancellationToken)
 		{
-			var result = _emailService.SendEmail(request.Email, request.Message);
+			//var result = await _emailService.SendEmail(request.Email, request.Message);
 
+			//if (result == "Failed") return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedSendEmail]);
+
+			return Success("");
 
 		}
 		#endregion

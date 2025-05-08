@@ -110,6 +110,7 @@
 
 		}
 
+
 		public static class AuthorizationRoute
 		{
 			private const string Prefex = Rule + "/Authorization";
@@ -128,7 +129,11 @@
 
 		}
 
+		public static class EmailRoute
+		{
+			private const string Prefex = Rule + "/Email";
+
+			public const string SendEmail = Prefex + "/SendEmail";
+		}
 	}
-
-
 }
