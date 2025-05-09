@@ -105,6 +105,7 @@
 		public static class AuthenticationRoute
 		{
 			private const string Prefex = Rule + "/Authentication";
+			public const string ConfirmEmail = Prefex + "/ConfirmEmail";
 			public const string SignIn = Prefex + "/SignIn";
 			public const string RefreshToken = Prefex + "/RefreshToken";
 

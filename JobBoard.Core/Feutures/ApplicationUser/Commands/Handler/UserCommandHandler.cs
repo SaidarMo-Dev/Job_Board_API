@@ -58,13 +58,11 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 			// map request with user
 			var user = _mapper.Map<User>(request);
 
-			// get user country Id 
-			user.CountryId = await _countryService.GetCountryIdAsync(request.CountryName);
 
-			var result = await _userManager.CreateAsync(user, request.Password);
+			//var result = await _userManager.CreateAsync(user, request.Password);
+			var result = await _userService.AddNewUserAsync(user, request.Password, request.CountryName);
 
-			if (!result.Succeeded)
-				return BadRequest<int>(result?.Errors?.FirstOrDefault()?.Description);
+			if (!(result == "Success")) return BadRequest<int>(result);
 
 			await _userManager.AddToRoleAsync(user, "User");
 

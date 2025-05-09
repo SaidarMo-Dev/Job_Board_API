@@ -1,6 +1,8 @@
 ﻿using JobBoard.Data.Entities.Identity;
+using JobBoard.Data.Metadata;
 using JobBoard.Infrastructure.Abstractions;
 using JobBoard.Service.Abstractions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -13,6 +15,9 @@ namespace JobBoard.Service.Implementations
 		#region Fields
 		private readonly UserManager<User> _userManager;
 		private readonly RoleManager<Role> _roleManager;
+		private readonly ICountryService _countryService;
+		private readonly IHttpContextAccessor _httpContextAccessor;
+		private readonly IEmailService _emailService;
 		private readonly IUserRepository _userRepository;
 		#endregion
 
@@ -28,8 +33,10 @@ namespace JobBoard.Service.Implementations
 							ILogger<UserManager<User>> logger,
 							IUserRepository userRepository,
 							UserManager<User> userManager,
-							RoleManager<Role> roleManager
-
+							RoleManager<Role> roleManager,
+							ICountryService countryService,
+							IHttpContextAccessor httpContextAccessor,
+							IEmailService emailService
 						)
 						: base(userStore, options,
 							passwordHasher, userValidators,
@@ -40,6 +47,9 @@ namespace JobBoard.Service.Implementations
 			_userRepository = userRepository;
 			_userManager = userManager;
 			_roleManager = roleManager;
+			_countryService = countryService;
+			_httpContextAccessor = httpContextAccessor;
+			_emailService = emailService;
 		}
 
 
@@ -54,14 +64,29 @@ namespace JobBoard.Service.Implementations
 
 		}
 
-		public async Task<string> AddNewUserAsync(User User, string Password)
+		public async Task<string> AddNewUserAsync(User User, string Password, string CountryName)
 		{
 			var trans = _userRepository.BeginTransaction();
 			try
 			{
-				await _userManager.CreateAsync(User, Password);
+
+				User.CountryId = await _countryService.GetCountryIdAsync(CountryName);
+
+				var result = await _userManager.CreateAsync(User, Password);
+
+
+				if (!result.Succeeded) return result.Errors.FirstOrDefault().Description;
+
+				var code = await _userManager.GenerateEmailConfirmationTokenAsync(User);
+
+				var httpAccessor = _httpContextAccessor.HttpContext.Request;
+
+				var url = httpAccessor.Scheme + "://" + httpAccessor.Host + Router.AuthenticationRoute.ConfirmEmail + $"?userId={User.Id}&code={code}";
+
+				await _emailService.SendEmail(User.Email, url);
+
 				await trans.CommitAsync();
-				return "User Created";
+				return "Success";
 			}
 			catch (Exception ex)
 			{
@@ -113,6 +138,21 @@ namespace JobBoard.Service.Implementations
 				.FirstOrDefaultAsync();
 
 			return user != null;
+		}
+
+		public async Task<string> ConfirmEmailAsync(int UserId, string Code)
+		{
+
+			var user = await _userManager.FindByIdAsync(UserId.ToString());
+
+			if (user == null) return "UserNotFound";
+
+			var result = await _userManager.ConfirmEmailAsync(user, Code);
+
+			if (!result.Succeeded) return result.Errors.FirstOrDefault().Description;
+
+			return "Success";
+
 		}
 
 

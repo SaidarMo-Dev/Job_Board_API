@@ -9,5 +9,6 @@ namespace JobBoard.Service.Authentication
 		Task<AuthResponse> GenerateUserToken(User user);
 		JwtSecurityToken ReadJwtToken(string accessToken);
 		Task<AuthResponse> GetRefreshToken(string refreshToken, string accessToken);
+
 	}
 }

@@ -3,6 +3,7 @@ using JobBoard.Core.Feutures.Authentication.Commands.Models;
 using JobBoard.Core.Resources;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Data.Helpers;
+using JobBoard.Service.Abstractions;
 using JobBoard.Service.Authentication;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -12,23 +13,27 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 {
 	public class AuthenticationHandler : ResponseHandler,
 			IRequestHandler<SignInCommand, Response<AuthResponse>>,
-			IRequestHandler<RefreshNewAccessToken, Response<AuthResponse>>
+			IRequestHandler<RefreshNewAccessToken, Response<AuthResponse>>,
+			IRequestHandler<ConfirmEmailCommand, Response<string>>
 	{
 		#region Fields
 		private readonly SignInManager<User> _signInManager;
 		private readonly UserManager<User> _userManager;
 		private readonly IAuthenticationService _authenticationService;
+		private readonly IUserService _userService;
 		#endregion
 
 		#region Constructors
 		public AuthenticationHandler(SignInManager<User> signInManager,
 									UserManager<User> userManager,
 									IAuthenticationService authenticationService,
-									IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
+									IStringLocalizer<SharedResources> stringLocalizer,
+									IUserService userService) : base(stringLocalizer)
 		{
 			_signInManager = signInManager;
 			_userManager = userManager;
 			_authenticationService = authenticationService;
+			_userService = userService;
 		}
 
 		#endregion
@@ -55,6 +60,16 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 			var response = await _authenticationService.GetRefreshToken(request.RefreshToken, request.AccessToken);
 
 			return Success(response);
+		}
+
+		public async Task<Response<string>> Handle(ConfirmEmailCommand request, CancellationToken cancellationToken)
+		{
+			var result = await _userService.ConfirmEmailAsync(request.UserId, request.Code);
+
+			if (!(result == "Success")) return BadRequest<string>(result);
+
+			return Success<string>(message: "Email Confirmed");
+
 		}
 		#endregion
 	}

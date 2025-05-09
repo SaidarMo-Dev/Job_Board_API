@@ -25,5 +25,14 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 		}
 
+		[HttpPut(Router.AuthenticationRoute.ConfirmEmail)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+
+		public async Task<IActionResult> ConfirmEmail([FromQuery] ConfirmEmailCommand request)
+		{
+			return NewResult(await Mediator.Send(request));
+
+		}
 	}
 }
