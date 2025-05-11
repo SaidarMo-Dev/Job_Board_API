@@ -1,5 +1,6 @@
 ﻿using JobBoard.Api.Bases;
 using JobBoard.Core.Feutures.Authentication.Commands.Models;
+using JobBoard.Core.Feutures.Authentication.Queries.Models;
 using JobBoard.Data.Metadata;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,11 +26,11 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 		}
 
-		[HttpPut(Router.AuthenticationRoute.ConfirmEmail)]
+		[HttpGet(Router.AuthenticationRoute.ConfirmEmail)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 
-		public async Task<IActionResult> ConfirmEmail([FromQuery] ConfirmEmailCommand request)
+		public async Task<IActionResult> ConfirmEmail([FromQuery] ConfirmEmailQuery request)
 		{
 			return NewResult(await Mediator.Send(request));
 

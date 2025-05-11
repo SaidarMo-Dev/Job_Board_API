@@ -1004,7 +1004,7 @@
       }
     },
     "/Api/V1/Authentication/ConfirmEmail": {
-      "put": {
+      "get": {
         "tags": [
           "Authentication"
         ],

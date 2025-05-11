@@ -2,7 +2,7 @@
 {
 	public static class Router
 	{
-		private const string Api = "Api";
+		private const string Api = "/Api";
 		private const string Version = "/V1";
 		private const string Rule = Api + Version;
 		private const string Single = "/{Id}";

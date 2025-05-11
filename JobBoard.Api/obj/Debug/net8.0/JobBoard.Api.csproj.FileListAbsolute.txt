@@ -201,13 +201,6 @@ C:\visual projects\JobBoard.Api\JobBoard.Api\bin\Debug\net8.0\Microsoft.Extensio
 C:\visual projects\JobBoard.Api\JobBoard.Api\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
 C:\visual projects\JobBoard.Api\JobBoard.Api\bin\Debug\net8.0\System.Security.Cryptography.Xml.dll
 C:\visual projects\JobBoard.Api\JobBoard.Api\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
-C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\JobBoard.Api.csproj.AssemblyReference.cache
-C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\JobBoard.Api.GeneratedMSBuildEditorConfig.editorconfig
-C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\JobBoard.Api.AssemblyInfoInputs.cache
-C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\JobBoard.Api.AssemblyInfo.cs
-C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\JobBoard.Api.csproj.CoreCompileInputs.cache
-C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\JobBoard.Api.MvcApplicationPartsAssemblyInfo.cache
-C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\JobBoard.Api.sourcelink.json
 C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\appsettings.Development.json
 C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\appsettings.json
 C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\JobBoard.Api.staticwebassets.endpoints.json
@@ -394,6 +387,14 @@ C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\JobBoard.Service.pdb
 C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\JobBoard.Data.pdb
 C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\Ar\JobBoard.Core.resources.dll
 C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\En\JobBoard.Core.resources.dll
+C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\JobBoard.Api.csproj.AssemblyReference.cache
+C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\JobBoard.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\JobBoard.Api.AssemblyInfoInputs.cache
+C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\JobBoard.Api.AssemblyInfo.cs
+C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\JobBoard.Api.csproj.CoreCompileInputs.cache
+C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\JobBoard.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\JobBoard.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\JobBoard.Api.sourcelink.json
 C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\scopedcss\bundle\JobBoard.Api.styles.css
 C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\staticwebassets.build.json
 C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\staticwebassets.development.json

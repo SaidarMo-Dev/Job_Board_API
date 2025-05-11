@@ -243,7 +243,7 @@
     "ContainingType": "JobBoard.Api.Controllers.AuthenticationController",
     "Method": "ConfirmEmail",
     "RelativePath": "Api/V1/Authentication/ConfirmEmail",
-    "HttpMethod": "PUT",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [

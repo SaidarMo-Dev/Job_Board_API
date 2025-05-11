@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Feutures\Authentication\Queries\" />
     <Folder Include="Feutures\Emails\" />
     <Folder Include="Mapping\AuthorizationMapping\Commands\" />
   </ItemGroup>

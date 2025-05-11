@@ -8,6 +8,9 @@ using JobBoard.Infrastructure.context;
 using JobBoard.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -49,6 +52,19 @@ builder.Services.AddInfrastuctureDependencies()
 	.AddServiceDependencies()
 	.AddCoreDependencies()
 	.AddRegistration(builder.Configuration);
+
+#endregion
+
+
+#region Depen For IUrlHelper
+builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+builder.Services.AddScoped<IUrlHelper>(x =>
+{
+	var actionContext = x.GetService<IActionContextAccessor>().ActionContext;
+	var factory = x.GetRequiredService<IUrlHelperFactory>();
+	return factory.GetUrlHelper(actionContext);
+
+});
 
 #endregion
 

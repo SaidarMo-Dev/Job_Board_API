@@ -1,9 +1,9 @@
 ﻿using JobBoard.Data.Entities.Identity;
-using JobBoard.Data.Metadata;
 using JobBoard.Infrastructure.Abstractions;
 using JobBoard.Service.Abstractions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -18,6 +18,7 @@ namespace JobBoard.Service.Implementations
 		private readonly ICountryService _countryService;
 		private readonly IHttpContextAccessor _httpContextAccessor;
 		private readonly IEmailService _emailService;
+		private readonly IUrlHelper _urlHelper;
 		private readonly IUserRepository _userRepository;
 		#endregion
 
@@ -36,7 +37,8 @@ namespace JobBoard.Service.Implementations
 							RoleManager<Role> roleManager,
 							ICountryService countryService,
 							IHttpContextAccessor httpContextAccessor,
-							IEmailService emailService
+							IEmailService emailService,
+							IUrlHelper urlHelper
 						)
 						: base(userStore, options,
 							passwordHasher, userValidators,
@@ -50,6 +52,7 @@ namespace JobBoard.Service.Implementations
 			_countryService = countryService;
 			_httpContextAccessor = httpContextAccessor;
 			_emailService = emailService;
+			_urlHelper = urlHelper;
 		}
 
 
@@ -77,13 +80,21 @@ namespace JobBoard.Service.Implementations
 
 				if (!result.Succeeded) return result.Errors.FirstOrDefault().Description;
 
+				// send confirmation email
 				var code = await _userManager.GenerateEmailConfirmationTokenAsync(User);
 
 				var httpAccessor = _httpContextAccessor.HttpContext.Request;
 
-				var url = httpAccessor.Scheme + "://" + httpAccessor.Host + Router.AuthenticationRoute.ConfirmEmail + $"?userId={User.Id}&code={code}";
+				//var url = httpAccessor.Scheme + "://" + httpAccessor.Host + "/" + Router.AuthenticationRoute.ConfirmEmail + $"?userId={User.Id}&code={code}";
 
-				await _emailService.SendEmail(User.Email, url);
+				var actionUrl = _urlHelper.Action("ConfirmEmail", "Authentication", new { UserId = User.Id, Code = code });
+
+				var url = httpAccessor.Scheme + "://" + httpAccessor.Host + actionUrl;
+
+
+
+
+				await _emailService.SendEmail(User.Email, url, "Email Confirmation from  Saidar Team");
 
 				await trans.CommitAsync();
 				return "Success";

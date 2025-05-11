@@ -13,8 +13,8 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 {
 	public class AuthenticationHandler : ResponseHandler,
 			IRequestHandler<SignInCommand, Response<AuthResponse>>,
-			IRequestHandler<RefreshNewAccessToken, Response<AuthResponse>>,
-			IRequestHandler<ConfirmEmailCommand, Response<string>>
+			IRequestHandler<RefreshNewAccessToken, Response<AuthResponse>>
+
 	{
 		#region Fields
 		private readonly SignInManager<User> _signInManager;
@@ -62,15 +62,7 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 			return Success(response);
 		}
 
-		public async Task<Response<string>> Handle(ConfirmEmailCommand request, CancellationToken cancellationToken)
-		{
-			var result = await _userService.ConfirmEmailAsync(request.UserId, request.Code);
 
-			if (!(result == "Success")) return BadRequest<string>(result);
-
-			return Success<string>(message: "Email Confirmed");
-
-		}
 		#endregion
 	}
 }
