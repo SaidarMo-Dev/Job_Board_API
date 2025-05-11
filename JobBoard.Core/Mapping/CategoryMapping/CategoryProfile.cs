@@ -7,8 +7,9 @@ namespace JobBoard.Core.Mapping.CategoryMapping
 		public CategoryProfile()
 		{
 			AddSingleCategorymapping();
-			addGetListMapping();
-
+			AddGetListMapping();
+			AddCategoryMapping();
+			UpdateCategoryMapping();
 		}
 	}
 }

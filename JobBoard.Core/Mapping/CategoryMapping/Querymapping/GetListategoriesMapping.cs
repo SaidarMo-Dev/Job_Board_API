@@ -5,7 +5,7 @@ namespace JobBoard.Core.Mapping.CategoryMapping
 {
 	public partial class CategoryProfile
 	{
-		public void addGetListMapping()
+		public void AddGetListMapping()
 		{
 			CreateMap<Category, GetListCategoriesQueryResponse>();
 

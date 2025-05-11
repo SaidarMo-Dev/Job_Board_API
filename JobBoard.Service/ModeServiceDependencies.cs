@@ -22,6 +22,7 @@ namespace JobBoard.Service
 			services.AddScoped<IApplicationService, ApplicationService>();
 			services.AddScoped<IAuthenticationService, AuthenticationService>();
 			services.AddScoped<IAuthorizationService, AuthorizationService>();
+			services.AddScoped<IEmailService, EmailService>();
 
 			return services;
 		}

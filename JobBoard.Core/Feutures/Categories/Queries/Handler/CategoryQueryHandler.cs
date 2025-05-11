@@ -30,7 +30,7 @@ namespace JobBoard.Core.Feutures.Categories.Queries.Handler
 		#region Handles
 		public async Task<Response<GetSingleCategoryQueryResponse>> Handle(GetSingleCategoryQuery request, CancellationToken cancellationToken)
 		{
-			var category = await _categoryService.GetCategoryByIdAsync(request.Id);
+			var category = await _categoryService.FindById(request.Id);
 
 			if (category == null) return NotFound<GetSingleCategoryQueryResponse>("Not Found");
 

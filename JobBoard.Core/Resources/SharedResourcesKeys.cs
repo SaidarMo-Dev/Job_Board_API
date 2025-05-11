@@ -19,6 +19,12 @@
 		public static string ErrorUpdateClaims = "ErrorUpdateClaims";
 		public static string FailedSendEmail = "FailedSendEmail";
 
+		public const string CategoryNameNotEmpty = "CategoryNameNotEmpty";
+		public const string CategoryNameNotNull = "CategoryNameNotNull";
+		public const string CategoryNameExist = "CategoryNameExist";
+		public const string CategoryNotFound = "CategoryNotFound";
+
+
 
 	}
 }

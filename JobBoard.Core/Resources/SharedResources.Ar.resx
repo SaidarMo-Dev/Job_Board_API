@@ -162,4 +162,16 @@
   <data name="FailedSendEmail" xml:space="preserve">
     <value>حدث خطأ أثناء إرسال الإيميل</value>
   </data>
+  <data name="CategoryNameNotEmpty" xml:space="preserve">
+    <value>لا يمكن ترك إسم القسم فارغ</value>
+  </data>
+  <data name="CategoryNameNotNull" xml:space="preserve">
+    <value>لا يمكن ترك إسم القسم فارغ</value>
+  </data>
+  <data name="CategoryNameExist" xml:space="preserve">
+    <value>إسم هذا القسم موجود مسبقا</value>
+  </data>
+  <data name="CategoryNotFound" xml:space="preserve">
+    <value>القسم غير موجود</value>
+  </data>
 </root>

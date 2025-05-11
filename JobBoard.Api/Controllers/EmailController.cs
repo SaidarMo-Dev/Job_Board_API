@@ -1,5 +1,5 @@
 ﻿using JobBoard.Api.Bases;
-using JobBoard.Core.Feutures.Email.commands.Models;
+using JobBoard.Core.Feutures.Emails.commands.Models;
 using JobBoard.Data.Metadata;
 using Microsoft.AspNetCore.Mvc;
 

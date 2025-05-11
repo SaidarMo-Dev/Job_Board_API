@@ -7,6 +7,7 @@
 		public string Description { get; set; }
 
 
+
 		public ICollection<JobCategory> JobCategories { get; set; } = new List<JobCategory>();
 	}
 }

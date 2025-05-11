@@ -18,6 +18,7 @@ namespace JobBoard.Service.Implementations
 			_categoryRepository = categoryRepository;
 		}
 
+
 		#endregion
 
 		#region Methods
@@ -27,7 +28,7 @@ namespace JobBoard.Service.Implementations
 			return await _categoryRepository.GetAllAsync();
 		}
 
-		public async Task<Category> GetCategoryByIdAsync(int Id)
+		public async Task<Category> FindById(int Id)
 		{
 			return await _categoryRepository.FindByIdAsync(Id);
 		}
@@ -55,6 +56,49 @@ namespace JobBoard.Service.Implementations
 			return category != null;
 
 		}
+
+		public async Task<int> AddAsync(Category category)
+		{
+			await _categoryRepository.AddAsync(category);
+
+			return category.CategoryId;
+
+		}
+
+		public async Task<bool> IsNameExistAsync(string Name)
+		{
+			var result = await _categoryRepository.GetTableAsNoTracking()
+									.Where(x => x.Name.Equals(Name))
+									.FirstOrDefaultAsync();
+
+			return result != null;
+
+		}
+		public async Task<bool> IsNameExistExcludeSelfAsync(int Id, string Name)
+		{
+			var result = await _categoryRepository.GetTableAsNoTracking()
+									.Where(x => x.Name.Equals(Name) && x.CategoryId != Id)
+									.FirstOrDefaultAsync();
+
+			return result != null;
+
+		}
+
+		public async Task<string> UpdateAsync(Category category)
+		{
+			await _categoryRepository.UpdateAsync(category);
+			return "Success";
+		}
+
+		public async Task<string> DeleteAsync(Category category)
+		{
+			await _categoryRepository.DeleteAsync(category);
+
+			return "Success";
+		}
+
+
+
 		#endregion
 	}
 }

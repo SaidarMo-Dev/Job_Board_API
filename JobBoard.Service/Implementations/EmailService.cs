@@ -25,6 +25,7 @@ namespace JobBoard.Service.Implementations
 		{
 			try
 			{
+
 				using var client = new SmtpClient();
 
 				await client.ConnectAsync(_emailSettings.Host, _emailSettings.Port, true);

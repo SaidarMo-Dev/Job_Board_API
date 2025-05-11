@@ -132,7 +132,7 @@
   <data name="FailedUpdateApplication" xml:space="preserve">
     <value>Update Application Failed</value>
   </data>
-  <data name="Not Found" xml:space="preserve">
+  <data name="NotFound" xml:space="preserve">
     <value>Not Found</value>
   </data>
   <data name="Required" xml:space="preserve">
@@ -161,5 +161,17 @@
   </data>
   <data name="FailedSendEmail" xml:space="preserve">
     <value>Failed Send Email</value>
+  </data>
+  <data name="CategoryNameNotEmpty" xml:space="preserve">
+    <value>Category Name cannot be Empty</value>
+  </data>
+  <data name="CategoryNameNotNull" xml:space="preserve">
+    <value>Category Name cannot  be null</value>
+  </data>
+  <data name="CategoryNameExist" xml:space="preserve">
+    <value>Category Name Already Exist</value>
+  </data>
+  <data name="CategoryNotFound" xml:space="preserve">
+    <value>Category Not Found</value>
   </data>
 </root>

@@ -28,9 +28,7 @@
 
   <ItemGroup>
     <Folder Include="Feutures\Authentication\Queries\" />
-    <Folder Include="Feutures\Categories\Commands\Validations\" />
-    <Folder Include="Feutures\Categories\Commands\Handler\" />
-    <Folder Include="Feutures\Categories\Commands\Models\" />
+    <Folder Include="Feutures\Emails\" />
     <Folder Include="Mapping\AuthorizationMapping\Commands\" />
   </ItemGroup>
 

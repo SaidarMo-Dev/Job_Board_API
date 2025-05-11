@@ -1,11 +1,11 @@
 ﻿using JobBoard.Core.Bases;
-using JobBoard.Core.Feutures.Email.commands.Models;
+using JobBoard.Core.Feutures.Emails.commands.Models;
 using JobBoard.Core.Resources;
 using JobBoard.Service.Abstractions;
 using MediatR;
 using Microsoft.Extensions.Localization;
 
-namespace JobBoard.Core.Feutures.Email.commands.handlers
+namespace JobBoard.Core.Feutures.Emails.commands.handlers
 {
 	public class EmailCommandHandler : ResponseHandler,
 							IRequestHandler<SendEmailCommand, Response<string>>
@@ -31,9 +31,9 @@ namespace JobBoard.Core.Feutures.Email.commands.handlers
 		#region Handle Methods
 		public async Task<Response<string>> Handle(SendEmailCommand request, CancellationToken cancellationToken)
 		{
-			//var result = await _emailService.SendEmail(request.Email, request.Message);
+			var result = await _emailService.SendEmail(request.Email, request.Message);
 
-			//if (result == "Failed") return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedSendEmail]);
+			if (result == "Failed") return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedSendEmail]);
 
 			return Success("");
 

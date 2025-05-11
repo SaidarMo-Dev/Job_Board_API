@@ -1,7 +1,7 @@
 ﻿using JobBoard.Core.Bases;
 using MediatR;
 
-namespace JobBoard.Core.Feutures.Email.commands.Models
+namespace JobBoard.Core.Feutures.Emails.commands.Models
 {
 	public class SendEmailCommand : IRequest<Response<string>>
 	{
