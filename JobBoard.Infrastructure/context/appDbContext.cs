@@ -8,7 +8,10 @@ namespace JobBoard.Infrastructure.context
 {
 	public class appDbContext : IdentityDbContext<User, Role, int, IdentityUserClaim<int>, IdentityUserRole<int>, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
 	{
-		public appDbContext(DbContextOptions<appDbContext> options) : base(options) { }
+
+		public appDbContext(DbContextOptions<appDbContext> options) : base(options)
+		{
+		}
 
 		public DbSet<Country> countries { get; set; }
 		public DbSet<Application> applications { get; set; }
@@ -24,6 +27,7 @@ namespace JobBoard.Infrastructure.context
 		{
 			base.OnModelCreating(modelBuilder);
 			modelBuilder.ApplyConfigurationsFromAssembly(typeof(appDbContext).Assembly);
+
 
 		}
 	}

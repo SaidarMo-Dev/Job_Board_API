@@ -1,5 +1,4 @@
-﻿using EntityFrameworkCore.EncryptColumn.Attribute;
-using JobBoard.Data.enums;
+﻿using JobBoard.Data.enums;
 using Microsoft.AspNetCore.Identity;
 
 namespace JobBoard.Data.Entities.Identity
@@ -23,8 +22,7 @@ namespace JobBoard.Data.Entities.Identity
 		public bool IsDeleted { get; set; }
 		public DateTime? DeletedAt { get; set; }
 		public int CountryId { get; set; }
-		[EncryptColumn]
-		public string Code { get; set; }
+		public string? Code { get; set; }
 
 		public Country Country { get; set; }
 		public ICollection<Application> applications { get; set; }

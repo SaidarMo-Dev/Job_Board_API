@@ -50,10 +50,6 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "EntityFrameworkCore.EncryptColumn": {
-              "target": "Package",
-              "version": "[6.0.8, )"
-            },
             "Microsoft.Extensions.Identity.Stores": {
               "target": "Package",
               "version": "[8.0.15, )"
