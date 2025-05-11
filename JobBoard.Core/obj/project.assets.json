@@ -76,6 +76,22 @@
           }
         }
       },
+      "EntityFrameworkCore.EncryptColumn/6.0.8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "6.0.0"
+        },
+        "compile": {
+          "lib/netcoreapp6.0/EntityFrameworkCore.EncryptColumn.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/netcoreapp6.0/EntityFrameworkCore.EncryptColumn.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
       "FluentValidation/11.11.0": {
         "type": "package",
         "compile": {
@@ -1827,6 +1843,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "EntityFrameworkCore.EncryptColumn": "6.0.8",
           "Microsoft.Extensions.Identity.Stores": "8.0.15"
         },
         "compile": {
@@ -1945,6 +1962,19 @@
         "lib/netstandard2.0/BouncyCastle.Cryptography.dll",
         "lib/netstandard2.0/BouncyCastle.Cryptography.xml",
         "packageIcon.png"
+      ]
+    },
+    "EntityFrameworkCore.EncryptColumn/6.0.8": {
+      "sha512": "AgnhI+4ZM0lySJKR4cEWvDe/EtGL9nIF3jAMz9XikAyMdbEknDTlj0ksSdLwq7OVXMh/ZsR0IuRHNkcnfXkGzQ==",
+      "type": "package",
+      "path": "entityframeworkcore.encryptcolumn/6.0.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "entityframeworkcore.encryptcolumn.6.0.8.nupkg.sha512",
+        "entityframeworkcore.encryptcolumn.nuspec",
+        "lib/netcoreapp6.0/EntityFrameworkCore.EncryptColumn.dll",
+        "lib/netcoreapp6.0/EntityFrameworkCore.EncryptColumn.pdb"
       ]
     },
     "FluentValidation/11.11.0": {
