@@ -237,6 +237,19 @@ namespace JobBoard.Service.Authentication
 
 		}
 
+		public async Task<string> ConfirmResetPasswordAsync(string email, string code)
+		{
+			var user = await _userManager.FindByEmailAsync(email);
+			if (user is null) return "UserNotFound";
+
+			var userCode = user.Code;
+
+			if (userCode != code) return "IncorrectCode";
+
+			return "Success";
+
+		}
+
 		#endregion
 	}
 }

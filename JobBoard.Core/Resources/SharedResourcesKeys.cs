@@ -26,6 +26,7 @@
 		public const string CategoryNameExist = "CategoryNameExist";
 		public const string CategoryNotFound = "CategoryNotFound";
 		public const string ErrorUpdateUser = "ErrorUpdateUser";
+		public const string IncorrectCode = "IncorrectCode";
 
 
 

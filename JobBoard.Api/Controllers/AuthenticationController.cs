@@ -41,12 +41,22 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 
-		public async Task<IActionResult> ResetPassword([FromQuery] ResetPasswordCommand request)
+		public async Task<IActionResult> ResetPassword([FromQuery] SendResetPasswordCommand request)
 		{
 			return NewResult(await Mediator.Send(request));
 
 		}
 
+		[HttpGet(Router.AuthenticationRoute.ConfirmResetPassword)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+
+		public async Task<IActionResult> ConfirmResetPassword([FromQuery] ConfirmResetPasswordQuery request)
+		{
+			return NewResult(await Mediator.Send(request));
+
+		}
 
 	}
 }

@@ -14,7 +14,7 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 	public class AuthenticationHandler : ResponseHandler,
 			IRequestHandler<SignInCommand, Response<AuthResponse>>,
 			IRequestHandler<RefreshNewAccessToken, Response<AuthResponse>>,
-			IRequestHandler<ResetPasswordCommand, Response<string>>
+			IRequestHandler<SendResetPasswordCommand, Response<string>>
 
 	{
 		#region Fields
@@ -65,7 +65,7 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 			return Success(response);
 		}
 
-		public async Task<Response<string>> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
+		public async Task<Response<string>> Handle(SendResetPasswordCommand request, CancellationToken cancellationToken)
 		{
 			var result = await _authenticationService.SendResetPasswordAsync(request.Email);
 
@@ -73,13 +73,15 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 			{
 				case "UserNotFound": return NotFound<string>(_stringLocalizer[SharedResourcesKeys.UserNotFound]);
 				case "ErrorUpdateUser": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.ErrorUpdateUser]);
-				case "Success": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.Success]);
+				case "Success": return Success("", _stringLocalizer[SharedResourcesKeys.Success]);
 				case "Failed": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.Failed]);
 
 				default: return BadRequest<string>(result);
 			}
 
 		}
+
+
 
 
 		#endregion

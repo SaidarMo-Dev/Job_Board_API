@@ -109,7 +109,7 @@
 			public const string SignIn = Prefex + "/SignIn";
 			public const string RefreshToken = Prefex + "/RefreshToken";
 			public const string ResetPassword = Prefex + "/ResetPassword";
-
+			public const string ConfirmResetPassword = Prefex + "/ConfirmResetPassword";
 		}
 
 

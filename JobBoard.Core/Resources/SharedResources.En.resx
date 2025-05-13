@@ -180,4 +180,7 @@
   <data name="Failed" xml:space="preserve">
     <value>Operation Not Completed</value>
   </data>
+  <data name="IncorrectCode" xml:space="preserve">
+    <value>Incorrect Code</value>
+  </data>
 </root>
