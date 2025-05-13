@@ -5,7 +5,7 @@
 namespace JobBoard.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddCodeColumnTousertable : Migration
+    public partial class AddCodeEncryptedColumnToUsersTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

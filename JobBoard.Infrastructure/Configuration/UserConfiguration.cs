@@ -22,6 +22,10 @@ namespace JobBoard.Infrastructure.Configuration
 					.WithMany(x => x.Users)
 					.HasForeignKey(x => x.CountryId);
 
+			builder.Property(x => x.Code)
+				.HasConversion(new EncryptionConverter());
+
+
 		}
 	}
 

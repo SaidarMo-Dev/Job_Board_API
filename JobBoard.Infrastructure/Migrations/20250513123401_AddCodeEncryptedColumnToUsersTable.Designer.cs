@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobBoard.Infrastructure.Migrations
 {
     [DbContext(typeof(appDbContext))]
-    [Migration("20250511192629_AddCodeColumnTousertable")]
-    partial class AddCodeColumnTousertable
+    [Migration("20250513123401_AddCodeEncryptedColumnToUsersTable")]
+    partial class AddCodeEncryptedColumnToUsersTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
