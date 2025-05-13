@@ -1,4 +1,5 @@
-﻿using JobBoard.Data.Entities.Identity;
+﻿using JobBoard.Core.Helpers;
+using JobBoard.Data.Entities.Identity;
 using JobBoard.Infrastructure.Abstractions;
 using JobBoard.Service.Abstractions;
 using Microsoft.AspNetCore.Http;
@@ -94,9 +95,10 @@ namespace JobBoard.Service.Implementations
 
 
 
-				await _emailService.SendEmail(User.Email, url, "Email Confirmation from  Saidar Team");
+				await _emailService.SendEmail(User.Email, User.FullName, Util.FormatVerificationLink(url), "Email Confirmation from  Saidar Team");
 
 				await trans.CommitAsync();
+
 				return "Success";
 			}
 			catch (Exception ex)

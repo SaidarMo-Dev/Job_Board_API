@@ -2,9 +2,12 @@
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using JobBoard.Core.Helpers;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Data.Helpers;
 using JobBoard.Infrastructure.Abstractions;
+using JobBoard.Infrastructure.context;
+using JobBoard.Service.Abstractions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -17,34 +20,94 @@ namespace JobBoard.Service.Authentication
 		private readonly JwtSettings _jwtSettings;
 		private readonly IUserRefreshTokenRepository _userRefreshTokenRepository;
 		private readonly UserManager<User> _userManager;
+		private readonly IEmailService _emailService;
+		private readonly appDbContext _appDbContext;
 		#endregion
 
 		#region Constructors
 		public AuthenticationService(JwtSettings jwtSettings,
 									 IUserRefreshTokenRepository userRefreshTokenRepository,
-									 UserManager<User> userManager
+									 UserManager<User> userManager,
+									 IEmailService emailService,
+									 appDbContext appDbContext
 									)
 		{
 			_jwtSettings = jwtSettings;
 			_userRefreshTokenRepository = userRefreshTokenRepository;
 			_userManager = userManager;
+			_emailService = emailService;
+			_appDbContext = appDbContext;
 		}
 
 		#endregion
 
 		#region Methods
+
+		private async Task<string> _GenerateAccessTokenAsync(User user)
+		{
+			var userRoles = await _userManager.GetRolesAsync(user);
+
+			var claims = await _GetUserClaimsAsync(user, userRoles.ToList());
+
+			var jwtToken = new JwtSecurityToken(
+						_jwtSettings.Issuer,
+						_jwtSettings.Audience,
+						 claims,
+						expires: DateTime.UtcNow.AddMinutes(_jwtSettings.AccesTokenExpirationDuration),
+						signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtSettings.Secret)), SecurityAlgorithms.HmacSha256));
+
+			var accessToken = new JwtSecurityTokenHandler().WriteToken(jwtToken);
+
+			return accessToken;
+		}
+		private string _GenerateRefreshToken()
+		{
+			var RandomNumber = new byte[32];
+			var generator = RandomNumberGenerator.Create();
+
+			generator.GetBytes(RandomNumber);
+
+			return Convert.ToBase64String(RandomNumber);
+		}
+		private async Task<List<Claim>> _GetUserClaimsAsync(User user, List<string> roles)
+		{
+
+			var userClaims = await _userManager.GetClaimsAsync(user);
+
+			var claims = new List<Claim>()
+			{
+				new Claim(nameof(JwtClaimModel.UserId), user?.Id.ToString()),
+				new Claim(ClaimTypes.Name.ToString(), user.UserName),
+				new Claim(ClaimTypes.Email.ToString(), user.Email),
+				new Claim(nameof(JwtClaimModel.FirstName), user.FirstName),
+				new Claim(nameof(JwtClaimModel.LastName), user.LastName)
+			};
+
+			foreach (var role in roles)
+			{
+				claims.Add(new Claim(ClaimTypes.Role, role));
+			}
+
+			claims.AddRange(userClaims);
+
+			return claims;
+
+		}
+
+
+
 		public async Task<AuthResponse> GenerateUserToken(User user)
 		{
 			// Create access token
 
-			var accessToken = await GenerateAccessTokenAsync(user);
+			var accessToken = await _GenerateAccessTokenAsync(user);
 
 			// Generate and save user refresh token
 
 			var refreshToken = new RefreshTokenResponse
 			{
 				Username = user.UserName,
-				RefreshToken = GenerateRefreshToken(), // refresh token value 
+				RefreshToken = _GenerateRefreshToken(), // refresh token value 
 				ExpirationDate = DateTime.UtcNow.AddDays(_jwtSettings.RefreshTokenExpirationDuration)
 			};
 
@@ -112,7 +175,7 @@ namespace JobBoard.Service.Authentication
 			if (user is null)
 				throw new ArgumentNullException("User Not Found");
 
-			var newAccessToken = await GenerateAccessTokenAsync(user);
+			var newAccessToken = await _GenerateAccessTokenAsync(user);
 
 			// Update Access token
 			userrefreshToken.AccessToken = newAccessToken;
@@ -142,55 +205,35 @@ namespace JobBoard.Service.Authentication
 
 		}
 
-
-		private async Task<string> GenerateAccessTokenAsync(User user)
+		public async Task<string> SendResetPasswordAsync(string Email)
 		{
-			var userRoles = await _userManager.GetRolesAsync(user);
-
-			var claims = await GetUserClaimsAsync(user, userRoles.ToList());
-
-			var jwtToken = new JwtSecurityToken(
-						_jwtSettings.Issuer,
-						_jwtSettings.Audience,
-						 claims,
-						expires: DateTime.UtcNow.AddMinutes(_jwtSettings.AccesTokenExpirationDuration),
-						signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtSettings.Secret)), SecurityAlgorithms.HmacSha256));
-
-			var accessToken = new JwtSecurityTokenHandler().WriteToken(jwtToken);
-
-			return accessToken;
-		}
-		private string GenerateRefreshToken()
-		{
-			var RandomNumber = new byte[32];
-			var generator = RandomNumberGenerator.Create();
-
-			generator.GetBytes(RandomNumber);
-
-			return Convert.ToBase64String(RandomNumber);
-		}
-		private async Task<List<Claim>> GetUserClaimsAsync(User user, List<string> roles)
-		{
-
-			var userClaims = await _userManager.GetClaimsAsync(user);
-
-			var claims = new List<Claim>()
+			var trans = await _appDbContext.Database.BeginTransactionAsync();
+			try
 			{
-				new Claim(nameof(JwtClaimModel.UserId), user?.Id.ToString()),
-				new Claim(ClaimTypes.Name.ToString(), user.UserName),
-				new Claim(ClaimTypes.Email.ToString(), user.Email),
-				new Claim(nameof(JwtClaimModel.FirstName), user.FirstName),
-				new Claim(nameof(JwtClaimModel.LastName), user.LastName)
-			};
+				var user = await _userManager.FindByEmailAsync(Email);
 
-			foreach (var role in roles)
-			{
-				claims.Add(new Claim(ClaimTypes.Role, role));
+				if (user is null) return "UserNotFound";
+
+				var random = new Random();
+
+				var randomCode = random.Next(0, 100000).ToString("D6");
+				user.Code = randomCode;
+
+				var result = await _userManager.UpdateAsync(user);
+				if (!(result.Succeeded)) return "ErrorUpdateUser";
+
+				// send code to user Email
+
+				await _emailService.SendEmail(Email, user.FullName, Util.FormatVerificationMessage(randomCode), "Your Verification Code");
+
+				await trans.CommitAsync();
+				return "Success";
 			}
-
-			claims.AddRange(userClaims);
-
-			return claims;
+			catch
+			{
+				await trans.RollbackAsync();
+				return "Failed";
+			}
 
 		}
 

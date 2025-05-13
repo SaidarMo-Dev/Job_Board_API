@@ -4,6 +4,8 @@
 	{
 
 		public static string Success = "Success";
+		public static string Failed = "Failed";
+
 		public static string Deleted = "Deleted";
 		public static string Required = "Required";
 		public static string NotFound = "NotFound";
@@ -23,6 +25,7 @@
 		public const string CategoryNameNotNull = "CategoryNameNotNull";
 		public const string CategoryNameExist = "CategoryNameExist";
 		public const string CategoryNotFound = "CategoryNotFound";
+		public const string ErrorUpdateUser = "ErrorUpdateUser";
 
 
 

@@ -35,5 +35,18 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 
 		}
+
+		[HttpPut(Router.AuthenticationRoute.ResetPassword)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+
+		public async Task<IActionResult> ResetPassword([FromQuery] ResetPasswordCommand request)
+		{
+			return NewResult(await Mediator.Send(request));
+
+		}
+
+
 	}
 }

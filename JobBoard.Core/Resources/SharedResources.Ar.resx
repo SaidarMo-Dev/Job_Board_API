@@ -174,4 +174,10 @@
   <data name="CategoryNotFound" xml:space="preserve">
     <value>القسم غير موجود</value>
   </data>
+  <data name="ErrorUpdateUser" xml:space="preserve">
+    <value>حدث خطأ اثناء عملية تحديث بيانات المستخدم</value>
+  </data>
+  <data name="Failed" xml:space="preserve">
+    <value>لم تتم العملية بنجاح </value>
+  </data>
 </root>

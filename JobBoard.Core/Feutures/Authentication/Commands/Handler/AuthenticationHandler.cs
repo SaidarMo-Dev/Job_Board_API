@@ -13,13 +13,15 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 {
 	public class AuthenticationHandler : ResponseHandler,
 			IRequestHandler<SignInCommand, Response<AuthResponse>>,
-			IRequestHandler<RefreshNewAccessToken, Response<AuthResponse>>
+			IRequestHandler<RefreshNewAccessToken, Response<AuthResponse>>,
+			IRequestHandler<ResetPasswordCommand, Response<string>>
 
 	{
 		#region Fields
 		private readonly SignInManager<User> _signInManager;
 		private readonly UserManager<User> _userManager;
 		private readonly IAuthenticationService _authenticationService;
+		private readonly IStringLocalizer<SharedResources> _stringLocalizer;
 		private readonly IUserService _userService;
 		#endregion
 
@@ -33,6 +35,7 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 			_signInManager = signInManager;
 			_userManager = userManager;
 			_authenticationService = authenticationService;
+			_stringLocalizer = stringLocalizer;
 			_userService = userService;
 		}
 
@@ -60,6 +63,22 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 			var response = await _authenticationService.GetRefreshToken(request.RefreshToken, request.AccessToken);
 
 			return Success(response);
+		}
+
+		public async Task<Response<string>> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
+		{
+			var result = await _authenticationService.SendResetPasswordAsync(request.Email);
+
+			switch (result)
+			{
+				case "UserNotFound": return NotFound<string>(_stringLocalizer[SharedResourcesKeys.UserNotFound]);
+				case "ErrorUpdateUser": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.ErrorUpdateUser]);
+				case "Success": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.Success]);
+				case "Failed": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.Failed]);
+
+				default: return BadRequest<string>(result);
+			}
+
 		}
 
 

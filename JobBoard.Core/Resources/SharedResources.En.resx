@@ -174,4 +174,10 @@
   <data name="CategoryNotFound" xml:space="preserve">
     <value>Category Not Found</value>
   </data>
+  <data name="ErrorUpdateUser" xml:space="preserve">
+    <value>An Error occured when Updating user</value>
+  </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Operation Not Completed</value>
+  </data>
 </root>

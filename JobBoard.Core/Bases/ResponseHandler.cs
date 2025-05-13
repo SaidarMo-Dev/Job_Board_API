@@ -31,7 +31,7 @@ namespace JobBoard.Core.Bases
 				Succeeded = true
 			};
 		}
-		public Response<T> NotFound<T>(string message = null)
+		public Response<T> BadRequest<T>(string message = null)
 		{
 			return new Response<T>()
 			{
@@ -97,7 +97,7 @@ namespace JobBoard.Core.Bases
 				Succeeded = false
 			};
 		}
-		public Response<TEntity> BadRequest<TEntity>(string message = null)
+		public Response<TEntity> NotFound<TEntity>(string message = null)
 		{
 			return new Response<TEntity>()
 			{

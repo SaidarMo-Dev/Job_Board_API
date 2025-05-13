@@ -1,4 +1,5 @@
-﻿using JobBoard.Data.Helpers;
+﻿using System.Text.RegularExpressions;
+using JobBoard.Data.Helpers;
 using JobBoard.Service.Abstractions;
 using MailKit.Net.Smtp;
 using MimeKit;
@@ -21,46 +22,15 @@ namespace JobBoard.Service.Implementations
 		#endregion
 
 		#region Methods
-		public async Task<string> SendEmail(string email, string message)
+
+		private static string _StripHtml(string input)
 		{
-			try
-			{
-
-				using var client = new SmtpClient();
-
-				await client.ConnectAsync(_emailSettings.Host, _emailSettings.Port, true);
-				await client.AuthenticateAsync(_emailSettings.FromEmail, _emailSettings.Password);
-
-				var body = new BodyBuilder
-				{
-					HtmlBody = message,
-					TextBody = "Welcome"
-
-				};
-				var mMessage = new MimeMessage
-				{
-					Body = body.ToMessageBody()
-				};
-
-				mMessage.From.Add(new MailboxAddress("Saidar Team", _emailSettings.FromEmail));
-				mMessage.To.Add(new MailboxAddress("Test User", email));
-
-				mMessage.Subject = "New Testing Message";
-
-
-				await client.SendAsync(mMessage);
-
-				await client.DisconnectAsync(true);
-
-				return "Success";
-			}
-			catch
-			{
-				return "Failed";
-			}
+			if (string.IsNullOrWhiteSpace(input)) return string.Empty;
+			return Regex.Replace(input, "<.*?>", string.Empty);
 		}
 
-		public async Task<string> SendEmail(string email, string message, string subject)
+
+		public async Task<string> SendEmail(string recipientEmail, string recipientName, string htmlMessage, string subject)
 		{
 			try
 			{
@@ -72,8 +42,15 @@ namespace JobBoard.Service.Implementations
 
 				var body = new BodyBuilder
 				{
-					HtmlBody = message,
-					TextBody = "Welcome"
+					HtmlBody = $@"
+				<html>
+				<body style='font-family: Arial, sans-serif; font-size: 14px; color: #333;'>
+					<p>Dear {recipientName},</p>
+					{htmlMessage}
+					<p>Best regards,<br/>The Saidar Team</p>
+				</body>
+				</html>",
+					TextBody = $"Dear {recipientName},\n\n{_StripHtml(htmlMessage)}\n\nBest regards,\nThe Saidar Team"
 
 				};
 				var mMessage = new MimeMessage
@@ -82,7 +59,7 @@ namespace JobBoard.Service.Implementations
 				};
 
 				mMessage.From.Add(new MailboxAddress("Saidar Team", _emailSettings.FromEmail));
-				mMessage.To.Add(new MailboxAddress("Test User", email));
+				mMessage.To.Add(new MailboxAddress("Test User", recipientEmail));
 
 				mMessage.Subject = subject;
 
@@ -98,6 +75,8 @@ namespace JobBoard.Service.Implementations
 				return "Failed";
 			}
 		}
+
+
 
 		#endregion
 
