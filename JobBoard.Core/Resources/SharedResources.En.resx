@@ -183,4 +183,7 @@
   <data name="IncorrectCode" xml:space="preserve">
     <value>Incorrect Code</value>
   </data>
+  <data name="FailedResetPassword" xml:space="preserve">
+    <value>Failed to Reset Password</value>
+  </data>
 </root>

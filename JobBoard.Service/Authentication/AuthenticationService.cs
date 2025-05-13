@@ -250,6 +250,34 @@ namespace JobBoard.Service.Authentication
 
 		}
 
+		public async Task<string> ResetPasswordAsync(string email, string password)
+		{
+			var trans = await _appDbContext.Database.BeginTransactionAsync();
+
+			try
+			{
+				var user = await _userManager.FindByEmailAsync(email);
+				if (user is null) return "UserNotFound";
+
+				var removePassResult = await _userManager.RemovePasswordAsync(user);
+				if (!(removePassResult.Succeeded)) return "FailedRemovePassword";
+
+				var addPassResult = await _userManager.AddPasswordAsync(user, password);
+
+				if (!(addPassResult.Succeeded)) return "FailedAddPassword";
+
+				await trans.CommitAsync();
+				return "Success";
+
+
+			}
+			catch
+			{
+				await trans.RollbackAsync();
+				return "Failed";
+			}
+		}
+
 		#endregion
 	}
 }

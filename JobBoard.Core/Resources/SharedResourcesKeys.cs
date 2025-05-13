@@ -27,6 +27,13 @@
 		public const string CategoryNotFound = "CategoryNotFound";
 		public const string ErrorUpdateUser = "ErrorUpdateUser";
 		public const string IncorrectCode = "IncorrectCode";
+		public const string FailedResetPassword = "FailedResetPassword";
+
+		public const string EmailNotEmpty = "EmailNotEmpty";
+		public const string EmailNotNull = "EmailNotNull";
+		public const string PasswordNotEmpty = "PasswordNotEmpty";
+		public const string PasswordNotNull = "PasswordNotNull";
+		public const string PasswordsNotMatches = "PasswordsNotMatches";
 
 
 

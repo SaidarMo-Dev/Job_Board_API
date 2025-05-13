@@ -11,10 +11,11 @@ using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 {
-	public class AuthenticationHandler : ResponseHandler,
+	public class AuthenticationCommandHandler : ResponseHandler,
 			IRequestHandler<SignInCommand, Response<AuthResponse>>,
 			IRequestHandler<RefreshNewAccessToken, Response<AuthResponse>>,
-			IRequestHandler<SendResetPasswordCommand, Response<string>>
+			IRequestHandler<SendResetPasswordCommand, Response<string>>,
+			IRequestHandler<ResetPasswordCommand, Response<string>>
 
 	{
 		#region Fields
@@ -26,7 +27,7 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 		#endregion
 
 		#region Constructors
-		public AuthenticationHandler(SignInManager<User> signInManager,
+		public AuthenticationCommandHandler(SignInManager<User> signInManager,
 									UserManager<User> userManager,
 									IAuthenticationService authenticationService,
 									IStringLocalizer<SharedResources> stringLocalizer,
@@ -81,6 +82,21 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 
 		}
 
+		public async Task<Response<string>> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
+		{
+			var result = await _authenticationService.ResetPasswordAsync(request.Email, request.Password);
+
+			var switchResult = result switch
+			{
+				"UserNotFound" => NotFound<string>(_stringLocalizer[SharedResourcesKeys.UserNotFound]),
+				"FailedRemovePassword" or "FailedAddPassword" => BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedResetPassword]),
+				"Success" => Success("", _stringLocalizer[SharedResourcesKeys.Success]),
+				_ => BadRequest<string>(_stringLocalizer[SharedResourcesKeys.Failed])
+			};
+
+
+			return switchResult;
+		}
 
 
 

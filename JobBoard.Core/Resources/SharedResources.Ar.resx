@@ -183,4 +183,7 @@
   <data name="IncorrectCode" xml:space="preserve">
     <value>الكود غير صحيح</value>
   </data>
+  <data name="FailedResetPassword" xml:space="preserve">
+    <value>حدث خطأ أثناء إعادة تحديث كلمة المرور</value>
+  </data>
 </root>
