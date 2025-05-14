@@ -62,47 +62,8 @@
       "DocumentGroups": [
         {
           "DockedHeight": 382,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ICurrentUSerervice.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Authentication\\Interfaces\\ICurrentUSerervice.cs",
-              "RelativeDocumentMoniker": "JobBoard.Service\\Authentication\\Interfaces\\ICurrentUSerervice.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Authentication\\Interfaces\\ICurrentUSerervice.cs*",
-              "RelativeToolTip": "JobBoard.Service\\Authentication\\Interfaces\\ICurrentUSerervice.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T21:36:14.086Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CurrentUserService.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Authentication\\Implementations\\CurrentUserService.cs",
-              "RelativeDocumentMoniker": "JobBoard.Service\\Authentication\\Implementations\\CurrentUserService.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Authentication\\Implementations\\CurrentUserService.cs",
-              "RelativeToolTip": "JobBoard.Service\\Authentication\\Implementations\\CurrentUserService.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAmwBkAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T21:27:34.777Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "JobBoard.Service",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\JobBoard.Service.csproj",
-              "RelativeDocumentMoniker": "JobBoard.Service\\JobBoard.Service.csproj",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\JobBoard.Service.csproj*",
-              "RelativeToolTip": "JobBoard.Service\\JobBoard.Service.csproj*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-05-14T21:24:33.425Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
@@ -113,16 +74,52 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ICurrentUSerervice.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Authentication\\Interfaces\\ICurrentUSerervice.cs",
+              "RelativeDocumentMoniker": "JobBoard.Service\\Authentication\\Interfaces\\ICurrentUSerervice.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Authentication\\Interfaces\\ICurrentUSerervice.cs",
+              "RelativeToolTip": "JobBoard.Service\\Authentication\\Interfaces\\ICurrentUSerervice.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T21:36:14.086Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CurrentUserService.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Authentication\\Implementations\\CurrentUserService.cs",
+              "RelativeDocumentMoniker": "JobBoard.Service\\Authentication\\Implementations\\CurrentUserService.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Authentication\\Implementations\\CurrentUserService.cs",
+              "RelativeToolTip": "JobBoard.Service\\Authentication\\Implementations\\CurrentUserService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T21:27:34.777Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "JobBoard.Service.csproj",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\JobBoard.Service.csproj",
+              "RelativeDocumentMoniker": "JobBoard.Service\\JobBoard.Service.csproj",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\JobBoard.Service.csproj",
+              "RelativeToolTip": "JobBoard.Service\\JobBoard.Service.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-14T21:24:33.425Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 4,
               "Title": "ResetPasswordValidator.cs",
               "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Authentication\\Commands\\Validations\\ResetPasswordValidator.cs",
               "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Authentication\\Commands\\Validations\\ResetPasswordValidator.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Authentication\\Commands\\Validations\\ResetPasswordValidator.cs*",
-              "RelativeToolTip": "JobBoard.Core\\Feutures\\Authentication\\Commands\\Validations\\ResetPasswordValidator.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAADAAAAAAAAAA==",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Authentication\\Commands\\Validations\\ResetPasswordValidator.cs",
+              "RelativeToolTip": "JobBoard.Core\\Feutures\\Authentication\\Commands\\Validations\\ResetPasswordValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-13T15:51:59.575Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-13T15:51:59.575Z"
             },
             {
               "$type": "Document",
@@ -202,12 +199,11 @@
               "Title": "AuthenticationService.cs",
               "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Authentication\\Implementations\\AuthenticationService.cs",
               "RelativeDocumentMoniker": "JobBoard.Service\\Authentication\\Implementations\\AuthenticationService.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Authentication\\Implementations\\AuthenticationService.cs*",
-              "RelativeToolTip": "JobBoard.Service\\Authentication\\Implementations\\AuthenticationService.cs*",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Authentication\\Implementations\\AuthenticationService.cs",
+              "RelativeToolTip": "JobBoard.Service\\Authentication\\Implementations\\AuthenticationService.cs",
               "ViewState": "AgIAAPwAAAAAAAAAAAApwA4BAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-13T12:51:22.376Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-13T12:51:22.376Z"
             },
             {
               "$type": "Document",
@@ -215,12 +211,11 @@
               "Title": "IAuthenticationService.cs",
               "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Authentication\\Interfaces\\IAuthenticationService.cs",
               "RelativeDocumentMoniker": "JobBoard.Service\\Authentication\\Interfaces\\IAuthenticationService.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Authentication\\Interfaces\\IAuthenticationService.cs*",
-              "RelativeToolTip": "JobBoard.Service\\Authentication\\Interfaces\\IAuthenticationService.cs*",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Authentication\\Interfaces\\IAuthenticationService.cs",
+              "RelativeToolTip": "JobBoard.Service\\Authentication\\Interfaces\\IAuthenticationService.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAswAsAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-13T12:50:56.881Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-13T12:50:56.881Z"
             },
             {
               "$type": "Document",
