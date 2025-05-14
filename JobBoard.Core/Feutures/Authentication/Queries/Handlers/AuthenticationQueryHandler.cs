@@ -2,7 +2,7 @@
 using JobBoard.Core.Feutures.Authentication.Queries.Models;
 using JobBoard.Core.Resources;
 using JobBoard.Service.Abstractions;
-using JobBoard.Service.Authentication;
+using JobBoard.Service.Authentication.Interfaces;
 using MediatR;
 using Microsoft.Extensions.Localization;
 

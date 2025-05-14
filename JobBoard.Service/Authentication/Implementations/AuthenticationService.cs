@@ -8,11 +8,12 @@ using JobBoard.Data.Helpers;
 using JobBoard.Infrastructure.Abstractions;
 using JobBoard.Infrastructure.context;
 using JobBoard.Service.Abstractions;
+using JobBoard.Service.Authentication.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
-namespace JobBoard.Service.Authentication
+namespace JobBoard.Service.Authentication.Implementations
 {
 	public class AuthenticationService : IAuthenticationService
 	{
@@ -220,7 +221,7 @@ namespace JobBoard.Service.Authentication
 				user.Code = randomCode;
 
 				var result = await _userManager.UpdateAsync(user);
-				if (!(result.Succeeded)) return "ErrorUpdateUser";
+				if (!result.Succeeded) return "ErrorUpdateUser";
 
 				// send code to user Email
 
@@ -260,11 +261,11 @@ namespace JobBoard.Service.Authentication
 				if (user is null) return "UserNotFound";
 
 				var removePassResult = await _userManager.RemovePasswordAsync(user);
-				if (!(removePassResult.Succeeded)) return "FailedRemovePassword";
+				if (!removePassResult.Succeeded) return "FailedRemovePassword";
 
 				var addPassResult = await _userManager.AddPasswordAsync(user, password);
 
-				if (!(addPassResult.Succeeded)) return "FailedAddPassword";
+				if (!addPassResult.Succeeded) return "FailedAddPassword";
 
 				await trans.CommitAsync();
 				return "Success";

@@ -4,7 +4,7 @@ using JobBoard.Core.Resources;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Data.Helpers;
 using JobBoard.Service.Abstractions;
-using JobBoard.Service.Authentication;
+using JobBoard.Service.Authentication.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;

@@ -15,6 +15,7 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Validations
 		{
 			_stringLocalizer = stringLocalizer;
 			ApplyValidations();
+
 		}
 
 		public void ApplyValidations()

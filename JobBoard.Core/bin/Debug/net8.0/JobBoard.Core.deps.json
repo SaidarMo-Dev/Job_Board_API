@@ -1083,7 +1083,7 @@
         },
         "runtime": {
           "JobBoard.Data.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -1101,7 +1101,7 @@
         },
         "runtime": {
           "JobBoard.Infrastructure.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -1114,7 +1114,7 @@
         },
         "runtime": {
           "JobBoard.Service.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }

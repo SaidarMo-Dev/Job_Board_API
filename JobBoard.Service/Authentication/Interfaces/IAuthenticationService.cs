@@ -2,7 +2,7 @@
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Data.Helpers;
 
-namespace JobBoard.Service.Authentication
+namespace JobBoard.Service.Authentication.Interfaces
 {
 	public interface IAuthenticationService
 	{

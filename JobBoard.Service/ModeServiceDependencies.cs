@@ -1,5 +1,6 @@
 ﻿using JobBoard.Service.Abstractions;
-using JobBoard.Service.Authentication;
+using JobBoard.Service.Authentication.Implementations;
+using JobBoard.Service.Authentication.Interfaces;
 using JobBoard.Service.Authorization;
 using JobBoard.Service.Implementations;
 using Microsoft.Extensions.DependencyInjection;
