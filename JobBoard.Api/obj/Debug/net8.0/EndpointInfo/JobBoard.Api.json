@@ -8,7 +8,7 @@
     "/Api/V1/Applications/{Id}": {
       "get": {
         "tags": [
-          "ApplicationConroller"
+          "Application"
         ],
         "parameters": [
           {
@@ -49,7 +49,7 @@
       },
       "delete": {
         "tags": [
-          "ApplicationConroller"
+          "Application"
         ],
         "parameters": [
           {
@@ -152,7 +152,7 @@
     "/Api/V1/Applications/AddApplication": {
       "post": {
         "tags": [
-          "ApplicationConroller"
+          "Application"
         ],
         "requestBody": {
           "content": {
@@ -203,7 +203,7 @@
     "/Api/V1/Applications/UpdateApplication": {
       "put": {
         "tags": [
-          "ApplicationConroller"
+          "Application"
         ],
         "requestBody": {
           "content": {
@@ -274,7 +274,7 @@
     "/Api/V1/Applications/SetAccepted": {
       "put": {
         "tags": [
-          "ApplicationConroller"
+          "Application"
         ],
         "parameters": [
           {
@@ -336,7 +336,7 @@
     "/Api/V1/Applications/SetRemoved": {
       "put": {
         "tags": [
-          "ApplicationConroller"
+          "Application"
         ],
         "parameters": [
           {

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace JobBoard.Api.Controllers
 {
 	[ApiController]
-	public class ApplicationConroller : AppControllerbase
+	public class ApplicationController : AppControllerbase
 	{
 
 		[HttpGet(Router.ApplicationRoute.GetByID)]

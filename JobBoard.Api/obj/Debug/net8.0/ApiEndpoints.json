@@ -1,6 +1,6 @@
 [
   {
-    "ContainingType": "JobBoard.Api.Controllers.ApplicationConroller",
+    "ContainingType": "JobBoard.Api.Controllers.ApplicationController",
     "Method": "AddApplication",
     "RelativePath": "Api/V1/Applications/{Id}",
     "HttpMethod": "GET",
@@ -31,7 +31,7 @@
     ]
   },
   {
-    "ContainingType": "JobBoard.Api.Controllers.ApplicationConroller",
+    "ContainingType": "JobBoard.Api.Controllers.ApplicationController",
     "Method": "DeleteApplication",
     "RelativePath": "Api/V1/Applications/{Id}",
     "HttpMethod": "DELETE",
@@ -89,7 +89,7 @@
     ]
   },
   {
-    "ContainingType": "JobBoard.Api.Controllers.ApplicationConroller",
+    "ContainingType": "JobBoard.Api.Controllers.ApplicationController",
     "Method": "AddApplication",
     "RelativePath": "Api/V1/Applications/AddApplication",
     "HttpMethod": "POST",
@@ -120,7 +120,7 @@
     ]
   },
   {
-    "ContainingType": "JobBoard.Api.Controllers.ApplicationConroller",
+    "ContainingType": "JobBoard.Api.Controllers.ApplicationController",
     "Method": "SetToAccepted",
     "RelativePath": "Api/V1/Applications/SetAccepted",
     "HttpMethod": "PUT",
@@ -160,7 +160,7 @@
     ]
   },
   {
-    "ContainingType": "JobBoard.Api.Controllers.ApplicationConroller",
+    "ContainingType": "JobBoard.Api.Controllers.ApplicationController",
     "Method": "SetToRemoved",
     "RelativePath": "Api/V1/Applications/SetRemoved",
     "HttpMethod": "PUT",
@@ -200,7 +200,7 @@
     ]
   },
   {
-    "ContainingType": "JobBoard.Api.Controllers.ApplicationConroller",
+    "ContainingType": "JobBoard.Api.Controllers.ApplicationController",
     "Method": "UpdateApplication",
     "RelativePath": "Api/V1/Applications/UpdateApplication",
     "HttpMethod": "PUT",
