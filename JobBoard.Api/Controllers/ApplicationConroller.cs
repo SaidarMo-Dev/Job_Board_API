@@ -2,11 +2,13 @@
 using JobBoard.Core.Feutures.Applications.Commands.Models;
 using JobBoard.Core.Feutures.Applications.Queries.Models;
 using JobBoard.Data.Metadata;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobBoard.Api.Controllers
 {
 	[ApiController]
+	[Authorize(Roles = "User")]
 	public class ApplicationController : AppControllerbase
 	{
 

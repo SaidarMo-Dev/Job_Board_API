@@ -4,6 +4,7 @@ using System.Text.Json;
 using JobBoard.Core.Bases;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 namespace JobBoard.Core.Middleware
 {
 	public class ErrorHandlerMiddleware
@@ -38,6 +39,7 @@ namespace JobBoard.Core.Middleware
 
 						responseModel.StatusCode = HttpStatusCode.BadRequest;
 						response.StatusCode = (int)HttpStatusCode.BadRequest;
+						Log.Error(e, "Error : " + responseModel.Message);
 						break;
 
 
@@ -46,6 +48,8 @@ namespace JobBoard.Core.Middleware
 						responseModel.Message = error.Message;
 						responseModel.StatusCode = HttpStatusCode.Unauthorized;
 						response.StatusCode = (int)HttpStatusCode.Unauthorized;
+						Log.Error(e, "Error : " + responseModel.Message);
+
 						break;
 
 					case ValidationException e:
@@ -53,19 +57,25 @@ namespace JobBoard.Core.Middleware
 						responseModel.Message = error.Message;
 						responseModel.StatusCode = HttpStatusCode.UnprocessableEntity;
 						response.StatusCode = (int)HttpStatusCode.UnprocessableEntity;
+						Log.Error(e, "Error : " + responseModel.Message);
+
 						break;
 					case KeyNotFoundException e:
-						// not found error
+
 						responseModel.Message = error.Message; ;
 						responseModel.StatusCode = HttpStatusCode.NotFound;
 						response.StatusCode = (int)HttpStatusCode.NotFound;
+						Log.Error(e, "Error : " + responseModel.Message);
+
 						break;
 
 					case DbUpdateException e:
-						// can't update error
+
 						responseModel.Message = e.Message;
 						responseModel.StatusCode = HttpStatusCode.BadRequest;
 						response.StatusCode = (int)HttpStatusCode.BadRequest;
+						Log.Error(e, "Error : " + responseModel.Message);
+
 						break;
 
 					case Exception e:
@@ -75,6 +85,7 @@ namespace JobBoard.Core.Middleware
 
 						responseModel.StatusCode = HttpStatusCode.InternalServerError;
 						response.StatusCode = (int)HttpStatusCode.InternalServerError;
+						Log.Error(e, "Error : " + responseModel.Message);
 						break;
 
 
@@ -84,6 +95,7 @@ namespace JobBoard.Core.Middleware
 						responseModel.Message = error?.Message;
 						responseModel.StatusCode = HttpStatusCode.InternalServerError;
 						response.StatusCode = (int)HttpStatusCode.InternalServerError;
+						Log.Error(error, "Error : " + responseModel.Message);
 						break;
 				}
 				var result = JsonSerializer.Serialize(responseModel);

@@ -8,10 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace JobBoard.Api.Controllers
 {
 	[ApiController]
-	//[Authorize]
+
 	public class ApplicationUserController : AppControllerbase
 	{
 		// paginate users
+		[Authorize(Roles = "Admin")]
 		[HttpGet(Router.ApplicationUserRoute.Paginate)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
@@ -22,6 +23,7 @@ namespace JobBoard.Api.Controllers
 		}
 
 		// get user by Id
+		[Authorize(Roles = "User")]
 		[HttpGet(Router.ApplicationUserRoute.GetByID)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
@@ -44,6 +46,8 @@ namespace JobBoard.Api.Controllers
 		[HttpPost(Router.ApplicationUserRoute.Create)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+		// any one can create user 
 		[AllowAnonymous]
 		public async Task<IActionResult> CreateUser([FromBody] AddUserCommand request)
 		{

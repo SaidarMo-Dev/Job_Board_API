@@ -149,6 +149,7 @@ namespace JobBoard.Service.Implementations
 			catch (Exception ex)
 			{
 				await trans.RollbackAsync();
+				Log.Error(ex, "Error When Delete User : " + ex.Message);
 				return false;
 			}
 		}

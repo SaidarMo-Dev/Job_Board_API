@@ -3,6 +3,7 @@
 	public enum JobTypeEnum
 	{
 		Full_Time = 0,
-		Part_Time
+		Part_Time,
+		FreeLencer
 	}
 }

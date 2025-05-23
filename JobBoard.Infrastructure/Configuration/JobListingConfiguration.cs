@@ -9,6 +9,9 @@ namespace JobBoard.Infrastructure.Configuration
 	{
 		public void Configure(EntityTypeBuilder<JobListing> builder)
 		{
+
+			builder.HasQueryFilter(x => x.UserInfo.IsDeleted == false);
+
 			builder.HasKey(x => x.JobId);
 			builder.Property(x => x.JobId)
 				.UseIdentityColumn();

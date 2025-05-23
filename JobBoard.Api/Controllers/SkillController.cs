@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace JobBoard.Api.Controllers
 {
 	[ApiController]
-	[AllowAnonymous]
+	[Authorize(Roles = "Admin,JobSeeker,SuperAdmin")]
 	public class SkillController : AppControllerbase
 	{
 		[HttpGet(Router.SkillRoute.GetByID)]

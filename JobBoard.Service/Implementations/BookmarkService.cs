@@ -2,6 +2,7 @@
 using JobBoard.Infrastructure.Abstractions;
 using JobBoard.Service.Abstractions;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace JobBoard.Service.Implementations
 {
@@ -38,6 +39,7 @@ namespace JobBoard.Service.Implementations
 			}
 			catch (Exception ex)
 			{
+				Log.Error(ex, "Error :" + ex.Message);
 				return false;
 			}
 		}

@@ -8,6 +8,8 @@ namespace JobBoard.Infrastructure.Configuration
 	{
 		public void Configure(EntityTypeBuilder<UserRefreshToken> builder)
 		{
+			builder.HasQueryFilter(x => x.User.IsDeleted == false);
+
 			builder.HasKey(x => x.Id);
 
 			builder.Property(x => x.Id).UseIdentityColumn();

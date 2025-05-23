@@ -1574,7 +1574,7 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.EmailController",
-    "Method": "AddApplication",
+    "Method": "SendEmail",
     "RelativePath": "Api/V1/Email/SendEmail",
     "HttpMethod": "POST",
     "IsController": true,

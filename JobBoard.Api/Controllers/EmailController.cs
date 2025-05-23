@@ -12,8 +12,7 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		[ProducesResponseType(StatusCodes.Status403Forbidden)]
-
-		public async Task<IActionResult> AddApplication([FromQuery] SendEmailCommand req)
+		public async Task<IActionResult> SendEmail([FromQuery] SendEmailCommand req)
 		{
 			return NewResult(await Mediator.Send(req));
 		}
