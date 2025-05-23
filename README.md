@@ -20,29 +20,27 @@ Welcome to **Job Portal API** Designed to connect job seekers with employers. It
 ## ✨ Features :
 
 - ### User Management
-  Secure authentication and authorization system leveraging ASP.NET Identity for managing users, roles (job seekers, employers, admins)and password hashing.
+   Secure authentication and authorization system using ASP.NET Identity for managing users, roles (job seekers, employers, admins)and password hashing.
 
 - ### Comprehensive Job Listings
-  Employers can create, update, and manage job postings with detailed information including title, description, location, job type, salary range, and status tracking.
+   Employers can create, update, and manage job postings with detailed informations.
 
 - ### Advanced Job Search and Categorization
-  Jobs are categorized by industry (categories) and associated with required skills, enabling precise filtering and matching for job seekers.
-
- - ### Skill and Category Association
-  Many-to-many relationships between jobs and skills, and jobs and categories, allow flexible and accurate representation of job requirements.
+   Jobs are categorized by industry (categories) and associated with required skills.
 
 - ### User Applications Tracking
-  Job seekers can apply to job listings, with applications tracked through multiple statuses (Submitted, InReview, Accepted, Rejected) along with timestamps for progress monitoring.
+   Job seekers can apply to job listings, with applications tracked through multiple statuses (Submitted, InReview, Accepted, Rejected) along with timestamps for progress monitoring.
 
 - ### Bookmarking System
-  Users can bookmark jobs they are interested in, making it easy to save and revisit listings for future consideration.
+   Users can bookmark jobs they are interested in, making it easy to save and revisit listings for future consideration.
 
 - ### Company Profiles
-  Companies can maintain detailed profiles including contact information, descriptions, and location, providing credibility and context to job listings.
+   Companies can maintain detailed profiles including contact information, descriptions, and location, providing credibility and context to job listings.
 
-- ### Geographical Data Support
-Countries are managed as entities, allowing user profiles and job listings to be associated with specific locations.
-
-
+- ### Exception Handling Middleware
+   Centralized middleware captures and handles exceptions globally.
+  
+- ### Validation Pipeline
+   Built-in validation pipeline ensures all incoming data is validated before processing.
 
 
