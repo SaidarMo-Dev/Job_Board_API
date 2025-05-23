@@ -52,10 +52,13 @@ Welcome to **Job Portal API** Designed to connect job seekers with employers. It
 2. Configure the connection string in `appsettings.json`.
 
 3. Run the following commands to apply migrations and seed data:
- ```bash
+  ```bash
    dotnet ef database update  
-   ```
+  ```
 Start the API:
-```bash
-dotnet run  
-```
+ ```bash
+   dotnet run   
+ ```
+
+## License
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for Details.
