@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,14 @@ builder.Services.AddDbContext<appDbContext>(
 		options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
+#region Serilog Connfiguration
+
+Log.Logger = new LoggerConfiguration().ReadFrom
+		.Configuration(builder.Configuration).CreateLogger();
+
+builder.Services.AddSerilog();
+
+#endregion
 
 #region Cors configurations
 

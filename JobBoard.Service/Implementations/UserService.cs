@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Serilog;
 
 namespace JobBoard.Service.Implementations
 {
@@ -20,6 +21,7 @@ namespace JobBoard.Service.Implementations
 		private readonly IHttpContextAccessor _httpContextAccessor;
 		private readonly IEmailService _emailService;
 		private readonly IUrlHelper _urlHelper;
+		private readonly Serilog.ILogger _logger;
 		private readonly IUserRepository _userRepository;
 		#endregion
 
@@ -40,6 +42,7 @@ namespace JobBoard.Service.Implementations
 							IHttpContextAccessor httpContextAccessor,
 							IEmailService emailService,
 							IUrlHelper urlHelper
+
 						)
 						: base(userStore, options,
 							passwordHasher, userValidators,
@@ -54,6 +57,7 @@ namespace JobBoard.Service.Implementations
 			_httpContextAccessor = httpContextAccessor;
 			_emailService = emailService;
 			_urlHelper = urlHelper;
+
 		}
 
 
@@ -104,6 +108,9 @@ namespace JobBoard.Service.Implementations
 			catch (Exception ex)
 			{
 				await trans.RollbackAsync();
+
+				Log.Error(ex, "Error When Creatig User: " + ex.Message);
+
 				return "Error When Creatig User: " + ex.Message;
 			}
 		}
@@ -121,6 +128,8 @@ namespace JobBoard.Service.Implementations
 			catch (Exception ex)
 			{
 				await trans.RollbackAsync();
+				Log.Error(ex, "Error When Updating User: " + ex.Message);
+
 				return "Error When Updating User: " + ex.Message;
 			}
 		}

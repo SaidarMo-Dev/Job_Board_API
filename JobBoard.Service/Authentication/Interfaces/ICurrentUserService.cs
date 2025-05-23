@@ -2,9 +2,10 @@
 
 namespace JobBoard.Service.Authentication.Interfaces
 {
-	public interface ICurrentUSerervice
+	public interface ICurrentUserService
 	{
 		int GetCurrentUserId();
-		Task<User> GetCurrentUser();
+		Task<User> GetCurrentUserAsync();
+		User GetCurrentUser();
 	}
 }

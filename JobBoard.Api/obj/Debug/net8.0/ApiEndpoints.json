@@ -357,14 +357,24 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.AuthenticationController",
-    "Method": "SendResetPassword",
+    "Method": "ResetPassword",
     "RelativePath": "Api/V1/Authentication/ResetPassword",
-    "HttpMethod": "PUT",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ConfirmPassword",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -401,24 +411,14 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.AuthenticationController",
-    "Method": "ResetPassword",
-    "RelativePath": "Api/V1/Authentication/ResetPassword",
-    "HttpMethod": "POST",
+    "Method": "SendResetPassword",
+    "RelativePath": "Api/V1/Authentication/SendResetPassword",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "Email",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Password",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "ConfirmPassword",
         "Type": "System.String",
         "IsRequired": false
       }

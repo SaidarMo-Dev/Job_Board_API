@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace JobBoard.Service.Authentication.Implementations
 {
-	public class CurrentUserService : ICurrentUSerervice
+	public class CurrentUserService : ICurrentUserService
 	{
 		private readonly IHttpContextAccessor _httpContextAccessor;
 		private readonly UserManager<User> _userManager;
@@ -34,11 +34,23 @@ namespace JobBoard.Service.Authentication.Implementations
 		}
 
 
-		public async Task<User> GetCurrentUser()
+		public async Task<User> GetCurrentUserAsync()
 		{
 			var userId = GetCurrentUserId();
 
 			var user = await _userManager.FindByIdAsync(userId.ToString());
+
+			if (user is null) throw new UnauthorizedAccessException();
+
+			return user;
+		}
+
+		public User GetCurrentUser()
+		{
+			var userId = GetCurrentUserId();
+
+			var user = _userManager.Users.FirstOrDefault(u => u.Id.Equals(userId));
+
 
 			if (user is null) throw new UnauthorizedAccessException();
 
