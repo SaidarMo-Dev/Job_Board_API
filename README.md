@@ -61,4 +61,4 @@ Start the API:
  ```
 
 ## License
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for Details.
+This project is licensed under the MIT License. See [LICENSE](LICENSE.txt) for Details.
