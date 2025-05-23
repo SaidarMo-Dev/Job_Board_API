@@ -43,4 +43,19 @@ Welcome to **Job Portal API** Designed to connect job seekers with employers. It
 - ### Validation Pipeline
    Built-in validation pipeline ensures all incoming data is validated before processing.
 
+## 📝 Installation
+1. Clone this repository to your local machine.
+   ```bash
+   git clone https://github.com/SaidarMo-Dev/Job_Board_API.git
+   cd job-portal
+   ```
+2. Configure the connection string in `appsettings.json`.
 
+3. Run the following commands to apply migrations and seed data:
+ ```bash
+   dotnet ef database update  
+   ```
+Start the API:
+```bash
+dotnet run  
+```
