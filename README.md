@@ -14,3 +14,6 @@ Welcome to **Job Portal API** Designed to connect job seekers with employers. It
 - **MediatR + CQRS Pattern** Separation of concerns for commands and queries.
 - **Generic Repository Pattern** for data access layer.
 - **Clean Code & Clean Architecture** for testability and maintainability.
+
+
+...
