@@ -17,6 +17,7 @@
 			public const string Create = Prefex + "/AddNewCompany";
 			public const string Update = Prefex + "/UpdateCompany";
 			public const string DeleteById = Prefex + Single;
+			public const string Jobs = Prefex + Single + "/Jobs";
 
 		}
 		public static class SkillRoute
@@ -64,13 +65,15 @@
 			private const string Prefex = Rule + "/Jobs";
 
 			public const string GetAll = Prefex + "/GetAll";
-			public const string GetByID = Prefex + "/{Id}";
+			public const string GetByID = Prefex + Single;
 			public const string Create = Prefex + "/AddJob";
 			public const string Update = Prefex + "/UpdateJob";
 			public const string DeleteById = Prefex + Single;
 			public const string Paginate = Prefex + "/Paginate";
 			public const string Skills = Prefex + "/Skills";
 			public const string Categories = Prefex + "/Categories";
+
+			public const string Applications = Prefex + Single + "/Applications";
 
 		}
 
@@ -92,7 +95,7 @@
 
 			public const string GetAll = Prefex + "/GetAll";
 			public const string GetByID = Prefex + "/{Id}";
-			public const string Create = Prefex + "/AddApplication";
+			public const string Apply = Prefex + "/AddApplication";
 			public const string Update = Prefex + "/UpdateApplication";
 			public const string DeleteById = Prefex + Single;
 			public const string Paginate = Prefex + "/Paginate";

@@ -15,4 +15,9 @@
     <ProjectReference Include="..\JobBoard.Infrastructure\JobBoard.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Security\Handlers\" />
+    <Folder Include="Security\Requirements\" />
+  </ItemGroup>
+
 </Project>

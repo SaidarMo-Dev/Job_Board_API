@@ -112,6 +112,13 @@ namespace JobBoard.Service.Implementations
 			return result;
 		}
 
+		public async Task<List<JobListing>> GetJobsByCompanyIdAsync(int CompanyId)
+		{
+			return await _jobRepository.GetTableAsNoTracking()
+							.Where(x => x.CompanyId.Equals(CompanyId)).ToListAsync();
+
+		}
+
 		#endregion
 
 	}

@@ -1427,6 +1427,37 @@
     ]
   },
   {
+    "ContainingType": "JobBoard.Api.Controllers.JobController",
+    "Method": "GetCompanyJobs",
+    "RelativePath": "Api/V1/Company/{Id}/Jobs",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      }
+    ]
+  },
+  {
     "ContainingType": "JobBoard.Api.Controllers.CompanyController",
     "Method": "AddCompany",
     "RelativePath": "Api/V1/Company/AddNewCompany",

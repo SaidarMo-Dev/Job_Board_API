@@ -20,10 +20,21 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(new GetSingleApplicationQuery { Id = Id }));
 		}
 
-		[HttpPost(Router.ApplicationRoute.Create)]
+		// list Applications for a job
+		[HttpGet(Router.JobRoute.Applications)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		public async Task<IActionResult> JobApplications([FromRoute] int Id)
+		{
+			//return NewResult(await Mediator.Send());
+			return Ok();
+		}
+
+		// apply for a job
+		[HttpPost(Router.ApplicationRoute.Apply)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		public async Task<IActionResult> AddApplication([FromBody] AddApplicationCommand request)
+		public async Task<IActionResult> ApplyForJob([FromBody] AddApplicationCommand request)
 		{
 			return NewResult(await Mediator.Send(request));
 		}

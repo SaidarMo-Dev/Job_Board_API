@@ -8,7 +8,7 @@
 		public required string Status { get; set; }
 		public required DateTime LastStatusDate { get; set; }
 		public required UserResponse UserResponse { get; set; }
-		public required JobResponse JobResponse { get; set; }
+		public required ApplicationJobResponse JobResponse { get; set; }
 
 
 	}
@@ -20,7 +20,7 @@
 		public string PhoneNumber { get; set; }
 	}
 
-	public class JobResponse
+	public class ApplicationJobResponse
 	{
 		public int Id { get; set; }
 		public required string Title { get; set; }

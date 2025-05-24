@@ -14,19 +14,23 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 			IRequestHandler<GetJobByIdQuery, Response<GetJobByIdQueryResponse>>,
 			IRequestHandler<GetPaginatedJobsQuery, PaginatedResponse<List<GetPaginatedJobsQueryResponse>>>,
 			IRequestHandler<GetJobSkillsQuery, Response<List<GetJobSkillsQueryResponse>>>,
-			IRequestHandler<GetJobCategoriesQuery, Response<List<GetJobCategoriesQueryResponse>>>
+			IRequestHandler<GetJobCategoriesQuery, Response<List<GetJobCategoriesQueryResponse>>>,
+			IRequestHandler<GetJobsByCompanyIdQuery, Response<GetJobsByCompanyIdQueryResponse>>
 	{
 		private readonly IJobService _jobService;
 		private readonly IMapper _mapper;
+		private readonly ICompanyService _companyService;
 		#region Fields
 		#endregion
 
 		#region Constructors
 		public JobQueryHandler(IJobService jobService, IMapper mapper,
-			IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
+			IStringLocalizer<SharedResources> stringLocalizer,
+			ICompanyService companyService) : base(stringLocalizer)
 		{
 			_jobService = jobService;
 			_mapper = mapper;
+			_companyService = companyService;
 		}
 		#endregion
 
@@ -74,6 +78,19 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 			var skillsMapping = _mapper.Map<List<GetJobCategoriesQueryResponse>>(Categries);
 
 			return Success(skillsMapping);
+		}
+
+		public async Task<Response<GetJobsByCompanyIdQueryResponse>> Handle(GetJobsByCompanyIdQuery request, CancellationToken cancellationToken)
+		{
+			// check if the company is exist 
+			var exist = await _companyService.IsExistByIdAsync(request.CompanyId);
+			if (!exist) return NotFound<GetJobsByCompanyIdQueryResponse>();
+
+			var result = await _jobService.GetJobsByCompanyIdAsync(request.CompanyId);
+
+			var JobsDto = _mapper.Map<List<JobResponse>>(result);
+
+			return Success(new GetJobsByCompanyIdQueryResponse { Jobs = JobsDto });
 		}
 
 		#endregion
