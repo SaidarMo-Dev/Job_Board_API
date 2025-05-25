@@ -55,7 +55,7 @@ Welcome to **Job Portal API** Designed to connect job seekers with employers. It
   ```bash
    dotnet ef database update  
   ```
-Start the API:
+4. Start the API:
  ```bash
    dotnet run   
  ```
