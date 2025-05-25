@@ -9,7 +9,7 @@ namespace JobBoard.Api.Controllers
 {
 
 	[ApiController]
-	//[Authorize]
+	[Authorize(Roles = "User")]
 	public class BookMarkController : AppControllerbase
 	{
 
@@ -24,7 +24,7 @@ namespace JobBoard.Api.Controllers
 
 		}
 
-
+		[Authorize(Roles = "Admin")]
 		[HttpGet(Router.BookMarkRoute.Paginate)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -46,11 +46,11 @@ namespace JobBoard.Api.Controllers
 
 
 
+		[AllowAnonymous]
 		[HttpPost(Router.BookMarkRoute.Create)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		[AllowAnonymous]
 		public async Task<IActionResult> AddBookMark([FromBody] AddBookMarkCommand request)
 		{
 			return NewResult(await Mediator.Send(request));

@@ -2,23 +2,25 @@
 using JobBoard.Core.Feutures.Authentication.Commands.Models;
 using JobBoard.Core.Feutures.Authentication.Queries.Models;
 using JobBoard.Data.Metadata;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobBoard.Api.Controllers
 {
 	[ApiController]
+	[Authorize(Roles = "User")]
 	public class AuthenticationController : AppControllerbase
 	{
+		[AllowAnonymous]
 		[HttpPost(Router.AuthenticationRoute.SignIn)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-
 		public async Task<IActionResult> SignIn([FromForm] SignInCommand request)
 		{
 			return NewResult(await Mediator.Send(request));
 		}
 
-
+		[AllowAnonymous]
 		[HttpPost(Router.AuthenticationRoute.RefreshToken)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		public async Task<IActionResult> RefreshNewToken([FromForm] RefreshNewAccessToken request)
@@ -26,6 +28,7 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 		}
 
+		[AllowAnonymous]
 		[HttpGet(Router.AuthenticationRoute.ConfirmEmail)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]

@@ -22,7 +22,7 @@ namespace JobBoard.Api.Controllers
 			return Ok(await Mediator.Send(query));
 
 		}
-		[Authorize(Roles = "Admin")]
+		[Authorize(Roles = "User")]
 		[HttpGet(Router.CompanyRoute.GetByID)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
