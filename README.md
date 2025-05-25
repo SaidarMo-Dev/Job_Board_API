@@ -42,7 +42,9 @@ Welcome to **Job Portal API** Designed to connect job seekers with employers. It
   
 - ### Validation Pipeline
    Built-in validation pipeline ensures all incoming data is validated before processing.
-
+- ### Authorization
+   Role-based, Policy-based, and Resource-based authorization to control access to API endpoints based on user roles, custom rules, and resource ownership.
+  
 ## 📝 Installation
 1. Clone this repository to your local machine.
    ```bash
