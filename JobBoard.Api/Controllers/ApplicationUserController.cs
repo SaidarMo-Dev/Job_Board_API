@@ -4,6 +4,7 @@ using JobBoard.Core.Feutures.ApplicationUser.Queries.Models;
 using JobBoard.Data.Metadata;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace JobBoard.Api.Controllers
 {
@@ -17,12 +18,15 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+
+		[SwaggerOperation(summary: "Paginate Users")]
 		public async Task<IActionResult> PaginateUsers([FromQuery] GetPaginatedListUsersQuery query)
 		{
 			return Ok(await Mediator.Send(query));
 		}
 
 		// get user by Id
+		[SwaggerOperation(summary: "Get User")]
 		[HttpGet(Router.ApplicationUserRoute.GetByID)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
@@ -33,6 +37,7 @@ namespace JobBoard.Api.Controllers
 		}
 
 		// create user
+		[SwaggerOperation(summary: "Register")]
 		[HttpPost(Router.ApplicationUserRoute.Register)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -45,6 +50,7 @@ namespace JobBoard.Api.Controllers
 		}
 
 		// Update user
+		[SwaggerOperation(summary: "Update User")]
 		[HttpPut(Router.ApplicationUserRoute.Update)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -55,17 +61,18 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 		}
 
+		[SwaggerOperation(summary: "Change User")]
 		[HttpPut(Router.ApplicationUserRoute.ChangePassword)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		public async Task<IActionResult> UpdatePassword([FromBody] ChangeUserPasswordCommand request)
+		public async Task<IActionResult> ChangePassword([FromBody] ChangeUserPasswordCommand request)
 		{
 			return NewResult(await Mediator.Send(request));
 		}
 
-
+		[SwaggerOperation(summary: "Delete User")]
 		[HttpDelete(Router.ApplicationUserRoute.DeleteById)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]

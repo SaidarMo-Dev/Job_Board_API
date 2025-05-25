@@ -4,14 +4,15 @@ using JobBoard.Core.Feutures.Applications.Queries.Models;
 using JobBoard.Data.Metadata;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace JobBoard.Api.Controllers
 {
 	[ApiController]
-	//[Authorize(Roles = "User")]
+	[Authorize(Roles = "Admin,User")]
 	public class ApplicationController : AppControllerbase
 	{
-
+		[SwaggerOperation(summary: "Get Application")]
 		[HttpGet(Router.ApplicationRoute.GetByID)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -22,6 +23,7 @@ namespace JobBoard.Api.Controllers
 
 
 		// current User Applications
+		[SwaggerOperation(summary: "User Applications")]
 		[Authorize(Roles = "JobSeeker")]
 		[HttpGet(Router.ApplicationUserRoute.Applications)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
@@ -34,9 +36,12 @@ namespace JobBoard.Api.Controllers
 
 
 		// list Applications for a job
+		[SwaggerOperation(summary: "Job Applications")]
+		[Authorize(Roles = "Admin,Employer")]
 		[HttpGet(Router.JobRoute.Applications)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
+
 		public async Task<IActionResult> JobApplications([FromRoute] int Id)
 		{
 			return NewResult(await Mediator.Send(new GetApplicationsByJobIdQuery(Id)));
@@ -44,6 +49,8 @@ namespace JobBoard.Api.Controllers
 		}
 
 		// apply for a job
+		[SwaggerOperation(summary: "Apply For a job")]
+		[AllowAnonymous]
 		[HttpPost(Router.ApplicationRoute.Apply)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -51,6 +58,9 @@ namespace JobBoard.Api.Controllers
 		{
 			return NewResult(await Mediator.Send(request));
 		}
+
+		[SwaggerOperation(summary: "Update Application")]
+		[Authorize(Roles = "Admin,JoobSeeker")]
 
 		[HttpPut(Router.ApplicationRoute.Update)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
@@ -61,6 +71,9 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 		}
 
+
+		[SwaggerOperation(summary: "Update Status")]
+		[Authorize(Roles = "Admin,Employer")]
 		[HttpPut(Router.ApplicationRoute.SetAccepted)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -70,7 +83,8 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 		}
 
-
+		[Authorize(Roles = "Admin,Employer")]
+		[SwaggerOperation(summary: "Update Status")]
 		[HttpPut(Router.ApplicationRoute.SetRemoved)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -80,6 +94,8 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 		}
 
+		[Authorize(Roles = "Admin,Employer")]
+		[SwaggerOperation(summary: "Delete Appicatios")]
 		[HttpDelete(Router.ApplicationRoute.DeleteById)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
