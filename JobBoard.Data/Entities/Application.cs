@@ -13,8 +13,8 @@ namespace JobBoard.Data.Entities
 		public ApplicationStatusEnum status { get; set; }
 		public required DateTime LastStatusDate { get; set; }
 
-		public JobListing jobListing { get; set; }
-		public User userInfo { get; set; }
+		public JobListing JobListing { get; set; }
+		public User UserInfo { get; set; }
 	}
 
 }

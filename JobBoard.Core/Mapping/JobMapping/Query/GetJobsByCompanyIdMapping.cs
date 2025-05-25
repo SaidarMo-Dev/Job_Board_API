@@ -9,7 +9,7 @@ namespace JobBoard.Core.Mapping.JobMapping
 		{
 			CreateMap<JobListing, JobResponse>()
 				.ForMember(dst => dst.JobType, opt => opt.MapFrom(src => src.JobType.ToString()))
-				.ForMember(dst => dst.Status, opt => opt.MapFrom(src => src.status.ToString()));
+				.ForMember(dst => dst.Status, opt => opt.MapFrom(src => src.Status.ToString()));
 
 		}
 	}

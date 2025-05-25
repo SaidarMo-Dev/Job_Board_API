@@ -9,6 +9,8 @@ namespace JobBoard.Core.Mapping.ApplicationMapping
 			AddApplicationMapping();
 			UpdateApplicationMapping();
 			GetSingleApplicationMapping();
+			GetApplicationsByJobIdMapping();
+			GetCurrentUserApplicationsMapping();
 		}
 	}
 }

@@ -36,7 +36,7 @@ namespace JobBoard.Infrastructure.Configuration
 			builder.Property(x => x.SalaryRange)
 				.HasPrecision(10, 4);
 
-			builder.Property(x => x.status)
+			builder.Property(x => x.Status)
 				.HasConversion(
 					x => x.ToString(),
 					x => (JobStatusEnum)Enum.Parse(typeof(JobStatusEnum), x)

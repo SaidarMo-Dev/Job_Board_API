@@ -233,7 +233,7 @@ namespace JobBoard.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Gendor")
+                    b.Property<string>("Gender")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -382,14 +382,14 @@ namespace JobBoard.Infrastructure.Migrations
                         .HasPrecision(10, 4)
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("JobId");
 
@@ -542,21 +542,21 @@ namespace JobBoard.Infrastructure.Migrations
 
             modelBuilder.Entity("JobBoard.Data.Entities.Application", b =>
                 {
-                    b.HasOne("JobBoard.Data.Entities.JobListing", "jobListing")
+                    b.HasOne("JobBoard.Data.Entities.JobListing", "JobListing")
                         .WithMany("applications")
                         .HasForeignKey("JobListingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("JobBoard.Data.Entities.Identity.User", "userInfo")
+                    b.HasOne("JobBoard.Data.Entities.Identity.User", "UserInfo")
                         .WithMany("applications")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("jobListing");
+                    b.Navigation("JobListing");
 
-                    b.Navigation("userInfo");
+                    b.Navigation("UserInfo");
                 });
 
             modelBuilder.Entity("JobBoard.Data.Entities.Bookmark", b =>

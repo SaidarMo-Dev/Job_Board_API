@@ -14,7 +14,7 @@ namespace JobBoard.Data.Entities
 		public JobTypeEnum JobType { get; set; }
 		public string? SalaryRange { get; set; }
 		public required DateTime DatePosted { get; set; }
-		public JobStatusEnum status { get; set; }
+		public JobStatusEnum Status { get; set; }
 		public int CreatedByUserId { get; set; }
 
 		public ICollection<JobSkill> Jobkills { get; set; }

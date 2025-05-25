@@ -102,7 +102,7 @@ namespace JobBoard.Core.Bases
 			return new Response<TEntity>()
 			{
 
-				StatusCode = System.Net.HttpStatusCode.BadRequest,
+				StatusCode = System.Net.HttpStatusCode.NotFound,
 				Message = message == null ? "Bad Request" : message,
 				Succeeded = false
 			};

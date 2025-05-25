@@ -4,7 +4,7 @@ using MediatR;
 
 namespace JobBoard.Core.Feutures.Applications.Queries.Models
 {
-	public class GetApplicationsByJobIdQuery : IRequest<Response<GetApplicationByJobIdQueryResponse>>
+	public class GetApplicationsByJobIdQuery : IRequest<Response<GetApplicationsByJobIdQueryResponse>>
 	{
 		public int JobId { get; set; }
 		public GetApplicationsByJobIdQuery(int jobId)

@@ -90,7 +90,7 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.ApplicationController",
-    "Method": "AddApplication",
+    "Method": "ApplyForJob",
     "RelativePath": "Api/V1/Applications/AddApplication",
     "HttpMethod": "POST",
     "IsController": true,
@@ -1742,6 +1742,37 @@
     ]
   },
   {
+    "ContainingType": "JobBoard.Api.Controllers.ApplicationController",
+    "Method": "JobApplications",
+    "RelativePath": "Api/V1/Jobs/{Id}/Applications",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
     "ContainingType": "JobBoard.Api.Controllers.JobController",
     "Method": "AddNewJob",
     "RelativePath": "Api/V1/Jobs/AddJob",
@@ -2128,6 +2159,31 @@
           "text/json"
         ],
         "StatusCode": 400
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.ApplicationController",
+    "Method": "CurrentUserApplications",
+    "RelativePath": "Api/V1/Users/Applications",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
       }
     ]
   },

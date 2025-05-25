@@ -51,6 +51,7 @@
 		{
 			private const string Prefex = Rule + "/Users";
 
+
 			public const string GetAll = Prefex + "/GetAll";
 			public const string GetByID = Prefex + "/{Id}";
 			public const string Create = Prefex + "/AddUser";
@@ -59,6 +60,9 @@
 			public const string Paginate = Prefex + "/Paginate";
 			public const string ChangePassword = Prefex + "/ChangePassword";
 			public const string Bookmarks = Prefex + "/Bookmarks/{Id}";
+			public const string Applications = Prefex + "/Applications";
+
+
 		}
 		public static class JobRoute
 		{

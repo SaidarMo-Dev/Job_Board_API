@@ -1,6 +1,8 @@
-﻿namespace JobBoard.Core.Feutures.Applications.Queries.Responses
+﻿using JobBoard.Core.Common.DTOs;
+
+namespace JobBoard.Core.Feutures.Applications.Queries.Responses
 {
-	public class GetApplicationByJobIdQueryResponse
+	public class GetApplicationsByJobIdQueryResponse
 	{
 		public List<ApplicationResponse> Applications { get; set; } = new();
 
@@ -9,8 +11,8 @@
 	public class ApplicationResponse
 	{
 		public int ApplicationId { get; set; }
-		public int JobListingId { get; set; }
-		public int UserId { get; set; }
+		public required JobSummaryDto Job { get; set; }
+		public required UserSummaryDto User { get; set; }
 		public string? Description { get; set; }
 		public required DateTime CreatedOn { get; set; }
 		public required string Status { get; set; }

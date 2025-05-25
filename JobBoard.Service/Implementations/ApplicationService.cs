@@ -54,8 +54,8 @@ namespace JobBoard.Service.Implementations
 		public async Task<Application> GetByIdWithIncludeAsync(int Id)
 		{
 			var application = await _applicationRepository.GetTableAsNoTracking()
-						.Include(x => x.userInfo)
-						.Include(x => x.jobListing).ThenInclude(x => x.company)
+						.Include(x => x.UserInfo)
+						.Include(x => x.JobListing).ThenInclude(x => x.company)
 						.FirstOrDefaultAsync(app => app.ApplicationId.Equals(Id));
 
 			return application;
@@ -76,6 +76,25 @@ namespace JobBoard.Service.Implementations
 		{
 			await _applicationRepository.UpdateAsync(application);
 			return true;
+		}
+
+		public async Task<List<Application>> GetApplicationsByJobIdAsync(int JobId)
+		{
+			var result = _applicationRepository.GetTableAsNoTracking()
+						.Where(x => x.JobListingId.Equals(JobId))
+						.Include(x => x.JobListing)
+						.Include(x => x.UserInfo).ThenInclude(x => x.Country);
+
+			return await result.ToListAsync();
+		}
+
+		public async Task<List<Application>> GetUserApplicationsAsync(int UserId)
+		{
+			var result = _applicationRepository.GetTableAsNoTracking()
+							.Where(x => x.UserId.Equals(UserId))
+							.Include(x => x.JobListing);
+
+			return await result.ToListAsync();
 		}
 
 

@@ -9,7 +9,7 @@ namespace JobBoard.Infrastructure.Configuration
 	{
 		public void Configure(EntityTypeBuilder<Application> builder)
 		{
-			builder.HasQueryFilter(x => x.userInfo.IsDeleted == false);
+			builder.HasQueryFilter(x => x.UserInfo.IsDeleted == false);
 
 			builder.HasKey(x => x.ApplicationId);
 
@@ -17,12 +17,12 @@ namespace JobBoard.Infrastructure.Configuration
 				.UseIdentityColumn();
 
 
-			builder.HasOne(x => x.jobListing)
+			builder.HasOne(x => x.JobListing)
 				.WithMany(x => x.applications)
 				.HasForeignKey(x => x.JobListingId)
 				.IsRequired();
 
-			builder.HasOne(x => x.userInfo)
+			builder.HasOne(x => x.UserInfo)
 				.WithMany(x => x.applications)
 				.HasForeignKey(x => x.UserId)
 				.IsRequired();

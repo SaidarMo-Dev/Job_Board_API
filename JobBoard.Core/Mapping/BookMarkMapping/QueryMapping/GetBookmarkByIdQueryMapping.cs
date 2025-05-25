@@ -20,7 +20,7 @@ namespace JobBoard.Core.Mapping.BookMarkMapping
 				.ForMember(x => x.JobType, opt => opt.MapFrom(src => src.jobListing.JobType.ToString()))
 				.ForMember(x => x.SalaryRange, opt => opt.MapFrom(src => src.jobListing.SalaryRange))
 				.ForMember(x => x.DatePosted, opt => opt.MapFrom(src => src.jobListing.DatePosted))
-				.ForMember(x => x.status, opt => opt.MapFrom(src => src.jobListing.status.ToString()));
+				.ForMember(x => x.status, opt => opt.MapFrom(src => src.jobListing.Status.ToString()));
 		}
 
 	}

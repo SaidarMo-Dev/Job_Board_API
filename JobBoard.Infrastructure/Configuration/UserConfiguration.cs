@@ -11,7 +11,7 @@ namespace JobBoard.Infrastructure.Configuration
 		{
 			builder.HasQueryFilter(x => x.IsDeleted == false);
 
-			builder.Property(x => x.Gendor)
+			builder.Property(x => x.Gender)
 				.HasConversion(
 					x => x.ToString(),
 					x => (GendorEnum)Enum.Parse(typeof(GendorEnum), x)

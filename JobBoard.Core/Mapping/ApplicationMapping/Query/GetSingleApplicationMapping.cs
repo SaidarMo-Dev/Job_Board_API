@@ -9,8 +9,8 @@ namespace JobBoard.Core.Mapping.ApplicationMapping
 		public void GetSingleApplicationMapping()
 		{
 			CreateMap<Application, GetSingleApplictionQueryResponse>()
-				.ForMember(x => x.UserResponse, opt => opt.MapFrom(src => src.userInfo))
-				.ForMember(x => x.JobResponse, opt => opt.MapFrom(src => src.jobListing));
+				.ForMember(x => x.UserResponse, opt => opt.MapFrom(src => src.UserInfo))
+				.ForMember(x => x.JobResponse, opt => opt.MapFrom(src => src.JobListing));
 
 
 			CreateMap<User, UserResponse>()

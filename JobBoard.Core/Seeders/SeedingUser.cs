@@ -16,7 +16,7 @@ namespace JobBoard.Core.Seeders
 				{
 					FirstName = "Mohammed",
 					LastName = "Saidar",
-					Gendor = GendorEnum.Male,
+					Gender = GendorEnum.Male,
 					DateOfBirth = DateTime.UtcNow.AddYears(-24),
 					Address = "Morocco",
 					ImagePath = "",

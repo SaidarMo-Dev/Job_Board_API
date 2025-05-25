@@ -15,7 +15,7 @@ namespace JobBoard.Data.Entities.Identity
 		public string FirstName { get; set; }
 		public string LastName { get; set; }
 		public string FullName => FirstName + " " + LastName;
-		public GendorEnum Gendor { get; set; }
+		public GendorEnum Gender { get; set; }
 		public required DateTime DateOfBirth { get; set; }
 		public string? Address { get; set; }
 		public string? ImagePath { get; set; }

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace JobBoard.Api.Controllers
 {
 	[ApiController]
-	[Authorize(Roles = "User")]
+	//[Authorize(Roles = "User")]
 	public class ApplicationController : AppControllerbase
 	{
 
@@ -20,14 +20,27 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(new GetSingleApplicationQuery { Id = Id }));
 		}
 
+
+		// current User Applications
+		[Authorize(Roles = "JobSeeker")]
+		[HttpGet(Router.ApplicationUserRoute.Applications)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		public async Task<IActionResult> CurrentUserApplications()
+		{
+			return NewResult(await Mediator.Send(new GetCurrentUserApplicationsQuery()));
+
+		}
+
+
 		// list Applications for a job
 		[HttpGet(Router.JobRoute.Applications)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> JobApplications([FromRoute] int Id)
 		{
-			//return NewResult(await Mediator.Send());
-			return Ok();
+			return NewResult(await Mediator.Send(new GetApplicationsByJobIdQuery(Id)));
+
 		}
 
 		// apply for a job

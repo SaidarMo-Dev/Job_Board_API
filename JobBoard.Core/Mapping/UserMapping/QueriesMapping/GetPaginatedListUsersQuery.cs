@@ -9,7 +9,7 @@ namespace JobBoard.Core.Mapping.UserMapping
 		{
 			CreateMap<User, GetPaginatedListUsersQueryResponse>()
 				.ForMember(dst => dst.UserId, opt => opt.MapFrom(src => src.Id))
-				.ForMember(dst => dst.Gendor, opt => opt.MapFrom(src => src.Gendor.ToString()))
+				.ForMember(dst => dst.Gendor, opt => opt.MapFrom(src => src.Gender.ToString()))
 				.ForMember(dst => dst.DateOfBirth, opt => opt.MapFrom(src => src.DateOfBirth.ToShortDateString()))
 				.ForMember(dst => dst.CountryName, opt => opt.MapFrom(src => src.Country.CountryName));
 		}
