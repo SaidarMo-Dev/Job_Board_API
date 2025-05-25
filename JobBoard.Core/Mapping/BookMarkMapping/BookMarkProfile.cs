@@ -9,6 +9,7 @@ namespace JobBoard.Core.Mapping.BookMarkMapping
 			AddbookMarkCommandMapping();
 			GetBookmarkByIdQueryMapping();
 			GetPaginatedBookmarkListMapping();
+			GetUserBookmarks();
 
 		}
 	}

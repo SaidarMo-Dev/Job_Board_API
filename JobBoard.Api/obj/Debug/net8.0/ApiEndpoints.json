@@ -2132,37 +2132,6 @@
     ]
   },
   {
-    "ContainingType": "JobBoard.Api.Controllers.ApplicationUserController",
-    "Method": "CreateUser",
-    "RelativePath": "Api/V1/Users/AddUser",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "JobBoard.Core.Feutures.ApplicationUser.Commands.Models.AddUserCommand",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 201
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      }
-    ]
-  },
-  {
     "ContainingType": "JobBoard.Api.Controllers.ApplicationController",
     "Method": "CurrentUserApplications",
     "RelativePath": "Api/V1/Users/Applications",
@@ -2188,7 +2157,7 @@
     ]
   },
   {
-    "ContainingType": "JobBoard.Api.Controllers.ApplicationUserController",
+    "ContainingType": "JobBoard.Api.Controllers.BookMarkController",
     "Method": "UserBookmarks",
     "RelativePath": "Api/V1/Users/Bookmarks/{Id}",
     "HttpMethod": "GET",
@@ -2318,6 +2287,37 @@
           "text/json"
         ],
         "StatusCode": 401
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.ApplicationUserController",
+    "Method": "CreateUser",
+    "RelativePath": "Api/V1/Users/Register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "JobBoard.Core.Feutures.ApplicationUser.Commands.Models.AddUserCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 201
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
       }
     ]
   },

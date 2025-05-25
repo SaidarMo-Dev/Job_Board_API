@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace JobBoard.Api.Controllers
 {
 	[ApiController]
-
+	[Authorize(Roles = "Admin,User")]
 	public class ApplicationUserController : AppControllerbase
 	{
 		// paginate users
@@ -23,7 +23,6 @@ namespace JobBoard.Api.Controllers
 		}
 
 		// get user by Id
-		[Authorize(Roles = "User")]
 		[HttpGet(Router.ApplicationUserRoute.GetByID)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
@@ -33,17 +32,8 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(new GetUserByIdQuery(Id)));
 		}
 
-		[HttpGet(Router.ApplicationUserRoute.Bookmarks)]
-		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		public async Task<IActionResult> UserBookmarks([FromRoute] int Id)
-		{
-			return NewResult(await Mediator.Send(new GetUserBookmarksQuery { UserId = Id }));
-		}
-
 		// create user
-		[HttpPost(Router.ApplicationUserRoute.Create)]
+		[HttpPost(Router.ApplicationUserRoute.Register)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 

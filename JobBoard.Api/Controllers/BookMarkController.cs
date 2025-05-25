@@ -24,6 +24,7 @@ namespace JobBoard.Api.Controllers
 
 		}
 
+
 		[HttpGet(Router.BookMarkRoute.Paginate)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -32,6 +33,18 @@ namespace JobBoard.Api.Controllers
 			return Ok(await Mediator.Send(request));
 
 		}
+
+
+		[HttpGet(Router.ApplicationUserRoute.Bookmarks)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		public async Task<IActionResult> UserBookmarks([FromRoute] int Id)
+		{
+			return NewResult(await Mediator.Send(new GetUserBookmarksQuery { UserId = Id }));
+		}
+
+
 
 		[HttpPost(Router.BookMarkRoute.Create)]
 		[ProducesResponseType(StatusCodes.Status201Created)]

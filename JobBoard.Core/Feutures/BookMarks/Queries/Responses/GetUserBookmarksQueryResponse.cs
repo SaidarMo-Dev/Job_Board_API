@@ -1,10 +1,9 @@
-﻿namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Responses
+﻿namespace JobBoard.Core.Feutures.BookMarks.Queries.Responses
 {
-	public class GetUseBookmarksQueryResponse
+
+	public class GetUserBookmarksQueryResponse
 	{
-		public int UserId { get; set; }
-		public required string Username { get; set; }
-		public BookmarkResponse? BookmarkResponse { get; set; }
+		public List<BookmarkResponse> Bookmarks { get; set; } = new();
 
 	}
 
@@ -14,7 +13,12 @@
 		public int BookmarkId { get; set; }
 		public DateTime DateBooked { get; set; }
 
-		// job Info
+		public BookmarkJobResponse? Job { get; set; }
+
+	}
+
+	public class BookmarkJobResponse
+	{
 		public int JobId { get; set; }
 		public required string Title { get; set; }
 		public string? Description { get; set; }
@@ -24,5 +28,6 @@
 		public string? SalaryRange { get; set; }
 		public required DateTime DatePosted { get; set; }
 		public required string status { get; set; }
+
 	}
 }

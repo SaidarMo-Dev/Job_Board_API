@@ -54,7 +54,7 @@
 
 			public const string GetAll = Prefex + "/GetAll";
 			public const string GetByID = Prefex + "/{Id}";
-			public const string Create = Prefex + "/AddUser";
+			public const string Register = Prefex + "/Register";
 			public const string Update = Prefex + "/UpdateUser";
 			public const string DeleteById = Prefex + Single;
 			public const string Paginate = Prefex + "/Paginate";

@@ -72,7 +72,6 @@ namespace JobBoard.Service.Implementations
 		public async Task<List<Bookmark>> GetUserBookmarks(int UserId)
 		{
 			return await _bookMarkRepository.GetTableAsNoTracking()
-							.Include(x => x.userInfo)
 							.Include(x => x.jobListing).ThenInclude(x => x.company)
 							.Where(x => x.UserId.Equals(UserId))
 							.ToListAsync();
