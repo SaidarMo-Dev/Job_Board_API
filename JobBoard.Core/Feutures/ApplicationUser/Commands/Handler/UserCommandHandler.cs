@@ -1,10 +1,13 @@
-﻿using AutoMapper;
+﻿using System.Security.Claims;
+using AutoMapper;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.ApplicationUser.Commands.Models;
 using JobBoard.Core.Resources;
+using JobBoard.Core.Security.Requirements;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Service.Abstractions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
@@ -24,20 +27,23 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 		private readonly ICountryService _countryService;
 		private readonly IUserService _userService;
 		private readonly IStringLocalizer<SharedResources> _stringLocalizer;
+		private readonly IAuthorizationService _authorizationService;
 		#endregion
 
 		#region Construtors
 		public UserCommandHandler(UserManager<User> userManager,
-		IMapper mapper,
-		ICountryService countryService,
+						IMapper mapper,
+						ICountryService countryService,
 						IUserService userService,
-						IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
+						IStringLocalizer<SharedResources> stringLocalizer,
+						IAuthorizationService authorizationService) : base(stringLocalizer)
 		{
 			_userManager = userManager;
 			_mapper = mapper;
 			_countryService = countryService;
 			_userService = userService;
 			_stringLocalizer = stringLocalizer;
+			_authorizationService = authorizationService;
 		}
 
 		#endregion
@@ -69,19 +75,27 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 			return Created(user.Id);
 
 		}
-
 		public async Task<Response<string>> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
 		{
 			var OldUser = await _userManager.FindByIdAsync(request.Id.ToString());
+
+			var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), OldUser, new SameUserRequirement());
+
+			if (!isAuthorized.Succeeded) return Forbidden<string>();
+
 			if (OldUser == null) return NotFound("");
 
 			var newUser = _mapper.Map(request, OldUser);
 			var result = await _userManager.UpdateAsync(newUser);
 
 			if (!result.Succeeded)
-				return BadRequest<string>("Cannot Update User :" + result?.Errors?.FirstOrDefault()?.Description);
+			{
+				return BadRequest<string>("Cannot Update User :" + result?.Errors?
+							.FirstOrDefault()?.Description);
+			}
 
-			return Success("");
+
+			return Success<string>();
 		}
 
 		public async Task<Response<string>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)

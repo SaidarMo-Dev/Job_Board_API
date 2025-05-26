@@ -2198,7 +2198,7 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.ApplicationUserController",
-    "Method": "UpdatePassword",
+    "Method": "ChangePassword",
     "RelativePath": "Api/V1/Users/ChangePassword",
     "HttpMethod": "PUT",
     "IsController": true,

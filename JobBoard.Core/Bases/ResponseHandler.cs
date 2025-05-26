@@ -87,6 +87,17 @@ namespace JobBoard.Core.Bases
 			};
 		}
 
+		public Response<TEntity> Forbidden<TEntity>(string message = null!)
+		{
+			return new Response<TEntity>()
+			{
+				StatusCode = System.Net.HttpStatusCode.Forbidden,
+				Message = message is null ? "Forbidden" : message,
+				Succeeded = false
+			};
+		}
+
+
 		public Response<TEntity> BadRequest<TEntity>(TEntity data, string message = null)
 		{
 			return new Response<TEntity>()

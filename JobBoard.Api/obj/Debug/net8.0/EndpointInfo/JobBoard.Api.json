@@ -10,6 +10,7 @@
         "tags": [
           "Application"
         ],
+        "summary": "Get Application",
         "parameters": [
           {
             "name": "Id",
@@ -51,6 +52,7 @@
         "tags": [
           "Application"
         ],
+        "summary": "Delete Appicatios",
         "parameters": [
           {
             "name": "Id",
@@ -154,6 +156,7 @@
         "tags": [
           "Application"
         ],
+        "summary": "User Applications",
         "responses": {
           "200": {
             "description": "OK"
@@ -186,6 +189,7 @@
         "tags": [
           "Application"
         ],
+        "summary": "Job Applications",
         "parameters": [
           {
             "name": "Id",
@@ -229,6 +233,7 @@
         "tags": [
           "Application"
         ],
+        "summary": "Apply For a job",
         "requestBody": {
           "content": {
             "application/json": {
@@ -280,6 +285,7 @@
         "tags": [
           "Application"
         ],
+        "summary": "Update Application",
         "requestBody": {
           "content": {
             "application/json": {
@@ -351,6 +357,7 @@
         "tags": [
           "Application"
         ],
+        "summary": "Update Status",
         "parameters": [
           {
             "name": "ApplicationId",
@@ -413,6 +420,7 @@
         "tags": [
           "Application"
         ],
+        "summary": "Update Status",
         "parameters": [
           {
             "name": "ApplicationId",
@@ -475,6 +483,7 @@
         "tags": [
           "ApplicationUser"
         ],
+        "summary": "Paginate Users",
         "parameters": [
           {
             "name": "PageNumber",
@@ -545,6 +554,7 @@
         "tags": [
           "ApplicationUser"
         ],
+        "summary": "Get User",
         "parameters": [
           {
             "name": "Id",
@@ -606,6 +616,7 @@
         "tags": [
           "ApplicationUser"
         ],
+        "summary": "Delete User",
         "parameters": [
           {
             "name": "Id",
@@ -689,6 +700,7 @@
         "tags": [
           "ApplicationUser"
         ],
+        "summary": "Register",
         "requestBody": {
           "content": {
             "application/json": {
@@ -740,6 +752,7 @@
         "tags": [
           "ApplicationUser"
         ],
+        "summary": "Update User",
         "requestBody": {
           "content": {
             "application/json": {
@@ -831,6 +844,7 @@
         "tags": [
           "ApplicationUser"
         ],
+        "summary": "Change User",
         "requestBody": {
           "content": {
             "application/json": {
