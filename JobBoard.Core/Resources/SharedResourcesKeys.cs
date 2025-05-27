@@ -35,6 +35,8 @@
 		public const string PasswordNotNull = "PasswordNotNull";
 		public const string PasswordsNotMatches = "PasswordsNotMatches";
 
+		public const string NoAccess = "NoAccess";
+
 
 
 	}

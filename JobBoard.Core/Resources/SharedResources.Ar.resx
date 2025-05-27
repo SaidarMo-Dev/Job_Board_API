@@ -186,4 +186,7 @@
   <data name="FailedResetPassword" xml:space="preserve">
     <value>حدث خطأ أثناء إعادة تحديث كلمة المرور</value>
   </data>
+  <data name="NoAccess" xml:space="preserve">
+    <value>ليس لديك الإذن لفعل هذه العملية</value>
+  </data>
 </root>

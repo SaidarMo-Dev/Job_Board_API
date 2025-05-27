@@ -103,7 +103,7 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 
 			// of not Admin apply entity based authorization (resource-based-Authorization)
 
-			if (!(userRoles.FirstOrDefault() == "Admin"))
+			if (!userRoles.Contains("Admin"))
 			{
 				var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), company, new CompanyOwnerRequirement());
 

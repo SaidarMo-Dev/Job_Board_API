@@ -17,7 +17,10 @@ namespace JobBoard.Core.Security.Handlers
 		{
 			var userId = _currentUserService.GetCurrentUserId();
 
-			throw new NotImplementedException();
+			if (resource.CreatedByUserId.Equals(userId))
+				context.Succeed(requirement);
+
+			return Task.CompletedTask;
 
 
 		}

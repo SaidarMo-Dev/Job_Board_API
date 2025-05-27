@@ -163,7 +163,7 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 			var userRoles = await _currentUserService.GetCurrentUserRoles();
 
 			// of not Admin then apply resource based Authorizatin for job creator
-			if (!(userRoles.FirstOrDefault() == "Admin"))
+			if (!userRoles.Contains("Admin"))
 			{
 				var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), job, new JobCreatorRequirement());
 				if (!isAuthorized.Succeeded) return Forbidden<string>();

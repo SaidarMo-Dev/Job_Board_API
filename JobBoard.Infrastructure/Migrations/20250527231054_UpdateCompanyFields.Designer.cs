@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobBoard.Infrastructure.Migrations
 {
     [DbContext(typeof(appDbContext))]
-    [Migration("20250527172221_AddCreatedByInCompanyTable")]
-    partial class AddCreatedByInCompanyTable
+    [Migration("20250527231054_UpdateCompanyFields")]
+    partial class UpdateCompanyFields
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -122,7 +122,7 @@ namespace JobBoard.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("CreatedUserId")
+                    b.Property<int>("CreatedByUserId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -150,7 +150,7 @@ namespace JobBoard.Infrastructure.Migrations
 
                     b.HasKey("CompanyId");
 
-                    b.HasIndex("CreatedUserId");
+                    b.HasIndex("CreatedByUserId");
 
                     b.ToTable("Companies", (string)null);
                 });
@@ -590,7 +590,7 @@ namespace JobBoard.Infrastructure.Migrations
                 {
                     b.HasOne("JobBoard.Data.Entities.Identity.User", "CreatedByUser")
                         .WithMany("CreatedCompanies")
-                        .HasForeignKey("CreatedUserId")
+                        .HasForeignKey("CreatedByUserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 

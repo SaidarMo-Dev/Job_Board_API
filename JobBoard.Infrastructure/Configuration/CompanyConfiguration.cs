@@ -12,6 +12,8 @@ namespace JobBoard.Infrastructure.Configuration
 			builder.Property(x => x.CompanyId)
 				.UseIdentityColumn();
 
+
+
 			builder.Property(x => x.CompanyName)
 				.HasMaxLength(100)
 				.IsRequired();
