@@ -8,10 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace JobBoard.Api.Controllers
 {
 	[ApiController]
-	[Authorize(Roles = "User")]
+	[AllowAnonymous]
 	public class AuthenticationController : AppControllerbase
 	{
-		[AllowAnonymous]
 		[HttpPost(Router.AuthenticationRoute.SignIn)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -20,7 +19,6 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 		}
 
-		[AllowAnonymous]
 		[HttpPost(Router.AuthenticationRoute.RefreshToken)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		public async Task<IActionResult> RefreshNewToken([FromForm] RefreshNewAccessToken request)
@@ -28,7 +26,6 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 		}
 
-		[AllowAnonymous]
 		[HttpGet(Router.AuthenticationRoute.ConfirmEmail)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]

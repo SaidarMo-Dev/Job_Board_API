@@ -16,7 +16,7 @@ namespace JobBoard.Api.Controllers
 		[HttpGet(Router.ApplicationRoute.GetByID)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		public async Task<IActionResult> AddApplication([FromRoute] int Id)
+		public async Task<IActionResult> GetApplication([FromRoute] int Id)
 		{
 			return NewResult(await Mediator.Send(new GetSingleApplicationQuery { Id = Id }));
 		}
@@ -25,6 +25,7 @@ namespace JobBoard.Api.Controllers
 		// current User Applications
 		[SwaggerOperation(summary: "User Applications")]
 		[Authorize(Roles = "JobSeeker")]
+
 		[HttpGet(Router.ApplicationUserRoute.Applications)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -60,7 +61,7 @@ namespace JobBoard.Api.Controllers
 		}
 
 		[SwaggerOperation(summary: "Update Application")]
-		[Authorize(Roles = "Admin,JoobSeeker")]
+		[Authorize(Roles = "Admin")]
 
 		[HttpPut(Router.ApplicationRoute.Update)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
@@ -95,7 +96,7 @@ namespace JobBoard.Api.Controllers
 		}
 
 		[Authorize(Roles = "Admin,Employer")]
-		[SwaggerOperation(summary: "Delete Appicatios")]
+		[SwaggerOperation(summary: "Delete Application")]
 		[HttpDelete(Router.ApplicationRoute.DeleteById)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]

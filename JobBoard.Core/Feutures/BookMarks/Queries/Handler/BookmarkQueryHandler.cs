@@ -1,12 +1,15 @@
-﻿using AutoMapper;
+﻿using System.Security.Claims;
+using AutoMapper;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.BookMarks.Queries.Models;
 using JobBoard.Core.Feutures.BookMarks.Queries.Responses;
 using JobBoard.Core.Resources;
+using JobBoard.Core.Security.Requirements;
 using JobBoard.Core.Wrapers;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Service.Abstractions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
 
@@ -21,6 +24,7 @@ namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
 		private readonly IBookmarkService _bookmarkService;
 		private readonly IMapper _mapper;
 		private readonly UserManager<User> _userManager;
+		private readonly IAuthorizationService _authorizationService;
 
 		#endregion
 
@@ -28,12 +32,14 @@ namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
 		public BookmarkQueryHandler(IBookmarkService bookmarkService,
 									IMapper mapper,
 									IStringLocalizer<SharedResources> stringLocalizer,
-									UserManager<User> userManager
+									UserManager<User> userManager,
+									IAuthorizationService authorizationService
 									) : base(stringLocalizer)
 		{
 			_bookmarkService = bookmarkService;
 			_mapper = mapper;
 			_userManager = userManager;
+			_authorizationService = authorizationService;
 		}
 		#endregion
 
@@ -42,6 +48,11 @@ namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
 		public async Task<Response<GetBookmarkByIdQueryResponse>> Handle(GetBookmarkByIdQuery request, CancellationToken cancellationToken)
 		{
 			var Bookmark = await _bookmarkService.GetBookmarkByIdWithIncludeAsync(request.Id);
+
+			var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), Bookmark, new UserBookmarkRequirement());
+
+			if (!isAuthorized.Succeeded) return Forbidden<GetBookmarkByIdQueryResponse>();
+
 			if (Bookmark == null) return NotFound<GetBookmarkByIdQueryResponse>();
 
 			var BookmarkMapping = _mapper.Map<GetBookmarkByIdQueryResponse>(Bookmark);
@@ -64,11 +75,18 @@ namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
 		public async Task<Response<GetUserBookmarksQueryResponse>> Handle(GetUserBookmarksQuery request, CancellationToken cancellationToken)
 		{
 			var user = await _userManager.FindByIdAsync(request.UserId.ToString());
+
 			if (user is null) return NotFound<GetUserBookmarksQueryResponse>();
 
 			var bookmarks = await _bookmarkService.GetUserBookmarks(request.UserId);
 
 			if (bookmarks is null) return BadRequest<GetUserBookmarksQueryResponse>("No Bookmarks found");
+
+			var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(),
+														bookmarks.FirstOrDefault(),
+														new UserBookmarkRequirement());
+
+			if (!isAuthorized.Succeeded) return Forbidden<GetUserBookmarksQueryResponse>();
 
 			var bookmarksDto = _mapper.Map<List<BookmarkResponse>>(bookmarks);
 

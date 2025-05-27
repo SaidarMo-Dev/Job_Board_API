@@ -36,7 +36,8 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 						ICountryService countryService,
 						IUserService userService,
 						IStringLocalizer<SharedResources> stringLocalizer,
-						IAuthorizationService authorizationService) : base(stringLocalizer)
+						IAuthorizationService authorizationService
+			) : base(stringLocalizer)
 		{
 			_userManager = userManager;
 			_mapper = mapper;
@@ -101,11 +102,13 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 		public async Task<Response<string>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
 		{
 			var user = await _userManager.FindByIdAsync(request.Id.ToString());
+
+			var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), user, new SameUserRequirement());
+
+			if (!isAuthorized.Succeeded) return Forbidden<string>();
+
+
 			if (user == null) return NotFound("");
-
-			//var result = await _userManager.DeleteAsync(user);
-
-			//if (!result.Succeeded) return BadRequest<string>(result.Errors.FirstOrDefault().Description);
 
 			var IsDeleted = await _userService.DeleteUsersAsync(user);
 			if (!IsDeleted) return BadRequest<string>("Cannot delete this User");
@@ -118,9 +121,6 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 
 			var user = await _userManager.FindByIdAsync(request.Id.ToString());
 			if (user == null) return NotFound("");
-
-			//var passwordCorrect = await _userManager.CheckPasswordAsync(user, request.CurrentPassword);
-			//if (!passwordCorrect) return BadRequest<string>("Wrong Id Or Password!");
 
 			var result = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
 			if (!result.Succeeded)

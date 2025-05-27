@@ -9,11 +9,10 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace JobBoard.Api.Controllers
 {
 	[ApiController]
-	[Authorize(Roles = "Admin,User")]
+	[Authorize(Roles = "Admin")]
 	public class ApplicationUserController : AppControllerbase
 	{
 		// paginate users
-		[Authorize(Roles = "Admin")]
 		[HttpGet(Router.ApplicationUserRoute.Paginate)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
@@ -26,6 +25,8 @@ namespace JobBoard.Api.Controllers
 		}
 
 		// get user by Id
+
+		[AllowAnonymous]
 		[SwaggerOperation(summary: "Get User")]
 		[HttpGet(Router.ApplicationUserRoute.GetByID)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -37,19 +38,21 @@ namespace JobBoard.Api.Controllers
 		}
 
 		// create user
+
+		// any one can create user 
+		[AllowAnonymous]
 		[SwaggerOperation(summary: "Register")]
 		[HttpPost(Router.ApplicationUserRoute.Register)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-		// any one can create user 
-		[AllowAnonymous]
 		public async Task<IActionResult> CreateUser([FromBody] AddUserCommand request)
 		{
 			return NewResult(await Mediator.Send(request));
 		}
 
 		// Update user
+		[AllowAnonymous]
 		[SwaggerOperation(summary: "Update User")]
 		[HttpPut(Router.ApplicationUserRoute.Update)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
@@ -61,7 +64,8 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 		}
 
-		[SwaggerOperation(summary: "Change User")]
+		[AllowAnonymous]
+		[SwaggerOperation(summary: "Change Password")]
 		[HttpPut(Router.ApplicationUserRoute.ChangePassword)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -73,6 +77,7 @@ namespace JobBoard.Api.Controllers
 		}
 
 		[SwaggerOperation(summary: "Delete User")]
+		[AllowAnonymous]
 		[HttpDelete(Router.ApplicationUserRoute.DeleteById)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -82,7 +87,6 @@ namespace JobBoard.Api.Controllers
 		{
 			return NewResult(await Mediator.Send(new DeleteUserCommand { Id = Id }));
 		}
-
 
 	}
 }

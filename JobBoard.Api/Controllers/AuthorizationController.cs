@@ -20,7 +20,6 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(new GetListRolesQuery()));
 		}
 
-
 		[HttpGet(Router.AuthorizationRoute.GetRoleById)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]

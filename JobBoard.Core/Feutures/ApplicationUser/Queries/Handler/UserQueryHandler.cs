@@ -1,12 +1,15 @@
-﻿using AutoMapper;
+﻿using System.Security.Claims;
+using AutoMapper;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.ApplicationUser.Queries.Models;
 using JobBoard.Core.Feutures.ApplicationUser.Queries.Responses;
 using JobBoard.Core.Resources;
+using JobBoard.Core.Security.Requirements;
 using JobBoard.Core.Wrapers;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Service.Abstractions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
 
@@ -24,6 +27,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 		private readonly IMapper _mapper;
 		private readonly IUserService _userService;
 		private readonly IBookmarkService _bookmarkService;
+		private readonly IAuthorizationService _authorizationService;
 
 		#endregion
 
@@ -33,12 +37,14 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 								IMapper mapper,
 								IUserService userService,
 								IBookmarkService bookmarkService,
-								IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
+								IStringLocalizer<SharedResources> stringLocalizer,
+								IAuthorizationService authorizationService) : base(stringLocalizer)
 		{
 			_userManager = userManager;
 			_mapper = mapper;
 			_userService = userService;
 			_bookmarkService = bookmarkService;
+			_authorizationService = authorizationService;
 		}
 
 		#endregion
@@ -46,11 +52,15 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 		#region Handle Methods
 		public async Task<Response<GetUserByIdQueryResponse>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
 		{
-			var User = await _userService.GetUserInfoByIdWithEnclude(request.Id);
+			var user = await _userService.GetUserInfoByIdWithEnclude(request.Id);
 
-			if (User == null) return NotFound<GetUserByIdQueryResponse>();
+			var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), user, new SameUserRequirement());
 
-			var UserResponse = _mapper.Map<GetUserByIdQueryResponse>(User);
+			if (!isAuthorized.Succeeded) return Forbidden<GetUserByIdQueryResponse>();
+
+			if (user == null) return NotFound<GetUserByIdQueryResponse>();
+
+			var UserResponse = _mapper.Map<GetUserByIdQueryResponse>(user);
 
 			return Success(UserResponse);
 		}

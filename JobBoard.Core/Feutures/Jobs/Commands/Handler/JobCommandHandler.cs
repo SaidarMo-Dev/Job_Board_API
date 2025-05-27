@@ -1,10 +1,13 @@
-﻿using AutoMapper;
+﻿using System.Security.Claims;
+using AutoMapper;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Jobs.Commands.Models;
 using JobBoard.Core.Resources;
+using JobBoard.Core.Security.Requirements;
 using JobBoard.Data.Entities;
 using JobBoard.Service.Abstractions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
@@ -23,6 +26,8 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 		private readonly IJobCategoryService _jobCategoryService;
 		private readonly ISkillService _skillService;
 		private readonly ICategoryService _categoryService;
+		private readonly IAuthorizationService _authorizationService;
+
 		#endregion
 
 		#region Constructors
@@ -32,7 +37,8 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 							IJobCategoryService jobCategoryService,
 							ISkillService skillService,
 							ICategoryService categoryService,
-							IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
+							IStringLocalizer<SharedResources> stringLocalizer,
+							IAuthorizationService authorizationService) : base(stringLocalizer)
 		{
 			_jobService = jobService;
 			_mapper = mapper;
@@ -40,6 +46,8 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 			_jobCategoryService = jobCategoryService;
 			_skillService = skillService;
 			_categoryService = categoryService;
+			_authorizationService = authorizationService;
+
 		}
 
 		#endregion
@@ -86,6 +94,11 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 		public async Task<Response<string>> Handle(UpdateJobCommand request, CancellationToken cancellationToken)
 		{
 			var Oldjob = await _jobService.GetJobByIdWithEncludeSkillsAndCategoriesAsync(request.Id);
+
+			var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), Oldjob, new JobCreatorRequirement());
+
+			if (!isAuthorized.Succeeded) return Forbidden<string>();
+
 			if (Oldjob == null) return NotFound<string>($"Job With Id = {request.Id} Not Found");
 
 			var newJob = _mapper.Map(request, Oldjob);

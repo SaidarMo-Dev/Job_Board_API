@@ -57,7 +57,7 @@ namespace JobBoard.Api.Controllers
 
 		}
 
-
+		[AllowAnonymous]
 		[HttpDelete(Router.BookMarkRoute.DeleteById)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]

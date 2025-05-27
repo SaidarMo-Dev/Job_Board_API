@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace JobBoard.Api.Controllers
 {
 	[ApiController]
-	[Authorize(Roles = "Admin")]
+	[Authorize(Roles = "Admin,Employer")]
 	public class CategoryController : AppControllerbase
 	{
 
@@ -47,6 +47,7 @@ namespace JobBoard.Api.Controllers
 		}
 
 
+		[Authorize(Roles = "Admin")]
 		[HttpPut(Router.CategoryRoute.Update)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -58,7 +59,7 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 		}
 
-
+		[Authorize(Roles = "Admin")]
 		[HttpDelete(Router.CategoryRoute.DeleteById)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
