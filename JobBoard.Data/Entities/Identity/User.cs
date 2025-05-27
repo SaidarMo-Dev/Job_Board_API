@@ -9,7 +9,7 @@ namespace JobBoard.Data.Entities.Identity
 		{
 			applications = new HashSet<Application>();
 			bookmarks = new HashSet<Bookmark>();
-			createdJobs = new HashSet<JobListing>();
+			CreatedJobs = new HashSet<JobListing>();
 		}
 
 		public string FirstName { get; set; }
@@ -25,11 +25,11 @@ namespace JobBoard.Data.Entities.Identity
 		public string? Code { get; set; }
 
 		public Country Country { get; set; }
-		public ICollection<Application> applications { get; set; }
-		public ICollection<Bookmark> bookmarks { get; set; }
-		public ICollection<JobListing> createdJobs { get; set; }
-		public ICollection<UserRefreshToken> userRefreshTokens { get; set; }
-
+		public ICollection<Application>? applications { get; set; }
+		public ICollection<Bookmark>? bookmarks { get; set; }
+		public ICollection<JobListing>? CreatedJobs { get; set; }
+		public ICollection<UserRefreshToken>? UserRefreshTokens { get; set; }
+		public ICollection<Company>? CreatedCompanies { get; set; }
 	}
 }
 

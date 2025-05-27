@@ -9,23 +9,24 @@ namespace JobBoard.Api.Controllers
 {
 	[ApiController]
 
+	[Authorize(Roles = "Admin,Employer")]
 	public class JobController : AppControllerbase
 	{
 
+		[AllowAnonymous]
 		[HttpGet(Router.JobRoute.Paginate)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		[AllowAnonymous]
 		public async Task<IActionResult> GetJobsPaginate([FromQuery] GetPaginatedJobsQuery request)
 		{
 			return Ok(await Mediator.Send(request));
 		}
 
+		[AllowAnonymous]
 		[HttpGet(Router.JobRoute.GetByID)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		[Authorize(policy: "Get")]
 
 		public async Task<IActionResult> GetJobById([FromRoute] int Id)
 		{
@@ -52,7 +53,6 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(new GetJobCategoriesQuery { JobId = JobId }));
 		}
 
-		[Authorize(Roles = "Admin,SuperAdmin")]
 		[HttpPost(Router.JobRoute.Create)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -63,7 +63,7 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 		}
 
-		[Authorize(Roles = "Admin,SuperAdmin")]
+		[Authorize(Roles = "Employer")]
 		[HttpPut(Router.JobRoute.Update)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -73,7 +73,7 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 		}
 
-		[Authorize(Roles = "Admin,SuperAdmin")]
+
 		[HttpDelete(Router.JobRoute.DeleteById)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -83,6 +83,7 @@ namespace JobBoard.Api.Controllers
 		{
 			return NewResult(await Mediator.Send(new DeleteJobCommand(Id)));
 		}
+
 
 
 		[HttpGet(Router.CompanyRoute.Jobs)]

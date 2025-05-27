@@ -1,4 +1,6 @@
-﻿namespace JobBoard.Data.Entities
+﻿using JobBoard.Data.Entities.Identity;
+
+namespace JobBoard.Data.Entities
 {
 	public class Company
 	{
@@ -10,9 +12,10 @@
 		public string? PhoneNumber { get; set; }
 		public required string Email { get; set; }
 		public string? Fax { get; set; }
+		public int CreatedByUserId { get; set; }
 
-		public ICollection<JobListing> JobsListing { get; set; }
-
+		public ICollection<JobListing>? JobsListing { get; set; }
+		public User CreatedByUser { get; set; }
 
 	}
 }

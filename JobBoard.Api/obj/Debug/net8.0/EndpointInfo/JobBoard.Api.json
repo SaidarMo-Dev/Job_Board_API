@@ -52,7 +52,7 @@
         "tags": [
           "Application"
         ],
-        "summary": "Delete Appicatios",
+        "summary": "Delete Application",
         "parameters": [
           {
             "name": "Id",
@@ -844,7 +844,7 @@
         "tags": [
           "ApplicationUser"
         ],
-        "summary": "Change User",
+        "summary": "Change Password",
         "requestBody": {
           "content": {
             "application/json": {

@@ -1,11 +1,15 @@
-﻿using AutoMapper;
+﻿using System.Security.Claims;
+using AutoMapper;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Jobs.Queries.Models;
 using JobBoard.Core.Feutures.Jobs.Queries.Responses;
 using JobBoard.Core.Resources;
+using JobBoard.Core.Security.Requirements;
 using JobBoard.Core.Wrapers;
 using JobBoard.Service.Abstractions;
+using JobBoard.Service.Authentication.Interfaces;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
@@ -17,20 +21,30 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 			IRequestHandler<GetJobCategoriesQuery, Response<List<GetJobCategoriesQueryResponse>>>,
 			IRequestHandler<GetJobsByCompanyIdQuery, Response<GetJobsByCompanyIdQueryResponse>>
 	{
+
+		#region Fields
 		private readonly IJobService _jobService;
 		private readonly IMapper _mapper;
 		private readonly ICompanyService _companyService;
-		#region Fields
+		private readonly IAuthorizationService _authorizationService;
+		private readonly ICurrentUserService _currentUserService;
 		#endregion
 
 		#region Constructors
-		public JobQueryHandler(IJobService jobService, IMapper mapper,
-			IStringLocalizer<SharedResources> stringLocalizer,
-			ICompanyService companyService) : base(stringLocalizer)
+		public JobQueryHandler(IJobService jobService,
+							IMapper mapper,
+							IStringLocalizer<SharedResources> stringLocalizer,
+							ICompanyService companyService,
+							IAuthorizationService authorizationService,
+							ICurrentUserService currentUserService
+
+			) : base(stringLocalizer)
 		{
 			_jobService = jobService;
 			_mapper = mapper;
 			_companyService = companyService;
+			_authorizationService = authorizationService;
+			_currentUserService = currentUserService;
 		}
 		#endregion
 
@@ -82,9 +96,24 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 
 		public async Task<Response<GetJobsByCompanyIdQueryResponse>> Handle(GetJobsByCompanyIdQuery request, CancellationToken cancellationToken)
 		{
-			// check if the company is exist 
-			var exist = await _companyService.IsExistByIdAsync(request.CompanyId);
-			if (!exist) return NotFound<GetJobsByCompanyIdQueryResponse>();
+
+			var company = _companyService.GetCompanyByIdAsync(request.CompanyId);
+
+			var userRoles = await _currentUserService.GetCurrentUserRoles();
+
+			// of not Admin apply entity based authorization (resource-based-Authorization)
+
+			if (!(userRoles.FirstOrDefault() == "Admin"))
+			{
+				var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), company, new CompanyOwnerRequirement());
+
+				if (!isAuthorized.Succeeded) return Forbidden<GetJobsByCompanyIdQueryResponse>();
+
+			}
+
+
+
+			if (company is null) return NotFound<GetJobsByCompanyIdQueryResponse>();
 
 			var result = await _jobService.GetJobsByCompanyIdAsync(request.CompanyId);
 

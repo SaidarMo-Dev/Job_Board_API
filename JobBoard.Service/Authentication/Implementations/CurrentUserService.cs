@@ -57,6 +57,15 @@ namespace JobBoard.Service.Authentication.Implementations
 			return user;
 		}
 
+		public async Task<List<string>> GetCurrentUserRoles()
+		{
+			var user = GetCurrentUser();
+
+			var userRoles = await _userManager.GetRolesAsync(user);
+
+			return userRoles.ToList();
+
+		}
 
 
 		#endregion

@@ -8,15 +8,18 @@ using Microsoft.AspNetCore.Mvc;
 namespace JobBoard.Api.Controllers
 {
 	[ApiController]
-	[Authorize(Roles = "Admin,JobSeeker,SuperAdmin")]
+	[Authorize(Roles = "Admin,Employer")]
 	public class SkillController : AppControllerbase
 	{
+
+
 		[HttpGet(Router.SkillRoute.GetByID)]
 		public async Task<IActionResult> GetSkillById([FromRoute] int Id)
 		{
 			return NewResult(await Mediator.Send(new GetSingleSkillQuery(Id)));
 
 		}
+
 		[HttpGet(Router.SkillRoute.GetAll)]
 		public async Task<IActionResult> GetAll()
 		{
@@ -31,6 +34,7 @@ namespace JobBoard.Api.Controllers
 
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPut(Router.SkillRoute.Update)]
 		public async Task<IActionResult> UpdateSkill([FromBody] UpdateSkillCommand request)
 		{
@@ -38,6 +42,7 @@ namespace JobBoard.Api.Controllers
 
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpDelete(Router.SkillRoute.DeleteById)]
 		public async Task<IActionResult> DeleteSkill([FromRoute] int Id)
 		{

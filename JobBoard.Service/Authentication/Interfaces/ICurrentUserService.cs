@@ -7,5 +7,7 @@ namespace JobBoard.Service.Authentication.Interfaces
 		int GetCurrentUserId();
 		Task<User> GetCurrentUserAsync();
 		User GetCurrentUser();
+		Task<List<string>> GetCurrentUserRoles();
+
 	}
 }

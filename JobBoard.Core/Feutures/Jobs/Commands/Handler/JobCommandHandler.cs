@@ -6,6 +6,7 @@ using JobBoard.Core.Resources;
 using JobBoard.Core.Security.Requirements;
 using JobBoard.Data.Entities;
 using JobBoard.Service.Abstractions;
+using JobBoard.Service.Authentication.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Localization;
@@ -27,6 +28,7 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 		private readonly ISkillService _skillService;
 		private readonly ICategoryService _categoryService;
 		private readonly IAuthorizationService _authorizationService;
+		private readonly ICurrentUserService _currentUserService;
 
 		#endregion
 
@@ -38,7 +40,10 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 							ISkillService skillService,
 							ICategoryService categoryService,
 							IStringLocalizer<SharedResources> stringLocalizer,
-							IAuthorizationService authorizationService) : base(stringLocalizer)
+							IAuthorizationService authorizationService,
+							ICurrentUserService currentUserService
+
+			) : base(stringLocalizer)
 		{
 			_jobService = jobService;
 			_mapper = mapper;
@@ -47,7 +52,7 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 			_skillService = skillService;
 			_categoryService = categoryService;
 			_authorizationService = authorizationService;
-
+			_currentUserService = currentUserService;
 		}
 
 		#endregion
@@ -154,7 +159,19 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 		public async Task<Response<string>> Handle(DeleteJobCommand request, CancellationToken cancellationToken)
 		{
 			var job = await _jobService.GetJobByIdAsync(request.Id);
+
+			var userRoles = await _currentUserService.GetCurrentUserRoles();
+
+			// of not Admin then apply resource based Authorizatin for job creator
+			if (!(userRoles.FirstOrDefault() == "Admin"))
+			{
+				var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), job, new JobCreatorRequirement());
+				if (!isAuthorized.Succeeded) return Forbidden<string>();
+
+			}
+
 			if (job == null) return NotFound<string>($"Job with Id = {request.Id} Not Found");
+
 
 			var result = await _jobService.DeleteJobAsync(job);
 

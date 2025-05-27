@@ -28,6 +28,12 @@ namespace JobBoard.Infrastructure.Configuration
 				.HasMaxLength(255)
 				.IsRequired();
 
+			builder.HasOne(x => x.CreatedByUser)
+				.WithMany(x => x.CreatedCompanies)
+				.HasForeignKey(x => x.CreatedByUserId)
+				.OnDelete(DeleteBehavior.NoAction);
+
+
 			builder.ToTable("Companies");
 		}
 	}

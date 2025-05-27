@@ -15,7 +15,7 @@ namespace JobBoard.Infrastructure.Configuration
 			builder.Property(x => x.Id).UseIdentityColumn();
 
 			builder.HasOne(x => x.User)
-				.WithMany(x => x.userRefreshTokens)
+				.WithMany(x => x.UserRefreshTokens)
 				.HasForeignKey(x => x.UserId);
 
 			builder.ToTable("UserRefreshTokens");

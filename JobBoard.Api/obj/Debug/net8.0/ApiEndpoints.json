@@ -1,7 +1,7 @@
 [
   {
     "ContainingType": "JobBoard.Api.Controllers.ApplicationController",
-    "Method": "AddApplication",
+    "Method": "GetApplication",
     "RelativePath": "Api/V1/Applications/{Id}",
     "HttpMethod": "GET",
     "IsController": true,

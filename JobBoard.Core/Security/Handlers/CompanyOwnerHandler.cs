@@ -1,0 +1,25 @@
+﻿using JobBoard.Core.Security.Requirements;
+using JobBoard.Data.Entities;
+using JobBoard.Service.Authentication.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+
+namespace JobBoard.Core.Security.Handlers
+{
+	public class CompanyOwnerHandler : AuthorizationHandler<CompanyOwnerRequirement, Company>
+	{
+		private readonly ICurrentUserService _currentUserService;
+
+		public CompanyOwnerHandler(ICurrentUserService currentUserService)
+		{
+			_currentUserService = currentUserService;
+		}
+		protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, CompanyOwnerRequirement requirement, Company resource)
+		{
+			var userId = _currentUserService.GetCurrentUserId();
+
+			throw new NotImplementedException();
+
+
+		}
+	}
+}
