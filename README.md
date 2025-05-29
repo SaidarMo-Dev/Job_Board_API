@@ -65,5 +65,8 @@ Welcome to **Job Portal API** Designed to connect job seekers with employers. It
 ## 📝 License
 This project is licensed under the MIT License. See [LICENSE](LICENSE.txt) for Details.
 
-## Contact Us 
+## 📫 Contact
+If you have any questions or want to collaborate, feel free to reach out to me at:  
+[saidarmohammedeco@gmail.com](mailto:saidarmohammedeco@gmail.com)
+
 
