@@ -69,3 +69,5 @@ If you have any questions or want to collaborate, feel free to reach out to me a
 ## 📝 License
 This project is licensed under the MIT License. See [LICENSE](LICENSE.txt) for Details.
 
+
+Show your support by 🌟 the project!!
