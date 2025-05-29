@@ -70,4 +70,4 @@ If you have any questions or want to collaborate, feel free to reach out to me a
 This project is licensed under the MIT License. See [LICENSE](LICENSE.txt) for Details.
 
 
-Show your support by 🌟 the project!!
+Don't forget to support us by 🌟 the project!!
