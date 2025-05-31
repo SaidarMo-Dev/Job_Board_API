@@ -1,0 +1,13 @@
+C:\Projects\Job_Board_API\JobBoard.Data\bin\Release\net8.0\win-x86\JobBoard.Data.deps.json
+C:\Projects\Job_Board_API\JobBoard.Data\bin\Release\net8.0\win-x86\JobBoard.Data.dll
+C:\Projects\Job_Board_API\JobBoard.Data\bin\Release\net8.0\win-x86\JobBoard.Data.pdb
+C:\Projects\Job_Board_API\JobBoard.Data\obj\Release\net8.0\win-x86\JobBoard.Data.csproj.AssemblyReference.cache
+C:\Projects\Job_Board_API\JobBoard.Data\obj\Release\net8.0\win-x86\JobBoard.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Job_Board_API\JobBoard.Data\obj\Release\net8.0\win-x86\JobBoard.Data.AssemblyInfoInputs.cache
+C:\Projects\Job_Board_API\JobBoard.Data\obj\Release\net8.0\win-x86\JobBoard.Data.AssemblyInfo.cs
+C:\Projects\Job_Board_API\JobBoard.Data\obj\Release\net8.0\win-x86\JobBoard.Data.csproj.CoreCompileInputs.cache
+C:\Projects\Job_Board_API\JobBoard.Data\obj\Release\net8.0\win-x86\JobBoard.Data.sourcelink.json
+C:\Projects\Job_Board_API\JobBoard.Data\obj\Release\net8.0\win-x86\JobBoard.Data.dll
+C:\Projects\Job_Board_API\JobBoard.Data\obj\Release\net8.0\win-x86\refint\JobBoard.Data.dll
+C:\Projects\Job_Board_API\JobBoard.Data\obj\Release\net8.0\win-x86\JobBoard.Data.pdb
+C:\Projects\Job_Board_API\JobBoard.Data\obj\Release\net8.0\win-x86\ref\JobBoard.Data.dll

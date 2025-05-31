@@ -43,17 +43,18 @@ builder.Services.AddSerilog();
 
 #region Cors configurations
 
-//builder.Services.AddCors(options =>
-//{
-//	options.AddPolicy("MyPolicy", builder =>
-//	{
-//		builder.WithOrigins("http://127.0.0.1:5500")
-//		.AllowAnyMethod()
-//		.AllowAnyHeader()
-//		.AllowCredentials();
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy("MyPolicy", builder =>
+	{
 
-//	});
-//});
+		builder.AllowAnyOrigin()
+		.AllowAnyMethod()
+		.AllowAnyHeader()
+		.AllowCredentials();
+
+	});
+});
 
 #endregion
 
@@ -111,6 +112,14 @@ builder.Services.AddScoped<IAuthorizationHandler, SameUserHandler>();
 
 var app = builder.Build();
 
+
+using (var scope = app.Services.CreateScope())
+{
+	var context = scope.ServiceProvider.GetRequiredService<appDbContext>();
+	context.Database.Migrate();
+}
+
+
 #region Seeders
 using (var service = app.Services.CreateScope())
 {
@@ -125,16 +134,24 @@ using (var service = app.Services.CreateScope())
 
 #endregion
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-	app.UseSwagger(options =>
-	{
-		options.OpenApiVersion = Microsoft.OpenApi.OpenApiSpecVersion.OpenApi2_0;
-	});
-	app.UseSwaggerUI();
 
-}
+//// Configure the HTTP request pipeline.
+//if (app.Environment.IsDevelopment())
+//{
+//app.UseSwagger(options =>
+//{
+//	options.OpenApiVersion = Microsoft.OpenApi.OpenApiSpecVersion.OpenApi2_0;
+//});
+//app.UseSwaggerUI();
+
+//}
+
+app.UseSwagger(options =>
+{
+	options.OpenApiVersion = Microsoft.OpenApi.OpenApiSpecVersion.OpenApi2_0;
+});
+app.UseSwaggerUI();
+
 
 #region Localization Midllware
 

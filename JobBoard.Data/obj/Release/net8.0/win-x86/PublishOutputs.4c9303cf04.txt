@@ -1,0 +1,14 @@
+C:\Projects\Job_Board_API\publish\JobBoard.Data.dll
+C:\Projects\Job_Board_API\publish\JobBoard.Data.deps.json
+C:\Projects\Job_Board_API\publish\JobBoard.Data.pdb
+C:\Projects\Job_Board_API\publish\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Projects\Job_Board_API\publish\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Projects\Job_Board_API\publish\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Projects\Job_Board_API\publish\Microsoft.Extensions.DependencyInjection.dll
+C:\Projects\Job_Board_API\publish\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Projects\Job_Board_API\publish\Microsoft.Extensions.Identity.Core.dll
+C:\Projects\Job_Board_API\publish\Microsoft.Extensions.Identity.Stores.dll
+C:\Projects\Job_Board_API\publish\Microsoft.Extensions.Logging.dll
+C:\Projects\Job_Board_API\publish\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Projects\Job_Board_API\publish\Microsoft.Extensions.Options.dll
+C:\Projects\Job_Board_API\publish\Microsoft.Extensions.Primitives.dll
