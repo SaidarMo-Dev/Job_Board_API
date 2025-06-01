@@ -72,9 +72,14 @@ namespace JobBoard.Infrastructure
 			{
 				x.SwaggerDoc("v1", new OpenApiInfo
 				{
-					Title = "API",
-					Version = "v1"
-
+					Title = "Job Board APIs",
+					Version = "v1",
+					Description = "The **Job Board API** provides a comprehensive set of endpoints for managing job postings, applications and more...",
+					Contact = new OpenApiContact
+					{
+						Name = "Mohammed Saidar",
+						Email = "saidarmohammedeco@gmail.com"
+					}
 				});
 
 				x.EnableAnnotations();

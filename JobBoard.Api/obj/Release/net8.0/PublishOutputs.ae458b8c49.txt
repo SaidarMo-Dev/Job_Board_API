@@ -1,6 +1,7 @@
 C:\Projects\Job_Board_API\JobBoard.Api\obj\Release\net8.0\PubTmp\Out\JobBoard.Api.exe
 C:\Projects\Job_Board_API\JobBoard.Api\obj\Release\net8.0\PubTmp\Out\appsettings.Development.json
 C:\Projects\Job_Board_API\JobBoard.Api\obj\Release\net8.0\PubTmp\Out\appsettings.json
+C:\Projects\Job_Board_API\JobBoard.Api\obj\Release\net8.0\PubTmp\Out\appsettings.Production.json
 C:\Projects\Job_Board_API\JobBoard.Api\obj\Release\net8.0\PubTmp\Out\JobBoard.Api.dll
 C:\Projects\Job_Board_API\JobBoard.Api\obj\Release\net8.0\PubTmp\Out\JobBoard.Api.runtimeconfig.json
 C:\Projects\Job_Board_API\JobBoard.Api\obj\Release\net8.0\PubTmp\Out\JobBoard.Api.pdb

@@ -32,14 +32,6 @@ builder.Services.AddDbContext<appDbContext>(
 		options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
-#region Serilog Connfiguration
-
-Log.Logger = new LoggerConfiguration().ReadFrom
-		.Configuration(builder.Configuration).CreateLogger();
-
-builder.Services.AddSerilog();
-
-#endregion
 
 #region Cors configurations
 
@@ -50,8 +42,7 @@ builder.Services.AddCors(options =>
 
 		builder.AllowAnyOrigin()
 		.AllowAnyMethod()
-		.AllowAnyHeader()
-		.AllowCredentials();
+		.AllowAnyHeader();
 
 	});
 });
@@ -107,6 +98,17 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 #endregion
 
 
+
+
+#region Serilog Connfiguration
+
+Log.Logger = new LoggerConfiguration().ReadFrom
+		.Configuration(builder.Configuration).CreateLogger();
+
+builder.Services.AddSerilog();
+
+#endregion
+
 builder.Services.AddScoped<IAuthorizationHandler, SameUserHandler>();
 
 
@@ -119,12 +121,14 @@ using (var scope = app.Services.CreateScope())
 	context.Database.Migrate();
 }
 
-
 #region Seeders
 using (var service = app.Services.CreateScope())
 {
 	var userManager = service.ServiceProvider.GetRequiredService<UserManager<User>>();
 	var roleManager = service.ServiceProvider.GetRequiredService<RoleManager<Role>>();
+	var context = service.ServiceProvider.GetRequiredService<appDbContext>();
+
+	await CountrySeeder.SeedAsnyc(context);
 
 	await RoleSeeder.SeedAsync(roleManager);
 	await UserSeeder.SeedAsync(userManager);
