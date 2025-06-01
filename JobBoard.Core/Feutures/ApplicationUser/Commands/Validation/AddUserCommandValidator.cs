@@ -43,7 +43,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Validation
 				.WithMessage("Invalide Email");
 
 			RuleFor(x => x.CountryName)
-				.MustAsync(async (key, CancellationToken) => await _countryService.IsCountryExist(key))
+				.MustAsync(async (key, CancellationToken) => await _countryService.IsExistByName(key))
 				.WithMessage("Country Not Exits");
 
 		}
