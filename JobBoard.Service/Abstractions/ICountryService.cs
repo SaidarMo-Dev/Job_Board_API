@@ -6,8 +6,8 @@ namespace JobBoard.Service.Abstractions
 	{
 		Task<Country> GetCountryByIdAsync(int Id);
 		Task<ICollection<Country>> GetAllAsync();
-		Task<int> GetCountryIdAsync(string countryName);
-		Task<bool> IsCountryExist(string CountryName);
+		Task<int> GetIdByNameAsync(string countryName);
+		Task<bool> IsExistByName(string CountryName);
 
 	}
 
