@@ -25,5 +25,3 @@ C:\Projects\Job_Board_API\JobBoard.Core\obj\Release\net8.0\JobBoard.Core.dll
 C:\Projects\Job_Board_API\JobBoard.Core\obj\Release\net8.0\refint\JobBoard.Core.dll
 C:\Projects\Job_Board_API\JobBoard.Core\obj\Release\net8.0\JobBoard.Core.pdb
 C:\Projects\Job_Board_API\JobBoard.Core\obj\Release\net8.0\ref\JobBoard.Core.dll
-C:\Projects\Job_Board_API\JobBoard.Core\obj\Release\net8.0\Ar\JobBoard.Core.resources.cs
-C:\Projects\Job_Board_API\JobBoard.Core\obj\Release\net8.0\En\JobBoard.Core.resources.cs

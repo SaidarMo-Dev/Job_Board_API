@@ -3,15 +3,20 @@
   "WorkspaceRootPath": "C:\\Projects\\Job_Board_API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|c:\\projects\\job_board_api\\jobboard.api\\jobboard.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|solutionrelative:jobboard.api\\jobboard.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|c:\\projects\\job_board_api\\jobboard.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|solutionrelative:jobboard.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\dotnet\\sdk\\9.0.204\\Sdks\\Microsoft.NET.Sdk.Publish\\targets\\PublishTargets\\Microsoft.NET.Sdk.Publish.MSDeploy.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|c:\\projects\\job_board_api\\jobboard.api\\appsettings.production.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|solutionrelative:jobboard.api\\appsettings.production.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|c:\\projects\\job_board_api\\jobboard.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|solutionrelative:jobboard.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\seeders\\roleseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\seeders\\roleseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -21,8 +26,48 @@
       "DocumentGroups": [
         {
           "DockedHeight": 382,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RoleSeeder.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Seeders\\RoleSeeder.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Seeders\\RoleSeeder.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Seeders\\RoleSeeder.cs",
+              "RelativeToolTip": "JobBoard.Core\\Seeders\\RoleSeeder.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADgvwsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-01T13:57:39.669Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.Production.json",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\appsettings.Production.json",
+              "RelativeDocumentMoniker": "JobBoard.Api\\appsettings.Production.json",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\appsettings.Production.json",
+              "RelativeToolTip": "JobBoard.Api\\appsettings.Production.json",
+              "ViewState": "AgIAAAAAAADg/////88vwAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-01T14:53:03.438Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "JobBoard.Api\\appsettings.Development.json",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\appsettings.Development.json",
+              "RelativeToolTip": "JobBoard.Api\\appsettings.Development.json",
+              "ViewState": "AgIAAAEAAADg5HAZ8NkuwAEAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-01T14:52:58.273Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
@@ -33,39 +78,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Microsoft.NET.Sdk.Publish.MSDeploy.targets",
-              "DocumentMoniker": "C:\\Program Files\\dotnet\\sdk\\9.0.204\\Sdks\\Microsoft.NET.Sdk.Publish\\targets\\PublishTargets\\Microsoft.NET.Sdk.Publish.MSDeploy.targets",
-              "RelativeDocumentMoniker": "..\\..\\Program Files\\dotnet\\sdk\\9.0.204\\Sdks\\Microsoft.NET.Sdk.Publish\\targets\\PublishTargets\\Microsoft.NET.Sdk.Publish.MSDeploy.targets",
-              "ToolTip": "C:\\Program Files\\dotnet\\sdk\\9.0.204\\Sdks\\Microsoft.NET.Sdk.Publish\\targets\\PublishTargets\\Microsoft.NET.Sdk.Publish.MSDeploy.targets",
-              "RelativeToolTip": "..\\..\\Program Files\\dotnet\\sdk\\9.0.204\\Sdks\\Microsoft.NET.Sdk.Publish\\targets\\PublishTargets\\Microsoft.NET.Sdk.Publish.MSDeploy.targets",
-              "ViewState": "AgIAAHwAAAAAAAAAAAAkwIkAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2025-05-31T15:36:57.731Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "JobBoard.Api.csproj",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\JobBoard.Api.csproj",
-              "RelativeDocumentMoniker": "JobBoard.Api\\JobBoard.Api.csproj",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\JobBoard.Api.csproj",
-              "RelativeToolTip": "JobBoard.Api\\JobBoard.Api.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-05-30T18:13:29.196Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\Program.cs",
               "RelativeDocumentMoniker": "JobBoard.Api\\Program.cs",
               "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\Program.cs",
               "RelativeToolTip": "JobBoard.Api\\Program.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAASwBEAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAADEAAAAAAAAAAAASwBMAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-30T15:37:08.357Z",
               "EditorCaption": ""

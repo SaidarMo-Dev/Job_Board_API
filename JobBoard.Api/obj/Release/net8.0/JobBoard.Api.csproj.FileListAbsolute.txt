@@ -223,3 +223,4 @@ C:\Projects\Job_Board_API\JobBoard.Api\obj\Release\net8.0\refint\JobBoard.Api.dl
 C:\Projects\Job_Board_API\JobBoard.Api\obj\Release\net8.0\JobBoard.Api.pdb
 C:\Projects\Job_Board_API\JobBoard.Api\obj\Release\net8.0\JobBoard.Api.genruntimeconfig.cache
 C:\Projects\Job_Board_API\JobBoard.Api\obj\Release\net8.0\ref\JobBoard.Api.dll
+C:\Projects\Job_Board_API\JobBoard.Api\bin\Release\net8.0\appsettings.Production.json
