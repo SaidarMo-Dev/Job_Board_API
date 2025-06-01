@@ -80,6 +80,16 @@ namespace JobBoard.Infrastructure.InfrastructureBases
 		{
 			await _context.SaveChangesAsync();
 		}
+
+		public void CommitAsync()
+		{
+			throw new NotImplementedException();
+		}
+
+		public void RollBackasync()
+		{
+			throw new NotImplementedException();
+		}
 		#endregion
 
 
