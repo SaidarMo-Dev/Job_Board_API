@@ -31,14 +31,14 @@ namespace JobBoard.Service.Implementations
 			return _countryRepository.GetCountryByIdAsyn(Id);
 		}
 
-		public async Task<int> GetCountryIdAsync(string countryName)
+		public async Task<int> GetIdByNameAsync(string countryName)
 		{
 			return _countryRepository.GetTableAsNoTracking().Where(c => c.CountryName == countryName)
 							.Select(x => x.CountryId)
 							.FirstOrDefault();
 		}
 
-		public async Task<bool> IsCountryExist(string CountryName)
+		public async Task<bool> IsExistByName(string CountryName)
 		{
 			var country = await _countryRepository.GetTableAsNoTracking()
 							.FirstOrDefaultAsync(x => x.CountryName == CountryName);
