@@ -7,6 +7,16 @@
 		private const string Rule = Api + Version;
 		private const string Single = "/{Id}";
 
+
+		public static class CountryRoute
+		{
+			private const string Prefex = Rule + "/Country";
+
+			public const string GetAll = Prefex + "/GetAll";
+			public const string GetByID = Prefex + "/{Id}";
+
+		}
+
 		public static class CompanyRoute
 		{
 			private const string Prefex = Rule + "/Company";
