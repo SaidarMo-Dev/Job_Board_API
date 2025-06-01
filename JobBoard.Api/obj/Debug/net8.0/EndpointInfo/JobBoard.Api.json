@@ -1,7 +1,12 @@
 {
   "openapi": "3.0.4",
   "info": {
-    "title": "API",
+    "title": "Job Board APIs",
+    "description": "The **Job Board API** provides a comprehensive set of endpoints for managing job postings, applications and more...",
+    "contact": {
+      "name": "Mohammed Saidar",
+      "email": "saidarmohammedeco@gmail.com"
+    },
     "version": "v1"
   },
   "paths": {
