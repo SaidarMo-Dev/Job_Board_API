@@ -4,11 +4,50 @@ namespace JobBoard.Service.Abstractions
 {
 	public interface IUserService
 	{
-		Task<User> GetUserInfoByIdWithEnclude(int UserId);
+		/// <summary>
+		/// Retrieves user information by user ID including related entities.
+		/// </summary>
+		/// <param name="UserId">The ID of the user.</param>
+		/// <returns>The <see cref="User"/> entity with related data if found; otherwise, null.</returns>
+		Task<User> GetUserInfoByIdWithInclude(int UserId);
+
+		/// <summary>
+		/// Adds a new user asynchronously with the specified password and country name.
+		/// </summary>
+		/// <param name="user">The <see cref="User"/> entity to add.</param>
+		/// <param name="Password">The password for the new user.</param>
+		/// <param name="CountryName">The country name associated with the user.</param>
+		/// <returns>A string indicating the result of the add operation.</returns>
 		Task<string> AddNewUserAsync(User user, string Password, string CountryName);
+
+		/// <summary>
+		/// Updates an existing user asynchronously.
+		/// </summary>
+		/// <param name="user">The <see cref="User"/> entity to update.</param>
+		/// <returns>A string indicating the result of the update operation.</returns>
 		Task<string> UpdateUserAsync(User user);
+
+		/// <summary>
+		/// Deletes a user asynchronously.
+		/// </summary>
+		/// <param name="user">The <see cref="User"/> entity to delete.</param>
+		/// <returns><c>true</c> if the user was deleted successfully; otherwise, <c>false</c>.</returns>
 		Task<bool> DeleteUsersAsync(User user);
-		Task<bool> IsExistByIdAync(int UserId);
+
+		/// <summary>
+		/// Checks asynchronously if a user exists by ID.
+		/// </summary>
+		/// <param name="UserId">The ID of the user.</param>
+		/// <returns><c>true</c> if the user exists; otherwise, <c>false</c>.</returns>
+		Task<bool> IsExistByIdAsync(int UserId);
+
+		/// <summary>
+		/// Confirms a user's email asynchronously using the provided confirmation code.
+		/// </summary>
+		/// <param name="UserId">The ID of the user.</param>
+		/// <param name="Code">The confirmation code.</param>
+		/// <returns>A string indicating the result of the email confirmation.</returns>
 		Task<string> ConfirmEmailAsync(int UserId, string Code);
+
 	}
 }
