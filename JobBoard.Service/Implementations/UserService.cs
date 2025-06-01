@@ -64,7 +64,7 @@ namespace JobBoard.Service.Implementations
 		#endregion
 
 		#region Methods
-		public async Task<User> GetUserInfoByIdWithEnclude(int UserId)
+		public async Task<User> GetUserInfoByIdWithInclude(int UserId)
 		{
 			return await _userManager.Users.
 						Include(x => x.Country)
@@ -78,7 +78,7 @@ namespace JobBoard.Service.Implementations
 			try
 			{
 
-				User.CountryId = await _countryService.GetCountryIdAsync(CountryName);
+				User.CountryId = await _countryService.GetIdByNameAsync(CountryName);
 
 				var result = await _userManager.CreateAsync(User, Password);
 
@@ -154,7 +154,7 @@ namespace JobBoard.Service.Implementations
 			}
 		}
 
-		public async Task<bool> IsExistByIdAync(int UserId)
+		public async Task<bool> IsExistByIdAsync(int UserId)
 		{
 			var user = await _userRepository.GetTableAsNoTracking()
 				.Where(x => x.Id.Equals(UserId))
