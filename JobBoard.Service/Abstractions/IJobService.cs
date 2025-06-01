@@ -81,5 +81,7 @@ namespace JobBoard.Service.Abstractions
 		/// <returns>A list of <see cref="JobListing"/> objects representing the jobs posted by the company.</returns>
 		Task<List<JobListing>> GetJobsByCompanyIdAsync(int CompanyId);
 
+
+
 	}
 }
