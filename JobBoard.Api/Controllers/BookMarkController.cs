@@ -4,6 +4,7 @@ using JobBoard.Core.Feutures.BookMarks.Queries.Models;
 using JobBoard.Data.Metadata;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace JobBoard.Api.Controllers
 {
@@ -12,6 +13,9 @@ namespace JobBoard.Api.Controllers
 	[Authorize(Roles = "User")]
 	public class BookMarkController : AppControllerbase
 	{
+		[SwaggerOperation(Summary = "Get bookmark by ID",
+				  Description = "Retrieves a specific bookmark using its unique identifier.",
+				  OperationId = "GetBookmarkByID")]
 
 
 		[HttpGet(Router.BookMarkRoute.GetByID)]
@@ -23,6 +27,9 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(new GetBookmarkByIdQuery { Id = Id }));
 
 		}
+		[SwaggerOperation(Summary = "Get paginated bookmarks (Admin only)",
+				  Description = "Returns a paginated list of all bookmarks. Requires admin role.",
+				  OperationId = "BookmarksPaginate")]
 
 		[Authorize(Roles = "Admin")]
 		[HttpGet(Router.BookMarkRoute.Paginate)]
@@ -35,6 +42,11 @@ namespace JobBoard.Api.Controllers
 		}
 
 
+
+		[SwaggerOperation(Summary = "Get bookmarks by user ID",
+				  Description = "Retrieves all bookmarks associated with a specific user.",
+				  OperationId = "UserBookmarks")]
+
 		[HttpGet(Router.ApplicationUserRoute.Bookmarks)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
@@ -46,6 +58,10 @@ namespace JobBoard.Api.Controllers
 
 
 
+		[SwaggerOperation(Summary = "Add new bookmark",
+				  Description = "Creates a new bookmark entry in the system.",
+				  OperationId = "AddBookMark")]
+
 		[AllowAnonymous]
 		[HttpPost(Router.BookMarkRoute.Create)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
@@ -56,6 +72,12 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 
 		}
+
+
+
+		[SwaggerOperation(Summary = "Delete bookmark by ID",
+				  Description = "Deletes a specific bookmark by its unique identifier.",
+				  OperationId = "DeleteBookMark")]
 
 		[AllowAnonymous]
 		[HttpDelete(Router.BookMarkRoute.DeleteById)]
