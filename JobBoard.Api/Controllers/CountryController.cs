@@ -11,7 +11,6 @@ namespace JobBoard.Api.Controllers
 	[AllowAnonymous]
 	public class CountryController : AppControllerbase
 	{
-		[AllowAnonymous]
 		[SwaggerOperation(
 			summary: "Retrieves Country Details by Id",
 			OperationId = "GetCountryById",
@@ -25,6 +24,19 @@ namespace JobBoard.Api.Controllers
 		public async Task<IActionResult> FindCountryById([FromRoute] int Id)
 		{
 			return NewResult(await Mediator.Send(new GetCountryByIdQuery(Id)));
+		}
+		[AllowAnonymous]
+		[SwaggerOperation(
+			Summary = "Get all countries",
+			Description = "Returns a list of all countries stored in the system.",
+			OperationId = "GetAllCountries"
+		)]
+
+		[HttpGet(Router.CountryRoute.GetAll)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<IActionResult> GetAll()
+		{
+			return NewResult(await Mediator.Send(new GetListCountriesQuery()));
 		}
 	}
 }
