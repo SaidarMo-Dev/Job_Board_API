@@ -4,6 +4,7 @@ using JobBoard.Core.Feutures.Companies.Queries.Models;
 using JobBoard.Data.Metadata;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace JobBoard.Api.Controllers
 {
@@ -11,6 +12,11 @@ namespace JobBoard.Api.Controllers
 	[Authorize(Roles = "Admin,Employer")]
 	public class CompanyController : AppControllerbase
 	{
+		[SwaggerOperation(
+			Summary = "Get paginated companies",
+			Description = "Retrieves a paginated list of companies based on the specified query parameters.",
+			OperationId = "GetPaginatedCompanies")]
+
 
 		[HttpGet(Router.CompanyRoute.Paginate)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
@@ -24,6 +30,11 @@ namespace JobBoard.Api.Controllers
 		}
 
 
+		[SwaggerOperation(
+			Summary = "Get company by ID",
+			Description = "Retrieves the details of a company by its unique identifier.",
+			OperationId = "GetCompanyById")]
+
 		[HttpGet(Router.CompanyRoute.GetByID)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -34,6 +45,12 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(new GetSingleCompanyQuery(Id)));
 		}
 
+
+		[SwaggerOperation(
+			Summary = "Get all companies",
+			Description = "Returns a list of all companies. Restricted to Admin role.",
+			OperationId = "GetAllCompanies")]
+
 		[Authorize(Roles = "Admin")]
 		[HttpGet(Router.CompanyRoute.GetAll)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
@@ -42,6 +59,12 @@ namespace JobBoard.Api.Controllers
 		{
 			return NewResult(await Mediator.Send(new GetAllCompaiesQuery()));
 		}
+
+
+		[SwaggerOperation(
+			Summary = "Add a new company",
+			Description = "Creates a new company with the provided details.",
+			OperationId = "AddCompany")]
 
 		[HttpPost(Router.CompanyRoute.Create)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
@@ -52,6 +75,12 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 		}
 
+		[SwaggerOperation(
+			Summary = "Update an existing company",
+			Description = "Updates the details of an existing company.",
+			OperationId = "UpdateCompany")]
+
+
 		[HttpPut(Router.CompanyRoute.Update)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -61,6 +90,13 @@ namespace JobBoard.Api.Controllers
 		{
 			return NewResult(await Mediator.Send(request));
 		}
+
+
+
+		[SwaggerOperation(
+			Summary = "Delete a company",
+			Description = "Deletes a company identified by its unique ID.",
+			OperationId = "DeleteCompany")]
 
 		[HttpDelete(Router.CompanyRoute.DeleteById)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
