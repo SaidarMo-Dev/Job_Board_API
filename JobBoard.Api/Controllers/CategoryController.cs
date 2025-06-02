@@ -4,6 +4,7 @@ using JobBoard.Core.Feutures.Categories.Queries.Models;
 using JobBoard.Data.Metadata;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace JobBoard.Api.Controllers
 {
@@ -11,6 +12,9 @@ namespace JobBoard.Api.Controllers
 	[Authorize(Roles = "Admin,Employer")]
 	public class CategoryController : AppControllerbase
 	{
+		[SwaggerOperation(Summary = "Get category by ID",
+				  Description = "Retrieves a specific category using its unique identifier.",
+				  OperationId = "GetCategoryByID")]
 
 		[HttpGet(Router.CategoryRoute.GetByID)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
@@ -24,6 +28,10 @@ namespace JobBoard.Api.Controllers
 		}
 
 
+		[SwaggerOperation(Summary = "Get all categories",
+				  Description = "Returns a list of all categories stored in the system.",
+				  OperationId = "GetAllCategories")]
+
 		[HttpGet(Router.CategoryRoute.GetAll)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -34,6 +42,10 @@ namespace JobBoard.Api.Controllers
 		{
 			return NewResult(await Mediator.Send(new GetListCategoriesQuery()));
 		}
+
+		[SwaggerOperation(Summary = "Create a new category",
+				  Description = "Creates a new category entry in the system.",
+				  OperationId = "CreateCategory")]
 
 		[HttpPost(Router.CategoryRoute.Create)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
@@ -48,6 +60,11 @@ namespace JobBoard.Api.Controllers
 
 
 		[Authorize(Roles = "Admin")]
+
+		[SwaggerOperation(Summary = "Update a category (Admin only)",
+				  Description = "Updates the details of an existing category. Requires admin privileges.",
+				  OperationId = "UpdateCategory")]
+
 		[HttpPut(Router.CategoryRoute.Update)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -58,6 +75,10 @@ namespace JobBoard.Api.Controllers
 		{
 			return NewResult(await Mediator.Send(request));
 		}
+
+		[SwaggerOperation(Summary = "Delete a category by ID (Admin only)",
+				  Description = "Deletes a specific category by its unique identifier. Requires admin privileges.",
+				  OperationId = "DeleteCategory")]
 
 		[Authorize(Roles = "Admin")]
 		[HttpDelete(Router.CategoryRoute.DeleteById)]
