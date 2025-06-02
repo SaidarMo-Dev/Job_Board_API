@@ -12,7 +12,12 @@ namespace JobBoard.Api.Controllers
 	[Authorize(Roles = "Admin,User")]
 	public class ApplicationController : AppControllerbase
 	{
-		[SwaggerOperation(summary: "Get Application")]
+		[SwaggerOperation(
+				Summary = "Get application by ID",
+				Description = "Retrieves a specific application by its unique identifier.",
+				OperationId = "GetApplicationById"
+			)]
+
 		[HttpGet(Router.ApplicationRoute.GetByID)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -23,9 +28,12 @@ namespace JobBoard.Api.Controllers
 
 
 		// current User Applications
-		[SwaggerOperation(summary: "User Applications")]
-		[Authorize(Roles = "JobSeeker")]
 
+		[SwaggerOperation(Summary = "Get current user applications",
+						  Description = "Retrieves a list of applications submitted by the currently logged-in user.",
+						  OperationId = "GetCurrentUserApplications")]
+
+		[Authorize(Roles = "JobSeeker,Employer")]
 		[HttpGet(Router.ApplicationUserRoute.Applications)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -37,7 +45,13 @@ namespace JobBoard.Api.Controllers
 
 
 		// list Applications for a job
-		[SwaggerOperation(summary: "Job Applications")]
+
+		[SwaggerOperation(
+				Summary = "Get job applications",
+				Description = "Retrieves all applications submitted for a specific job.",
+				OperationId = "GetApplicationsByJobId"
+			)]
+
 		[Authorize(Roles = "Admin,Employer")]
 		[HttpGet(Router.JobRoute.Applications)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
@@ -50,7 +64,13 @@ namespace JobBoard.Api.Controllers
 		}
 
 		// apply for a job
-		[SwaggerOperation(summary: "Apply For a job")]
+
+		[SwaggerOperation(
+					Summary = "Apply for a job",
+					Description = "Allows a user to submit a job application.",
+					OperationId = "ApplyForJob"
+			)]
+
 		[AllowAnonymous]
 		[HttpPost(Router.ApplicationRoute.Apply)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
@@ -60,9 +80,12 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 		}
 
-		[SwaggerOperation(summary: "Update Application")]
-		[Authorize(Roles = "Admin")]
 
+		[SwaggerOperation(Summary = "Update application",
+						  Description = "Updates the information of an existing application.",
+						  OperationId = "UpdateApplication")]
+
+		[Authorize(Roles = "Admin")]
 		[HttpPut(Router.ApplicationRoute.Update)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -73,7 +96,11 @@ namespace JobBoard.Api.Controllers
 		}
 
 
-		[SwaggerOperation(summary: "Update Status")]
+
+		[SwaggerOperation(Summary = "Set application status to accepted",
+						  Description = "Updates the status of an application to 'Accepted'.",
+						  OperationId = "SetApplicationStatusToAccepted")]
+
 		[Authorize(Roles = "Admin,Employer")]
 		[HttpPut(Router.ApplicationRoute.SetAccepted)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
@@ -84,8 +111,12 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 		}
 
+
+		[SwaggerOperation(Summary = "Set application status to removed",
+						  Description = "Updates the status of an application to 'Removed'.",
+						  OperationId = "SetApplicationStatusToRemoved")]
+
 		[Authorize(Roles = "Admin,Employer")]
-		[SwaggerOperation(summary: "Update Status")]
 		[HttpPut(Router.ApplicationRoute.SetRemoved)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -95,8 +126,12 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 		}
 
+
+		[SwaggerOperation(Summary = "Delete application",
+						  Description = "Deletes an application by its ID.",
+						  OperationId = "DeleteApplicationById")]
+
 		[Authorize(Roles = "Admin,Employer")]
-		[SwaggerOperation(summary: "Delete Application")]
 		[HttpDelete(Router.ApplicationRoute.DeleteById)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
