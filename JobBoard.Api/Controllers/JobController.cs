@@ -4,6 +4,7 @@ using JobBoard.Core.Feutures.Jobs.Queries.Models;
 using JobBoard.Data.Metadata;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace JobBoard.Api.Controllers
 {
@@ -13,6 +14,11 @@ namespace JobBoard.Api.Controllers
 	public class JobController : AppControllerbase
 	{
 
+		[SwaggerOperation(
+			Summary = "Get paginated jobs",
+			Description = "Returns a paginated list of jobs based on the query parameters.",
+			OperationId = "GetJobsPaginate")]
+
 		[AllowAnonymous]
 		[HttpGet(Router.JobRoute.Paginate)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
@@ -21,6 +27,11 @@ namespace JobBoard.Api.Controllers
 		{
 			return Ok(await Mediator.Send(request));
 		}
+
+		[SwaggerOperation(
+			Summary = "Get job by ID",
+			Description = "Retrieves detailed information about a specific job identified by its ID.",
+			OperationId = "GetJobById")]
 
 		[AllowAnonymous]
 		[HttpGet(Router.JobRoute.GetByID)]
@@ -33,6 +44,12 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(new GetJobByIdQuery { Id = Id }));
 		}
 
+
+		[SwaggerOperation(
+			Summary = "Get job skills",
+			Description = "Returns a list of skills associated with a specific job identified by its JobId.",
+			OperationId = "GetJobSkills")]
+
 		[AllowAnonymous]
 		[HttpGet(Router.JobRoute.Skills)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
@@ -42,6 +59,13 @@ namespace JobBoard.Api.Controllers
 		{
 			return NewResult(await Mediator.Send(new GetJobSkillsQuery { JobId = JobId }));
 		}
+
+
+
+		[SwaggerOperation(
+			Summary = "Get job categories",
+			Description = "Returns a list of categories associated with a specific job identified by its JobId.",
+			OperationId = "GetJobCategories")]
 
 		[AllowAnonymous]
 		[HttpGet(Router.JobRoute.Categories)]
@@ -53,6 +77,12 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(new GetJobCategoriesQuery { JobId = JobId }));
 		}
 
+
+		[SwaggerOperation(
+			Summary = "Create a new job",
+			Description = "Creates a new job entry with the provided job details.",
+			OperationId = "AddNewJob")]
+
 		[HttpPost(Router.JobRoute.Create)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -62,6 +92,11 @@ namespace JobBoard.Api.Controllers
 		{
 			return NewResult(await Mediator.Send(request));
 		}
+
+		[SwaggerOperation(
+			Summary = "Update a job",
+			Description = "Updates an existing job with the provided information.",
+			OperationId = "UpdateJob")]
 
 		[Authorize(Roles = "Employer")]
 		[HttpPut(Router.JobRoute.Update)]
@@ -74,6 +109,11 @@ namespace JobBoard.Api.Controllers
 		}
 
 
+		[SwaggerOperation(
+			Summary = "Delete a job",
+			Description = "Deletes a job identified by its unique ID.",
+			OperationId = "DeleteJob")]
+
 		[HttpDelete(Router.JobRoute.DeleteById)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -84,7 +124,10 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(new DeleteJobCommand(Id)));
 		}
 
-
+		[SwaggerOperation(
+			Summary = "Get jobs by company ID",
+			Description = "Retrieves all jobs posted by a specific company identified by its ID.",
+			OperationId = "GetCompanyJobs")]
 
 		[HttpGet(Router.CompanyRoute.Jobs)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
