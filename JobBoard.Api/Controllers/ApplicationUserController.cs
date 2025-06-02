@@ -13,12 +13,15 @@ namespace JobBoard.Api.Controllers
 	public class ApplicationUserController : AppControllerbase
 	{
 		// paginate users
+		[SwaggerOperation(Summary = "Paginate users",
+				  Description = "Retrieves a paginated list of users based on the given filter and pagination parameters.",
+				  OperationId = "PaginateUsers")]
+
 		[HttpGet(Router.ApplicationUserRoute.Paginate)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 
-		[SwaggerOperation(summary: "Paginate Users")]
 		public async Task<IActionResult> PaginateUsers([FromQuery] GetPaginatedListUsersQuery query)
 		{
 			return Ok(await Mediator.Send(query));
@@ -26,8 +29,12 @@ namespace JobBoard.Api.Controllers
 
 		// get user by Id
 
+
+		[SwaggerOperation(Summary = "Get user by ID",
+						  Description = "Retrieves a single user by their unique identifier.",
+						  OperationId = "GetUserById")]
+
 		[AllowAnonymous]
-		[SwaggerOperation(summary: "Get User")]
 		[HttpGet(Router.ApplicationUserRoute.GetByID)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
@@ -39,9 +46,11 @@ namespace JobBoard.Api.Controllers
 
 		// create user
 
-		// any one can create user 
+		[SwaggerOperation(Summary = "Register user",
+						  Description = "Creates a new user account with the provided information.",
+						  OperationId = "RegisterUser")]
+
 		[AllowAnonymous]
-		[SwaggerOperation(summary: "Register")]
 		[HttpPost(Router.ApplicationUserRoute.Register)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -52,8 +61,12 @@ namespace JobBoard.Api.Controllers
 		}
 
 		// Update user
+
+		[SwaggerOperation(Summary = "Update user",
+						  Description = "Updates the information of an existing user.",
+						  OperationId = "UpdateUser")]
+
 		[AllowAnonymous]
-		[SwaggerOperation(summary: "Update User")]
 		[HttpPut(Router.ApplicationUserRoute.Update)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -64,8 +77,12 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 		}
 
+
+		[SwaggerOperation(Summary = "Change user password",
+						  Description = "Changes the password of an existing user account.",
+						  OperationId = "ChangeUserPassword")]
+
 		[AllowAnonymous]
-		[SwaggerOperation(summary: "Change Password")]
 		[HttpPut(Router.ApplicationUserRoute.ChangePassword)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -76,7 +93,11 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 		}
 
-		[SwaggerOperation(summary: "Delete User")]
+
+		[SwaggerOperation(Summary = "Delete user",
+						  Description = "Deletes a user account by its unique identifier.",
+						  OperationId = "DeleteUserById")]
+
 		[AllowAnonymous]
 		[HttpDelete(Router.ApplicationUserRoute.DeleteById)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
