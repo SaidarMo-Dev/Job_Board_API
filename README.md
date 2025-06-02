@@ -62,7 +62,7 @@ Welcome to **Job Portal API** Designed to connect job seekers with employers. It
    dotnet run   
  ```
 
- ## API Documentation
+ ## 🔗 API Documentation
 You can explore the API using Swagger UI:
 
 http://jobportalapi.runasp.net/swagger
