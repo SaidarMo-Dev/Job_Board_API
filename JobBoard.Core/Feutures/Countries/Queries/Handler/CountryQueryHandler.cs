@@ -10,7 +10,8 @@ using Microsoft.Extensions.Localization;
 namespace JobBoard.Core.Feutures.Countries.Queries.Handler
 {
 	public class CountryQueryHandler : ResponseHandler,
-						IRequestHandler<GetCountryByIdQuery, Response<GetCountryByIdQueryResponse>>
+						IRequestHandler<GetCountryByIdQuery, Response<GetCountryByIdQueryResponse>>,
+						IRequestHandler<GetListCountriesQuery, Response<List<ListCountriesQueryResponse>>>
 	{
 		#region Fields
 		private readonly ICountryService _countryService;
@@ -40,6 +41,15 @@ namespace JobBoard.Core.Feutures.Countries.Queries.Handler
 			if (country == null) return NotFound<GetCountryByIdQueryResponse>();
 
 			return Success(new GetCountryByIdQueryResponse { Id = country.CountryId, CountryName = country.CountryName });
+		}
+
+		public async Task<Response<List<ListCountriesQueryResponse>>> Handle(GetListCountriesQuery request, CancellationToken cancellationToken)
+		{
+			var countries = await _countryService.GetAllAsync();
+
+			var countriesDto = _mapper.Map<List<ListCountriesQueryResponse>>(countries);
+
+			return Success(countriesDto);
 		}
 
 		#endregion
