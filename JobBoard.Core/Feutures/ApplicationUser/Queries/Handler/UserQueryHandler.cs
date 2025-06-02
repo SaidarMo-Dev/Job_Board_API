@@ -52,7 +52,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 		#region Handle Methods
 		public async Task<Response<GetUserByIdQueryResponse>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
 		{
-			var user = await _userService.GetUserInfoByIdWithEnclude(request.Id);
+			var user = await _userService.GetUserInfoByIdWithInclude(request.Id);
 
 			var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), user, new SameUserRequirement());
 

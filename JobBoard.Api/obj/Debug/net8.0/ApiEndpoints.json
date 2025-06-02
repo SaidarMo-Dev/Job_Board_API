@@ -1604,6 +1604,53 @@
     ]
   },
   {
+    "ContainingType": "JobBoard.Api.Controllers.CountryController",
+    "Method": "FindCountryById",
+    "RelativePath": "Api/V1/Country/{Id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.CountryController",
+    "Method": "GetAll",
+    "RelativePath": "Api/V1/Country/GetAll",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "JobBoard.Api.Controllers.EmailController",
     "Method": "SendEmail",
     "RelativePath": "Api/V1/Email/SendEmail",

@@ -3278,6 +3278,67 @@
         }
       }
     },
+    "/Api/V1/Country/{Id}": {
+      "get": {
+        "tags": [
+          "Country"
+        ],
+        "summary": "Retrieves Country Details by Id",
+        "description": "This EndPoint fetch Country Details. Country must exist",
+        "operationId": "GetCountryById",
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Api/V1/Country/GetAll": {
+      "get": {
+        "tags": [
+          "Country"
+        ],
+        "summary": "Retrieves Country Details by Id",
+        "description": "This EndPoint fetch Country Details. Country must exist",
+        "operationId": "GetCountryById",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/Api/V1/Email/SendEmail": {
       "post": {
         "tags": [

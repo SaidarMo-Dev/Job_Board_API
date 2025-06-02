@@ -24,7 +24,7 @@ namespace JobBoard.Core.Feutures.BookMarks.Commands.Validations
 				.WithMessage("The specifec Job Not Found!");
 
 			RuleFor(x => x.UserId)
-				.MustAsync(async (key, cancellationToken) => await _userService.IsExistByIdAync(key))
+				.MustAsync(async (key, cancellationToken) => await _userService.IsExistByIdAsync(key))
 				.WithMessage("User Not Found!");
 
 		}
