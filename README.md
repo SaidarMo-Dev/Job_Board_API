@@ -68,8 +68,8 @@ You can explore the API using Swagger UI:
 http://jobportalapi.runasp.net/swagger
 
 ### Default User for Testing 
-   - **Username** : Saidar
-   - **Password** : Admin@123
+   - **Username** : `Saidar`
+   - **Password** : `Admin@123`
 ## 📫 Contact
 If you have any questions or want to collaborate, feel free to reach out to me at:  
 [saidarmohammedeco@gmail.com](mailto:saidarmohammedeco@gmail.com)
