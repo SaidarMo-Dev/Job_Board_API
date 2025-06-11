@@ -20,7 +20,8 @@ namespace JobBoard.Infrastructure.Configuration
 
 			builder.HasOne(x => x.Country)
 					.WithMany(x => x.Users)
-					.HasForeignKey(x => x.CountryId);
+					.HasForeignKey(x => x.CountryId)
+					.IsRequired(false);
 
 			builder.Property(x => x.Code)
 				.HasConversion(new EncryptionConverter());

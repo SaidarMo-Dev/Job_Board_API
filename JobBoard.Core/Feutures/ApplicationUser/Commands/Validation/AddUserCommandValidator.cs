@@ -42,9 +42,6 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Validation
 				.Must(key => Util.IsValideEmail(key))
 				.WithMessage("Invalide Email");
 
-			RuleFor(x => x.CountryName)
-				.MustAsync(async (key, CancellationToken) => await _countryService.IsExistByName(key))
-				.WithMessage("Country Not Exits");
 
 		}
 	}

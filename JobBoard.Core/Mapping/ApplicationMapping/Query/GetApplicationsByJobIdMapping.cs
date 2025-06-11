@@ -22,7 +22,7 @@ namespace JobBoard.Core.Mapping.ApplicationMapping
 
 			CreateMap<User, UserSummaryDto>()
 			.ForMember(x => x.Gender, opt => opt.MapFrom(src => src.Gender.ToString()))
-			.ForMember(x => x.CountryName, opt => opt.MapFrom(src => src.Country.CountryName));
+			.ForMember(x => x.CountryName, opt => opt.MapFrom(src => src.Country != null ? src.Country.CountryName : ""));
 
 
 		}

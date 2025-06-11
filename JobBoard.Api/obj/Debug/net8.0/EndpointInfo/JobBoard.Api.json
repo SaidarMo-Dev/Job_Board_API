@@ -15,7 +15,9 @@
         "tags": [
           "Application"
         ],
-        "summary": "Get Application",
+        "summary": "Get application by ID",
+        "description": "Retrieves a specific application by its unique identifier.",
+        "operationId": "GetApplicationById",
         "parameters": [
           {
             "name": "Id",
@@ -57,7 +59,9 @@
         "tags": [
           "Application"
         ],
-        "summary": "Delete Application",
+        "summary": "Delete application",
+        "description": "Deletes an application by its ID.",
+        "operationId": "DeleteApplicationById",
         "parameters": [
           {
             "name": "Id",
@@ -161,7 +165,9 @@
         "tags": [
           "Application"
         ],
-        "summary": "User Applications",
+        "summary": "Get current user applications",
+        "description": "Retrieves a list of applications submitted by the currently logged-in user.",
+        "operationId": "GetCurrentUserApplications",
         "responses": {
           "200": {
             "description": "OK"
@@ -194,7 +200,9 @@
         "tags": [
           "Application"
         ],
-        "summary": "Job Applications",
+        "summary": "Get job applications",
+        "description": "Retrieves all applications submitted for a specific job.",
+        "operationId": "GetApplicationsByJobId",
         "parameters": [
           {
             "name": "Id",
@@ -238,7 +246,9 @@
         "tags": [
           "Application"
         ],
-        "summary": "Apply For a job",
+        "summary": "Apply for a job",
+        "description": "Allows a user to submit a job application.",
+        "operationId": "ApplyForJob",
         "requestBody": {
           "content": {
             "application/json": {
@@ -290,7 +300,9 @@
         "tags": [
           "Application"
         ],
-        "summary": "Update Application",
+        "summary": "Update application",
+        "description": "Updates the information of an existing application.",
+        "operationId": "UpdateApplication",
         "requestBody": {
           "content": {
             "application/json": {
@@ -362,7 +374,9 @@
         "tags": [
           "Application"
         ],
-        "summary": "Update Status",
+        "summary": "Set application status to accepted",
+        "description": "Updates the status of an application to 'Accepted'.",
+        "operationId": "SetApplicationStatusToAccepted",
         "parameters": [
           {
             "name": "ApplicationId",
@@ -425,7 +439,9 @@
         "tags": [
           "Application"
         ],
-        "summary": "Update Status",
+        "summary": "Set application status to removed",
+        "description": "Updates the status of an application to 'Removed'.",
+        "operationId": "SetApplicationStatusToRemoved",
         "parameters": [
           {
             "name": "ApplicationId",
@@ -488,7 +504,9 @@
         "tags": [
           "ApplicationUser"
         ],
-        "summary": "Paginate Users",
+        "summary": "Paginate users",
+        "description": "Retrieves a paginated list of users based on the given filter and pagination parameters.",
+        "operationId": "PaginateUsers",
         "parameters": [
           {
             "name": "PageNumber",
@@ -559,7 +577,9 @@
         "tags": [
           "ApplicationUser"
         ],
-        "summary": "Get User",
+        "summary": "Get user by ID",
+        "description": "Retrieves a single user by their unique identifier.",
+        "operationId": "GetUserById",
         "parameters": [
           {
             "name": "Id",
@@ -621,7 +641,9 @@
         "tags": [
           "ApplicationUser"
         ],
-        "summary": "Delete User",
+        "summary": "Delete user",
+        "description": "Deletes a user account by its unique identifier.",
+        "operationId": "DeleteUserById",
         "parameters": [
           {
             "name": "Id",
@@ -705,7 +727,9 @@
         "tags": [
           "ApplicationUser"
         ],
-        "summary": "Register",
+        "summary": "Register user",
+        "description": "Creates a new user account with the provided information.",
+        "operationId": "RegisterUser",
         "requestBody": {
           "content": {
             "application/json": {
@@ -757,7 +781,9 @@
         "tags": [
           "ApplicationUser"
         ],
-        "summary": "Update User",
+        "summary": "Update user",
+        "description": "Updates the information of an existing user.",
+        "operationId": "UpdateUser",
         "requestBody": {
           "content": {
             "application/json": {
@@ -849,7 +875,9 @@
         "tags": [
           "ApplicationUser"
         ],
-        "summary": "Change Password",
+        "summary": "Change user password",
+        "description": "Changes the password of an existing user account.",
+        "operationId": "ChangeUserPassword",
         "requestBody": {
           "content": {
             "application/json": {
@@ -941,6 +969,9 @@
         "tags": [
           "Authentication"
         ],
+        "summary": "Sign in",
+        "description": "Authenticates a user using their credentials and returns an access token.",
+        "operationId": "SignIn",
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -1002,6 +1033,9 @@
         "tags": [
           "Authentication"
         ],
+        "summary": "Refresh token",
+        "description": "Generates a new access token using a valid refresh token.",
+        "operationId": "RefreshAccessToken",
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -1039,6 +1073,9 @@
         "tags": [
           "Authentication"
         ],
+        "summary": "Confirm email",
+        "description": "Confirms a user's email address using a confirmation code or token.",
+        "operationId": "ConfirmEmail",
         "parameters": [
           {
             "name": "UserId",
@@ -1105,6 +1142,9 @@
         "tags": [
           "Authentication"
         ],
+        "summary": "Send reset password link",
+        "description": "Sends a password reset link or code to the user's registered email address.",
+        "operationId": "SendResetPasswordLink",
         "parameters": [
           {
             "name": "Email",
@@ -1184,6 +1224,9 @@
         "tags": [
           "Authentication"
         ],
+        "summary": "Confirm password reset",
+        "description": "Validates the password reset token or code before allowing password change.",
+        "operationId": "ConfirmResetPassword",
         "parameters": [
           {
             "name": "Email",
@@ -1271,6 +1314,9 @@
         "tags": [
           "Authentication"
         ],
+        "summary": "Reset password",
+        "description": "Resets the user's password using the provided reset token and new password.",
+        "operationId": "ResetPassword",
         "parameters": [
           {
             "name": "Email",
@@ -1366,6 +1412,9 @@
         "tags": [
           "Authorization"
         ],
+        "summary": "Get all roles",
+        "description": "Returns a list of all roles defined in the system.",
+        "operationId": "GetAllRoles",
         "responses": {
           "200": {
             "description": "OK"
@@ -1418,6 +1467,9 @@
         "tags": [
           "Authorization"
         ],
+        "summary": "Get role by ID",
+        "description": "Retrieves detailed information about a specific role by its ID.",
+        "operationId": "GetRoleById",
         "parameters": [
           {
             "name": "Id",
@@ -1479,6 +1531,9 @@
         "tags": [
           "Authorization"
         ],
+        "summary": "Delete role",
+        "description": "Deletes an existing role by ID.",
+        "operationId": "DeleteRole",
         "parameters": [
           {
             "name": "Id",
@@ -1582,6 +1637,9 @@
         "tags": [
           "Authorization"
         ],
+        "summary": "Get user roles management data",
+        "description": "Fetches role assignment details for a specific user.",
+        "operationId": "GetManageUserRoles",
         "parameters": [
           {
             "name": "Id",
@@ -1665,6 +1723,9 @@
         "tags": [
           "Authorization"
         ],
+        "summary": "Update user roles",
+        "description": "Updates the roles assigned to a specific user.",
+        "operationId": "UpdateUserRoles",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1756,6 +1817,9 @@
         "tags": [
           "Authorization"
         ],
+        "summary": "Add new role",
+        "description": "Creates a new role in the system with the specified permissions.",
+        "operationId": "AddRole",
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -1830,6 +1894,9 @@
         "tags": [
           "Authorization"
         ],
+        "summary": "Update role",
+        "description": "Updates the details of an existing role.",
+        "operationId": "UpdateRole",
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -1951,6 +2018,9 @@
         "tags": [
           "Authorization"
         ],
+        "summary": "Get user claims management data",
+        "description": "Fetches claim assignment details for a specific user.",
+        "operationId": "GetManageUserClaims",
         "parameters": [
           {
             "name": "Id",
@@ -2034,6 +2104,9 @@
         "tags": [
           "Authorization"
         ],
+        "summary": "Update user claims",
+        "description": "Updates the claims assigned to a specific user.",
+        "operationId": "UpdateUserClaims",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2145,6 +2218,9 @@
         "tags": [
           "BookMark"
         ],
+        "summary": "Get bookmark by ID",
+        "description": "Retrieves a specific bookmark using its unique identifier.",
+        "operationId": "GetBookmarkByID",
         "parameters": [
           {
             "name": "Id",
@@ -2206,6 +2282,9 @@
         "tags": [
           "BookMark"
         ],
+        "summary": "Delete bookmark by ID",
+        "description": "Deletes a specific bookmark by its unique identifier.",
+        "operationId": "DeleteBookMark",
         "parameters": [
           {
             "name": "Id",
@@ -2289,6 +2368,9 @@
         "tags": [
           "BookMark"
         ],
+        "summary": "Get paginated bookmarks (Admin only)",
+        "description": "Returns a paginated list of all bookmarks. Requires admin role.",
+        "operationId": "BookmarksPaginate",
         "parameters": [
           {
             "name": "Page",
@@ -2339,6 +2421,9 @@
         "tags": [
           "BookMark"
         ],
+        "summary": "Get bookmarks by user ID",
+        "description": "Retrieves all bookmarks associated with a specific user.",
+        "operationId": "UserBookmarks",
         "parameters": [
           {
             "name": "Id",
@@ -2402,6 +2487,9 @@
         "tags": [
           "BookMark"
         ],
+        "summary": "Add new bookmark",
+        "description": "Creates a new bookmark entry in the system.",
+        "operationId": "AddBookMark",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2473,6 +2561,9 @@
         "tags": [
           "Category"
         ],
+        "summary": "Get category by ID",
+        "description": "Retrieves a specific category using its unique identifier.",
+        "operationId": "GetCategoryByID",
         "parameters": [
           {
             "name": "Id",
@@ -2554,6 +2645,9 @@
         "tags": [
           "Category"
         ],
+        "summary": "Delete a category by ID (Admin only)",
+        "description": "Deletes a specific category by its unique identifier. Requires admin privileges.",
+        "operationId": "DeleteCategory",
         "parameters": [
           {
             "name": "Id",
@@ -2637,6 +2731,9 @@
         "tags": [
           "Category"
         ],
+        "summary": "Get all categories",
+        "description": "Returns a list of all categories stored in the system.",
+        "operationId": "GetAllCategories",
         "responses": {
           "201": {
             "description": "Created"
@@ -2709,6 +2806,9 @@
         "tags": [
           "Category"
         ],
+        "summary": "Create a new category",
+        "description": "Creates a new category entry in the system.",
+        "operationId": "CreateCategory",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2800,6 +2900,9 @@
         "tags": [
           "Category"
         ],
+        "summary": "Update a category (Admin only)",
+        "description": "Updates the details of an existing category. Requires admin privileges.",
+        "operationId": "UpdateCategory",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2891,6 +2994,9 @@
         "tags": [
           "Company"
         ],
+        "summary": "Get paginated companies",
+        "description": "Retrieves a paginated list of companies based on the specified query parameters.",
+        "operationId": "GetPaginatedCompanies",
         "parameters": [
           {
             "name": "PageNumber",
@@ -2948,6 +3054,9 @@
         "tags": [
           "Company"
         ],
+        "summary": "Get company by ID",
+        "description": "Retrieves the details of a company by its unique identifier.",
+        "operationId": "GetCompanyById",
         "parameters": [
           {
             "name": "Id",
@@ -3029,6 +3138,9 @@
         "tags": [
           "Company"
         ],
+        "summary": "Delete a company",
+        "description": "Deletes a company identified by its unique ID.",
+        "operationId": "DeleteCompany",
         "parameters": [
           {
             "name": "Id",
@@ -3109,6 +3221,9 @@
         "tags": [
           "Company"
         ],
+        "summary": "Get all companies",
+        "description": "Returns a list of all companies. Restricted to Admin role.",
+        "operationId": "GetAllCompanies",
         "responses": {
           "200": {
             "description": "OK"
@@ -3141,6 +3256,9 @@
         "tags": [
           "Company"
         ],
+        "summary": "Add a new company",
+        "description": "Creates a new company with the provided details.",
+        "operationId": "AddCompany",
         "requestBody": {
           "content": {
             "application/json": {
@@ -3212,6 +3330,9 @@
         "tags": [
           "Company"
         ],
+        "summary": "Update an existing company",
+        "description": "Updates the details of an existing company.",
+        "operationId": "UpdateCompany",
         "requestBody": {
           "content": {
             "application/json": {
@@ -3329,9 +3450,9 @@
         "tags": [
           "Country"
         ],
-        "summary": "Retrieves Country Details by Id",
-        "description": "This EndPoint fetch Country Details. Country must exist",
-        "operationId": "GetCountryById",
+        "summary": "Get all countries",
+        "description": "Returns a list of all countries stored in the system.",
+        "operationId": "GetAllCountries",
         "responses": {
           "200": {
             "description": "OK"
@@ -3344,6 +3465,9 @@
         "tags": [
           "Email"
         ],
+        "summary": "Send an Email",
+        "description": "This EndPoint Send´s Email",
+        "operationId": "SendEmail",
         "parameters": [
           {
             "name": "Email",
@@ -3431,6 +3555,9 @@
         "tags": [
           "Job"
         ],
+        "summary": "Get paginated jobs",
+        "description": "Returns a paginated list of jobs based on the query parameters.",
+        "operationId": "GetJobsPaginate",
         "parameters": [
           {
             "name": "PageNumber",
@@ -3481,6 +3608,9 @@
         "tags": [
           "Job"
         ],
+        "summary": "Get job by ID",
+        "description": "Retrieves detailed information about a specific job identified by its ID.",
+        "operationId": "GetJobById",
         "parameters": [
           {
             "name": "Id",
@@ -3542,6 +3672,9 @@
         "tags": [
           "Job"
         ],
+        "summary": "Delete a job",
+        "description": "Deletes a job identified by its unique ID.",
+        "operationId": "DeleteJob",
         "parameters": [
           {
             "name": "Id",
@@ -3625,6 +3758,9 @@
         "tags": [
           "Job"
         ],
+        "summary": "Get job skills",
+        "description": "Returns a list of skills associated with a specific job identified by its JobId.",
+        "operationId": "GetJobSkills",
         "parameters": [
           {
             "name": "JobId",
@@ -3687,6 +3823,9 @@
         "tags": [
           "Job"
         ],
+        "summary": "Get job categories",
+        "description": "Returns a list of categories associated with a specific job identified by its JobId.",
+        "operationId": "GetJobCategories",
         "parameters": [
           {
             "name": "JobId",
@@ -3749,6 +3888,9 @@
         "tags": [
           "Job"
         ],
+        "summary": "Create a new job",
+        "description": "Creates a new job entry with the provided job details.",
+        "operationId": "AddNewJob",
         "requestBody": {
           "content": {
             "application/json": {
@@ -3820,6 +3962,9 @@
         "tags": [
           "Job"
         ],
+        "summary": "Update a job",
+        "description": "Updates an existing job with the provided information.",
+        "operationId": "UpdateJob",
         "requestBody": {
           "content": {
             "application/json": {
@@ -3891,6 +4036,9 @@
         "tags": [
           "Job"
         ],
+        "summary": "Get jobs by company ID",
+        "description": "Retrieves all jobs posted by a specific company identified by its ID.",
+        "operationId": "GetCompanyJobs",
         "parameters": [
           {
             "name": "Id",
@@ -3934,6 +4082,9 @@
         "tags": [
           "Skill"
         ],
+        "summary": "Get skill by ID",
+        "description": "Retrieves detailed information about a specific skill identified by its ID.",
+        "operationId": "GetSkillById",
         "parameters": [
           {
             "name": "Id",
@@ -3955,6 +4106,9 @@
         "tags": [
           "Skill"
         ],
+        "summary": "Delete a skill",
+        "description": "Deletes a skill identified by its unique ID.",
+        "operationId": "DeleteSkill",
         "parameters": [
           {
             "name": "Id",
@@ -3978,6 +4132,9 @@
         "tags": [
           "Skill"
         ],
+        "summary": "Get all skills",
+        "description": "Returns a list of all skills available in the system.",
+        "operationId": "GetAllSkills",
         "responses": {
           "200": {
             "description": "OK"
@@ -3990,6 +4147,9 @@
         "tags": [
           "Skill"
         ],
+        "summary": "Create a new skill",
+        "description": "Adds a new skill to the system with the provided details.",
+        "operationId": "AddNewSkill",
         "requestBody": {
           "content": {
             "application/json": {
@@ -4021,6 +4181,9 @@
         "tags": [
           "Skill"
         ],
+        "summary": "Update a skill",
+        "description": "Updates an existing skill with the provided information.",
+        "operationId": "UpdateSkill",
         "requestBody": {
           "content": {
             "application/json": {
