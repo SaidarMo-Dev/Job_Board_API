@@ -16,7 +16,7 @@ namespace JobBoard.Infrastructure.Configuration
 					x => x.ToString(),
 					x => (GendorEnum)Enum.Parse(typeof(GendorEnum), x)
 				)
-				.IsRequired();
+				.IsRequired(false);
 
 			builder.HasOne(x => x.Country)
 					.WithMany(x => x.Users)

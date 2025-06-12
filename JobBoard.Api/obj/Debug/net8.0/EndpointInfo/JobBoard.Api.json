@@ -4370,7 +4370,12 @@
       },
       "AddUserCommand": {
         "required": [
-          "dateOfBirth"
+          "confirmPassword",
+          "email",
+          "firstName",
+          "lastName",
+          "password",
+          "userName"
         ],
         "type": "object",
         "properties": {
@@ -4395,29 +4400,6 @@
             "nullable": true
           },
           "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "phoneNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "gendor": {
-            "$ref": "#/components/schemas/GendorEnum"
-          },
-          "dateOfBirth": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "address": {
-            "type": "string",
-            "nullable": true
-          },
-          "imagePath": {
-            "type": "string",
-            "nullable": true
-          },
-          "countryName": {
             "type": "string",
             "nullable": true
           }

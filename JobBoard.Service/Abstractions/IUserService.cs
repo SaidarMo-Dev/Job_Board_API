@@ -16,9 +16,9 @@ namespace JobBoard.Service.Abstractions
 		/// </summary>
 		/// <param name="user">The <see cref="User"/> entity to add.</param>
 		/// <param name="Password">The password for the new user.</param>
-		/// <param name="CountryName">The country name associated with the user.</param>
+
 		/// <returns>A string indicating the result of the add operation.</returns>
-		Task<string> AddNewUserAsync(User user, string Password, string CountryName);
+		Task<string> AddNewUserAsync(User user, string Password);
 
 		/// <summary>
 		/// Updates an existing user asynchronously.

@@ -72,13 +72,11 @@ namespace JobBoard.Service.Implementations
 
 		}
 
-		public async Task<string> AddNewUserAsync(User User, string Password, string CountryName)
+		public async Task<string> AddNewUserAsync(User User, string Password)
 		{
 			var trans = _userRepository.BeginTransaction();
 			try
 			{
-
-				User.CountryId = await _countryService.GetIdByNameAsync(CountryName);
 
 				var result = await _userManager.CreateAsync(User, Password);
 
