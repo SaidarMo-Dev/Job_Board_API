@@ -1,5 +1,4 @@
-﻿using JobBoard.Core.Helpers;
-using JobBoard.Data.Entities.Identity;
+﻿using JobBoard.Data.Entities.Identity;
 using JobBoard.Infrastructure.Abstractions;
 using JobBoard.Service.Abstractions;
 using Microsoft.AspNetCore.Http;
@@ -21,9 +20,9 @@ namespace JobBoard.Service.Implementations
 		private readonly IHttpContextAccessor _httpContextAccessor;
 		private readonly IEmailService _emailService;
 		private readonly IUrlHelper _urlHelper;
-		private readonly Serilog.ILogger _logger;
+
 		private readonly IUserRepository _userRepository;
-		private readonly string host = "http://localhost:5173";
+
 		#endregion
 
 		#region Constructors
@@ -83,20 +82,6 @@ namespace JobBoard.Service.Implementations
 
 
 				if (!result.Succeeded) throw new Exception(result.Errors?.FirstOrDefault()?.Description);
-
-				// send confirmation email
-				var code = await _userManager.GenerateEmailConfirmationTokenAsync(User);
-
-				var httpAccessor = _httpContextAccessor.HttpContext.Request;
-
-				//var url = httpAccessor.Scheme + "://" + httpAccessor.Host + "/" + Router.AuthenticationRoute.ConfirmEmail + $"?userId={User.Id}&code={code}";
-
-				var actionUrl = _urlHelper.Action("ConfirmEmail", "Authentication", new { UserId = User.Id, Code = code });
-
-				var url = httpAccessor.Scheme + "://" + host + actionUrl;
-
-
-				await _emailService.SendEmail(User.Email, User.FullName, Util.FormatVerificationLink(url), "Email Confirmation from  Saidar Team");
 
 				var addedRole = await AddUserToRoleAsync(User, role);
 				if (!addedRole) throw new Exception("Can't Add role to user");
@@ -162,21 +147,6 @@ namespace JobBoard.Service.Implementations
 
 			return user != null;
 		}
-
-		//public async Task<string> ConfirmEmailAsync(int UserId, string Code)
-		//{
-
-		//	var user = await _userManager.FindByIdAsync(UserId.ToString());
-
-		//	if (user == null) return "UserNotFound";
-
-		//	var result = await _userManager.ConfirmEmailAsync(user, Code);
-
-		//	if (!result.Succeeded) return result.Errors.FirstOrDefault().Description;
-
-		//	return "Success";
-
-		//}
 
 		private async Task<bool> AddUserToRoleAsync(User user, string role)
 		{
