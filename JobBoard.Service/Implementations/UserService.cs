@@ -23,6 +23,7 @@ namespace JobBoard.Service.Implementations
 		private readonly IUrlHelper _urlHelper;
 		private readonly Serilog.ILogger _logger;
 		private readonly IUserRepository _userRepository;
+		private readonly string host = "http://localhost:5173";
 		#endregion
 
 		#region Constructors
@@ -72,7 +73,7 @@ namespace JobBoard.Service.Implementations
 
 		}
 
-		public async Task<string> AddNewUserAsync(User User, string Password)
+		public async Task<string> AddNewUserAsync(User User, string Password, string role)
 		{
 			var trans = _userRepository.BeginTransaction();
 			try
@@ -81,7 +82,7 @@ namespace JobBoard.Service.Implementations
 				var result = await _userManager.CreateAsync(User, Password);
 
 
-				if (!result.Succeeded) return result.Errors.FirstOrDefault().Description;
+				if (!result.Succeeded) throw new Exception(result.Errors?.FirstOrDefault()?.Description);
 
 				// send confirmation email
 				var code = await _userManager.GenerateEmailConfirmationTokenAsync(User);
@@ -92,12 +93,13 @@ namespace JobBoard.Service.Implementations
 
 				var actionUrl = _urlHelper.Action("ConfirmEmail", "Authentication", new { UserId = User.Id, Code = code });
 
-				var url = httpAccessor.Scheme + "://" + httpAccessor.Host + actionUrl;
-
-
+				var url = httpAccessor.Scheme + "://" + host + actionUrl;
 
 
 				await _emailService.SendEmail(User.Email, User.FullName, Util.FormatVerificationLink(url), "Email Confirmation from  Saidar Team");
+
+				var addedRole = await AddUserToRoleAsync(User, role);
+				if (!addedRole) throw new Exception("Can't Add role to user");
 
 				await trans.CommitAsync();
 
@@ -107,9 +109,9 @@ namespace JobBoard.Service.Implementations
 			{
 				await trans.RollbackAsync();
 
-				Log.Error(ex, "Error When Creatig User: " + ex.Message);
+				Log.Error(ex, "Error: " + ex.Message);
 
-				return "Error When Creatig User: " + ex.Message;
+				return "Error:  " + ex.Message;
 			}
 		}
 
@@ -161,19 +163,32 @@ namespace JobBoard.Service.Implementations
 			return user != null;
 		}
 
-		public async Task<string> ConfirmEmailAsync(int UserId, string Code)
+		//public async Task<string> ConfirmEmailAsync(int UserId, string Code)
+		//{
+
+		//	var user = await _userManager.FindByIdAsync(UserId.ToString());
+
+		//	if (user == null) return "UserNotFound";
+
+		//	var result = await _userManager.ConfirmEmailAsync(user, Code);
+
+		//	if (!result.Succeeded) return result.Errors.FirstOrDefault().Description;
+
+		//	return "Success";
+
+		//}
+
+		private async Task<bool> AddUserToRoleAsync(User user, string role)
 		{
+			var exist = await _roleManager.RoleExistsAsync(role);
+			if (!exist)
+			{
+				await _roleManager.CreateAsync(new Role { Name = role, ConcurrencyStamp = null, NormalizedName = role.ToUpper() });
+			}
 
-			var user = await _userManager.FindByIdAsync(UserId.ToString());
+			var result = await _userManager.AddToRoleAsync(user, role);
 
-			if (user == null) return "UserNotFound";
-
-			var result = await _userManager.ConfirmEmailAsync(user, Code);
-
-			if (!result.Succeeded) return result.Errors.FirstOrDefault().Description;
-
-			return "Success";
-
+			return result.Succeeded;
 		}
 
 

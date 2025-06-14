@@ -67,11 +67,12 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 
 
 			//var result = await _userManager.CreateAsync(user, request.Password);
-			var result = await _userService.AddNewUserAsync(user, request.Password);
+			var result = await _userService.AddNewUserAsync(user, request.Password, request.Role);
 
 			if (!(result == "Success")) return BadRequest<int>(result);
 
-			await _userManager.AddToRoleAsync(user, "User");
+
+			//await _userManager.AddToRoleAsync(user, request.Role);
 
 			return Created(user.Id);
 

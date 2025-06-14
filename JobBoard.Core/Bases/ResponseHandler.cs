@@ -54,7 +54,7 @@ namespace JobBoard.Core.Bases
 		}
 
 
-		public Response<TEntity> Success<TEntity>(TEntity entity, string message = null!, object meta = null)
+		public Response<TEntity> Success<TEntity>(TEntity entity, string message = null!)
 		{
 			return new Response<TEntity>()
 			{
@@ -62,7 +62,7 @@ namespace JobBoard.Core.Bases
 				StatusCode = System.Net.HttpStatusCode.OK,
 				Succeeded = true,
 				Message = message is null ? _stringLocalizer[SharedResourcesKeys.Success] : message,
-				Meta = meta
+
 			};
 		}
 		public Response<TEntity> Success<TEntity>(string message = null!, object meta = null)
@@ -73,7 +73,7 @@ namespace JobBoard.Core.Bases
 				StatusCode = System.Net.HttpStatusCode.OK,
 				Succeeded = true,
 				Message = message is null ? _stringLocalizer[SharedResourcesKeys.Success] : message,
-				Meta = meta
+
 			};
 		}
 
@@ -119,12 +119,11 @@ namespace JobBoard.Core.Bases
 			};
 		}
 
-		public Response<TEntity> Created<TEntity>(TEntity entity, object meta = null!)
+		public Response<TEntity> Created<TEntity>(TEntity entity)
 		{
 			return new Response<TEntity>()
 			{
 				Data = entity,
-				Meta = meta,
 				StatusCode = System.Net.HttpStatusCode.Created,
 				Succeeded = true,
 				Message = "Created Successsfuly"

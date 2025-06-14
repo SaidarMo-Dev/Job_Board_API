@@ -59,18 +59,18 @@
 
 		public static class ApplicationUserRoute
 		{
-			private const string Prefex = Rule + "/Users";
+			private const string Prefex = Rule + "/users";
 
 
-			public const string GetAll = Prefex + "/GetAll";
+			public const string GetAll = Prefex + "/get-all";
 			public const string GetByID = Prefex + "/{Id}";
-			public const string Register = Prefex + "/Register";
-			public const string Update = Prefex + "/UpdateUser";
+			public const string Register = Prefex + "/register";
+			public const string Update = Prefex + "/update";
 			public const string DeleteById = Prefex + Single;
-			public const string Paginate = Prefex + "/Paginate";
-			public const string ChangePassword = Prefex + "/ChangePassword";
-			public const string Bookmarks = Prefex + "/Bookmarks/{Id}";
-			public const string Applications = Prefex + "/Applications";
+			public const string Paginate = Prefex + "/paginate";
+			public const string ChangePassword = Prefex + "/changepassword";
+			public const string Bookmarks = Prefex + "/bookmarks/{Id}";
+			public const string Applications = Prefex + "/applications";
 
 
 		}
@@ -121,13 +121,13 @@
 
 		public static class AuthenticationRoute
 		{
-			private const string Prefex = Rule + "/Authentication";
-			public const string ConfirmEmail = Prefex + "/ConfirmEmail";
-			public const string SignIn = Prefex + "/SignIn";
-			public const string RefreshToken = Prefex + "/RefreshToken";
-			public const string SendResetPassword = Prefex + "/SendResetPassword";
-			public const string ConfirmResetPassword = Prefex + "/ConfirmResetPassword";
-			public const string ResetPassword = Prefex + "/ResetPassword";
+			private const string Prefex = Rule + "/auth";
+			public const string ConfirmEmail = Prefex + "/confirm-email";
+			public const string SignIn = Prefex + "/signin";
+			public const string RefreshToken = Prefex + "/refresh-token";
+			public const string SendResetPassword = Prefex + "/send-reset-password";
+			public const string ConfirmResetPassword = Prefex + "/confirm-reset-password";
+			public const string ResetPassword = Prefex + "/reset-password";
 		}
 
 

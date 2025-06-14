@@ -279,6 +279,19 @@ namespace JobBoard.Service.Authentication.Implementations
 			}
 		}
 
+		public async Task<string> ConfirmEmailAsync(int UserId, string Code)
+		{
+			var user = await _userManager.FindByIdAsync(UserId.ToString());
+
+			if (user == null) return "UserNotFound";
+
+			var result = await _userManager.ConfirmEmailAsync(user, Code);
+
+			if (!result.Succeeded) return result.Errors?.FirstOrDefault()?.Description;
+
+			return "Success";
+		}
+
 		#endregion
 	}
 }

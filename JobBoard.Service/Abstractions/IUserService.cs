@@ -16,9 +16,10 @@ namespace JobBoard.Service.Abstractions
 		/// </summary>
 		/// <param name="user">The <see cref="User"/> entity to add.</param>
 		/// <param name="Password">The password for the new user.</param>
+		/// <param name="role">The role for the new user.</param>
 
 		/// <returns>A string indicating the result of the add operation.</returns>
-		Task<string> AddNewUserAsync(User user, string Password);
+		Task<string> AddNewUserAsync(User user, string Password, string role);
 
 		/// <summary>
 		/// Updates an existing user asynchronously.
@@ -40,14 +41,6 @@ namespace JobBoard.Service.Abstractions
 		/// <param name="UserId">The ID of the user.</param>
 		/// <returns><c>true</c> if the user exists; otherwise, <c>false</c>.</returns>
 		Task<bool> IsExistByIdAsync(int UserId);
-
-		/// <summary>
-		/// Confirms a user's email asynchronously using the provided confirmation code.
-		/// </summary>
-		/// <param name="UserId">The ID of the user.</param>
-		/// <param name="Code">The confirmation code.</param>
-		/// <returns>A string indicating the result of the email confirmation.</returns>
-		Task<string> ConfirmEmailAsync(int UserId, string Code);
 
 	}
 }

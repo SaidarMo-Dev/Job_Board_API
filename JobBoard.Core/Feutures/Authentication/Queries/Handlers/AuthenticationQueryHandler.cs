@@ -35,7 +35,7 @@ namespace JobBoard.Core.Feutures.Authentication.Queries.Handlers
 		#region Handle Methods
 		public async Task<Response<string>> Handle(ConfirmEmailQuery request, CancellationToken cancellationToken)
 		{
-			var result = await _userService.ConfirmEmailAsync(request.UserId, request.Code);
+			var result = await _authenticationService.ConfirmEmailAsync(request.UserId, request.Code);
 
 			if (!(result == "Success")) return BadRequest<string>(result);
 

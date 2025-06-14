@@ -164,6 +164,7 @@ var options = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
 app.UseRequestLocalization(options.Value);
 
 #endregion
+
 app.UseHttpsRedirection();
 
 app.UseCors("MyPolicy");

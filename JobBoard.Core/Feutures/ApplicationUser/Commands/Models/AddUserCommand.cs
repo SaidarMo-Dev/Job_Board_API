@@ -13,5 +13,6 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Models
 		public required string Password { get; set; }
 		public required string ConfirmPassword { get; set; }
 		public required string Email { get; set; }
+		public string Role { get; set; }
 	}
 }

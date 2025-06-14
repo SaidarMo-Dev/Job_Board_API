@@ -12,5 +12,13 @@ namespace JobBoard.Service.Authentication.Interfaces
 		Task<string> SendResetPasswordAsync(string email);
 		Task<string> ConfirmResetPasswordAsync(string email, string code);
 		Task<string> ResetPasswordAsync(string email, string password);
+
+		/// <summary>
+		/// Confirms a user's email asynchronously using the provided confirmation code.
+		/// </summary>
+		/// <param name="UserId">The ID of the user.</param>
+		/// <param name="Code">The confirmation code.</param>
+		/// <returns>A string indicating the result of the email confirmation.</returns>
+		Task<string> ConfirmEmailAsync(int UserId, string Code);
 	}
 }

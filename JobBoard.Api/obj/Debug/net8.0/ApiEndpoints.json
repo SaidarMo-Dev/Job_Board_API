@@ -242,7 +242,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.AuthenticationController",
     "Method": "ConfirmEmail",
-    "RelativePath": "Api/V1/Authentication/ConfirmEmail",
+    "RelativePath": "Api/V1/auth/confirm-email",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -282,7 +282,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.AuthenticationController",
     "Method": "ConfirmResetPassword",
-    "RelativePath": "Api/V1/Authentication/ConfirmResetPassword",
+    "RelativePath": "Api/V1/auth/confirm-reset-password",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -331,7 +331,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.AuthenticationController",
     "Method": "RefreshNewToken",
-    "RelativePath": "Api/V1/Authentication/RefreshToken",
+    "RelativePath": "Api/V1/auth/refresh-token",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -358,7 +358,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.AuthenticationController",
     "Method": "ResetPassword",
-    "RelativePath": "Api/V1/Authentication/ResetPassword",
+    "RelativePath": "Api/V1/auth/reset-password",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -412,7 +412,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.AuthenticationController",
     "Method": "SendResetPassword",
-    "RelativePath": "Api/V1/Authentication/SendResetPassword",
+    "RelativePath": "Api/V1/auth/send-reset-password",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -456,7 +456,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.AuthenticationController",
     "Method": "SignIn",
-    "RelativePath": "Api/V1/Authentication/SignIn",
+    "RelativePath": "Api/V1/auth/signin",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -2092,7 +2092,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.ApplicationUserController",
     "Method": "FindById",
-    "RelativePath": "Api/V1/Users/{Id}",
+    "RelativePath": "Api/V1/users/{Id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -2132,7 +2132,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.ApplicationUserController",
     "Method": "DeleteUser",
-    "RelativePath": "Api/V1/Users/{Id}",
+    "RelativePath": "Api/V1/users/{Id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -2181,7 +2181,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.ApplicationController",
     "Method": "CurrentUserApplications",
-    "RelativePath": "Api/V1/Users/Applications",
+    "RelativePath": "Api/V1/users/applications",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -2206,7 +2206,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.BookMarkController",
     "Method": "UserBookmarks",
-    "RelativePath": "Api/V1/Users/Bookmarks/{Id}",
+    "RelativePath": "Api/V1/users/bookmarks/{Id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -2246,7 +2246,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.ApplicationUserController",
     "Method": "ChangePassword",
-    "RelativePath": "Api/V1/Users/ChangePassword",
+    "RelativePath": "Api/V1/users/changepassword",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -2295,7 +2295,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.ApplicationUserController",
     "Method": "PaginateUsers",
-    "RelativePath": "Api/V1/Users/Paginate",
+    "RelativePath": "Api/V1/users/paginate",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -2340,7 +2340,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.ApplicationUserController",
     "Method": "CreateUser",
-    "RelativePath": "Api/V1/Users/Register",
+    "RelativePath": "Api/V1/users/register",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -2371,7 +2371,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.ApplicationUserController",
     "Method": "UpdateUser",
-    "RelativePath": "Api/V1/Users/UpdateUser",
+    "RelativePath": "Api/V1/users/update",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
