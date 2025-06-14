@@ -9,7 +9,9 @@ using JobBoard.Infrastructure.Abstractions;
 using JobBoard.Infrastructure.context;
 using JobBoard.Service.Abstractions;
 using JobBoard.Service.Authentication.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -23,6 +25,9 @@ namespace JobBoard.Service.Authentication.Implementations
 		private readonly UserManager<User> _userManager;
 		private readonly IEmailService _emailService;
 		private readonly appDbContext _appDbContext;
+		private readonly IHttpContextAccessor _httpContextAccessor;
+		private readonly string host = "http://localhost:5173";
+		private readonly IUrlHelper _urlHelper;
 		#endregion
 
 		#region Constructors
@@ -30,7 +35,9 @@ namespace JobBoard.Service.Authentication.Implementations
 									 IUserRefreshTokenRepository userRefreshTokenRepository,
 									 UserManager<User> userManager,
 									 IEmailService emailService,
-									 appDbContext appDbContext
+									 appDbContext appDbContext,
+									 IHttpContextAccessor httpContextAccessor,
+									 IUrlHelper urlHelper
 									)
 		{
 			_jwtSettings = jwtSettings;
@@ -38,6 +45,8 @@ namespace JobBoard.Service.Authentication.Implementations
 			_userManager = userManager;
 			_emailService = emailService;
 			_appDbContext = appDbContext;
+			_httpContextAccessor = httpContextAccessor;
+			_urlHelper = urlHelper;
 		}
 
 		#endregion
@@ -290,6 +299,40 @@ namespace JobBoard.Service.Authentication.Implementations
 			if (!result.Succeeded) return result.Errors?.FirstOrDefault()?.Description;
 
 			return "Success";
+		}
+
+		public async Task<string> SendConfirmEmailAsync(int userId)
+		{
+			try
+			{
+				var user = await _userManager.FindByIdAsync(userId.ToString());
+
+
+				if (user is null) return "UserNotFound";
+
+				var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+				var httpAccessor = _httpContextAccessor?.HttpContext?.Request;
+
+				//var url = httpAccessor.Scheme + "://" + httpAccessor.Host + "/" + Router.AuthenticationRoute.ConfirmEmail + $"?userId={User.Id}&code={code}";
+
+				var actionUrl = _urlHelper.Action("ConfirmEmail", "Authentication", new { UserId = user.Id, Code = code });
+
+				var url = httpAccessor?.Scheme + "://" + host + actionUrl;
+
+
+				var result = await _emailService.SendEmail(user.Email, user.FullName, Util.FormatVerificationLink(url), "Email Confirmation from  Saidar Team");
+				if (result == "Failed") throw new Exception("Cannot send Email Something wrong!");
+
+				return "Success";
+			}
+			catch (Exception ex)
+			{
+				return ex.Message;
+			}
+
+
+
 		}
 
 		#endregion
