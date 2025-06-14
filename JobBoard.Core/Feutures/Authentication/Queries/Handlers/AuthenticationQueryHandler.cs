@@ -10,7 +10,8 @@ namespace JobBoard.Core.Feutures.Authentication.Queries.Handlers
 {
 	public class AuthenticationQueryHandler : ResponseHandler,
 					IRequestHandler<ConfirmEmailQuery, Response<string>>,
-					IRequestHandler<ConfirmResetPasswordQuery, Response<string>>
+					IRequestHandler<ConfirmResetPasswordQuery, Response<string>>,
+					IRequestHandler<SendConfirmEmailQuery, Response<string>>
 	{
 		#region Fields
 		private readonly IStringLocalizer<SharedResources> _stringLocalizer;
@@ -55,6 +56,20 @@ namespace JobBoard.Core.Feutures.Authentication.Queries.Handlers
 				default: return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.Failed]);
 			}
 		}
+
+		public async Task<Response<string>> Handle(SendConfirmEmailQuery request, CancellationToken cancellationToken)
+		{
+			var result = await _authenticationService.SendConfirmEmailAsync(request.UserId);
+
+			if (result == "UserNotFound") return NotFound<string>(_stringLocalizer[SharedResourcesKeys.UserNotFound]);
+			else if (result == "Success") return Success<string>(_stringLocalizer[SharedResourcesKeys.ConfirmEmailSend]);
+
+
+			return BadRequest(result);
+
+
+		}
+
 
 		#endregion
 
