@@ -24,6 +24,21 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 		}
 
+		[SwaggerOperation(Summary = "Send confirm email link",
+			  Description = "Sends a confirm email link or code to the user's registered email address.",
+			  OperationId = "SendConfirmEmailLink")]
+
+		[HttpGet(Router.AuthenticationRoute.SendConfirmeEmail)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+
+		public async Task<IActionResult> SendConfirmEmail([FromQuery] int userId)
+		{
+			return NewResult(await Mediator.Send(new SendConfirmEmailQuery(userId)));
+
+		}
+
 
 		[SwaggerOperation(Summary = "Refresh token",
 				  Description = "Generates a new access token using a valid refresh token.",
