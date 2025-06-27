@@ -10,10 +10,12 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Validations
 		#region Fields 
 		private readonly IStringLocalizer<SharedResources> _stringLocalizer;
 
+
 		#endregion
 		public ResetPasswordValidator(IStringLocalizer<SharedResources> stringLocalizer)
 		{
 			_stringLocalizer = stringLocalizer;
+
 			ApplyValidations();
 
 		}
