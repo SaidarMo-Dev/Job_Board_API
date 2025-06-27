@@ -17,8 +17,8 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 	public class UserCommandHandler : ResponseHandler,
 			IRequestHandler<AddUserCommand, Response<int>>,
 			IRequestHandler<UpdateUserCommand, Response<string>>,
-			IRequestHandler<DeleteUserCommand, Response<string>>,
-			IRequestHandler<ChangeUserPasswordCommand, Response<string>>
+			IRequestHandler<DeleteUserCommand, Response<string>>
+
 	{
 
 		#region Fields 
@@ -66,13 +66,10 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 			var user = _mapper.Map<User>(request);
 
 
-			//var result = await _userManager.CreateAsync(user, request.Password);
 			var result = await _userService.AddNewUserAsync(user, request.Password, request.Role);
 
 			if (!(result == "Success")) return BadRequest<int>(result);
 
-
-			//await _userManager.AddToRoleAsync(user, request.Role);
 
 			return Created(user.Id);
 
@@ -88,7 +85,11 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 			if (OldUser == null) return NotFound("");
 
 			var newUser = _mapper.Map(request, OldUser);
+
+			newUser.CountryId = string.IsNullOrEmpty(request.CountryName) ? null : await _countryService.GetIdByNameAsync(request.CountryName);
+
 			var result = await _userManager.UpdateAsync(newUser);
+
 
 			if (!result.Succeeded)
 			{
@@ -97,7 +98,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 			}
 
 
-			return Success<string>();
+			return Success("Success");
 		}
 
 		public async Task<Response<string>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
@@ -117,21 +118,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 			return Success("");
 		}
 
-		public async Task<Response<string>> Handle(ChangeUserPasswordCommand request, CancellationToken cancellationToken)
-		{
 
-			var user = await _userManager.FindByIdAsync(request.Id.ToString());
-			if (user == null) return NotFound("");
-
-			var result = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
-			if (!result.Succeeded)
-			{
-				return BadRequest<string>(result.Errors.FirstOrDefault().Description);
-
-			}
-
-			return Success<string>();
-		}
 
 		#endregion
 	}

@@ -3,26 +3,19 @@ using JobBoard.Core.Feutures.ApplicationUser.Commands.Models;
 
 namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Validation
 {
-	public class ChangePasswordValidator : AbstractValidator<ChangeUserPasswordCommand>
+	public class ChangeEmailValidation : AbstractValidator<ChangeEmailCommand>
 	{
-		public ChangePasswordValidator()
-		{
-			AddValidations();
-		}
 
 		public void AddValidations()
 		{
-			RuleFor(x => x.CurrentPassword)
+			RuleFor(x => x.CurrentEmail)
 				.NotEmpty().WithMessage("{PropertyName} Cannot Be Empty")
 				.NotNull().WithMessage("{PropertyName} Cannot Be Null");
 
-			RuleFor(x => x.NewPassword)
+			RuleFor(x => x.NewEmail)
 				.NotEmpty().WithMessage("{PropertyName} Cannot Be Empty")
 				.NotNull().WithMessage("{PropertyName} Cannot Be Null");
 
-			RuleFor(x => x.ConfirmPassword)
-				.NotEmpty().WithMessage("{PropertyName} Cannot Be Empty")
-				.NotNull().WithMessage("{PropertyName} Cannot Be Null");
 		}
 	}
 }
