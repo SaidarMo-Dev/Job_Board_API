@@ -27,8 +27,25 @@ namespace JobBoard.Api.Controllers
 			return Ok(await Mediator.Send(query));
 		}
 
-		// get user by Id
 
+		// get current user
+		[SwaggerOperation(Summary = "Get current user",
+						  Description = "Retrieves the current user Info.",
+						  OperationId = "GetCurrentUser")]
+
+		[AllowAnonymous]
+		[HttpGet(Router.ApplicationUserRoute.me)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		public async Task<IActionResult> GetCurrentUser()
+		{
+			return NewResult(await Mediator.Send(new GetCurrentUserQuery()));
+		}
+
+
+		// get user by Id
 
 		[SwaggerOperation(Summary = "Get user by ID",
 						  Description = "Retrieves a single user by their unique identifier.",
@@ -77,21 +94,6 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 		}
 
-
-		[SwaggerOperation(Summary = "Change user password",
-						  Description = "Changes the password of an existing user account.",
-						  OperationId = "ChangeUserPassword")]
-
-		[AllowAnonymous]
-		[HttpPut(Router.ApplicationUserRoute.ChangePassword)]
-		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		public async Task<IActionResult> ChangePassword([FromBody] ChangeUserPasswordCommand request)
-		{
-			return NewResult(await Mediator.Send(request));
-		}
 
 
 		[SwaggerOperation(Summary = "Delete user",
