@@ -36,7 +36,7 @@ namespace JobBoard.Core.Feutures.Authentication.Queries.Handlers
 		#region Handle Methods
 		public async Task<Response<string>> Handle(ConfirmEmailQuery request, CancellationToken cancellationToken)
 		{
-			var result = await _authenticationService.ConfirmEmailAsync(request.UserId, request.Code);
+			var result = await _authenticationService.ConfirmEmailByUrlAsync(request.UserId, request.Code);
 
 			if (!(result == "Success")) return BadRequest<string>(result);
 
@@ -59,7 +59,7 @@ namespace JobBoard.Core.Feutures.Authentication.Queries.Handlers
 
 		public async Task<Response<string>> Handle(SendConfirmEmailQuery request, CancellationToken cancellationToken)
 		{
-			var result = await _authenticationService.SendConfirmEmailAsync(request.UserId);
+			var result = await _authenticationService.SendUrlConfirmEmailAsync(request.UserId);
 
 			if (result == "UserNotFound") return NotFound<string>(_stringLocalizer[SharedResourcesKeys.UserNotFound]);
 			else if (result == "Success") return Success<string>(_stringLocalizer[SharedResourcesKeys.ConfirmEmailSend]);

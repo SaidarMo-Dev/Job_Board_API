@@ -117,5 +117,65 @@ namespace JobBoard.Api.Controllers
 
 		}
 
+		[SwaggerOperation(Summary = "Send Confirm Email Code",
+			  Description = "Sends a confirm email code to the user's registered email address.",
+			  OperationId = "SendConfirmEmailCode")]
+
+		[HttpPut(Router.AuthenticationRoute.SendConfirmeEmailCode)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+
+		public async Task<IActionResult> SendConfirmeEmailCode([FromQuery] SendConfirmEmail request)
+		{
+			return NewResult(await Mediator.Send(request));
+
+		}
+
+		[SwaggerOperation(Summary = "Send email change code",
+			  Description = "Sends a confirm email code to the user's changed email address.",
+			  OperationId = "SendEmailChange")]
+
+		[HttpPut(Router.AuthenticationRoute.SendEmailChange)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+
+		public async Task<IActionResult> SendEmailChange([FromQuery] SendEmailChangeCommand request)
+		{
+			return NewResult(await Mediator.Send(request));
+
+		}
+
+
+		[SwaggerOperation(Summary = "Verify email change",
+			  Description = "Verify the new email and change the user email to the new one.",
+			  OperationId = "VerifyEmailChange")]
+
+		[HttpPut(Router.AuthenticationRoute.VerifyEmailChange)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+
+		public async Task<IActionResult> VerifyEmailChange([FromBody] VerifyEmailChangeCommand request)
+		{
+			return NewResult(await Mediator.Send(request));
+
+		}
+
+		[SwaggerOperation(Summary = "Change user password",
+						  Description = "Changes the password of an existing user account.",
+						  OperationId = "ChangeUserPassword")]
+
+		[AllowAnonymous]
+		[HttpPut(Router.AuthenticationRoute.ChangePassword)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		public async Task<IActionResult> ChangePassword([FromBody] ChangeUserPasswordCommand request)
+		{
+			return NewResult(await Mediator.Send(request));
+		}
 	}
 }

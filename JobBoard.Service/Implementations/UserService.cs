@@ -161,6 +161,13 @@ namespace JobBoard.Service.Implementations
 			return result.Succeeded;
 		}
 
+		public async Task<bool> IsEmailExistAsync(string email)
+		{
+			var user = await _userManager.FindByEmailAsync(email);
+
+			return user is not null;
+		}
+
 
 		#endregion
 	}

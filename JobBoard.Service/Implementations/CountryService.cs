@@ -33,9 +33,9 @@ namespace JobBoard.Service.Implementations
 
 		public async Task<int> GetIdByNameAsync(string countryName)
 		{
-			return _countryRepository.GetTableAsNoTracking().Where(c => c.CountryName == countryName)
+			return await _countryRepository.GetTableAsNoTracking().Where(c => c.CountryName == countryName)
 							.Select(x => x.CountryId)
-							.FirstOrDefault();
+							.FirstOrDefaultAsync();
 		}
 
 		public async Task<bool> IsExistByName(string CountryName)

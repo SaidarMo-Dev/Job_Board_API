@@ -64,11 +64,11 @@
 
 			public const string GetAll = Prefex + "/get-all";
 			public const string GetByID = Prefex + "/{Id}";
+			public const string me = Prefex + "/me";
 			public const string Register = Prefex + "/register";
 			public const string Update = Prefex + "/update";
 			public const string DeleteById = Prefex + Single;
 			public const string Paginate = Prefex + "/paginate";
-			public const string ChangePassword = Prefex + "/changepassword";
 			public const string Bookmarks = Prefex + "/bookmarks/{Id}";
 			public const string Applications = Prefex + "/applications";
 
@@ -129,6 +129,12 @@
 			public const string ConfirmResetPassword = Prefex + "/confirm-reset-password";
 			public const string ResetPassword = Prefex + "/reset-password";
 			public const string SendConfirmeEmail = Prefex + "/send-confirm-email";
+
+			public const string SendConfirmeEmailCode = Prefex + "/send-confirm-email-code";
+			public const string SendEmailChange = Prefex + "/send-email-change";
+			public const string VerifyEmailChange = Prefex + "/verify-email-change";
+
+			public const string ChangePassword = Prefex + "/change-password";
 
 		}
 

@@ -37,7 +37,8 @@ namespace JobBoard.Service.Implementations
 
 				using var client = new SmtpClient();
 
-				await client.ConnectAsync(_emailSettings.Host, _emailSettings.Port, true);
+				await client.ConnectAsync(_emailSettings.Host, _emailSettings.Port, MailKit.Security.SecureSocketOptions.SslOnConnect);
+
 				await client.AuthenticateAsync(_emailSettings.FromEmail, _emailSettings.Password);
 
 				var body = new BodyBuilder

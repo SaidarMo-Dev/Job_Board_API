@@ -36,6 +36,7 @@
 		public const string PasswordsNotMatches = "PasswordsNotMatches";
 
 		public const string NoAccess = "NoAccess";
+		public const string ConfirmEmailSend = "ConfirmEmailSend";
 
 
 

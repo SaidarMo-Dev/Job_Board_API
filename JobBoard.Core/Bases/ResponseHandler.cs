@@ -16,28 +16,28 @@ namespace JobBoard.Core.Bases
 		{
 			return new Response<T>()
 			{
-				StatusCode = System.Net.HttpStatusCode.OK,
-				Message = _stringLocalizer[SharedResourcesKeys.Deleted],
-				Succeeded = true
+				statusCode = System.Net.HttpStatusCode.OK,
+				message = _stringLocalizer[SharedResourcesKeys.Deleted],
+				succeeded = true
 			};
 		}
 		public Response<T> Deleted<T>(T data)
 		{
 			return new Response<T>()
 			{
-				Data = data,
-				StatusCode = System.Net.HttpStatusCode.OK,
-				Message = _stringLocalizer[SharedResourcesKeys.Deleted],
-				Succeeded = true
+				data = data,
+				statusCode = System.Net.HttpStatusCode.OK,
+				message = _stringLocalizer[SharedResourcesKeys.Deleted],
+				succeeded = true
 			};
 		}
 		public Response<T> BadRequest<T>(string message = null)
 		{
 			return new Response<T>()
 			{
-				StatusCode = System.Net.HttpStatusCode.NotFound,
-				Message = message is null ? _stringLocalizer[SharedResourcesKeys.NotFound] : message,
-				Succeeded = false,
+				statusCode = System.Net.HttpStatusCode.NotFound,
+				message = message is null ? _stringLocalizer[SharedResourcesKeys.NotFound] : message,
+				succeeded = false,
 
 			};
 		}
@@ -46,10 +46,10 @@ namespace JobBoard.Core.Bases
 		{
 			return new Response<TEntity>()
 			{
-				Data = entity,
-				StatusCode = System.Net.HttpStatusCode.NotFound,
-				Message = message == null ? _stringLocalizer[SharedResourcesKeys.NotFound] : message,
-				Succeeded = false
+				data = entity,
+				statusCode = System.Net.HttpStatusCode.NotFound,
+				message = message == null ? _stringLocalizer[SharedResourcesKeys.NotFound] : message,
+				succeeded = false
 			};
 		}
 
@@ -58,10 +58,10 @@ namespace JobBoard.Core.Bases
 		{
 			return new Response<TEntity>()
 			{
-				Data = entity,
-				StatusCode = System.Net.HttpStatusCode.OK,
-				Succeeded = true,
-				Message = message is null ? _stringLocalizer[SharedResourcesKeys.Success] : message,
+				data = entity,
+				statusCode = System.Net.HttpStatusCode.OK,
+				succeeded = true,
+				message = message is null ? _stringLocalizer[SharedResourcesKeys.Success] : message,
 
 			};
 		}
@@ -70,9 +70,9 @@ namespace JobBoard.Core.Bases
 			return new Response<TEntity>()
 			{
 
-				StatusCode = System.Net.HttpStatusCode.OK,
-				Succeeded = true,
-				Message = message is null ? _stringLocalizer[SharedResourcesKeys.Success] : message,
+				statusCode = System.Net.HttpStatusCode.OK,
+				succeeded = true,
+				message = message is null ? _stringLocalizer[SharedResourcesKeys.Success] : message,
 
 			};
 		}
@@ -81,9 +81,9 @@ namespace JobBoard.Core.Bases
 		{
 			return new Response<TEntity>()
 			{
-				StatusCode = System.Net.HttpStatusCode.Unauthorized,
-				Message = message is null ? "Unauthorized" : message,
-				Succeeded = false
+				statusCode = System.Net.HttpStatusCode.Unauthorized,
+				message = message is null ? "Unauthorized" : message,
+				succeeded = false
 			};
 		}
 
@@ -91,9 +91,9 @@ namespace JobBoard.Core.Bases
 		{
 			return new Response<TEntity>()
 			{
-				StatusCode = System.Net.HttpStatusCode.Forbidden,
-				Message = message is null ? "Forbidden" : message,
-				Succeeded = false
+				statusCode = System.Net.HttpStatusCode.Forbidden,
+				message = message is null ? "Forbidden" : message,
+				succeeded = false
 			};
 		}
 
@@ -102,10 +102,10 @@ namespace JobBoard.Core.Bases
 		{
 			return new Response<TEntity>()
 			{
-				Data = data,
-				StatusCode = System.Net.HttpStatusCode.BadRequest,
-				Message = message == null ? "Bad Request" : message,
-				Succeeded = false
+				data = data,
+				statusCode = System.Net.HttpStatusCode.BadRequest,
+				message = message == null ? "Bad Request" : message,
+				succeeded = false
 			};
 		}
 		public Response<TEntity> NotFound<TEntity>(string message = null)
@@ -113,9 +113,9 @@ namespace JobBoard.Core.Bases
 			return new Response<TEntity>()
 			{
 
-				StatusCode = System.Net.HttpStatusCode.NotFound,
-				Message = message == null ? "Bad Request" : message,
-				Succeeded = false
+				statusCode = System.Net.HttpStatusCode.NotFound,
+				message = message == null ? "Bad Request" : message,
+				succeeded = false
 			};
 		}
 
@@ -123,10 +123,10 @@ namespace JobBoard.Core.Bases
 		{
 			return new Response<TEntity>()
 			{
-				Data = entity,
-				StatusCode = System.Net.HttpStatusCode.Created,
-				Succeeded = true,
-				Message = "Created Successsfuly"
+				data = entity,
+				statusCode = System.Net.HttpStatusCode.Created,
+				succeeded = true,
+				message = "Created Successsfuly"
 			};
 		}
 

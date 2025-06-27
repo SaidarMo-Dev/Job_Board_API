@@ -1,19 +1,16 @@
 ﻿namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Responses
 {
-	public class GetUserByIdQueryResponse
+	public class GetCurrentUserQueryResponse
 	{
-		public int UserId { get; set; }
+		public int Id { get; set; }
 		public required string Email { get; set; }
 		public required string FirstName { get; set; }
 		public required string LastName { get; set; }
-		public string? Gendor { get; set; }
-		public required string DateOfBirth { get; set; }
+		public string? Gender { get; set; }
 		public string? PhoneNumber { get; set; }
+		public required string DateOfBirth { get; set; }
 		public string? Address { get; set; }
 		public string? ImagePath { get; set; }
 		public string? CountryName { get; set; }
-
-
 	}
-
 }

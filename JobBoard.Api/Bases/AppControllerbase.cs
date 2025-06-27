@@ -15,7 +15,7 @@ namespace JobBoard.Api.Bases
 
 		public ObjectResult NewResult<T>(Response<T> response)
 		{
-			switch (response.StatusCode)
+			switch (response.statusCode)
 			{
 				case HttpStatusCode.OK:
 					return new OkObjectResult(response);

@@ -7,17 +7,21 @@ using JobBoard.Core.Resources;
 using JobBoard.Core.Security.Requirements;
 using JobBoard.Core.Wrapers;
 using JobBoard.Data.Entities.Identity;
+using JobBoard.Data.Helpers;
 using JobBoard.Service.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 {
 	public class UserQueryHandler : ResponseHandler,
 									IRequestHandler<GetUserByIdQuery, Response<GetUserByIdQueryResponse>>,
-									IRequestHandler<GetPaginatedListUsersQuery, PaginatedResponse<List<GetPaginatedListUsersQueryResponse>>>
+									IRequestHandler<GetPaginatedListUsersQuery, PaginatedResponse<List<GetPaginatedListUsersQueryResponse>>>,
+									IRequestHandler<GetCurrentUserQuery, Response<GetCurrentUserQueryResponse>>
 
 	{
 
@@ -28,6 +32,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 		private readonly IUserService _userService;
 		private readonly IBookmarkService _bookmarkService;
 		private readonly IAuthorizationService _authorizationService;
+		private readonly IHttpContextAccessor _httpContextAccessor;
 
 		#endregion
 
@@ -38,13 +43,17 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 								IUserService userService,
 								IBookmarkService bookmarkService,
 								IStringLocalizer<SharedResources> stringLocalizer,
-								IAuthorizationService authorizationService) : base(stringLocalizer)
+								IAuthorizationService authorizationService,
+								IHttpContextAccessor httpContextAccessor)
+
+								: base(stringLocalizer)
 		{
 			_userManager = userManager;
 			_mapper = mapper;
 			_userService = userService;
 			_bookmarkService = bookmarkService;
 			_authorizationService = authorizationService;
+			_httpContextAccessor = httpContextAccessor;
 		}
 
 		#endregion
@@ -72,6 +81,24 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 			var usersResponse = await _mapper.ProjectTo<GetPaginatedListUsersQueryResponse>(users).ToPaginatedAsync(request.PageNumber, request.PageSize);
 
 			return usersResponse;
+
+		}
+
+		public async Task<Response<GetCurrentUserQueryResponse>> Handle(GetCurrentUserQuery request, CancellationToken cancellationToken)
+		{
+
+			var userId = _httpContextAccessor.HttpContext?.User
+						.FindFirst(nameof(JwtClaimModel.UserId))?.Value;
+
+			if (userId is null) return BadRequest<GetCurrentUserQueryResponse>("No Claim userId Found");
+
+			var user = await _userManager.Users.Include(c => c.Country).FirstOrDefaultAsync();
+
+
+			if (user is null) return NotFound<GetCurrentUserQueryResponse>("User not Found");
+			var userResponse = _mapper.Map<GetCurrentUserQueryResponse>(user);
+
+			return Success(userResponse);
 
 		}
 

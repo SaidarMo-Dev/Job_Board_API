@@ -42,5 +42,12 @@ namespace JobBoard.Service.Abstractions
 		/// <returns><c>true</c> if the user exists; otherwise, <c>false</c>.</returns>
 		Task<bool> IsExistByIdAsync(int UserId);
 
+		/// <summary>
+		/// Checks asynchronously if the email exists.
+		/// </summary>
+		/// <param name="email">The email we want to check.</param>
+		/// <returns><c>true</c> if the email exists; otherwise, <c>false</c>.</returns>
+		Task<bool> IsEmailExistAsync(string email);
+
 	}
 }

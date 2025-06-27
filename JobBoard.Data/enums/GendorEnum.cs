@@ -4,6 +4,6 @@
 	{
 		Male,
 		Female,
-		Ather
+		Other
 	}
 }

@@ -189,4 +189,7 @@
   <data name="NoAccess" xml:space="preserve">
     <value>ليس لديك الإذن لفعل هذه العملية</value>
   </data>
+  <data name="ConfirmEmailSend" xml:space="preserve">
+    <value>تم إرسال تأكيد البريد الإلكتروني بنجاح</value>
+  </data>
 </root>
