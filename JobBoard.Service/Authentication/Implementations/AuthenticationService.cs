@@ -116,7 +116,7 @@ namespace JobBoard.Service.Authentication.Implementations
 
 			var refreshToken = new RefreshTokenResponse
 			{
-				Username = user.UserName,
+				UserId = user.Id,
 				RefreshToken = _GenerateRefreshToken(), // refresh token value 
 				ExpirationDate = DateTime.UtcNow.AddDays(_jwtSettings.RefreshTokenExpirationDuration)
 			};
@@ -197,7 +197,7 @@ namespace JobBoard.Service.Authentication.Implementations
 				AccessToken = newAccessToken,
 				RefreshToken = new RefreshTokenResponse
 				{
-					Username = user.UserName,
+					UserId = user.Id,
 					RefreshToken = userrefreshToken.RefreshToken,
 					ExpirationDate = userrefreshToken.ExpiresOn
 				}
@@ -288,7 +288,7 @@ namespace JobBoard.Service.Authentication.Implementations
 			}
 		}
 
-		public async Task<string> ConfirmEmailAsync(int UserId, string Code)
+		public async Task<string> ConfirmEmailByUrlAsync(int UserId, string Code)
 		{
 			var user = await _userManager.FindByIdAsync(UserId.ToString());
 
@@ -301,7 +301,7 @@ namespace JobBoard.Service.Authentication.Implementations
 			return "Success";
 		}
 
-		public async Task<string> SendConfirmEmailAsync(int userId)
+		public async Task<string> SendUrlConfirmEmailAsync(int userId)
 		{
 			try
 			{
@@ -332,6 +332,101 @@ namespace JobBoard.Service.Authentication.Implementations
 			}
 
 
+
+		}
+
+
+		public async Task<string> SendCodeConfirmEmailAsync(string email)
+		{
+			var trans = await _appDbContext.Database.BeginTransactionAsync();
+			try
+			{
+				var user = await _userManager.FindByEmailAsync(email);
+
+				if (user is null) return "UserNotFound";
+
+				var random = new Random();
+
+				var randomCode = random.Next(0, 100000).ToString("D6");
+				user.Code = randomCode;
+
+				var result = await _userManager.UpdateAsync(user);
+				if (!result.Succeeded) throw new DbUpdateException("ErrorUpdateUser");
+
+				// send code to user Email
+
+				await _emailService.SendEmail(email, user.FullName, Util.FormatVerificationMessage(randomCode), "Email Confirmation");
+
+				await trans.CommitAsync();
+				return "Success";
+			}
+			catch (Exception ex)
+			{
+				await trans.RollbackAsync();
+				return ex.Message;
+			}
+		}
+
+		public async Task<string> ConfirmEmailByCodeAsync(string email, string code)
+		{
+			var user = await _userManager.FindByEmailAsync(email);
+			if (user is null) return "UserNotFound";
+
+			if (user.Code != code) return "IncorrectCode";
+
+			return "Success";
+		}
+
+		public async Task<string> SenEmailChangeAsync(string currentEmail, string newEmail)
+		{
+			try
+			{
+				var user = await _userManager.FindByEmailAsync(currentEmail);
+				if (user is null) return "UserNotFound";
+
+				var random = new Random();
+
+				var randomCode = random.Next(0, 100000).ToString("D6");
+				user.Code = randomCode;
+
+				var result = await _userManager.UpdateAsync(user);
+				if (!result.Succeeded) throw new DbUpdateException("ErrorUpdateUser");
+
+				// send code to user email
+
+				await _emailService.SendEmail(newEmail, user.FullName, Util.FormatVerificationMessage(randomCode), "Change email confirmation");
+
+				return "Success";
+			}
+			catch (Exception ex)
+			{
+				return ex.Message;
+			}
+
+		}
+
+		public async Task<string> VerifyEmailChangeAsync(string currentEmail, string newEmail, string code)
+		{
+			var trans = await _appDbContext.Database.BeginTransactionAsync();
+			try
+			{
+				var user = await _userManager.FindByEmailAsync(currentEmail);
+				if (user is null) return "UserNotFound";
+
+				if (user.Code != code) return "IncorrectCode";
+
+				user.Email = newEmail;
+
+				var result = await _userManager.UpdateAsync(user);
+				if (!result.Succeeded) throw new DbUpdateException("Cannot Change Email");
+				await trans.CommitAsync();
+				return "Success";
+			}
+			catch (Exception ex)
+			{
+				await trans.RollbackAsync();
+				return ex.Message;
+			}
 
 		}
 
