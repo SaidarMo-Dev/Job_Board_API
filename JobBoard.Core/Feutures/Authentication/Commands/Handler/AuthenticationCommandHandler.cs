@@ -1,11 +1,14 @@
-﻿using JobBoard.Core.Bases;
+﻿using System.Security.Claims;
+using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Authentication.Commands.Models;
 using JobBoard.Core.Resources;
+using JobBoard.Core.Security.Requirements;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Data.Helpers;
 using JobBoard.Service.Abstractions;
 using JobBoard.Service.Authentication.Interfaces;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
 
@@ -19,7 +22,8 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 			IRequestHandler<SendConfirmEmail, Response<string>>,
 			IRequestHandler<SendEmailChangeCommand, Response<string>>,
 			IRequestHandler<VerifyEmailChangeCommand, Response<string>>,
-			IRequestHandler<ChangeUserPasswordCommand, Response<string>>
+			IRequestHandler<ChangeUserPasswordCommand, Response<string>>,
+			IRequestHandler<AddRecoveryContactCommand, Response<string>>
 
 
 
@@ -30,6 +34,7 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 		private readonly IAuthenticationService _authenticationService;
 		private readonly IStringLocalizer<SharedResources> _stringLocalizer;
 		private readonly IUserService _userService;
+		private readonly IAuthorizationService _authorizationService;
 		#endregion
 
 		#region Constructors
@@ -37,13 +42,16 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 									UserManager<User> userManager,
 									IAuthenticationService authenticationService,
 									IStringLocalizer<SharedResources> stringLocalizer,
-									IUserService userService) : base(stringLocalizer)
+									IUserService userService,
+									IAuthorizationService authorizationService
+									) : base(stringLocalizer)
 		{
 			_signInManager = signInManager;
 			_userManager = userManager;
 			_authenticationService = authenticationService;
 			_stringLocalizer = stringLocalizer;
 			_userService = userService;
+			_authorizationService = authorizationService;
 		}
 
 		#endregion
@@ -151,6 +159,31 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 				return BadRequest<string>(result.Errors.FirstOrDefault()?.Description ?? "Cannot change password");
 			}
 			return Success("Success");
+		}
+
+		public async Task<Response<string>> Handle(AddRecoveryContactCommand request, CancellationToken cancellationToken)
+		{
+			var user = await _userManager.FindByIdAsync(request.UserId.ToString());
+			if (user is null) return NotFound("Error", _stringLocalizer[SharedResourcesKeys.UserNotFound]);
+
+			// check if the same user who want to add recover contact inforamtions
+			var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), user, new SameUserRequirement());
+
+			if (!isAuthorized.Succeeded) return BadRequest("", "You don't have access for this operation!");
+
+			// update the recover contact info 
+			user.RecoveryEmail = request.Email;
+			user.RecoveryPhone = request.PhoneNumber;
+
+
+			var result = await _userManager.UpdateAsync(user);
+
+			if (!result.Succeeded)
+			{
+				return BadRequest(result.Errors?.FirstOrDefault()?.Description ?? "Cannot Add Recover Informations");
+			}
+
+			return Success("", _stringLocalizer[SharedResourcesKeys.Success]);
 		}
 
 
