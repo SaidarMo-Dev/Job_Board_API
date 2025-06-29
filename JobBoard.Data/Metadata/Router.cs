@@ -136,6 +136,8 @@
 
 			public const string ChangePassword = Prefex + "/change-password";
 
+			public const string AddRecoveryContact = Prefex + "/add-recovery-contact";
+
 		}
 
 
