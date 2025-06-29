@@ -177,5 +177,20 @@ namespace JobBoard.Api.Controllers
 		{
 			return NewResult(await Mediator.Send(request));
 		}
+
+		[SwaggerOperation(Summary = "Add user recovery contact",
+					  Description = "add a recovery contact informations including email and phone number to an existing user account.",
+					  OperationId = "AddRecoveryContact")]
+
+		[AllowAnonymous]
+		[HttpPut(Router.AuthenticationRoute.AddRecoveryContact)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		public async Task<IActionResult> AddRecoveryContact([FromBody] AddRecoveryContactCommand request)
+		{
+			return NewResult(await Mediator.Send(request));
+		}
 	}
 }
