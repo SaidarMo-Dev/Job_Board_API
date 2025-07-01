@@ -3,6 +3,7 @@ using AutoMapper;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Jobs.Queries.Models;
 using JobBoard.Core.Feutures.Jobs.Queries.Responses;
+using JobBoard.Core.Helpers;
 using JobBoard.Core.Resources;
 using JobBoard.Core.Security.Requirements;
 using JobBoard.Core.Wrapers;
@@ -60,6 +61,12 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 		public async Task<PaginatedResponse<List<GetPaginatedJobsQueryResponse>>> Handle(GetPaginatedJobsQuery request, CancellationToken cancellationToken)
 		{
 			var queryable = _jobService.GetJobsQueryable();
+
+			// perform filters and sorting
+
+			queryable = queryable
+						.ApplySearch(request.SearchByTitle, request.SearchByLocation)
+						.ApplyFilters(request.JobType, request.SalaryMin, request.SalaryMax, request.ExperienceLevel, request.SortBy);
 
 			var result = await _mapper.ProjectTo<GetPaginatedJobsQueryResponse>(queryable)
 					.ToPaginatedAsync(request.PageNumber, request.PageSize);
