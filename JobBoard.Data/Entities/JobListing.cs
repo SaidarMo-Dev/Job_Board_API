@@ -12,7 +12,9 @@ namespace JobBoard.Data.Entities
 		public int CompanyId { get; set; }
 		public required string Location { get; set; }
 		public JobTypeEnum JobType { get; set; }
-		public string? SalaryRange { get; set; }
+		public double MinSalary { get; set; }
+		public double MaxSalary { get; set; }
+		public ExperienceLevelEnum ExperienceLevel { get; set; }
 		public required DateTime DatePosted { get; set; }
 		public JobStatusEnum Status { get; set; }
 		public int CreatedByUserId { get; set; }

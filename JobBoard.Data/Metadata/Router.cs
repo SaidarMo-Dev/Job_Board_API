@@ -78,7 +78,7 @@
 		{
 			private const string Prefex = Rule + "/Jobs";
 
-			public const string GetAll = Prefex + "/GetAll";
+			public const string GetAll = Prefex;
 			public const string GetByID = Prefex + Single;
 			public const string Create = Prefex + "/AddJob";
 			public const string Update = Prefex + "/UpdateJob";
