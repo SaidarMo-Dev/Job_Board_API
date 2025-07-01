@@ -20,7 +20,7 @@ namespace JobBoard.Infrastructure.Configuration
 			builder.HasOne(x => x.JobListing)
 				.WithMany(x => x.applications)
 				.HasForeignKey(x => x.JobListingId)
-				.IsRequired();
+				.IsRequired().OnDelete(DeleteBehavior.NoAction);
 
 			builder.HasOne(x => x.UserInfo)
 				.WithMany(x => x.applications)

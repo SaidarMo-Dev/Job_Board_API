@@ -17,12 +17,14 @@ namespace JobBoard.Infrastructure.Configuration
 
 			builder.HasOne(x => x.jobListing)
 				.WithMany(x => x.bookMarks)
-				.HasForeignKey(x => x.JobId);
+				.HasForeignKey(x => x.JobId)
+				.OnDelete(DeleteBehavior.NoAction);
 
 
 			builder.HasOne(x => x.userInfo)
 				.WithMany(x => x.bookmarks)
-				.HasForeignKey(x => x.UserId);
+				.HasForeignKey(x => x.UserId)
+				.OnDelete(DeleteBehavior.NoAction);
 
 			builder.ToTable("BookMarks");
 

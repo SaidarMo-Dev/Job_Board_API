@@ -33,8 +33,13 @@ namespace JobBoard.Infrastructure.Configuration
 				)
 				.IsRequired();
 
-			builder.Property(x => x.SalaryRange)
-				.HasPrecision(10, 4);
+
+			builder.Property(x => x.ExperienceLevel)
+				.HasConversion(
+					x => x.ToString(),
+					x => (ExperienceLevelEnum)Enum.Parse(typeof(ExperienceLevelEnum), x)
+				)
+				.IsRequired();
 
 			builder.Property(x => x.Status)
 				.HasConversion(

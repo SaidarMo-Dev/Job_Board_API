@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobBoard.Infrastructure.Migrations
 {
     [DbContext(typeof(appDbContext))]
-    [Migration("20250612111131_updateUserGendorToNullable")]
-    partial class updateUserGendorToNullable
+    [Migration("20250701152142_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -277,6 +277,12 @@ namespace JobBoard.Infrastructure.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("RecoveryEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RecoveryPhone")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -376,6 +382,10 @@ namespace JobBoard.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<string>("ExperienceLevel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("JobType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -385,9 +395,11 @@ namespace JobBoard.Infrastructure.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("SalaryRange")
-                        .HasPrecision(10, 4)
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("MaxSalary")
+                        .HasColumnType("float");
+
+                    b.Property<double>("MinSalary")
+                        .HasColumnType("float");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -552,7 +564,7 @@ namespace JobBoard.Infrastructure.Migrations
                     b.HasOne("JobBoard.Data.Entities.JobListing", "JobListing")
                         .WithMany("applications")
                         .HasForeignKey("JobListingId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("JobBoard.Data.Entities.Identity.User", "UserInfo")
@@ -571,13 +583,13 @@ namespace JobBoard.Infrastructure.Migrations
                     b.HasOne("JobBoard.Data.Entities.JobListing", "jobListing")
                         .WithMany("bookMarks")
                         .HasForeignKey("JobId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("JobBoard.Data.Entities.Identity.User", "userInfo")
                         .WithMany("bookmarks")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("jobListing");
