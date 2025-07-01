@@ -4,6 +4,7 @@
 	{
 		Full_Time = 0,
 		Part_Time,
-		FreeLencer
+		FreeLence,
+		Contract
 	}
 }
