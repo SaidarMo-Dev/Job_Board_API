@@ -29,7 +29,6 @@
   <ItemGroup>
     <Folder Include="Feutures\Countries\Commands\" />
     <Folder Include="Feutures\Emails\" />
-    <Folder Include="Helpers\" />
     <Folder Include="Mapping\AuthorizationMapping\Commands\" />
   </ItemGroup>
 

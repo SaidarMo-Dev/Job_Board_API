@@ -1825,6 +1825,100 @@
         }
       }
     },
+    "/Api/V1/auth/add-recovery-contact": {
+      "put": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Add user recovery contact",
+        "description": "add a recovery contact informations including email and phone number to an existing user account.",
+        "operationId": "AddRecoveryContact",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddRecoveryContactCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddRecoveryContactCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddRecoveryContactCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/Api/V1/Authorization/Roles/GetAll": {
       "get": {
         "tags": [
@@ -3968,7 +4062,7 @@
         }
       }
     },
-    "/Api/V1/Jobs/Paginate": {
+    "/Api/V1/Jobs": {
       "get": {
         "tags": [
           "Job"
@@ -3991,6 +4085,57 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "SearchByTitle",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "SearchByLocation",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "JobType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/JobTypeEnum"
+            }
+          },
+          {
+            "name": "SalaryMin",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "SalaryMax",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "ExperienceLevel",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ExperienceLevelEnum"
+            }
+          },
+          {
+            "name": "SortBy",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SortEnum"
             }
           }
         ],
@@ -4772,6 +4917,28 @@
         },
         "additionalProperties": false
       },
+      "AddRecoveryContactCommand": {
+        "required": [
+          "email",
+          "phoneNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "AddSkillCommand": {
         "type": "object",
         "properties": {
@@ -4881,6 +5048,16 @@
         },
         "additionalProperties": false
       },
+      "ExperienceLevelEnum": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
       "JobStatusEnum": {
         "enum": [
           0,
@@ -4894,7 +5071,8 @@
         "enum": [
           0,
           1,
-          2
+          2,
+          3
         ],
         "type": "integer",
         "format": "int32"
@@ -4951,6 +5129,16 @@
           }
         },
         "additionalProperties": false
+      },
+      "SortEnum": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
       },
       "UpdateApplicationCommand": {
         "type": "object",

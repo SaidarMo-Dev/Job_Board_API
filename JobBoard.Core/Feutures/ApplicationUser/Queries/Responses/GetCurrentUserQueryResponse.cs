@@ -12,5 +12,7 @@
 		public string? Address { get; set; }
 		public string? ImagePath { get; set; }
 		public string? CountryName { get; set; }
+		public string? RecoveryEmail { get; set; }
+		public string? RecoveryPhone { get; set; }
 	}
 }

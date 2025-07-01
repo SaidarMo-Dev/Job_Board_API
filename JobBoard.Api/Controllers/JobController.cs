@@ -20,7 +20,7 @@ namespace JobBoard.Api.Controllers
 			OperationId = "GetJobsPaginate")]
 
 		[AllowAnonymous]
-		[HttpGet(Router.JobRoute.Paginate)]
+		[HttpGet(Router.JobRoute.GetAll)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> GetJobsPaginate([FromQuery] GetPaginatedJobsQuery request)

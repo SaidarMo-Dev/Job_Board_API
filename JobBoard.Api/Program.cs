@@ -132,6 +132,12 @@ using (var service = app.Services.CreateScope())
 
 	await RoleSeeder.SeedAsync(roleManager);
 	await UserSeeder.SeedAsync(userManager);
+	await CompanySeeder.SeedAsync(context);
+	await JobSeeder.SeedAsync(context);
+	await SkillSeeder.SeedAsync(context);
+	await CategorySeeder.SeedAsync(context);
+	await JobSkillSeeder.SeedAsync(context);
+	await JobCategorySeeder.SeedAsync(context);
 
 
 }
@@ -139,16 +145,6 @@ using (var service = app.Services.CreateScope())
 #endregion
 
 
-//// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-//app.UseSwagger(options =>
-//{
-//	options.OpenApiVersion = Microsoft.OpenApi.OpenApiSpecVersion.OpenApi2_0;
-//});
-//app.UseSwaggerUI();
-
-//}
 
 app.UseSwagger(options =>
 {
