@@ -1,4 +1,6 @@
-﻿namespace JobBoard.Core.Feutures.Jobs.Queries.Responses
+﻿using JobBoard.Core.Common.DTOs;
+
+namespace JobBoard.Core.Feutures.Jobs.Queries.Responses
 {
 	public class GetPaginatedJobsQueryResponse
 	{
@@ -12,8 +14,11 @@
 		public string? MinSalary { get; set; }
 		public string? ExperienceLevel { get; set; }
 		public required string DatePosted { get; set; }
-		public required string status { get; set; }
+		public required string Status { get; set; }
 		public required string CretaedByUser { get; set; }
 
+		public List<SkillDto> Skills { get; set; }
+		public List<CategoryDto> Categories { get; set; }
 	}
+
 }

@@ -30,7 +30,7 @@ namespace JobBoard.Core.Helpers
 			{
 				SortEnum.Recent => queryable.OrderByDescending(x => x.DatePosted),
 				SortEnum.HighestSalary => queryable.OrderByDescending(x => x.MaxSalary),
-				SortEnum.LowestSalary => queryable.OrderByDescending(x => x.MinSalary),
+				SortEnum.LowestSalary => queryable.OrderBy(x => x.MinSalary),
 				_ => queryable.OrderByDescending(x => x.DatePosted),
 			};
 
@@ -41,7 +41,7 @@ namespace JobBoard.Core.Helpers
 		public static IQueryable<JobListing> ApplySearch(this IQueryable<JobListing> queryable, string? title = null, string? location = null)
 		{
 			if (title != null)
-				queryable = queryable.Where(x => x.Equals(title));
+				queryable = queryable.Where(x => x.Title.Equals(title));
 			if (location != null)
 				queryable = queryable.Where(x => x.Location.Equals(location));
 

@@ -9,6 +9,7 @@ using JobBoard.Core.Wrapers;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Data.Helpers;
 using JobBoard.Service.Abstractions;
+using JobBoard.Service.Authentication.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -21,7 +22,8 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 	public class UserQueryHandler : ResponseHandler,
 									IRequestHandler<GetUserByIdQuery, Response<GetUserByIdQueryResponse>>,
 									IRequestHandler<GetPaginatedListUsersQuery, PaginatedResponse<List<GetPaginatedListUsersQueryResponse>>>,
-									IRequestHandler<GetCurrentUserQuery, Response<GetCurrentUserQueryResponse>>
+									IRequestHandler<GetCurrentUserQuery, Response<GetCurrentUserQueryResponse>>,
+									IRequestHandler<GetUserDashboardStatsQuery, Response<GetUserDashboardStatsQueryResponse>>
 
 	{
 
@@ -33,6 +35,8 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 		private readonly IBookmarkService _bookmarkService;
 		private readonly IAuthorizationService _authorizationService;
 		private readonly IHttpContextAccessor _httpContextAccessor;
+		private readonly ICurrentUserService _currentUserservice;
+
 
 		#endregion
 
@@ -44,7 +48,8 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 								IBookmarkService bookmarkService,
 								IStringLocalizer<SharedResources> stringLocalizer,
 								IAuthorizationService authorizationService,
-								IHttpContextAccessor httpContextAccessor)
+								IHttpContextAccessor httpContextAccessor,
+								ICurrentUserService currentUserService)
 
 								: base(stringLocalizer)
 		{
@@ -54,6 +59,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 			_bookmarkService = bookmarkService;
 			_authorizationService = authorizationService;
 			_httpContextAccessor = httpContextAccessor;
+			_currentUserservice = currentUserService;
 		}
 
 		#endregion
@@ -99,6 +105,26 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 			var userResponse = _mapper.Map<GetCurrentUserQueryResponse>(user);
 
 			return Success(userResponse);
+
+		}
+
+		public async Task<Response<GetUserDashboardStatsQueryResponse>> Handle(GetUserDashboardStatsQuery request, CancellationToken cancellationToken)
+		{
+			var curretUserId = _currentUserservice.GetCurrentUserId();
+
+			if (!curretUserId.Equals(request.Id)) return Forbidden<GetUserDashboardStatsQueryResponse>("You don't have access to perform this operation!");
+
+			var stats = await _userService.GetUserDashboardStatsAsync(request.Id);
+
+			if (stats is null) return Success(new GetUserDashboardStatsQueryResponse());
+
+			return Success(new GetUserDashboardStatsQueryResponse
+			{
+				TotalSavedJobs = stats.TotalSavedJobs,
+				TotalApplications = stats.TotalApplications,
+				Pending = stats.Pending,
+				Rejected = stats.Rejected
+			});
 
 		}
 

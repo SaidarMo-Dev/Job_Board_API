@@ -6,18 +6,18 @@ namespace JobBoard.Core.Wrapers
 	{
 		public PaginatedResponse(T data)
 		{
-			Data = data;
+			this.data = data;
 		}
 		public PaginatedResponse(T data, int page, int size, int totalRecords, string message = null)
 		{
-			Data = data;
-			TotalPages = (int)Math.Ceiling((double)totalRecords / size);
-			TotalRecords = totalRecords;
-			PageSize = size;
-			Message = message == null ? "Success" : message;
-			Succeeded = true;
-			StatusCode = HttpStatusCode.OK;
-			CurrentPage = page > TotalPages ? TotalPages : page;
+			this.data = data;
+			totalPages = (int)Math.Ceiling((double)totalRecords / size);
+			this.totalRecords = totalRecords;
+			pageSize = size;
+			this.message = message == null ? "Success" : message;
+			succeeded = true;
+			statusCode = HttpStatusCode.OK;
+			currentPage = page > totalPages ? totalPages : page;
 		}
 
 		public static PaginatedResponse<T> Success(T data, int page, int size, int totalRecords, string message = null)
@@ -25,16 +25,16 @@ namespace JobBoard.Core.Wrapers
 			return new(data, page, size, totalRecords, message);
 		}
 
-		public T Data { get; set; }
-		public string Message { get; set; } = string.Empty;
-		public HttpStatusCode StatusCode { get; set; }
-		public bool Succeeded { get; set; }
-		public int TotalPages { get; set; }
-		public int TotalRecords { get; set; }
-		public int CurrentPage { get; set; }
-		public int PageSize { get; set; }
-		public bool HasPreviusPage => CurrentPage > 1;
-		public bool HasNextPage => CurrentPage < TotalPages;
+		public T data { get; set; }
+		public string message { get; set; } = string.Empty;
+		public HttpStatusCode statusCode { get; set; }
+		public bool succeeded { get; set; }
+		public int totalPages { get; set; }
+		public int totalRecords { get; set; }
+		public int currentPage { get; set; }
+		public int pageSize { get; set; }
+		public bool hasPreviusPage => currentPage > 1;
+		public bool hasNextPage => currentPage < totalPages;
 
 	}
 }
