@@ -27,11 +27,11 @@ namespace JobBoard.Data.Entities.Identity
 		public string? RecoveryPhone { get; set; }
 
 		public Country? Country { get; set; }
-		public ICollection<Application>? applications { get; set; }
-		public ICollection<Bookmark>? bookmarks { get; set; }
-		public ICollection<JobListing>? CreatedJobs { get; set; }
-		public ICollection<UserRefreshToken>? UserRefreshTokens { get; set; }
-		public ICollection<Company>? CreatedCompanies { get; set; }
+		public ICollection<Application> applications { get; set; }
+		public ICollection<Bookmark> bookmarks { get; set; }
+		public ICollection<JobListing> CreatedJobs { get; set; }
+		public ICollection<UserRefreshToken> UserRefreshTokens { get; set; }
+		public ICollection<Company> CreatedCompanies { get; set; }
 	}
 }
 

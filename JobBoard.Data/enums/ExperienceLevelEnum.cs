@@ -2,6 +2,7 @@
 {
 	public enum ExperienceLevelEnum
 	{
+		Any,
 		EntryLevel,
 		MidLevel,
 		SeniorLevel,

@@ -69,8 +69,10 @@
 			public const string Update = Prefex + "/update";
 			public const string DeleteById = Prefex + Single;
 			public const string Paginate = Prefex + "/paginate";
-			public const string Bookmarks = Prefex + "/bookmarks/{Id}";
+			public const string Bookmarks = Prefex + "/bookmarks";
+			public const string TotaleBookmarks = Prefex + "/bookmarks/Count";
 			public const string Applications = Prefex + "/applications";
+			public const string DashboardStats = Prefex + "/{Id}/dashboard-stats";
 
 
 		}
@@ -98,9 +100,12 @@
 
 			public const string GetAll = Prefex + "/GetAll";
 			public const string GetByID = Prefex + "/{Id}";
-			public const string Create = Prefex + "/AddBookmark";
+			public const string Create = Prefex + "/save-job";
 			public const string DeleteById = Prefex + Single;
-			public const string Paginate = Prefex + "/Paginate";
+			public const string DeleteByJobId = Prefex + "/by-jobId" + Single;
+			public const string Paginate = Prefex + "/paginate";
+			public const string UserSavedJobIds = Prefex + "/{Id}/saved-job-ids";
+
 		}
 
 		public static class ApplicationRoute
