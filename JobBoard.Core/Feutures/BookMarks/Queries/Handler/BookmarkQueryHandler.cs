@@ -18,7 +18,10 @@ namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
 	public class BookmarkQueryHandler : ResponseHandler,
 				IRequestHandler<GetBookmarkByIdQuery, Response<GetBookmarkByIdQueryResponse>>,
 				IRequestHandler<GetPaginatedBookmarkListQuery, PaginatedResponse<List<GetPaginatedBookmarkListQueryResponse>>>,
-				IRequestHandler<GetUserBookmarksQuery, Response<GetUserBookmarksQueryResponse>>
+				IRequestHandler<GetUserBookmarksQuery, PaginatedResponse<List<GetUserBookmarksQueryResponse>>>,
+				IRequestHandler<GetUserSavedJobsCount, Response<int>>,
+				IRequestHandler<GetSavedJobIdsQuery, Response<GetSavedJobIdsQueryResponse>>
+
 	{
 		#region Fields
 		private readonly IBookmarkService _bookmarkService;
@@ -72,26 +75,28 @@ namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
 			return BookmarksPaginatedResult;
 		}
 
-		public async Task<Response<GetUserBookmarksQueryResponse>> Handle(GetUserBookmarksQuery request, CancellationToken cancellationToken)
+		public async Task<PaginatedResponse<List<GetUserBookmarksQueryResponse>>> Handle(GetUserBookmarksQuery request, CancellationToken cancellationToken)
 		{
-			var user = await _userManager.FindByIdAsync(request.UserId.ToString());
 
-			if (user is null) return NotFound<GetUserBookmarksQueryResponse>();
+			var queryable = _bookmarkService.GetUserBookmarksQueryable(request.UserId);
 
-			var bookmarks = await _bookmarkService.GetUserBookmarks(request.UserId);
+			var result = await _mapper.ProjectTo<GetUserBookmarksQueryResponse>(queryable).ToPaginatedAsync(request.page, request.pageSize);
 
-			if (bookmarks is null) return BadRequest<GetUserBookmarksQueryResponse>("No Bookmarks found");
+			return result;
 
-			var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(),
-														bookmarks.FirstOrDefault(),
-														new UserBookmarkRequirement());
+		}
 
-			if (!isAuthorized.Succeeded) return Forbidden<GetUserBookmarksQueryResponse>();
+		public async Task<Response<int>> Handle(GetUserSavedJobsCount request, CancellationToken cancellationToken)
+		{
+			var result = await _bookmarkService.GetUserSavedJobsCount(request.UserId);
+			return Success(result);
+		}
 
-			var bookmarksDto = _mapper.Map<List<BookmarkResponse>>(bookmarks);
+		public async Task<Response<GetSavedJobIdsQueryResponse>> Handle(GetSavedJobIdsQuery request, CancellationToken cancellationToken)
+		{
+			var result = await _bookmarkService.GetUserSavedJobIds(request.UserId);
 
-			return Success(new GetUserBookmarksQueryResponse { Bookmarks = bookmarksDto });
-
+			return Success(new GetSavedJobIdsQueryResponse { SavedJobIds = result });
 		}
 
 		#endregion

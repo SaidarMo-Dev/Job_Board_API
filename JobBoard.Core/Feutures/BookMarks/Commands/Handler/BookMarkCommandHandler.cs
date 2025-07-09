@@ -11,7 +11,8 @@ namespace JobBoard.Core.Feutures.BookMarks.Commands.Handler
 {
 	public class BookMarkCommandHandler : ResponseHandler,
 			IRequestHandler<AddBookMarkCommand, Response<int>>,
-			IRequestHandler<DeleteBookmarkByIdCommand, Response<string>>
+			IRequestHandler<DeleteBookmarkByIdCommand, Response<string>>,
+			IRequestHandler<DeleteBookmarkByJobIdCommand, Response<string>>
 	{
 
 		#region Fields
@@ -43,12 +44,24 @@ namespace JobBoard.Core.Feutures.BookMarks.Commands.Handler
 			var bookmark = await _bookMarkService.GetBookmarkByIdAsync(request.Id);
 			if (bookmark is null) return NotFound<string>();
 
-			bool IsDeleted = await _bookMarkService.DeleteByIdAsync(bookmark);
+			bool IsDeleted = await _bookMarkService.DeleteBookmarkAsync(bookmark);
 
 			if (!IsDeleted) return BadRequest<string>();
 
 			return Deleted<string>();
 
+		}
+
+		public async Task<Response<string>> Handle(DeleteBookmarkByJobIdCommand request, CancellationToken cancellationToken)
+		{
+			var bookmark = await _bookMarkService.GetBookmarkByJobIdAsync(request.Id);
+			if (bookmark is null) return NotFound<string>();
+
+			bool IsDeleted = await _bookMarkService.DeleteBookmarkAsync(bookmark);
+
+			if (!IsDeleted) return BadRequest<string>();
+
+			return Deleted<string>();
 		}
 
 
