@@ -30,7 +30,7 @@ namespace JobBoard.Service.Implementations
 			return result;
 		}
 
-		public async Task<bool> DeleteByIdAsync(Bookmark bookmark)
+		public async Task<bool> DeleteBookmarkAsync(Bookmark bookmark)
 		{
 			try
 			{
@@ -69,6 +69,7 @@ namespace JobBoard.Service.Implementations
 			return _bookMarkRepository.GetTableAsNoTracking().AsQueryable();
 		}
 
+
 		public async Task<List<Bookmark>> GetUserBookmarks(int UserId)
 		{
 			return await _bookMarkRepository.GetTableAsNoTracking()
@@ -77,6 +78,33 @@ namespace JobBoard.Service.Implementations
 							.ToListAsync();
 
 		}
+
+		public IQueryable<Bookmark> GetUserBookmarksQueryable(int userId)
+		{
+			return _bookMarkRepository.GetTableAsNoTracking().Where(x => x.UserId.Equals(userId)).AsQueryable();
+		}
+
+		public Task<int> GetUserSavedJobsCount(int userId)
+		{
+			return _bookMarkRepository.GetTableAsNoTracking().Where(x => x.UserId.Equals(userId)).CountAsync();
+		}
+		public async Task<List<int>> GetUserSavedJobIds(int userId)
+		{
+			var result = await _bookMarkRepository.GetTableAsNoTracking()
+								.Where(x => x.UserId.Equals(userId))
+								.Select(x => x.JobId).ToListAsync();
+
+			return result;
+		}
+
+		public async Task<Bookmark> GetBookmarkByJobIdAsync(int Id)
+		{
+			var result = await _bookMarkRepository.GetTableAsNoTracking()
+				.FirstOrDefaultAsync(x => x.JobId.Equals(Id));
+
+			return result;
+		}
+
 
 		#endregion
 	}

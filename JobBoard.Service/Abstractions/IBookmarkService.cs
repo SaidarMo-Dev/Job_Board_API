@@ -26,11 +26,18 @@ namespace JobBoard.Service.Abstractions
 		Task<Bookmark> GetBookmarkByIdAsync(int Id);
 
 		/// <summary>
+		/// Retrieves a bookmark by job Id asynchronously.
+		/// </summary>
+		/// <param name="Id">The ID of the bookmarked job.</param>
+		/// <returns>The <see cref="Bookmark"/> entity if found; otherwise, null.</returns>
+		Task<Bookmark> GetBookmarkByJobIdAsync(int Id);
+
+		/// <summary>
 		/// Deletes the specified bookmark asynchronously.
 		/// </summary>
 		/// <param name="bookmark">The <see cref="Bookmark"/> entity to delete.</param>
 		/// <returns><c>true</c> if the deletion was successful; otherwise, <c>false</c>.</returns>
-		Task<bool> DeleteByIdAsync(Bookmark bookmark);
+		Task<bool> DeleteBookmarkAsync(Bookmark bookmark);
 
 		/// <summary>
 		/// Retrieves a list of bookmarks for a specific user.
@@ -40,10 +47,28 @@ namespace JobBoard.Service.Abstractions
 		Task<List<Bookmark>> GetUserBookmarks(int UserId);
 
 		/// <summary>
+		/// Retrieves a queryable collection of user bookmarks.
+		/// </summary>
+		/// <returns>An <see cref="IQueryable{Bookmark}"/> for further querying operations.</returns>
+		IQueryable<Bookmark> GetUserBookmarksQueryable(int userId);
+
+		/// <summary>
 		/// Retrieves a queryable collection of bookmarks.
 		/// </summary>
 		/// <returns>An <see cref="IQueryable{Bookmark}"/> for further querying operations.</returns>
 		IQueryable<Bookmark> GetBookmarksQueryable();
+
+		/// <summary>
+		/// Retrieves the number of user bookmarks.
+		/// </summary>
+		/// <returns>An <see cref="int"/> represent the total records of saved jobs.</returns>
+		Task<int> GetUserSavedJobsCount(int userId);
+
+		/// <summary>
+		/// Retrieves the ids of saved jobs.
+		/// </summary>
+		/// <returns>A list of <see cref="int>"/> represent the ids of saved jobs.</returns>
+		Task<List<int>> GetUserSavedJobIds(int userId);
 
 	}
 }
