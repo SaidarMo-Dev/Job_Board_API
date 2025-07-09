@@ -10,7 +10,7 @@ namespace JobBoard.Api.Controllers
 {
 
 	[ApiController]
-	[Authorize(Roles = "User")]
+	[Authorize]
 	public class BookMarkController : AppControllerbase
 	{
 		[SwaggerOperation(Summary = "Get bookmark by ID",
@@ -27,6 +27,7 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(new GetBookmarkByIdQuery { Id = Id }));
 
 		}
+
 		[SwaggerOperation(Summary = "Get paginated bookmarks (Admin only)",
 				  Description = "Returns a paginated list of all bookmarks. Requires admin role.",
 				  OperationId = "BookmarksPaginate")]
@@ -43,7 +44,7 @@ namespace JobBoard.Api.Controllers
 
 
 
-		[SwaggerOperation(Summary = "Get bookmarks by user ID",
+		[SwaggerOperation(Summary = "Get user bookmarks",
 				  Description = "Retrieves all bookmarks associated with a specific user.",
 				  OperationId = "UserBookmarks")]
 
@@ -51,9 +52,9 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		public async Task<IActionResult> UserBookmarks([FromRoute] int Id)
+		public async Task<IActionResult> UserBookmarks([FromQuery] GetUserBookmarksQuery request)
 		{
-			return NewResult(await Mediator.Send(new GetUserBookmarksQuery { UserId = Id }));
+			return Ok(await Mediator.Send(request));
 		}
 
 
@@ -62,7 +63,6 @@ namespace JobBoard.Api.Controllers
 				  Description = "Creates a new bookmark entry in the system.",
 				  OperationId = "AddBookMark")]
 
-		[AllowAnonymous]
 		[HttpPost(Router.BookMarkRoute.Create)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -79,7 +79,6 @@ namespace JobBoard.Api.Controllers
 				  Description = "Deletes a specific bookmark by its unique identifier.",
 				  OperationId = "DeleteBookMark")]
 
-		[AllowAnonymous]
 		[HttpDelete(Router.BookMarkRoute.DeleteById)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -90,5 +89,48 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(new DeleteBookmarkByIdCommand { Id = Id }));
 
 		}
+
+		[SwaggerOperation(Summary = "Delete bookmark by job ID",
+			  Description = "Deletes a specific bookmark by its job Id.",
+			  OperationId = "DeleteBookMarkByJobId")]
+
+		[HttpDelete(Router.BookMarkRoute.DeleteByJobId)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		public async Task<IActionResult> DeleteBookMarkByJobId([FromRoute] int Id)
+		{
+			return NewResult(await Mediator.Send(new DeleteBookmarkByJobIdCommand(Id)));
+
+		}
+
+
+
+		[SwaggerOperation(Summary = "Get user bookmarks",
+				  Description = "Retrieves all bookmarks associated with a specific user.",
+				  OperationId = "TotalUserBookmarks")]
+
+		[HttpGet(Router.ApplicationUserRoute.TotaleBookmarks)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		public async Task<IActionResult> TotalUserBookmarks([FromQuery] GetUserSavedJobsCount request)
+		{
+			return Ok(await Mediator.Send(request));
+		}
+
+
+		[SwaggerOperation(Summary = "Get user Saved job ids",
+			  Description = "Retrieves all saved job ids associated with a specific user.",
+			  OperationId = "GetSavedJobIds")]
+
+		[HttpGet(Router.BookMarkRoute.UserSavedJobIds)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		public async Task<IActionResult> GetUserSavedJobIds([FromRoute] int Id)
+		{
+			return Ok(await Mediator.Send(new GetSavedJobIdsQuery(Id)));
+		}
+
 	}
 }
