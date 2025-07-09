@@ -1,5 +1,7 @@
 ﻿using JobBoard.Data.Entities.Identity;
+using JobBoard.Data.Responses;
 using JobBoard.Infrastructure.Abstractions;
+using JobBoard.Infrastructure.context;
 using JobBoard.Service.Abstractions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -22,7 +24,7 @@ namespace JobBoard.Service.Implementations
 		private readonly IUrlHelper _urlHelper;
 
 		private readonly IUserRepository _userRepository;
-
+		private readonly appDbContext _context;
 		#endregion
 
 		#region Constructors
@@ -41,7 +43,8 @@ namespace JobBoard.Service.Implementations
 							ICountryService countryService,
 							IHttpContextAccessor httpContextAccessor,
 							IEmailService emailService,
-							IUrlHelper urlHelper
+							IUrlHelper urlHelper,
+							appDbContext appDbContext
 
 						)
 						: base(userStore, options,
@@ -57,7 +60,7 @@ namespace JobBoard.Service.Implementations
 			_httpContextAccessor = httpContextAccessor;
 			_emailService = emailService;
 			_urlHelper = urlHelper;
-
+			_context = appDbContext;
 		}
 
 
@@ -166,6 +169,19 @@ namespace JobBoard.Service.Implementations
 			var user = await _userManager.FindByEmailAsync(email);
 
 			return user is not null;
+		}
+
+		public async Task<DashboardStatsResponse> GetUserDashboardStatsAsync(int userId)
+		{
+			var result = await _context.Users.Where(x => x.Id == userId).Select(u => new DashboardStatsResponse
+			{
+				TotalSavedJobs = u.bookmarks.Count(),
+				TotalApplications = u.applications.Count(),
+				Rejected = u.applications.Where(x => x.status == Data.enums.ApplicationStatusEnum.Removed).Count(),
+				Pending = u.applications.Where(x => x.status == Data.enums.ApplicationStatusEnum.Pending).Count(),
+			}).FirstOrDefaultAsync();
+
+			return result;
 		}
 
 
