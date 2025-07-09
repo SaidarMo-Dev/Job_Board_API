@@ -46,7 +46,7 @@ namespace JobBoard.Api.Controllers
 
 		[HttpPost(Router.AuthenticationRoute.RefreshToken)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<IActionResult> RefreshNewToken([FromForm] RefreshNewAccessToken request)
+		public async Task<IActionResult> RefreshNewToken([FromBody] RefreshNewAccessToken request)
 		{
 			return NewResult(await Mediator.Send(request));
 		}

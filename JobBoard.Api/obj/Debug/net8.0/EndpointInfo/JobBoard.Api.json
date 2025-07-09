@@ -945,6 +945,92 @@
         }
       }
     },
+    "/Api/V1/users/{Id}/dashboard-stats": {
+      "get": {
+        "tags": [
+          "ApplicationUser"
+        ],
+        "summary": "get user dashboard stats",
+        "description": "get user stats like saved jobs total application etc...",
+        "operationId": "GetDashboardStats",
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/Api/V1/auth/signin": {
       "post": {
         "tags": [
@@ -1101,25 +1187,19 @@
         "operationId": "RefreshAccessToken",
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "RefreshToken": {
-                    "type": "string"
-                  },
-                  "AccessToken": {
-                    "type": "string"
-                  }
-                }
-              },
-              "encoding": {
-                "RefreshToken": {
-                  "style": "form"
-                },
-                "AccessToken": {
-                  "style": "form"
-                }
+                "$ref": "#/components/schemas/RefreshNewAccessToken"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshNewAccessToken"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshNewAccessToken"
               }
             }
           }
@@ -2875,7 +2955,7 @@
         }
       }
     },
-    "/Api/V1/Bookmarks/Paginate": {
+    "/Api/V1/Bookmarks/paginate": {
       "get": {
         "tags": [
           "BookMark"
@@ -2928,19 +3008,34 @@
         }
       }
     },
-    "/Api/V1/users/bookmarks/{Id}": {
+    "/Api/V1/users/bookmarks": {
       "get": {
         "tags": [
           "BookMark"
         ],
-        "summary": "Get bookmarks by user ID",
+        "summary": "Get user bookmarks",
         "description": "Retrieves all bookmarks associated with a specific user.",
         "operationId": "UserBookmarks",
         "parameters": [
           {
-            "name": "Id",
-            "in": "path",
-            "required": true,
+            "name": "UserId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -2994,7 +3089,7 @@
         }
       }
     },
-    "/Api/V1/Bookmarks/AddBookmark": {
+    "/Api/V1/Bookmarks/save-job": {
       "post": {
         "tags": [
           "BookMark"
@@ -3044,6 +3139,183 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Api/V1/Bookmarks/by-jobId/{Id}": {
+      "delete": {
+        "tags": [
+          "BookMark"
+        ],
+        "summary": "Delete bookmark by job ID",
+        "description": "Deletes a specific bookmark by its job Id.",
+        "operationId": "DeleteBookMarkByJobId",
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Api/V1/users/bookmarks/Count": {
+      "get": {
+        "tags": [
+          "BookMark"
+        ],
+        "summary": "Get user bookmarks",
+        "description": "Retrieves all bookmarks associated with a specific user.",
+        "operationId": "TotalUserBookmarks",
+        "parameters": [
+          {
+            "name": "UserId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Api/V1/Bookmarks/{Id}/saved-job-ids": {
+      "get": {
+        "tags": [
+          "BookMark"
+        ],
+        "summary": "Get user Saved job ids",
+        "description": "Retrieves all saved job ids associated with a specific user.",
+        "operationId": "GetSavedJobIds",
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           },
           "401": {
             "description": "Unauthorized",
@@ -5053,7 +5325,8 @@
           0,
           1,
           2,
-          3
+          3,
+          4
         ],
         "type": "integer",
         "format": "int32"
@@ -5072,7 +5345,8 @@
           0,
           1,
           2,
-          3
+          3,
+          4
         ],
         "type": "integer",
         "format": "int32"
@@ -5112,6 +5386,20 @@
           }
         },
         "additionalProperties": { }
+      },
+      "RefreshNewAccessToken": {
+        "type": "object",
+        "properties": {
+          "refreshToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "accessToken": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "RoleResponse": {
         "type": "object",

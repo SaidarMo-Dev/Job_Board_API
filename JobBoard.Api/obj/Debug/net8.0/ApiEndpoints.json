@@ -435,14 +435,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "RefreshToken",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "AccessToken",
-        "Type": "System.String",
-        "IsRequired": false
+        "Name": "request",
+        "Type": "JobBoard.Core.Feutures.Authentication.Commands.Models.RefreshNewAccessToken",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": [
@@ -1299,8 +1294,124 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.BookMarkController",
+    "Method": "GetUserSavedJobIds",
+    "RelativePath": "Api/V1/Bookmarks/{Id}/saved-job-ids",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.BookMarkController",
+    "Method": "DeleteBookMarkByJobId",
+    "RelativePath": "Api/V1/Bookmarks/by-jobId/{Id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.BookMarkController",
+    "Method": "BookmarksPaginate",
+    "RelativePath": "Api/V1/Bookmarks/paginate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Size",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.BookMarkController",
     "Method": "AddBookMark",
-    "RelativePath": "Api/V1/Bookmarks/AddBookmark",
+    "RelativePath": "Api/V1/Bookmarks/save-job",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -1325,42 +1436,6 @@
           "text/json"
         ],
         "StatusCode": 400
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 401
-      }
-    ]
-  },
-  {
-    "ContainingType": "JobBoard.Api.Controllers.BookMarkController",
-    "Method": "BookmarksPaginate",
-    "RelativePath": "Api/V1/Bookmarks/Paginate",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Page",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Size",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
@@ -2493,6 +2568,55 @@
     ]
   },
   {
+    "ContainingType": "JobBoard.Api.Controllers.ApplicationUserController",
+    "Method": "GetDashboardStats",
+    "RelativePath": "Api/V1/users/{Id}/dashboard-stats",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      }
+    ]
+  },
+  {
     "ContainingType": "JobBoard.Api.Controllers.ApplicationController",
     "Method": "CurrentUserApplications",
     "RelativePath": "Api/V1/users/applications",
@@ -2520,15 +2644,25 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.BookMarkController",
     "Method": "UserBookmarks",
-    "RelativePath": "Api/V1/users/bookmarks/{Id}",
+    "RelativePath": "Api/V1/users/bookmarks",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Id",
+        "Name": "UserId",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -2541,6 +2675,37 @@
         ],
         "StatusCode": 404
       },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.BookMarkController",
+    "Method": "TotalUserBookmarks",
+    "RelativePath": "Api/V1/users/bookmarks/Count",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
       {
         "Type": "System.Void",
         "MediaTypes": [],
