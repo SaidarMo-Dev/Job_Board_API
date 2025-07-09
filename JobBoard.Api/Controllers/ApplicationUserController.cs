@@ -33,7 +33,7 @@ namespace JobBoard.Api.Controllers
 						  Description = "Retrieves the current user Info.",
 						  OperationId = "GetCurrentUser")]
 
-		[AllowAnonymous]
+		[Authorize]
 		[HttpGet(Router.ApplicationUserRoute.me)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -83,7 +83,7 @@ namespace JobBoard.Api.Controllers
 						  Description = "Updates the information of an existing user.",
 						  OperationId = "UpdateUser")]
 
-		[AllowAnonymous]
+		[Authorize]
 		[HttpPut(Router.ApplicationUserRoute.Update)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -100,7 +100,7 @@ namespace JobBoard.Api.Controllers
 						  Description = "Deletes a user account by its unique identifier.",
 						  OperationId = "DeleteUserById")]
 
-		[AllowAnonymous]
+		[Authorize]
 		[HttpDelete(Router.ApplicationUserRoute.DeleteById)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -111,5 +111,19 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(new DeleteUserCommand { Id = Id }));
 		}
 
+
+		[SwaggerOperation(Summary = "get user dashboard stats",
+					  Description = "get user stats like saved jobs total application etc...",
+					  OperationId = "GetDashboardStats")]
+		[Authorize]
+		[HttpGet(Router.ApplicationUserRoute.DashboardStats)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		public async Task<IActionResult> GetDashboardStats([FromRoute] int Id)
+		{
+			return NewResult(await Mediator.Send(new GetUserDashboardStatsQuery(Id)));
+		}
 	}
 }
