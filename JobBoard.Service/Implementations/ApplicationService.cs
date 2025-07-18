@@ -61,13 +61,14 @@ namespace JobBoard.Service.Implementations
 			return application;
 		}
 
-		public async Task<bool> HasActiveOrAcceptedApplicationAsnyc(int UserId)
+		public async Task<bool> HasActiveOrAcceptedApplicationAsnycWithJob(int UserId, int jobId)
 		{
 			var result = await _applicationRepository.GetTableAsNoTracking()
-						.FirstOrDefaultAsync(x => x.UserId == UserId &&
-											(x.status == ApplicationStatusEnum.Accepted ||
-											x.status == ApplicationStatusEnum.Pending)
-											);
+						.FirstOrDefaultAsync(x => x.UserId == UserId
+							&& x.JobId == jobId &&
+							(x.status == ApplicationStatusEnum.Accepted ||
+							x.status == ApplicationStatusEnum.Pending));
+
 
 			return result != null;
 		}
@@ -81,20 +82,19 @@ namespace JobBoard.Service.Implementations
 		public async Task<List<Application>> GetApplicationsByJobIdAsync(int JobId)
 		{
 			var result = _applicationRepository.GetTableAsNoTracking()
-						.Where(x => x.JobListingId.Equals(JobId))
+						.Where(x => x.JobId.Equals(JobId))
 						.Include(x => x.JobListing)
 						.Include(x => x.UserInfo).ThenInclude(x => x.Country);
 
 			return await result.ToListAsync();
 		}
 
-		public async Task<List<Application>> GetUserApplicationsAsync(int UserId)
+		public IQueryable<Application> GetUserApplicationsQueryable(int UserId)
 		{
 			var result = _applicationRepository.GetTableAsNoTracking()
-							.Where(x => x.UserId.Equals(UserId))
-							.Include(x => x.JobListing);
+							.Where(x => x.UserId.Equals(UserId)).AsQueryable();
 
-			return await result.ToListAsync();
+			return result;
 		}
 
 

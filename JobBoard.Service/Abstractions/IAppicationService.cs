@@ -37,7 +37,7 @@ namespace JobBoard.Service.Abstractions
 		/// </summary>
 		/// <param name="UserId">The ID of the user.</param>
 		/// <returns><c>true</c> if the user with ID <paramref name="UserId"/> has an active or accepted <see cref="Application"/>; otherwise, <c>false</c>.</returns>
-		Task<bool> HasActiveOrAcceptedApplicationAsnyc(int UserId);
+		Task<bool> HasActiveOrAcceptedApplicationAsnycWithJob(int UserId, int jobId);
 
 		/// <summary>
 		/// Deletes an existing <see cref="Application"/> from the database.
@@ -54,11 +54,13 @@ namespace JobBoard.Service.Abstractions
 		Task<List<Application>> GetApplicationsByJobIdAsync(int JobId);
 
 		/// <summary>
-		/// Retrieves a list of User <see cref="Application"/>.
+		/// Retrieves a queryable collection of applications submitted by a specific user.
 		/// </summary>
-		/// <param name="UserId">The ID of the user.</param>
-		/// <returns>A list of <see cref="Application"/> objects related to the User.</returns>
-		Task<List<Application>> GetUserApplicationsAsync(int UserId);
+		/// <param name="userId">The ID of the user whose applications are to be retrieved.</param>
+		/// <returns>
+		/// An <see cref="IQueryable{T}"/> of <see cref="Application"/> objects associated with the specified user.
+		/// </returns>
+		IQueryable<Application> GetUserApplicationsQueryable(int userId);
 
 
 	}

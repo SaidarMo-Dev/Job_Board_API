@@ -38,9 +38,9 @@ namespace JobBoard.Service.Implementations
 		{
 			var result = await _jobRepository.GetTableAsNoTracking()
 					.Include(x => x.company)
-					.Include(x => x.UserInfo).IgnoreQueryFilters()
-					.Include(x => x.jobCategories)
-					.Include(x => x.Jobkills).ThenInclude(x => x.skillInfo)
+					.Include(x => x.UserInfo)
+					.Include(x => x.jobCategories).ThenInclude(x => x.category)
+					.Include(x => x.JobSkills).ThenInclude(x => x.skillInfo)
 					.FirstOrDefaultAsync(x => x.JobId == Id);
 
 			return result;
@@ -104,7 +104,7 @@ namespace JobBoard.Service.Implementations
 		public async Task<JobListing> GetJobByIdWithEncludeSkillsAndCategoriesAsync(int Id)
 		{
 			var result = await _jobRepository.GetTableAsNoTracking()
-								.Include(x => x.Jobkills)
+								.Include(x => x.JobSkills)
 								.Include(x => x.jobCategories)
 								.Where(x => x.JobId.Equals(Id))
 								.FirstOrDefaultAsync();
