@@ -17,7 +17,7 @@ namespace JobBoard.Infrastructure.Configuration
 
 
 			builder.HasOne(x => x.jobListing)
-				.WithMany(x => x.Jobkills)
+				.WithMany(x => x.JobSkills)
 				.HasForeignKey(x => x.JobListingId)
 				.IsRequired();
 
