@@ -1,14 +1,14 @@
-﻿using System.Security.Claims;
-using AutoMapper;
+﻿using AutoMapper;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Applications.Queries.Models;
 using JobBoard.Core.Feutures.Applications.Queries.Responses;
 using JobBoard.Core.Resources;
-using JobBoard.Core.Security.Requirements;
+using JobBoard.Core.Wrapers;
 using JobBoard.Service.Abstractions;
 using JobBoard.Service.Authentication.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Applications.Queries.Handler
@@ -16,7 +16,7 @@ namespace JobBoard.Core.Feutures.Applications.Queries.Handler
 	public class ApplicationQueryHandler : ResponseHandler,
 				IRequestHandler<GetSingleApplicationQuery, Response<GetSingleApplictionQueryResponse>>,
 				IRequestHandler<GetApplicationsByJobIdQuery, Response<GetApplicationsByJobIdQueryResponse>>,
-				IRequestHandler<GetCurrentUserApplicationsQuery, Response<GetCurrentUserApplicationsQueryResponse>>
+				IRequestHandler<GetCurrentUserApplicationsQuery, PaginatedResponse<List<GetCurrentUserApplicationsQueryResponse>>>
 	{
 		private readonly IApplicationService _applicationService;
 		private readonly IMapper _mapper;
@@ -71,21 +71,20 @@ namespace JobBoard.Core.Feutures.Applications.Queries.Handler
 			return Success(new GetApplicationsByJobIdQueryResponse { Applications = applicationDto });
 		}
 
-		public async Task<Response<GetCurrentUserApplicationsQueryResponse>> Handle(GetCurrentUserApplicationsQuery request, CancellationToken cancellationToken)
+		public async Task<PaginatedResponse<List<GetCurrentUserApplicationsQueryResponse>>> Handle(GetCurrentUserApplicationsQuery request, CancellationToken cancellationToken)
 		{
 			int userId = _currentUserService.GetCurrentUserId();
 
-			var applications = await _applicationService.GetUserApplicationsAsync(userId);
+			var applications = _applicationService.GetUserApplicationsQueryable(userId);
 
-			if (applications is null) return NotFound<GetCurrentUserApplicationsQueryResponse>();
+			var applicationsDto = _mapper.ProjectTo<GetCurrentUserApplicationsQueryResponse>(applications);
 
-			var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), applications.FirstOrDefault(), new UserApplicationsRequirement());
 
-			if (!isAuthorized.Succeeded) return Forbidden<GetCurrentUserApplicationsQueryResponse>();
+			Console.WriteLine(applicationsDto.ToQueryString());
 
-			var applicationsDto = _mapper.Map<List<UserApplicationResponse>>(applications);
+			var result = await applicationsDto.ToPaginatedAsync(request.Page, request.Size);
 
-			return Success(new GetCurrentUserApplicationsQueryResponse { applications = applicationsDto });
+			return result;
 		}
 
 		#endregion

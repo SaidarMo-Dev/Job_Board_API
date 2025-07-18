@@ -21,30 +21,38 @@ namespace JobBoard.Core.Feutures.Applications.Commands.Handler
 		private readonly IApplicationService _applicationService;
 		private readonly IMapper _mapper;
 		private readonly IStringLocalizer<SharedResources> _localizer;
+		private readonly IJobService _jobService;
 
 		#endregion
 
 		#region Constructors
 		public ApplicationCommandHandler(IApplicationService applicationService, IMapper mapper,
-										IStringLocalizer<SharedResources> localizer) : base(localizer)
+										IStringLocalizer<SharedResources> localizer,
+										IJobService jobService) : base(localizer)
 		{
 			_applicationService = applicationService;
 			_mapper = mapper;
 			_localizer = localizer;
+			_jobService = jobService;
 		}
 
 		#endregion
 
-
 		#region Handle Methods
 		public async Task<Response<int>> Handle(AddApplicationCommand request, CancellationToken cancellationToken)
 		{
-			var application = _mapper.Map<Application>(request);
+			var jobExist = await _jobService.IsExistByIdAsync(request.JobId);
 
-			var hasApp = await _applicationService.HasActiveOrAcceptedApplicationAsnyc(request.UserId);
+			if (!jobExist) return BadRequest<int>("Job not found");
+			var hasApp = await _applicationService.HasActiveOrAcceptedApplicationAsnycWithJob(request.UserId, request.JobId);
 
 			if (hasApp) return BadRequest<int>(_localizer[SharedResourcesKeys.UserHasActiveApplication]);
 
+			var application = _mapper.Map<Application>(request);
+
+			// TODO : handle saving resume to cloud storage 
+
+			application.ResumeUrl = "Test Url";
 			var success = await _applicationService.AddAsync(application);
 
 			if (!success) return BadRequest<int>(_localizer[SharedResourcesKeys.FailedAddApplication]);
@@ -80,7 +88,7 @@ namespace JobBoard.Core.Feutures.Applications.Commands.Handler
 			var application = await _applicationService.GetByIdAsync(request.ApplicationId);
 			if (application is null) return NotFound<string>();
 
-			application.status = ApplicationStatusEnum.Removed;
+			application.status = ApplicationStatusEnum.Rejected;
 			application.LastStatusDate = DateTime.UtcNow;
 
 			return await PerformUpdateApplicationAsync(application);
