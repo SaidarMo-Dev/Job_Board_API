@@ -110,17 +110,17 @@
 
 		public static class ApplicationRoute
 		{
-			private const string Prefex = Rule + "/Applications";
+			private const string Prefex = Rule + "/applications";
 
-			public const string GetAll = Prefex + "/GetAll";
+			public const string GetAll = Prefex;
 			public const string GetByID = Prefex + "/{Id}";
-			public const string Apply = Prefex + "/AddApplication";
-			public const string Update = Prefex + "/UpdateApplication";
+			public const string Apply = Prefex + "/apply";
+			public const string Update = Prefex + "/update-application";
 			public const string DeleteById = Prefex + Single;
-			public const string Paginate = Prefex + "/Paginate";
+			public const string Paginate = Prefex + "/paginate";
 
-			public const string SetAccepted = Prefex + "/SetAccepted";
-			public const string SetRemoved = Prefex + "/SetRemoved";
+			public const string SetAccepted = Prefex + "/set-accepted";
+			public const string SetRemoved = Prefex + "/set-removed";
 		}
 
 

@@ -19,7 +19,7 @@ namespace JobBoard.Data.Entities
 		public JobStatusEnum Status { get; set; }
 		public int CreatedByUserId { get; set; }
 
-		public ICollection<JobSkill> Jobkills { get; set; }
+		public ICollection<JobSkill> JobSkills { get; set; }
 		public Company company { get; set; }
 		public ICollection<Bookmark> bookMarks { get; set; }
 		public ICollection<Application> applications { get; set; }
