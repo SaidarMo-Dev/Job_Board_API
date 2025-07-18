@@ -9,7 +9,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace JobBoard.Api.Controllers
 {
 	[ApiController]
-	[Authorize(Roles = "Admin,User")]
+	[Authorize]
 	public class ApplicationController : AppControllerbase
 	{
 		[SwaggerOperation(
@@ -32,15 +32,14 @@ namespace JobBoard.Api.Controllers
 		[SwaggerOperation(Summary = "Get current user applications",
 						  Description = "Retrieves a list of applications submitted by the currently logged-in user.",
 						  OperationId = "GetCurrentUserApplications")]
-
-		[Authorize(Roles = "JobSeeker,Employer")]
 		[HttpGet(Router.ApplicationUserRoute.Applications)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		public async Task<IActionResult> CurrentUserApplications()
+		public async Task<IActionResult> CurrentUserApplications([FromQuery] int Page, [FromQuery] int PageSize)
 		{
-			return NewResult(await Mediator.Send(new GetCurrentUserApplicationsQuery()));
+			var result = await Mediator.Send(new GetCurrentUserApplicationsQuery(Page, PageSize));
 
+			return Ok(result);
 		}
 
 
@@ -70,12 +69,10 @@ namespace JobBoard.Api.Controllers
 					Description = "Allows a user to submit a job application.",
 					OperationId = "ApplyForJob"
 			)]
-
-		[AllowAnonymous]
 		[HttpPost(Router.ApplicationRoute.Apply)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		public async Task<IActionResult> ApplyForJob([FromBody] AddApplicationCommand request)
+		public async Task<IActionResult> ApplyForJob([FromForm] AddApplicationCommand request)
 		{
 			return NewResult(await Mediator.Send(request));
 		}

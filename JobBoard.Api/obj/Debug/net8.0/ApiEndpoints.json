@@ -2,7 +2,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.ApplicationController",
     "Method": "GetApplication",
-    "RelativePath": "Api/V1/Applications/{Id}",
+    "RelativePath": "Api/V1/applications/{Id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -33,7 +33,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.ApplicationController",
     "Method": "DeleteApplication",
-    "RelativePath": "Api/V1/Applications/{Id}",
+    "RelativePath": "Api/V1/applications/{Id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -91,15 +91,70 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.ApplicationController",
     "Method": "ApplyForJob",
-    "RelativePath": "Api/V1/Applications/AddApplication",
+    "RelativePath": "Api/V1/applications/apply",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "JobBoard.Core.Feutures.Applications.Commands.Models.AddApplicationCommand",
-        "IsRequired": true
+        "Name": "JobId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "FirstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "LastName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "resume",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "CoverLetter",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "LinkedIn",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Portfolio",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Experience",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Availability",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -122,7 +177,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.ApplicationController",
     "Method": "SetToAccepted",
-    "RelativePath": "Api/V1/Applications/SetAccepted",
+    "RelativePath": "Api/V1/applications/set-accepted",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -162,7 +217,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.ApplicationController",
     "Method": "SetToRemoved",
-    "RelativePath": "Api/V1/Applications/SetRemoved",
+    "RelativePath": "Api/V1/applications/set-removed",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -202,7 +257,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.ApplicationController",
     "Method": "UpdateApplication",
-    "RelativePath": "Api/V1/Applications/UpdateApplication",
+    "RelativePath": "Api/V1/applications/update-application",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -2623,7 +2678,18 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "Page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Void",

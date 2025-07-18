@@ -10,7 +10,7 @@
     "version": "v1"
   },
   "paths": {
-    "/Api/V1/Applications/{Id}": {
+    "/Api/V1/applications/{Id}": {
       "get": {
         "tags": [
           "Application"
@@ -168,6 +168,24 @@
         "summary": "Get current user applications",
         "description": "Retrieves a list of applications submitted by the currently logged-in user.",
         "operationId": "GetCurrentUserApplications",
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -241,7 +259,7 @@
         }
       }
     },
-    "/Api/V1/Applications/AddApplication": {
+    "/Api/V1/applications/apply": {
       "post": {
         "tags": [
           "Application"
@@ -251,19 +269,97 @@
         "operationId": "ApplyForJob",
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/AddApplicationCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddApplicationCommand"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddApplicationCommand"
+                "required": [
+                  "Availability",
+                  "Email",
+                  "Experience",
+                  "FirstName",
+                  "LastName",
+                  "Phone",
+                  "resume"
+                ],
+                "type": "object",
+                "properties": {
+                  "JobId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "FirstName": {
+                    "type": "string"
+                  },
+                  "LastName": {
+                    "type": "string"
+                  },
+                  "Email": {
+                    "type": "string"
+                  },
+                  "Phone": {
+                    "type": "string"
+                  },
+                  "resume": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "CoverLetter": {
+                    "type": "string"
+                  },
+                  "LinkedIn": {
+                    "type": "string"
+                  },
+                  "Portfolio": {
+                    "type": "string"
+                  },
+                  "Experience": {
+                    "type": "string"
+                  },
+                  "Availability": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "JobId": {
+                  "style": "form"
+                },
+                "UserId": {
+                  "style": "form"
+                },
+                "FirstName": {
+                  "style": "form"
+                },
+                "LastName": {
+                  "style": "form"
+                },
+                "Email": {
+                  "style": "form"
+                },
+                "Phone": {
+                  "style": "form"
+                },
+                "resume": {
+                  "style": "form"
+                },
+                "CoverLetter": {
+                  "style": "form"
+                },
+                "LinkedIn": {
+                  "style": "form"
+                },
+                "Portfolio": {
+                  "style": "form"
+                },
+                "Experience": {
+                  "style": "form"
+                },
+                "Availability": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -295,7 +391,7 @@
         }
       }
     },
-    "/Api/V1/Applications/UpdateApplication": {
+    "/Api/V1/applications/update-application": {
       "put": {
         "tags": [
           "Application"
@@ -369,7 +465,7 @@
         }
       }
     },
-    "/Api/V1/Applications/SetAccepted": {
+    "/Api/V1/applications/set-accepted": {
       "put": {
         "tags": [
           "Application"
@@ -434,7 +530,7 @@
         }
       }
     },
-    "/Api/V1/Applications/SetRemoved": {
+    "/Api/V1/applications/set-removed": {
       "put": {
         "tags": [
           "Application"
@@ -5048,24 +5144,6 @@
   },
   "components": {
     "schemas": {
-      "AddApplicationCommand": {
-        "type": "object",
-        "properties": {
-          "jobId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "userId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "AddBookMarkCommand": {
         "required": [
           "dateBooked"

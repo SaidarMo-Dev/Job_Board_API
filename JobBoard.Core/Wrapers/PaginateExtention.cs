@@ -6,7 +6,7 @@ namespace JobBoard.Core.Wrapers
 	{
 		public static async Task<PaginatedResponse<List<T>>> ToPaginatedAsync<T>(this IQueryable<T> source, int PageNumber = 1, int PageSize = 10)
 		{
-			if (source == null) throw new ArgumentNullException("Source ds empty");
+			if (source == null) throw new ArgumentNullException("Source is empty");
 
 			PageNumber = PageNumber <= 0 ? 1 : PageNumber;
 			PageSize = PageSize <= 0 ? 10 : PageSize;

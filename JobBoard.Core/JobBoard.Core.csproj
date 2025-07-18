@@ -30,6 +30,7 @@
     <Folder Include="Feutures\Countries\Commands\" />
     <Folder Include="Feutures\Emails\" />
     <Folder Include="Mapping\AuthorizationMapping\Commands\" />
+    <Folder Include="Mapping\GlobalMapping\commands\" />
   </ItemGroup>
 
 </Project>

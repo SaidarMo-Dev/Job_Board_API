@@ -124,7 +124,7 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 				}
 			}
 
-			foreach (var item in Oldjob.Jobkills)
+			foreach (var item in Oldjob.JobSkills)
 			{
 				if (!request.skillIds.Contains(item.SkillId))
 				{

@@ -6,6 +6,7 @@ using JobBoard.Core.Seeders;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Infrastructure;
 using JobBoard.Infrastructure.context;
+using JobBoard.Infrastructure.ModelBinders;
 using JobBoard.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -21,7 +22,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers((options) =>
+{
+	options.ModelBinderProviders.Insert(0, new CaseInsensitiveFormModelBinderProvider());
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
