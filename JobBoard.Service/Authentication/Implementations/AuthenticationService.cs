@@ -336,7 +336,7 @@ namespace JobBoard.Service.Authentication.Implementations
 		}
 
 
-		public async Task<string> SendCodeConfirmEmailAsync(string email)
+		public async Task<string> SendCodeConfirmEmailAsync(string email, string reason = "Email Confirmation")
 		{
 			var trans = await _appDbContext.Database.BeginTransactionAsync();
 			try
@@ -355,7 +355,7 @@ namespace JobBoard.Service.Authentication.Implementations
 
 				// send code to user Email
 
-				await _emailService.SendEmail(email, user.FullName, Util.FormatVerificationMessage(randomCode), "Email Confirmation");
+				await _emailService.SendEmail(email, user.FullName, Util.FormatVerificationMessage(randomCode), reason ?? "Email Confirmation");
 
 				await trans.CommitAsync();
 				return "Success";

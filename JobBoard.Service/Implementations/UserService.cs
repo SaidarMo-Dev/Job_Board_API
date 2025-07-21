@@ -1,8 +1,10 @@
-﻿using JobBoard.Data.Entities.Identity;
+﻿using JobBoard.Core.Helpers;
+using JobBoard.Data.Entities.Identity;
 using JobBoard.Data.Responses;
 using JobBoard.Infrastructure.Abstractions;
 using JobBoard.Infrastructure.context;
 using JobBoard.Service.Abstractions;
+using JobBoard.Service.Authentication.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +27,7 @@ namespace JobBoard.Service.Implementations
 
 		private readonly IUserRepository _userRepository;
 		private readonly appDbContext _context;
+		private readonly IAuthenticationService _authenticationService;
 		#endregion
 
 		#region Constructors
@@ -44,7 +47,8 @@ namespace JobBoard.Service.Implementations
 							IHttpContextAccessor httpContextAccessor,
 							IEmailService emailService,
 							IUrlHelper urlHelper,
-							appDbContext appDbContext
+							appDbContext appDbContext,
+							IAuthenticationService authenticationService
 
 						)
 						: base(userStore, options,
@@ -61,6 +65,7 @@ namespace JobBoard.Service.Implementations
 			_emailService = emailService;
 			_urlHelper = urlHelper;
 			_context = appDbContext;
+			_authenticationService = authenticationService;
 		}
 
 
@@ -75,31 +80,39 @@ namespace JobBoard.Service.Implementations
 
 		}
 
-		public async Task<string> AddNewUserAsync(User User, string Password, string role)
+		public async Task<string> AddNewUserAsync(User user, string password, string role)
 		{
-			var trans = _userRepository.BeginTransaction();
+			using var trans = _userRepository.BeginTransaction();
 			try
 			{
+				var creationResult = await _userManager.CreateAsync(user, password);
+				if (!creationResult.Succeeded)
+					throw new Exception(creationResult.Errors.FirstOrDefault()?.Description);
 
-				var result = await _userManager.CreateAsync(User, Password);
+				user.Code = Util.GenerateSixDigitCode();
+
+				var roleAdded = await AddUserToRoleAsync(user, role);
+				if (!roleAdded)
+					throw new Exception("Failed to assign role to user.");
+
+				var emailResult = await _emailService.SendEmail(
+					user.Email!,
+					user.FullName,
+					Util.FormatVerificationMessage(user.Code),
+					"Email Confirmation");
 
 
-				if (!result.Succeeded) throw new Exception(result.Errors?.FirstOrDefault()?.Description);
-
-				var addedRole = await AddUserToRoleAsync(User, role);
-				if (!addedRole) throw new Exception("Can't Add role to user");
+				if (emailResult != "Success")
+					throw new Exception("Failed to send verification email.");
 
 				await trans.CommitAsync();
-
 				return "Success";
 			}
 			catch (Exception ex)
 			{
 				await trans.RollbackAsync();
-
-				Log.Error(ex, "Error: " + ex.Message);
-
-				return "Error:  " + ex.Message;
+				Log.Error(ex, "Failed to add user");
+				return "An error occurred while creating the user.";
 			}
 		}
 

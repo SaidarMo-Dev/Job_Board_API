@@ -22,7 +22,7 @@ namespace JobBoard.Service.Authentication.Interfaces
 		/// <returns>A string indicating the result of the email confirmation.</returns>
 		Task<string> ConfirmEmailByUrlAsync(int UserId, string Code);
 
-		Task<string> SendCodeConfirmEmailAsync(string email);
+		Task<string> SendCodeConfirmEmailAsync(string email, string reason = "Email Confirmation");
 		Task<string> ConfirmEmailByCodeAsync(string email, string code);
 		Task<string> SenEmailChangeAsync(string currentEmail, string newEmail);
 		Task<string> VerifyEmailChangeAsync(string currentEmail, string newEmail, string code);
