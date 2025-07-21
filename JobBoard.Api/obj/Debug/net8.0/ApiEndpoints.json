@@ -394,8 +394,53 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.AuthenticationController",
+    "Method": "ConfirmEmailByCode",
+    "RelativePath": "Api/V1/auth/confirm-email-code",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Code",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.AuthenticationController",
     "Method": "ConfirmEmail",
-    "RelativePath": "Api/V1/auth/confirm-email",
+    "RelativePath": "Api/V1/auth/confirm-email-url",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

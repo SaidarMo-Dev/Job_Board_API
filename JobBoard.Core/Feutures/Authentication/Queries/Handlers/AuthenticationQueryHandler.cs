@@ -11,7 +11,8 @@ namespace JobBoard.Core.Feutures.Authentication.Queries.Handlers
 	public class AuthenticationQueryHandler : ResponseHandler,
 					IRequestHandler<ConfirmEmailQuery, Response<string>>,
 					IRequestHandler<ConfirmResetPasswordQuery, Response<string>>,
-					IRequestHandler<SendConfirmEmailQuery, Response<string>>
+					IRequestHandler<SendConfirmEmailQuery, Response<string>>,
+					IRequestHandler<ConfirmEmailByCode, Response<string>>
 	{
 		#region Fields
 		private readonly IStringLocalizer<SharedResources> _stringLocalizer;
@@ -68,6 +69,15 @@ namespace JobBoard.Core.Feutures.Authentication.Queries.Handlers
 			return BadRequest(result);
 
 
+		}
+
+		public async Task<Response<string>> Handle(ConfirmEmailByCode request, CancellationToken cancellationToken)
+		{
+			var result = await _authenticationService.ConfirmEmailByCodeAsync(request.Email, request.Code);
+
+			if (!(result == "Success")) return BadRequest<string>("Inccorect code!");
+
+			return Success<string>(message: "Email Confirmed");
 		}
 
 

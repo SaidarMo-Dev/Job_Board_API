@@ -52,11 +52,11 @@ namespace JobBoard.Api.Controllers
 		}
 
 
-		[SwaggerOperation(Summary = "Confirm email",
+		[SwaggerOperation(Summary = "Confirm email by url",
 				  Description = "Confirms a user's email address using a confirmation code or token.",
-				  OperationId = "ConfirmEmail")]
+				  OperationId = "ConfirmEmailByUrl")]
 
-		[HttpGet(Router.AuthenticationRoute.ConfirmEmail)]
+		[HttpGet(Router.AuthenticationRoute.ConfirmEmailByUrl)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 
@@ -189,6 +189,21 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> AddRecoveryContact([FromBody] AddRecoveryContactCommand request)
+		{
+			return NewResult(await Mediator.Send(request));
+		}
+
+
+		[SwaggerOperation(Summary = "Confirm email by code",
+					  Description = "Confirms a user's email address using a confirmation code.",
+					  OperationId = "ConfirmEmailByCode")]
+
+		[AllowAnonymous]
+		[HttpPut(Router.AuthenticationRoute.ConfirmEmailByCode)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		public async Task<IActionResult> ConfirmEmailByCode([FromQuery] ConfirmEmailByCode request)
 		{
 			return NewResult(await Mediator.Send(request));
 		}

@@ -127,7 +127,8 @@
 		public static class AuthenticationRoute
 		{
 			private const string Prefex = Rule + "/auth";
-			public const string ConfirmEmail = Prefex + "/confirm-email";
+			public const string ConfirmEmailByUrl = Prefex + "/confirm-email-url";
+			public const string ConfirmEmailByCode = Prefex + "/confirm-email-code";
 			public const string SignIn = Prefex + "/signin";
 			public const string RefreshToken = Prefex + "/refresh-token";
 			public const string SendResetPassword = Prefex + "/send-reset-password";
