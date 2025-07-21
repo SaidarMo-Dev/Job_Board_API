@@ -69,5 +69,12 @@ namespace JobBoard.Core.Helpers
 
 		}
 
+		public static string GenerateSixDigitCode()
+		{
+			var random = new Random();
+
+			return random.Next(0, 100000).ToString("D6");
+
+		}
 	}
 }

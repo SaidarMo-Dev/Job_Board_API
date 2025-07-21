@@ -6,6 +6,7 @@ using JobBoard.Core.Resources;
 using JobBoard.Core.Security.Requirements;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Service.Abstractions;
+using JobBoard.Service.Authentication.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -28,6 +29,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 		private readonly IUserService _userService;
 		private readonly IStringLocalizer<SharedResources> _stringLocalizer;
 		private readonly IAuthorizationService _authorizationService;
+		private readonly IAuthenticationService _authenticationService;
 		#endregion
 
 		#region Construtors
@@ -36,7 +38,8 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 						ICountryService countryService,
 						IUserService userService,
 						IStringLocalizer<SharedResources> stringLocalizer,
-						IAuthorizationService authorizationService
+						IAuthorizationService authorizationService,
+						IAuthenticationService authenticationService
 			) : base(stringLocalizer)
 		{
 			_userManager = userManager;
@@ -45,6 +48,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 			_userService = userService;
 			_stringLocalizer = stringLocalizer;
 			_authorizationService = authorizationService;
+			_authenticationService = authenticationService;
 		}
 
 		#endregion
@@ -64,7 +68,6 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 
 			// map request with user
 			var user = _mapper.Map<User>(request);
-
 
 			var result = await _userService.AddNewUserAsync(user, request.Password, request.Role);
 

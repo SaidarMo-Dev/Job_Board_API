@@ -2,6 +2,7 @@
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Applications.Queries.Models;
 using JobBoard.Core.Feutures.Applications.Queries.Responses;
+using JobBoard.Core.Helpers;
 using JobBoard.Core.Resources;
 using JobBoard.Core.Wrapers;
 using JobBoard.Service.Abstractions;
@@ -75,10 +76,10 @@ namespace JobBoard.Core.Feutures.Applications.Queries.Handler
 		{
 			int userId = _currentUserService.GetCurrentUserId();
 
-			var applications = _applicationService.GetUserApplicationsQueryable(userId);
+			var applications = _applicationService.GetUserApplicationsQueryable(userId)
+							.FilterUserApplications(request.StatusFilter);
 
 			var applicationsDto = _mapper.ProjectTo<GetCurrentUserApplicationsQueryResponse>(applications);
-
 
 			Console.WriteLine(applicationsDto.ToQueryString());
 

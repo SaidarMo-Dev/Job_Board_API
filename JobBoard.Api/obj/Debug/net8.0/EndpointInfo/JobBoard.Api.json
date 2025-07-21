@@ -178,11 +178,18 @@
             }
           },
           {
-            "name": "PageSize",
+            "name": "Size",
             "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "StatusFilter",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ApplicationStatusFilter"
             }
           }
         ],
@@ -5350,6 +5357,16 @@
           0,
           1,
           2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "ApplicationStatusFilter": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
         ],
         "type": "integer",
         "format": "int32"

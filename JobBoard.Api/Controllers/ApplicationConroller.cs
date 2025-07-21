@@ -35,9 +35,9 @@ namespace JobBoard.Api.Controllers
 		[HttpGet(Router.ApplicationUserRoute.Applications)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		public async Task<IActionResult> CurrentUserApplications([FromQuery] int Page, [FromQuery] int PageSize)
+		public async Task<IActionResult> CurrentUserApplications([FromQuery] GetCurrentUserApplicationsQuery request)
 		{
-			var result = await Mediator.Send(new GetCurrentUserApplicationsQuery(Page, PageSize));
+			var result = await Mediator.Send(request);
 
 			return Ok(result);
 		}

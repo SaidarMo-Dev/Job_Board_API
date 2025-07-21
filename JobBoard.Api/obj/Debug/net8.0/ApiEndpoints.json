@@ -2685,8 +2685,13 @@
         "IsRequired": false
       },
       {
-        "Name": "PageSize",
+        "Name": "Size",
         "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "StatusFilter",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],

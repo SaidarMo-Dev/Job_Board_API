@@ -47,6 +47,27 @@ namespace JobBoard.Core.Helpers
 
 			return queryable;
 		}
+		public static IQueryable<Application> FilterUserApplications(this IQueryable<Application> source, ApplicationStatusFilter filter)
+		{
+			switch (filter)
+			{
+				case ApplicationStatusFilter.Pending:
+					source = source.Where(x => x.status == ApplicationStatusEnum.Pending);
+					break;
+				case ApplicationStatusFilter.Rejected:
+					source = source.Where(x => x.status.Equals(ApplicationStatusEnum.Rejected));
+					break;
+				case ApplicationStatusFilter.Accepted:
+					source = source.Where(x => x.status.Equals(ApplicationStatusEnum.Accepted));
+					break;
+				case ApplicationStatusFilter.All:
+				default:
+					break;
+
+			}
+
+			return source;
+		}
 	}
 
 }
