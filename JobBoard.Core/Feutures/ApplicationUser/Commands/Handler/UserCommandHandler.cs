@@ -62,12 +62,12 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 
 			if (Exist) return BadRequest<int>(_stringLocalizer[SharedResourcesKeys.EmailExist]);
 
-			Exist = await _userManager.Users.AnyAsync(x => x.UserName == request.UserName);
-
 			if (Exist) return BadRequest<int>("Username Already Exits");
 
 			// map request with user
 			var user = _mapper.Map<User>(request);
+
+			user.UserName = $"{user.FirstName}{Guid.NewGuid().ToString("N").Substring(0, 8)}";
 
 			var result = await _userService.AddNewUserAsync(user, request.Password, request.Role);
 

@@ -26,10 +26,6 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Validation
 				.NotEmpty().WithMessage("{PropertyName} Cannot be Empty")
 				.NotNull().WithMessage("{PropertyName} Cannot be Null");
 
-			RuleFor(x => x.UserName)
-				.NotEmpty().WithMessage("{PropertyName} Cannot be Empty")
-				.NotNull().WithMessage("{PropertyName} Cannot be Null");
-
 
 			RuleFor(x => x.Password)
 				.NotEmpty().WithMessage("{PropertyName} Cannot be Empty")
