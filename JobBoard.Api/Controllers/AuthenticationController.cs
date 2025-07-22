@@ -199,7 +199,7 @@ namespace JobBoard.Api.Controllers
 					  OperationId = "ConfirmEmailByCode")]
 
 		[AllowAnonymous]
-		[HttpPut(Router.AuthenticationRoute.ConfirmEmailByCode)]
+		[HttpGet(Router.AuthenticationRoute.ConfirmEmailByCode)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]

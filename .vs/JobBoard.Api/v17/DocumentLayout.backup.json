@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Projects\\Job_Board_API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{79D9DDE7-61D3-45DB-8E5A-81646E3C13E2}|JobBoard.Data\\JobBoard.Data.csproj|c:\\projects\\job_board_api\\jobboard.data\\metadata\\router.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{79D9DDE7-61D3-45DB-8E5A-81646E3C13E2}|JobBoard.Data\\JobBoard.Data.csproj|solutionrelative:jobboard.data\\metadata\\router.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|c:\\projects\\job_board_api\\jobboard.api\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|solutionrelative:jobboard.api\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79D9DDE7-61D3-45DB-8E5A-81646E3C13E2}|JobBoard.Data\\JobBoard.Data.csproj|c:\\projects\\job_board_api\\jobboard.data\\metadata\\router.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79D9DDE7-61D3-45DB-8E5A-81646E3C13E2}|JobBoard.Data\\JobBoard.Data.csproj|solutionrelative:jobboard.data\\metadata\\router.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\authentication\\queries\\handlers\\authenticationqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -54,21 +54,8 @@
       "DocumentGroups": [
         {
           "DockedHeight": 382,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Router.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Data\\Metadata\\Router.cs",
-              "RelativeDocumentMoniker": "JobBoard.Data\\Metadata\\Router.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Data\\Metadata\\Router.cs",
-              "RelativeToolTip": "JobBoard.Data\\Metadata\\Router.cs",
-              "ViewState": "AgIAAHsAAAAAAAAAAAAlwIEAAABHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-21T20:28:35.294Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
@@ -84,12 +71,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Router.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Data\\Metadata\\Router.cs",
+              "RelativeDocumentMoniker": "JobBoard.Data\\Metadata\\Router.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Data\\Metadata\\Router.cs",
+              "RelativeToolTip": "JobBoard.Data\\Metadata\\Router.cs",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAlwIEAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-21T20:28:35.294Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "AuthenticationController.cs",
               "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\Controllers\\AuthenticationController.cs",
               "RelativeDocumentMoniker": "JobBoard.Api\\Controllers\\AuthenticationController.cs",
               "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\Controllers\\AuthenticationController.cs",
               "RelativeToolTip": "JobBoard.Api\\Controllers\\AuthenticationController.cs",
-              "ViewState": "AgIAAMIAAAAAAAAAAAAIwMkAAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAAMIAAAAAAAAAAAAIwMkAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-21T20:25:43.681Z",
               "EditorCaption": ""
@@ -104,8 +104,7 @@
               "RelativeToolTip": "JobBoard.Core\\Feutures\\Authentication\\Queries\\Handlers\\AuthenticationQueryHandler.cs",
               "ViewState": "AgIAAD8AAAAAAAAAAAAlwFAAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-21T20:20:13.598Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-21T20:20:13.598Z"
             },
             {
               "$type": "Document",
@@ -117,8 +116,7 @@
               "RelativeToolTip": "JobBoard.Core\\Feutures\\Authentication\\Commands\\Handler\\AuthenticationCommandHandler.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-21T20:19:39.975Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-21T20:19:39.975Z"
             },
             {
               "$type": "Document",
@@ -126,12 +124,11 @@
               "Title": "ConfirmEmailByCode.cs",
               "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Authentication\\Queries\\Models\\ConfirmEmailByCode.cs",
               "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Authentication\\Queries\\Models\\ConfirmEmailByCode.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Authentication\\Queries\\Models\\ConfirmEmailByCode.cs*",
-              "RelativeToolTip": "JobBoard.Core\\Feutures\\Authentication\\Queries\\Models\\ConfirmEmailByCode.cs*",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Authentication\\Queries\\Models\\ConfirmEmailByCode.cs",
+              "RelativeToolTip": "JobBoard.Core\\Feutures\\Authentication\\Queries\\Models\\ConfirmEmailByCode.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-21T20:19:12.024Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-21T20:19:12.024Z"
             },
             {
               "$type": "Document",
@@ -143,8 +140,7 @@
               "RelativeToolTip": "JobBoard.Core\\Feutures\\Authentication\\Queries\\Models\\ConfirmEmailQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-21T20:18:54.781Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-21T20:18:54.781Z"
             },
             {
               "$type": "Document",
@@ -156,8 +152,7 @@
               "RelativeToolTip": "JobBoard.Core\\Feutures\\ApplicationUser\\Commands\\Validation\\AddUserCommandValidator.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAmwBgAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-21T20:14:48.848Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-21T20:14:48.848Z"
             },
             {
               "$type": "Document",
@@ -181,8 +176,7 @@
               "RelativeToolTip": "JobBoard.Service\\Authentication\\Interfaces\\IAuthenticationService.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAIA1wBkAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-21T16:49:59.892Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-21T16:49:59.892Z"
             },
             {
               "$type": "Document",
@@ -194,8 +188,7 @@
               "RelativeToolTip": "JobBoard.Service\\Authentication\\Implementations\\AuthenticationService.cs",
               "ViewState": "AgIAAGUBAAAAAAAAAAAlwHEBAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-21T16:49:08.915Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-21T16:49:08.915Z"
             },
             {
               "$type": "Document",

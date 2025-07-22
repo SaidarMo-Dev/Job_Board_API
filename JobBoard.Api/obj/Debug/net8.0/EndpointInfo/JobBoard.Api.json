@@ -2103,7 +2103,7 @@
       }
     },
     "/Api/V1/auth/confirm-email-code": {
-      "put": {
+      "get": {
         "tags": [
           "Authentication"
         ],
