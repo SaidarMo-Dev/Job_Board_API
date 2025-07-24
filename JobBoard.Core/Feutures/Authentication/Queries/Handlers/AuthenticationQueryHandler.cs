@@ -68,7 +68,6 @@ namespace JobBoard.Core.Feutures.Authentication.Queries.Handlers
 
 			return BadRequest(result);
 
-
 		}
 
 		public async Task<Response<string>> Handle(ConfirmEmailByCode request, CancellationToken cancellationToken)

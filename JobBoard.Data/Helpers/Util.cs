@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using JobBoard.Data.Entities.Identity;
 
 namespace JobBoard.Core.Helpers
 {
@@ -29,7 +30,7 @@ namespace JobBoard.Core.Helpers
 			string htmlMessage = $@"
 				<p>We received a request that requires verification.</p>
 				<p>Your verification code is:</p>
-				<div style='font-size: 24px; font-weight: bold; color: #2c3e50; margin: 20px 0;'>
+				<div style='font-size: 24px; font-weight: bold; color: #039BE5; margin: 20px 0;'>
 					{code}
 				</div>
 				<p>This code is valid for 10 minutes. If you did not request this, please ignore this email.</p>
@@ -74,6 +75,35 @@ namespace JobBoard.Core.Helpers
 			var random = new Random();
 
 			return random.Next(0, 100000).ToString("D6");
+
+		}
+
+		public static int CalculateProfileCompletion(User user)
+		{
+			if (user is null) throw new ArgumentNullException("user");
+
+			var fields = new List<(object? value, double weight)>
+			{
+				(user.FirstName, 1),
+				(user.LastName, 1),
+				(user.Email, 1),
+				(user.PhoneNumber, 1),
+				// i want image path to be null for testing i will change it later 
+				(null, 2),
+				(user.Address, 1),
+				(user.Gender, 1),
+				(user.CountryId, 0.5),
+				(user.DateOfBirth, 0.5),
+				(user.UserName, 1),
+			};
+
+			var totalWeights = fields.Sum(x => x.weight);
+
+			var completedWeights = fields.Where(x => x.value != null &&
+									!string.IsNullOrWhiteSpace(x.value.ToString()))
+								.Sum(x => x.weight);
+			return (int)((completedWeights / totalWeights) * 100);
+
 
 		}
 	}

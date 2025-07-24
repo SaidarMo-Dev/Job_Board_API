@@ -97,10 +97,10 @@ namespace JobBoard.Service.Implementations
 			return result;
 		}
 
-		public async Task<Bookmark> GetBookmarkByJobIdAsync(int Id)
+		public async Task<Bookmark> GetUserBookmarkAsync(int userId, int JobId)
 		{
 			var result = await _bookMarkRepository.GetTableAsNoTracking()
-				.FirstOrDefaultAsync(x => x.JobId.Equals(Id));
+				.FirstOrDefaultAsync(x => x.JobId.Equals(JobId) && x.UserId.Equals(userId));
 
 			return result;
 		}

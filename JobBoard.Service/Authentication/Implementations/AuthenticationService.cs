@@ -374,6 +374,10 @@ namespace JobBoard.Service.Authentication.Implementations
 
 			if (user.Code != code) return "IncorrectCode";
 
+			user.EmailConfirmed = true;
+			var UpdateResult = await _userManager.UpdateAsync(user);
+			if (!UpdateResult.Succeeded) return "Cannot Update User";
+
 			return "Success";
 		}
 

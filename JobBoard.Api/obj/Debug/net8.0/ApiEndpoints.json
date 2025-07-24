@@ -792,7 +792,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Username",
+        "Name": "UsernameOrEmail",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -2765,11 +2765,6 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [
-      {
-        "Name": "UserId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
       {
         "Name": "page",
         "Type": "System.Int32",

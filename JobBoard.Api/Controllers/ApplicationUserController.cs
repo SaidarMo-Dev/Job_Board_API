@@ -9,10 +9,11 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace JobBoard.Api.Controllers
 {
 	[ApiController]
-	[Authorize(Roles = "Admin")]
+	[Authorize]
 	public class ApplicationUserController : AppControllerbase
 	{
 		// paginate users
+		[Authorize(Roles = "Admin")]
 		[SwaggerOperation(Summary = "Paginate users",
 				  Description = "Retrieves a paginated list of users based on the given filter and pagination parameters.",
 				  OperationId = "PaginateUsers")]
@@ -33,7 +34,7 @@ namespace JobBoard.Api.Controllers
 						  Description = "Retrieves the current user Info.",
 						  OperationId = "GetCurrentUser")]
 
-		[Authorize]
+
 		[HttpGet(Router.ApplicationUserRoute.me)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -51,7 +52,7 @@ namespace JobBoard.Api.Controllers
 						  Description = "Retrieves a single user by their unique identifier.",
 						  OperationId = "GetUserById")]
 
-		[AllowAnonymous]
+		[Authorize]
 		[HttpGet(Router.ApplicationUserRoute.GetByID)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
@@ -83,7 +84,7 @@ namespace JobBoard.Api.Controllers
 						  Description = "Updates the information of an existing user.",
 						  OperationId = "UpdateUser")]
 
-		[Authorize]
+
 		[HttpPut(Router.ApplicationUserRoute.Update)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -100,7 +101,7 @@ namespace JobBoard.Api.Controllers
 						  Description = "Deletes a user account by its unique identifier.",
 						  OperationId = "DeleteUserById")]
 
-		[Authorize]
+
 		[HttpDelete(Router.ApplicationUserRoute.DeleteById)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -115,7 +116,7 @@ namespace JobBoard.Api.Controllers
 		[SwaggerOperation(Summary = "get user dashboard stats",
 					  Description = "get user stats like saved jobs total application etc...",
 					  OperationId = "GetDashboardStats")]
-		[Authorize]
+
 		[HttpGet(Router.ApplicationUserRoute.DashboardStats)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]

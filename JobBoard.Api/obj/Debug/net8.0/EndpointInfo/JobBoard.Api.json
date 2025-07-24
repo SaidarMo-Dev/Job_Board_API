@@ -1148,11 +1148,11 @@
               "schema": {
                 "required": [
                   "Password",
-                  "Username"
+                  "UsernameOrEmail"
                 ],
                 "type": "object",
                 "properties": {
-                  "Username": {
+                  "UsernameOrEmail": {
                     "type": "string"
                   },
                   "Password": {
@@ -1161,7 +1161,7 @@
                 }
               },
               "encoding": {
-                "Username": {
+                "UsernameOrEmail": {
                   "style": "form"
                 },
                 "Password": {
@@ -3193,14 +3193,6 @@
         "description": "Retrieves all bookmarks associated with a specific user.",
         "operationId": "UserBookmarks",
         "parameters": [
-          {
-            "name": "UserId",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
           {
             "name": "page",
             "in": "query",
@@ -5753,9 +5745,6 @@
         "additionalProperties": false
       },
       "UpdateUserCommand": {
-        "required": [
-          "dateOfBirth"
-        ],
         "type": "object",
         "properties": {
           "id": {
@@ -5776,7 +5765,8 @@
           },
           "dateOfBirth": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "address": {
             "type": "string",

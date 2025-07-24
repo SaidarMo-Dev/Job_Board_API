@@ -3,6 +3,7 @@ using AutoMapper;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.ApplicationUser.Queries.Models;
 using JobBoard.Core.Feutures.ApplicationUser.Queries.Responses;
+using JobBoard.Core.Helpers;
 using JobBoard.Core.Resources;
 using JobBoard.Core.Security.Requirements;
 using JobBoard.Core.Wrapers;
@@ -98,8 +99,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 
 			if (userId is null) return BadRequest<GetCurrentUserQueryResponse>("No Claim userId Found");
 
-			var user = await _userManager.Users.Include(c => c.Country).FirstOrDefaultAsync();
-
+			var user = await _userManager.Users.Include(x => x.Country).FirstOrDefaultAsync(x => x.Id == Convert.ToInt32(userId));
 
 			if (user is null) return NotFound<GetCurrentUserQueryResponse>("User not Found");
 			var userResponse = _mapper.Map<GetCurrentUserQueryResponse>(user);
@@ -118,12 +118,16 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 
 			if (stats is null) return Success(new GetUserDashboardStatsQueryResponse());
 
+			var user = _currentUserservice.GetCurrentUser();
+
 			return Success(new GetUserDashboardStatsQueryResponse
 			{
 				TotalSavedJobs = stats.TotalSavedJobs,
 				TotalApplications = stats.TotalApplications,
 				Pending = stats.Pending,
-				Rejected = stats.Rejected
+				Rejected = stats.Rejected,
+				ProfileCompletion = Util.CalculateProfileCompletion(user)
+
 			});
 
 		}

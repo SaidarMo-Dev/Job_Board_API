@@ -8,6 +8,7 @@ using JobBoard.Core.Security.Requirements;
 using JobBoard.Core.Wrapers;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Service.Abstractions;
+using JobBoard.Service.Authentication.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -28,6 +29,7 @@ namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
 		private readonly IMapper _mapper;
 		private readonly UserManager<User> _userManager;
 		private readonly IAuthorizationService _authorizationService;
+		private readonly ICurrentUserService _currentUserService;
 
 		#endregion
 
@@ -36,13 +38,15 @@ namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
 									IMapper mapper,
 									IStringLocalizer<SharedResources> stringLocalizer,
 									UserManager<User> userManager,
-									IAuthorizationService authorizationService
+									IAuthorizationService authorizationService,
+									ICurrentUserService currentUserService
 									) : base(stringLocalizer)
 		{
 			_bookmarkService = bookmarkService;
 			_mapper = mapper;
 			_userManager = userManager;
 			_authorizationService = authorizationService;
+			_currentUserService = currentUserService;
 		}
 		#endregion
 
@@ -77,8 +81,9 @@ namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
 
 		public async Task<PaginatedResponse<List<GetUserBookmarksQueryResponse>>> Handle(GetUserBookmarksQuery request, CancellationToken cancellationToken)
 		{
+			var currentUserId = _currentUserService.GetCurrentUserId();
 
-			var queryable = _bookmarkService.GetUserBookmarksQueryable(request.UserId);
+			var queryable = _bookmarkService.GetUserBookmarksQueryable(currentUserId);
 
 			var result = await _mapper.ProjectTo<GetUserBookmarksQueryResponse>(queryable).ToPaginatedAsync(request.page, request.pageSize);
 
@@ -94,6 +99,7 @@ namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
 
 		public async Task<Response<GetSavedJobIdsQueryResponse>> Handle(GetSavedJobIdsQuery request, CancellationToken cancellationToken)
 		{
+
 			var result = await _bookmarkService.GetUserSavedJobIds(request.UserId);
 
 			return Success(new GetSavedJobIdsQueryResponse { SavedJobIds = result });

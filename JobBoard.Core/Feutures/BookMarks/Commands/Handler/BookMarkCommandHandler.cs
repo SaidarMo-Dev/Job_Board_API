@@ -4,7 +4,9 @@ using JobBoard.Core.Feutures.BookMarks.Commands.Models;
 using JobBoard.Core.Resources;
 using JobBoard.Data.Entities;
 using JobBoard.Service.Abstractions;
+using JobBoard.Service.Authentication.Interfaces;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.BookMarks.Commands.Handler
@@ -18,14 +20,20 @@ namespace JobBoard.Core.Feutures.BookMarks.Commands.Handler
 		#region Fields
 		private readonly IBookmarkService _bookMarkService;
 		private readonly IMapper _mapper;
+		private readonly IAuthorizationService _authorizationService;
+		private readonly ICurrentUserService _currentUserService;
 		#endregion
 
 		#region Constructors
 		public BookMarkCommandHandler(IBookmarkService bookMarkService, IMapper mapper,
-									IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
+									IStringLocalizer<SharedResources> stringLocalizer,
+									IAuthorizationService authorizationService,
+									ICurrentUserService currentUserService) : base(stringLocalizer)
 		{
 			_bookMarkService = bookMarkService;
 			_mapper = mapper;
+			_authorizationService = authorizationService;
+			_currentUserService = currentUserService;
 		}
 		#endregion
 
@@ -54,7 +62,13 @@ namespace JobBoard.Core.Feutures.BookMarks.Commands.Handler
 
 		public async Task<Response<string>> Handle(DeleteBookmarkByJobIdCommand request, CancellationToken cancellationToken)
 		{
-			var bookmark = await _bookMarkService.GetBookmarkByJobIdAsync(request.Id);
+
+			int userId = _currentUserService.GetCurrentUserId();
+
+			var bookmark = await _bookMarkService.GetUserBookmarkAsync(userId, request.Id);
+
+			if (bookmark.UserId != userId) return Forbidden<string>();
+
 			if (bookmark is null) return NotFound<string>();
 
 			bool IsDeleted = await _bookMarkService.DeleteBookmarkAsync(bookmark);

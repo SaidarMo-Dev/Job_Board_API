@@ -30,7 +30,7 @@ namespace JobBoard.Service.Abstractions
 		/// </summary>
 		/// <param name="Id">The ID of the bookmarked job.</param>
 		/// <returns>The <see cref="Bookmark"/> entity if found; otherwise, null.</returns>
-		Task<Bookmark> GetBookmarkByJobIdAsync(int Id);
+		Task<Bookmark> GetUserBookmarkAsync(int userId, int JobId);
 
 		/// <summary>
 		/// Deletes the specified bookmark asynchronously.

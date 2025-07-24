@@ -59,11 +59,13 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 		#region Handles
 		public async Task<Response<AuthResponse>> Handle(SignInCommand request, CancellationToken cancellationToken)
 		{
-			var user = await _userManager.FindByNameAsync(request.Username);
-			if (user == null) return NotFound<AuthResponse>("Incorect Username Or Password!");
+			var IsEmail = request.UsernameOrEmail.Contains("@");
+
+			var user = IsEmail ? await _userManager.FindByEmailAsync(request.UsernameOrEmail) : await _userManager.FindByNameAsync(request.UsernameOrEmail);
+			if (user == null) return NotFound<AuthResponse>(IsEmail ? "Incorect Email Or Password!" : "Incorect Username Or Password!");
 
 			var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
-			if (!result.Succeeded) return NotFound<AuthResponse>($"Incorect Username Or Password!");
+			if (!result.Succeeded) return NotFound<AuthResponse>(IsEmail ? "Incorect Email Or Password!" : "Incorect Username Or Password!");
 
 			// generate token
 

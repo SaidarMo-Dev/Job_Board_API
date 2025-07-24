@@ -6,7 +6,7 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Models
 {
 	public class SignInCommand : IRequest<Response<AuthResponse>>
 	{
-		public required string Username { get; set; }
+		public required string UsernameOrEmail { get; set; }
 		public required string Password { get; set; }
 
 	}

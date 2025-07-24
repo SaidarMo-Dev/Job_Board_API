@@ -51,6 +51,5 @@ namespace JobBoard.Service.Abstractions
 		Task<bool> IsEmailExistAsync(string email);
 		Task<DashboardStatsResponse> GetUserDashboardStatsAsync(int userId);
 
-
 	}
 }

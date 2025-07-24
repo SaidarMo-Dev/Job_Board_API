@@ -13,7 +13,7 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Validations
 		public void AddValidations()
 		{
 
-			RuleFor(x => x.Username)
+			RuleFor(x => x.UsernameOrEmail)
 				.NotEmpty().WithMessage("{PropertyName} Cannot Be Empty")
 				.NotNull().WithMessage("{PropertyName} Cannot Be Null");
 

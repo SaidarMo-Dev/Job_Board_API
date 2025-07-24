@@ -6,6 +6,6 @@
 		public int TotalApplications { get; set; }
 		public int Rejected { get; set; }
 		public int Pending { get; set; }
-
+		public int ProfileCompletion { get; set; }
 	}
 }
