@@ -1,5 +1,6 @@
 ﻿using JobBoard.Core.Helpers;
 using JobBoard.Data.Entities.Identity;
+using JobBoard.Data.enums;
 using JobBoard.Data.Responses;
 using JobBoard.Infrastructure.Abstractions;
 using JobBoard.Infrastructure.context;
@@ -28,6 +29,8 @@ namespace JobBoard.Service.Implementations
 		private readonly IUserRepository _userRepository;
 		private readonly appDbContext _context;
 		private readonly IAuthenticationService _authenticationService;
+		private readonly appDbContext appDbContext1;
+
 		#endregion
 
 		#region Constructors
@@ -50,6 +53,9 @@ namespace JobBoard.Service.Implementations
 							appDbContext appDbContext,
 							IAuthenticationService authenticationService
 
+
+
+
 						)
 						: base(userStore, options,
 							passwordHasher, userValidators,
@@ -66,6 +72,7 @@ namespace JobBoard.Service.Implementations
 			_urlHelper = urlHelper;
 			_context = appDbContext;
 			_authenticationService = authenticationService;
+
 		}
 
 
@@ -197,7 +204,84 @@ namespace JobBoard.Service.Implementations
 			return result;
 		}
 
+		public IQueryable<UserManagementResponse> GetUsersQueryable(string? search, FilterByRole? role, FilterByStatus? status)
+		{
+			var users = _userManager.Users.IgnoreQueryFilters().AsNoTracking();
 
+			// Handle search by email or full name
+
+			if (search != null)
+			{
+				// if search contains @ then search by email
+				// else we treat search as full name 
+
+				if (search.Contains("@"))
+				{
+					users = users.Where(x => x.Email != null && x.Email.ToLower() == search.ToLower());
+				}
+				else
+				{
+					var names = search.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+
+					if (names.Length > 1)
+					{
+						users = users.Where(x => x.FirstName.ToLower() == names[0].ToLower() && x.LastName.ToLower() == names[1].ToLower());
+					}
+					else users = users.Where(x => x.FirstName.ToLower() == names[0].ToLower());
+
+				}
+
+
+			}
+
+			// filter by status
+
+			if (status != null && status != FilterByStatus.All)
+			{
+				users = users.Where(x => status == FilterByStatus.Suspended ? x.IsDeleted : !x.IsDeleted);
+			}
+
+
+
+			// filter by role
+			if (role != null && role != FilterByRole.All)
+			{
+				var roleInfo = _roleManager.Roles.FirstOrDefault(x => x.Name == role.ToString());
+				var roleId = roleInfo is null ? -1 : roleInfo.Id;
+
+				users = users.Join(_context.userRoles.Where(r => r.RoleId.Equals(roleId)), u => u.Id, r => r.UserId, (user, role) => user);
+
+
+			}
+
+			var query = from user in users
+						join country in _context.countries on user.CountryId equals country.CountryId into countryJoin
+						from country in countryJoin.DefaultIfEmpty()
+
+						from userRole in _context.UserRoles.Where(ur => ur.UserId == user.Id).DefaultIfEmpty()
+						from r in _context.Roles.Where(r => r.Id == userRole.RoleId).DefaultIfEmpty()
+
+						select new UserManagementResponse
+						{
+							Id = user.Id,
+							FirstName = user.FirstName,
+							LastName = user.LastName,
+							Email = user.Email,
+							Username = user.UserName,
+							PhoneNumber = user.PhoneNumber,
+							Address = user.Address,
+							Gender = user.Gender.ToString(),
+							DateOfBirth = user.DateOfBirth,
+							ImagePath = user.ImagePath,
+							IsDeleted = user.IsDeleted,
+							DeletedAt = user.DeletedAt,
+							country = country != null ? country.CountryName : "Unknown",
+							Role = r.Name ?? "Unknown"
+						};
+
+			return query;
+		}
 		#endregion
 	}
+
 }

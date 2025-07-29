@@ -1,4 +1,5 @@
 ﻿using JobBoard.Data.Entities.Identity;
+using JobBoard.Data.enums;
 using JobBoard.Data.Responses;
 
 namespace JobBoard.Service.Abstractions
@@ -50,6 +51,8 @@ namespace JobBoard.Service.Abstractions
 		/// <returns><c>true</c> if the email exists; otherwise, <c>false</c>.</returns>
 		Task<bool> IsEmailExistAsync(string email);
 		Task<DashboardStatsResponse> GetUserDashboardStatsAsync(int userId);
+		IQueryable<UserManagementResponse> GetUsersQueryable(string? search, FilterByRole? role, FilterByStatus? status);
+
 
 	}
 }

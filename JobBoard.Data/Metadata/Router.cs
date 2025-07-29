@@ -8,6 +8,14 @@
 		private const string Single = "/{Id}";
 
 
+		public static class AdminRoute
+		{
+			private const string Prefex = Rule + "/admin";
+
+			public const string GetUsers = Prefex + "/users";
+
+		}
+
 		public static class CountryRoute
 		{
 			private const string Prefex = Rule + "/Country";

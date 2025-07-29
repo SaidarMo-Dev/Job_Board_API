@@ -22,12 +22,12 @@ namespace JobBoard.Infrastructure.context
 		public DbSet<Skill> skills { get; set; }
 		public DbSet<JobSkill> jobSkills { get; set; }
 		public DbSet<Bookmark> bookMarks { get; set; }
+		public DbSet<IdentityUserRole<int>> userRoles { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);
 			modelBuilder.ApplyConfigurationsFromAssembly(typeof(appDbContext).Assembly);
-
 
 		}
 	}
