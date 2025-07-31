@@ -27,12 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Feutures\Admin\Command\Handlers\" />
-    <Folder Include="Feutures\Admin\Command\Models\" />
-    <Folder Include="Feutures\Admin\Command\Validations\" />
     <Folder Include="Feutures\Countries\Commands\" />
     <Folder Include="Feutures\Emails\" />
-    <Folder Include="Mapping\AdminMapping\command\" />
     <Folder Include="Mapping\AuthorizationMapping\Commands\" />
     <Folder Include="Mapping\GlobalMapping\commands\" />
   </ItemGroup>

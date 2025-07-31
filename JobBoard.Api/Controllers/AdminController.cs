@@ -1,12 +1,14 @@
 ﻿using JobBoard.Api.Bases;
+using JobBoard.Core.Feutures.Admin.Command.Models;
 using JobBoard.Core.Feutures.Admin.Query.Models;
 using JobBoard.Data.Metadata;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace JobBoard.Api.Controllers
 {
-	//[Authorize(Roles = "Admin")]
+	[Authorize(Roles = "Admin")]
 	[ApiController]
 	public class AdminController : AppControllerbase
 	{
@@ -26,6 +28,28 @@ namespace JobBoard.Api.Controllers
 			var response = await Mediator.Send(query);
 
 			return Ok(response);
+		}
+
+
+		[HttpPost(Router.AdminRoute.AddUser)]
+		[ProducesResponseType(StatusCodes.Status201Created)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		[ProducesResponseType(StatusCodes.Status403Forbidden)]
+		public async Task<IActionResult> AddNewUser([FromBody] AdminAddUserCommand command)
+		{
+			return NewResult(await Mediator.Send(command));
+		}
+
+
+		[HttpPut(Router.AdminRoute.UpdateUser)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		[ProducesResponseType(StatusCodes.Status403Forbidden)]
+		public async Task<IActionResult> UpdateUser([FromBody] AdminUpdateUserCommand command)
+		{
+			return NewResult(await Mediator.Send(command));
 		}
 	}
 }

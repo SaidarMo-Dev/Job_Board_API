@@ -281,6 +281,49 @@ namespace JobBoard.Service.Implementations
 
 			return query;
 		}
+
+		public async Task<IdentityResult> AdminUpdateUserAsync(User user, string role)
+		{
+			using var trans = _userRepository.BeginTransaction();
+
+			try
+			{
+				// Update the user
+				var updateUserResult = await _userManager.UpdateAsync(user);
+				if (!updateUserResult.Succeeded)
+					throw new DbUpdateException(updateUserResult.Errors.FirstOrDefault()?.Description ?? "Cannot update user");
+
+				// Remove old role
+				var oldRoles = await _userManager.GetRolesAsync(user);
+				if (oldRoles.Count > 0)
+				{
+					var removeRoleResult = await _userManager.RemoveFromRolesAsync(user, oldRoles);
+					if (!removeRoleResult.Succeeded)
+						throw new DbUpdateException(removeRoleResult.Errors.FirstOrDefault()?.Description ?? "Cannot remove old roles");
+				}
+
+				// Add new role
+				var addRoleResult = await _userManager.AddToRoleAsync(user, role);
+				if (!addRoleResult.Succeeded)
+					throw new DbUpdateException(addRoleResult.Errors.FirstOrDefault()?.Description ?? "Cannot add new role");
+
+				await trans.CommitAsync();
+				return IdentityResult.Success;
+			}
+			catch (Exception ex)
+			{
+				await trans.RollbackAsync();
+
+				Log.Error(ex, "Failed to update user");
+
+				return IdentityResult.Failed(new IdentityError
+				{
+					Code = "UpdateFailed",
+					Description = ex.Message
+				});
+			}
+		}
+
 		#endregion
 	}
 

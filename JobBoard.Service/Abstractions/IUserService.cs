@@ -1,6 +1,7 @@
 ﻿using JobBoard.Data.Entities.Identity;
 using JobBoard.Data.enums;
 using JobBoard.Data.Responses;
+using Microsoft.AspNetCore.Identity;
 
 namespace JobBoard.Service.Abstractions
 {
@@ -53,6 +54,12 @@ namespace JobBoard.Service.Abstractions
 		Task<DashboardStatsResponse> GetUserDashboardStatsAsync(int userId);
 		IQueryable<UserManagementResponse> GetUsersQueryable(string? search, FilterByRole? role, FilterByStatus? status);
 
+		/// <summary>
+		/// Updates an existing user asynchronously.
+		/// </summary>
+		/// <param name="user">The <see cref="User"/> entity to update.</param>
+		/// <returns>A string indicating the result of the update operation.</returns>
+		Task<IdentityResult> AdminUpdateUserAsync(User user, string role);
 
 	}
 }

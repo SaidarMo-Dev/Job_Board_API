@@ -7,6 +7,8 @@ namespace JobBoard.Core.Mapping.AdminMapping
 		public AdminProfile()
 		{
 			GetUsersQueryMapping();
+			AdminAddUserCommandMapping();
+			AdminUpddateUserCommandMapping();
 		}
 	}
 }

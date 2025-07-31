@@ -13,6 +13,9 @@
 			private const string Prefex = Rule + "/admin";
 
 			public const string GetUsers = Prefex + "/users";
+			public const string AddUser = Prefex + "/users";
+			public const string UpdateUser = Prefex + "/users";
+
 
 		}
 
