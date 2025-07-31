@@ -207,5 +207,19 @@ namespace JobBoard.Api.Controllers
 		{
 			return NewResult(await Mediator.Send(request));
 		}
+
+
+		[SwaggerOperation(Summary = "Confirm email by code",
+					  Description = "Confirms a user's email address using a confirmation code.",
+					  OperationId = "ConfirmEmailByCode")]
+
+		[HttpGet(Router.AuthenticationRoute.VerfiyPassword)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		public async Task<IActionResult> VerifyPassword([FromQuery] VerifyPasswordQuery query)
+		{
+			return NewResult(await Mediator.Send(query));
+		}
 	}
 }

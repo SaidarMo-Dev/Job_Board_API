@@ -988,6 +988,46 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.AuthenticationController",
+    "Method": "VerifyPassword",
+    "RelativePath": "Api/V1/auth/verfiy-password",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.AuthenticationController",
     "Method": "VerifyEmailChange",
     "RelativePath": "Api/V1/auth/verify-email-change",
     "HttpMethod": "PUT",

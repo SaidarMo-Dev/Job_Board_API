@@ -155,6 +155,8 @@
 
 			public const string AddRecoveryContact = Prefex + "/add-recovery-contact";
 
+			public const string VerfiyPassword = Prefex + "/verfiy-password";
+
 		}
 
 

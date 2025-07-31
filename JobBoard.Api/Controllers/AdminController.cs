@@ -2,17 +2,16 @@
 using JobBoard.Core.Feutures.Admin.Command.Models;
 using JobBoard.Core.Feutures.Admin.Query.Models;
 using JobBoard.Data.Metadata;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace JobBoard.Api.Controllers
 {
-	[Authorize(Roles = "Admin")]
+	//[Authorize(Roles = "Admin")]
 	[ApiController]
+
 	public class AdminController : AppControllerbase
 	{
-
 
 		[SwaggerOperation(Summary = "get all users",
 					  Description = "get all users information with paginations...",

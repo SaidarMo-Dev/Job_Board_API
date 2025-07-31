@@ -1,9 +1,11 @@
 ﻿using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Authentication.Queries.Models;
 using JobBoard.Core.Resources;
+using JobBoard.Data.Entities.Identity;
 using JobBoard.Service.Abstractions;
 using JobBoard.Service.Authentication.Interfaces;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Authentication.Queries.Handlers
@@ -12,23 +14,29 @@ namespace JobBoard.Core.Feutures.Authentication.Queries.Handlers
 					IRequestHandler<ConfirmEmailQuery, Response<string>>,
 					IRequestHandler<ConfirmResetPasswordQuery, Response<string>>,
 					IRequestHandler<SendConfirmEmailQuery, Response<string>>,
-					IRequestHandler<ConfirmEmailByCode, Response<string>>
+					IRequestHandler<ConfirmEmailByCode, Response<string>>,
+					IRequestHandler<VerifyPasswordQuery, Response<bool>>
 	{
 		#region Fields
 		private readonly IStringLocalizer<SharedResources> _stringLocalizer;
 		private readonly IUserService _userService;
 		private readonly IAuthenticationService _authenticationService;
+		private readonly ICurrentUserService _currentUserService;
+		private readonly SignInManager<User> _signInManager;
 
 		#endregion
 
 		#region Constructors
 		public AuthenticationQueryHandler(IStringLocalizer<SharedResources> stringLocalizer,
 										 IUserService userService,
-										  IAuthenticationService authenticationService) : base(stringLocalizer)
+										  IAuthenticationService authenticationService,
+										  ICurrentUserService currentUserService, SignInManager<User> signInManager) : base(stringLocalizer)
 		{
 			_stringLocalizer = stringLocalizer;
 			_userService = userService;
 			_authenticationService = authenticationService;
+			_currentUserService = currentUserService;
+			_signInManager = signInManager;
 		}
 
 
@@ -77,6 +85,23 @@ namespace JobBoard.Core.Feutures.Authentication.Queries.Handlers
 			if (!(result == "Success")) return BadRequest<string>("Inccorect code!");
 
 			return Success<string>(message: "Email Confirmed");
+		}
+
+		public async Task<Response<bool>> Handle(VerifyPasswordQuery request, CancellationToken cancellationToken)
+		{
+			if (string.IsNullOrWhiteSpace(request.Password))
+			{
+				return BadRequest<bool>("Password cannot be empty");
+			}
+
+			var user = _currentUserService.GetCurrentUser();
+			if (user == null || !(await _signInManager.CheckPasswordSignInAsync(user, request.Password, false)).Succeeded)
+			{
+				return Unauthorized<bool>("Authentication failed: Invalid credentials");
+			}
+
+			return Success(true, "Password verified successfully.");
+
 		}
 
 
