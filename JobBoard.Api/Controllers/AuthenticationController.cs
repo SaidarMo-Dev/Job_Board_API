@@ -209,9 +209,9 @@ namespace JobBoard.Api.Controllers
 		}
 
 
-		[SwaggerOperation(Summary = "Confirm email by code",
-					  Description = "Confirms a user's email address using a confirmation code.",
-					  OperationId = "ConfirmEmailByCode")]
+		[SwaggerOperation(Summary = "Verify password",
+					  Description = "Verify user's passwor.",
+					  OperationId = "VerifyPassword")]
 
 		[HttpGet(Router.AuthenticationRoute.VerfiyPassword)]
 		[ProducesResponseType(StatusCodes.Status200OK)]

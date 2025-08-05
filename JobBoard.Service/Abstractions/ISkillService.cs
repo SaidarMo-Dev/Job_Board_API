@@ -1,4 +1,5 @@
 ﻿using JobBoard.Data.Entities;
+using JobBoard.Data.enums;
 
 namespace JobBoard.Service.Abstractions
 {
@@ -72,6 +73,15 @@ namespace JobBoard.Service.Abstractions
 		/// <param name="JobId">The ID of the job.</param>
 		/// <returns>An <see cref="IQueryable{Skill}"/> for further querying.</returns>
 		IQueryable<Skill> GetJobSkills(int JobId);
+
+
+		/// <summary>
+		/// Retrieves a queryable collection of skills based on search and sort.
+		/// </summary>
+		/// <param name="search">search for skills by name.</param>
+		/// <param name="sort">the sort that we will sort the queryable by.</param>
+		/// <returns>An <see cref="IQueryable{Skill}"/> for further querying.</returns>
+		IQueryable<Skill> GetSkillsQueryable(string? search, SortSkill? sort);
 
 	}
 }

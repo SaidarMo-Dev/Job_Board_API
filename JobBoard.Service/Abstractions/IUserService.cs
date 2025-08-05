@@ -60,6 +60,8 @@ namespace JobBoard.Service.Abstractions
 		/// <param name="user">The <see cref="User"/> entity to update.</param>
 		/// <returns>A string indicating the result of the update operation.</returns>
 		Task<IdentityResult> AdminUpdateUserAsync(User user, string role);
+		Task<User> GetAdminProfile(int userId);
+
 
 	}
 }

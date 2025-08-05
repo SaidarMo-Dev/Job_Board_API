@@ -31,9 +31,9 @@ namespace JobBoard.Api.Controllers
 			OperationId = "GetAllSkills")]
 
 		[HttpGet(Router.SkillRoute.GetAll)]
-		public async Task<IActionResult> GetAll()
+		public async Task<IActionResult> GetAll([FromQuery] GetListSkillsQuery query)
 		{
-			return NewResult(await Mediator.Send(new GetListSkillsQuery()));
+			return Ok(await Mediator.Send(query));
 
 		}
 

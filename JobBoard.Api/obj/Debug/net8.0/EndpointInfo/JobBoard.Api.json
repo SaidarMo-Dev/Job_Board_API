@@ -10,6 +10,81 @@
     "version": "v1"
   },
   "paths": {
+    "/Api/V1/admin/profile": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "get admin profile",
+        "description": "get admin profile info",
+        "operationId": "Admin/Profile",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/Api/V1/admin/users": {
       "get": {
         "tags": [
@@ -2467,14 +2542,14 @@
         }
       }
     },
-    "/Api/V1/auth/verfiy-password": {
+    "/Api/V1/auth/verify-password": {
       "get": {
         "tags": [
           "Authentication"
         ],
-        "summary": "Confirm email by code",
-        "description": "Confirms a user's email address using a confirmation code.",
-        "operationId": "ConfirmEmailByCode",
+        "summary": "Verify password",
+        "description": "Verify user's passwor.",
+        "operationId": "VerifyPassword",
         "parameters": [
           {
             "name": "Password",
@@ -5437,7 +5512,7 @@
         }
       }
     },
-    "/Api/V1/Skill/{Id}": {
+    "/Api/V1/skills/{Id}": {
       "get": {
         "tags": [
           "Skill"
@@ -5487,7 +5562,7 @@
         }
       }
     },
-    "/Api/V1/Skill/GetAll": {
+    "/Api/V1/skills": {
       "get": {
         "tags": [
           "Skill"
@@ -5495,14 +5570,44 @@
         "summary": "Get all skills",
         "description": "Returns a list of all skills available in the system.",
         "operationId": "GetAllSkills",
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "SortBy",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SortSkill"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
           }
         }
-      }
-    },
-    "/Api/V1/Skill/AddSkill": {
+      },
       "post": {
         "tags": [
           "Skill"
@@ -5534,9 +5639,7 @@
             "description": "OK"
           }
         }
-      }
-    },
-    "/Api/V1/Skill/UpdateSkill": {
+      },
       "put": {
         "tags": [
           "Skill"
@@ -6025,6 +6128,14 @@
           1,
           2,
           3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "SortSkill": {
+        "enum": [
+          0,
+          1
         ],
         "type": "integer",
         "format": "int32"

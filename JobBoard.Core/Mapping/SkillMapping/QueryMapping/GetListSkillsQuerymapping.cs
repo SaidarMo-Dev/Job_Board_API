@@ -7,7 +7,10 @@ namespace JobBoard.Core.Mapping.SkillMapping
 	{
 		public void AddListSkillsMapping()
 		{
-			CreateMap<Skill, GetListSkillsQueryResponse>();
+			CreateMap<Skill, GetListSkillsQueryResponse>()
+				.ForMember(x => x.Id, opt => opt.MapFrom(src => src.SkillId))
+				.ForMember(x => x.CreateDate, opt => opt.MapFrom(
+								src => src.CreateDate.ToString()));
 
 		}
 	}

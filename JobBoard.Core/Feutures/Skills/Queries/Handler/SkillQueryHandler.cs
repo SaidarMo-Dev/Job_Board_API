@@ -3,6 +3,7 @@ using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Skills.Queries.Models;
 using JobBoard.Core.Feutures.Skills.Queries.Results;
 using JobBoard.Core.Resources;
+using JobBoard.Core.Wrapers;
 using JobBoard.Service.Abstractions;
 using MediatR;
 using Microsoft.Extensions.Localization;
@@ -11,7 +12,7 @@ namespace JobBoard.Core.Feutures.Skills.Queries.Handler
 {
 	public class SkillQueryHandler : ResponseHandler,
 									IRequestHandler<GetSingleSkillQuery, Response<GetSingleSkillQueryResponse>>,
-									IRequestHandler<GetListSkillsQuery, Response<List<GetListSkillsQueryResponse>>>
+									IRequestHandler<GetListSkillsQuery, PaginatedResponse<List<GetListSkillsQueryResponse>>>
 	{
 		#region Fields
 		private readonly ISkillService _skillService;
@@ -37,11 +38,12 @@ namespace JobBoard.Core.Feutures.Skills.Queries.Handler
 			return Success(_mapper.Map<GetSingleSkillQueryResponse>(skill));
 		}
 
-		public async Task<Response<List<GetListSkillsQueryResponse>>> Handle(GetListSkillsQuery request, CancellationToken cancellationToken)
+		public async Task<PaginatedResponse<List<GetListSkillsQueryResponse>>> Handle(GetListSkillsQuery request, CancellationToken cancellationToken)
 		{
-			var skills = await _skillService.GetAllAsync();
+			var queryable = _skillService.GetSkillsQueryable(request.Search, request.SortBy);
 
-			return Success(_mapper.Map<List<GetListSkillsQueryResponse>>(skills));
+			var skills = await _mapper.ProjectTo<GetListSkillsQueryResponse>(queryable).ToPaginatedAsync(request.Page, request.PageSize);
+			return skills;
 		}
 		#endregion
 	}

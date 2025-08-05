@@ -15,6 +15,7 @@
 			public const string GetUsers = Prefex + "/users";
 			public const string AddUser = Prefex + "/users";
 			public const string UpdateUser = Prefex + "/users";
+			public const string Profile = Prefex + "/profile";
 
 
 		}
@@ -43,13 +44,13 @@
 		}
 		public static class SkillRoute
 		{
-			private const string Prefex = Rule + "/Skill";
+			private const string Prefex = Rule + "/skills";
 
-			public const string GetAll = Prefex + "/GetAll";
-			public const string Paginate = Prefex + "/Paginate";
+			public const string GetAll = Prefex;
+			public const string Paginate = Prefex + "/paginate";
 			public const string GetByID = Prefex + "/{Id}";
-			public const string Create = Prefex + "/AddSkill";
-			public const string Update = Prefex + "/UpdateSkill";
+			public const string Create = Prefex;
+			public const string Update = Prefex;
 			public const string DeleteById = Prefex + Single;
 
 		}
@@ -155,7 +156,7 @@
 
 			public const string AddRecoveryContact = Prefex + "/add-recovery-contact";
 
-			public const string VerfiyPassword = Prefex + "/verfiy-password";
+			public const string VerfiyPassword = Prefex + "/verify-password";
 
 		}
 

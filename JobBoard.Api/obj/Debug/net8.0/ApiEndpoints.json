@@ -1,6 +1,49 @@
 [
   {
     "ContainingType": "JobBoard.Api.Controllers.AdminController",
+    "Method": "GetAdminProfile",
+    "RelativePath": "Api/V1/admin/profile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 403
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.AdminController",
     "Method": "GetUsers",
     "RelativePath": "Api/V1/admin/users",
     "HttpMethod": "GET",
@@ -988,46 +1031,6 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.AuthenticationController",
-    "Method": "VerifyPassword",
-    "RelativePath": "Api/V1/auth/verfiy-password",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Password",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 401
-      }
-    ]
-  },
-  {
-    "ContainingType": "JobBoard.Api.Controllers.AuthenticationController",
     "Method": "VerifyEmailChange",
     "RelativePath": "Api/V1/auth/verify-email-change",
     "HttpMethod": "PUT",
@@ -1058,6 +1061,46 @@
           "text/json"
         ],
         "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.AuthenticationController",
+    "Method": "VerifyPassword",
+    "RelativePath": "Api/V1/auth/verify-password",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
@@ -2713,8 +2756,71 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.SkillController",
+    "Method": "GetAll",
+    "RelativePath": "Api/V1/skills",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Search",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortBy",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.SkillController",
+    "Method": "AddNewSkill",
+    "RelativePath": "Api/V1/skills",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "JobBoard.Core.Feutures.Skills.Commands.Models.AddSkillCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.SkillController",
+    "Method": "UpdateSkill",
+    "RelativePath": "Api/V1/skills",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "JobBoard.Core.Feutures.Skills.Commands.Models.UpdateSkillCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.SkillController",
     "Method": "GetSkillById",
-    "RelativePath": "Api/V1/Skill/{Id}",
+    "RelativePath": "Api/V1/skills/{Id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -2730,7 +2836,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.SkillController",
     "Method": "DeleteSkill",
-    "RelativePath": "Api/V1/Skill/{Id}",
+    "RelativePath": "Api/V1/skills/{Id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -2738,48 +2844,6 @@
       {
         "Name": "Id",
         "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "JobBoard.Api.Controllers.SkillController",
-    "Method": "AddNewSkill",
-    "RelativePath": "Api/V1/Skill/AddSkill",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "JobBoard.Core.Feutures.Skills.Commands.Models.AddSkillCommand",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "JobBoard.Api.Controllers.SkillController",
-    "Method": "GetAll",
-    "RelativePath": "Api/V1/Skill/GetAll",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "JobBoard.Api.Controllers.SkillController",
-    "Method": "UpdateSkill",
-    "RelativePath": "Api/V1/Skill/UpdateSkill",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "JobBoard.Core.Feutures.Skills.Commands.Models.UpdateSkillCommand",
         "IsRequired": true
       }
     ],

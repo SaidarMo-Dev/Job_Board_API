@@ -13,6 +13,21 @@ namespace JobBoard.Api.Controllers
 	public class AdminController : AppControllerbase
 	{
 
+		[SwaggerOperation(Summary = "get admin profile",
+					  Description = "get admin profile info",
+					  OperationId = "Admin/Profile")]
+
+		[HttpGet(Router.AdminRoute.Profile)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		[ProducesResponseType(StatusCodes.Status403Forbidden)]
+		public async Task<IActionResult> GetAdminProfile()
+		{
+
+			return Ok(await Mediator.Send(new GetAdminProfileQuery()));
+		}
+
 		[SwaggerOperation(Summary = "get all users",
 					  Description = "get all users information with paginations...",
 					  OperationId = "Admin/GetUsers")]

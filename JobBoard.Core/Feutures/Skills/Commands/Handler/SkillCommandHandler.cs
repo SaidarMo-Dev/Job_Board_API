@@ -35,6 +35,10 @@ namespace JobBoard.Core.Feutures.Skills.Commands.Handler
 		{
 			var skill = _mapper.Map<Skill>(request);
 
+			var dateNow = DateTime.UtcNow;
+
+			skill.CreateDate = new DateOnly(dateNow.Year, dateNow.Month, dateNow.Day);
+
 			skill = await _skillService.AddNewSkillAsync(skill);
 
 			return Created(skill.SkillId);
@@ -42,7 +46,6 @@ namespace JobBoard.Core.Feutures.Skills.Commands.Handler
 
 		public async Task<Response<string>> Handle(UpdateSkillCommand request, CancellationToken cancellationToken)
 		{
-			//bool Exist = await _skillService.IsExistByIdAsync(request.SkillId);
 
 			var skill = await _skillService.GetSkillByIdAsync(request.SkillId);
 

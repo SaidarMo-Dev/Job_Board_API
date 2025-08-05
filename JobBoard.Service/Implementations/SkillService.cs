@@ -1,4 +1,5 @@
 ﻿using JobBoard.Data.Entities;
+using JobBoard.Data.enums;
 using JobBoard.Infrastructure.Abstractions;
 using JobBoard.Service.Abstractions;
 using Microsoft.EntityFrameworkCore;
@@ -90,6 +91,21 @@ namespace JobBoard.Service.Implementations
 
 			return skill != null;
 
+		}
+
+		public IQueryable<Skill> GetSkillsQueryable(string? search, SortSkill? sort)
+		{
+			var queryable = _skillRepository.GetTableAsNoTracking();
+
+			if (search != null)
+				queryable = queryable.Where(x => x.Name.Contains(search));
+
+			if (sort != null && sort == SortSkill.Name)
+				queryable = queryable.OrderBy(x => x.Name);
+			else
+				queryable = queryable.OrderBy(x => x.CreateDate);
+
+			return queryable;
 		}
 
 

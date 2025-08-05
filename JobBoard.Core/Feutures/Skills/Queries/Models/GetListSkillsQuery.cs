@@ -1,10 +1,16 @@
-﻿using JobBoard.Core.Bases;
-using JobBoard.Core.Feutures.Skills.Queries.Results;
+﻿using JobBoard.Core.Feutures.Skills.Queries.Results;
+using JobBoard.Core.Wrapers;
+using JobBoard.Data.enums;
 using MediatR;
 
 namespace JobBoard.Core.Feutures.Skills.Queries.Models
 {
-	public class GetListSkillsQuery : IRequest<Response<List<GetListSkillsQueryResponse>>>
+	public class GetListSkillsQuery : IRequest<PaginatedResponse<List<GetListSkillsQueryResponse>>>
 	{
+		public int Page { get; set; }
+		public int PageSize { get; set; }
+		public string? Search { get; set; }
+		public SortSkill? SortBy { get; set; }
 	}
+
 }

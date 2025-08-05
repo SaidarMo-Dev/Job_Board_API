@@ -324,6 +324,12 @@ namespace JobBoard.Service.Implementations
 			}
 		}
 
+		public async Task<User> GetAdminProfile(int userId)
+		{
+			var user = await _userRepository.GetTableAsNoTracking().Where(x => x.Id == userId).Include(x => x.Country).FirstOrDefaultAsync();
+			return user;
+		}
+
 		#endregion
 	}
 

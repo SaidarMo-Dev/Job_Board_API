@@ -86,16 +86,16 @@ namespace JobBoard.Service.Authentication.Implementations
 
 			var claims = new List<Claim>()
 			{
-				new Claim(nameof(JwtClaimModel.UserId), user?.Id.ToString()),
-				new Claim(ClaimTypes.Name.ToString(), user.UserName),
-				new Claim(ClaimTypes.Email.ToString(), user.Email),
+				new Claim(nameof(JwtClaimModel.UserId), user.Id.ToString()),
+				new Claim(nameof(JwtClaimModel.Username), user.UserName ?? "Unknown"),
+				new Claim(nameof(JwtClaimModel.Email), user.Email ?? "Unknown"),
 				new Claim(nameof(JwtClaimModel.FirstName), user.FirstName),
 				new Claim(nameof(JwtClaimModel.LastName), user.LastName)
 			};
 
 			foreach (var role in roles)
 			{
-				claims.Add(new Claim(ClaimTypes.Role, role));
+				claims.Add(new Claim(nameof(JwtClaimModel.role), role));
 			}
 
 			claims.AddRange(userClaims);

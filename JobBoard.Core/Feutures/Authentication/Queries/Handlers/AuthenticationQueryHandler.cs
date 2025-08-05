@@ -97,7 +97,7 @@ namespace JobBoard.Core.Feutures.Authentication.Queries.Handlers
 			var user = _currentUserService.GetCurrentUser();
 			if (user == null || !(await _signInManager.CheckPasswordSignInAsync(user, request.Password, false)).Succeeded)
 			{
-				return Unauthorized<bool>("Authentication failed: Invalid credentials");
+				return Forbidden<bool>("Authentication failed: Invalid credentials");
 			}
 
 			return Success(true, "Password verified successfully.");
