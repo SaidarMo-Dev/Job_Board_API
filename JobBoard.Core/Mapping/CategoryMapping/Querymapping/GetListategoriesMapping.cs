@@ -7,7 +7,8 @@ namespace JobBoard.Core.Mapping.CategoryMapping
 	{
 		public void AddGetListMapping()
 		{
-			CreateMap<Category, GetListCategoriesQueryResponse>();
+			CreateMap<Category, GetListCategoriesQueryResponse>()
+				.ForMember(x => x.CreateDate, opt => opt.MapFrom(src => src.CreateDate.ToString()));
 
 		}
 	}

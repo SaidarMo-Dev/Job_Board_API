@@ -3,6 +3,7 @@ using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Categories.Queries.Models;
 using JobBoard.Core.Feutures.Categories.Queries.Results;
 using JobBoard.Core.Resources;
+using JobBoard.Core.Wrapers;
 using JobBoard.Service.Abstractions;
 using MediatR;
 using Microsoft.Extensions.Localization;
@@ -10,7 +11,7 @@ using Microsoft.Extensions.Localization;
 namespace JobBoard.Core.Feutures.Categories.Queries.Handler
 {
 	public class CategoryQueryHandler : ResponseHandler, IRequestHandler<GetSingleCategoryQuery, Response<GetSingleCategoryQueryResponse>>,
-										IRequestHandler<GetListCategoriesQuery, Response<List<GetListCategoriesQueryResponse>>>
+										IRequestHandler<GetListCategoriesQuery, PaginatedResponse<List<GetListCategoriesQueryResponse>>>
 	{
 
 		#region Fields
@@ -38,11 +39,14 @@ namespace JobBoard.Core.Feutures.Categories.Queries.Handler
 
 		}
 
-		public async Task<Response<List<GetListCategoriesQueryResponse>>> Handle(GetListCategoriesQuery request, CancellationToken cancellationToken)
+		public async Task<PaginatedResponse<List<GetListCategoriesQueryResponse>>> Handle(GetListCategoriesQuery request, CancellationToken cancellationToken)
 		{
-			var result = await _categoryService.GetAllAsync();
+			var queryable = _categoryService.GetCategoriesQueryable(request.Search, request.sort);
 
-			return Success(_mapper.Map<List<GetListCategoriesQueryResponse>>(result));
+			var categories = await _mapper.ProjectTo<GetListCategoriesQueryResponse>(queryable)
+									.ToPaginatedAsync(request.Page, request.PageSize);
+
+			return categories;
 
 		}
 

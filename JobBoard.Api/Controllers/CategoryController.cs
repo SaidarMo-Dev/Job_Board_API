@@ -9,7 +9,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace JobBoard.Api.Controllers
 {
 	[ApiController]
-	[Authorize(Roles = "Admin,Employer")]
+	//[Authorize(Roles = "Admin,Employer")]
 	public class CategoryController : AppControllerbase
 	{
 		[SwaggerOperation(Summary = "Get category by ID",
@@ -38,9 +38,9 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		[ProducesResponseType(StatusCodes.Status403Forbidden)]
 
-		public async Task<IActionResult> GetAll()
+		public async Task<IActionResult> GetAll([FromQuery] GetListCategoriesQuery query)
 		{
-			return NewResult(await Mediator.Send(new GetListCategoriesQuery()));
+			return Ok(await Mediator.Send(query));
 		}
 
 		[SwaggerOperation(Summary = "Create a new category",

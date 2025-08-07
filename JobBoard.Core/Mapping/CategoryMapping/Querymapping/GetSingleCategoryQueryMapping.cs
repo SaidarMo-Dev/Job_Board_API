@@ -7,7 +7,8 @@ namespace JobBoard.Core.Mapping.CategoryMapping
 	{
 		public void AddSingleCategorymapping()
 		{
-			CreateMap<Category, GetSingleCategoryQueryResponse>();
+			CreateMap<Category, GetSingleCategoryQueryResponse>()
+				.ForMember(x => x.CreateDate, opt => opt.MapFrom(src => src.CreateDate.ToString()));
 		}
 	}
 }

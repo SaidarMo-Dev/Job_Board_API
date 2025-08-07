@@ -40,6 +40,10 @@ namespace JobBoard.Core.Feutures.Categories.Commands.Handler
 		{
 			var newCategory = _mapper.Map<Category>(request);
 
+			var date = DateTime.Now;
+
+			newCategory.CreateDate = new DateOnly(date.Year, date.Month, date.Day);
+
 			var result = await _categoryService.AddAsync(newCategory);
 
 			return Created(result);

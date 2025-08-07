@@ -57,13 +57,12 @@
 
 		public static class CategoryRoute
 		{
-			private const string Prefex = Rule + "/Categories";
+			private const string Prefex = Rule + "/categories";
 
-			public const string GetAll = Prefex + "/GetAll";
-			public const string Paginate = Prefex + "/Paginate";
+			public const string GetAll = Prefex;
 			public const string GetByID = Prefex + "/{Id}";
-			public const string Create = Prefex + "/AddCategory";
-			public const string Update = Prefex + "/UpdateCategory";
+			public const string Create = Prefex;
+			public const string Update = Prefex;
 			public const string DeleteById = Prefex + Single;
 
 		}

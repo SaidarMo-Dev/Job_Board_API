@@ -1,4 +1,5 @@
 ﻿using JobBoard.Data.Entities;
+using JobBoard.Data.enums;
 
 namespace JobBoard.Service.Abstractions
 {
@@ -74,6 +75,14 @@ namespace JobBoard.Service.Abstractions
 		/// <param name="category">The <see cref="Category"/> to delete.</param>
 		/// <returns>A status message indicating the result of the deletion.</returns>
 		Task<string> DeleteAsync(Category category);
+
+		/// <summary>
+		/// Get categories queryable
+		/// </summary>
+		/// <param name="search"> the name to search by.</param>
+		/// <param name="sort"> the enum <see cref="SortCategory"/> to sort categories.</param>
+		/// <returns>queryable categories</returns>
+		IQueryable<Category> GetCategoriesQueryable(string? search, SortCategory? sort);
 
 
 	}

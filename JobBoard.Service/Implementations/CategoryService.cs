@@ -1,4 +1,5 @@
 ﻿using JobBoard.Data.Entities;
+using JobBoard.Data.enums;
 using JobBoard.Infrastructure.Abstractions;
 using JobBoard.Service.Abstractions;
 using Microsoft.EntityFrameworkCore;
@@ -95,6 +96,44 @@ namespace JobBoard.Service.Implementations
 			await _categoryRepository.DeleteAsync(category);
 
 			return "Success";
+		}
+
+		public IQueryable<Category> GetCategoriesQueryable(string? search, SortCategory? sort)
+		{
+			var queryable = _categoryRepository.GetTableAsNoTracking();
+
+			if (search != null) queryable = queryable.Where(x => x.Name.Contains(search));
+
+			if (sort != null)
+			{
+				switch (sort)
+				{
+					case SortCategory.NameAsc:
+						queryable = queryable.OrderBy(x => x.Name);
+						break;
+
+					case SortCategory.NameDesc:
+						queryable = queryable.OrderByDescending(x => x.Name);
+						break;
+
+					case SortCategory.NewestFirst:
+						queryable = queryable.OrderByDescending(x => x.CreateDate);
+						break;
+
+					case SortCategory.OlderFirst:
+						queryable = queryable.OrderBy(x => x.CreateDate);
+						break;
+
+					default:
+						queryable = queryable.OrderByDescending(x => x.CreateDate);
+						break;
+				}
+
+
+			}
+
+			return queryable;
+
 		}
 
 

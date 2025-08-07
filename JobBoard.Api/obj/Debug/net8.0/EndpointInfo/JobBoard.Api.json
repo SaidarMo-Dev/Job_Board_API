@@ -3940,7 +3940,7 @@
         }
       }
     },
-    "/Api/V1/Categories/{Id}": {
+    "/Api/V1/categories/{Id}": {
       "get": {
         "tags": [
           "Category"
@@ -4110,7 +4110,7 @@
         }
       }
     },
-    "/Api/V1/Categories/GetAll": {
+    "/Api/V1/categories": {
       "get": {
         "tags": [
           "Category"
@@ -4118,6 +4118,38 @@
         "summary": "Get all categories",
         "description": "Returns a list of all categories stored in the system.",
         "operationId": "GetAllCategories",
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SortCategory"
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -4183,9 +4215,7 @@
             }
           }
         }
-      }
-    },
-    "/Api/V1/Categories/AddCategory": {
+      },
       "post": {
         "tags": [
           "Category"
@@ -4277,9 +4307,7 @@
             }
           }
         }
-      }
-    },
-    "/Api/V1/Categories/UpdateCategory": {
+      },
       "put": {
         "tags": [
           "Category"
@@ -6121,6 +6149,16 @@
           }
         },
         "additionalProperties": false
+      },
+      "SortCategory": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
       },
       "SortEnum": {
         "enum": [
