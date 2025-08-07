@@ -217,7 +217,7 @@ namespace JobBoard.Service.Implementations
 
 				if (search.Contains("@"))
 				{
-					users = users.Where(x => x.Email != null && x.Email.ToLower() == search.ToLower());
+					users = users.Where(x => x.Email != null && x.Email.Contains(search));
 				}
 				else
 				{
@@ -225,9 +225,9 @@ namespace JobBoard.Service.Implementations
 
 					if (names.Length > 1)
 					{
-						users = users.Where(x => x.FirstName.ToLower() == names[0].ToLower() && x.LastName.ToLower() == names[1].ToLower());
+						users = users.Where(x => x.FirstName.Contains(names[0]) && x.LastName.Contains(names[1]));
 					}
-					else users = users.Where(x => x.FirstName.ToLower() == names[0].ToLower());
+					else users = users.Where(x => x.FirstName.Contains(names[0]));
 
 				}
 
