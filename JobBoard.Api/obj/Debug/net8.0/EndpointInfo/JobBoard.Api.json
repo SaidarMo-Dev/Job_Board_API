@@ -4401,7 +4401,7 @@
         }
       }
     },
-    "/Api/V1/Company/Paginate": {
+    "/Api/V1/company/paginate": {
       "get": {
         "tags": [
           "Company"
@@ -4461,7 +4461,7 @@
         }
       }
     },
-    "/Api/V1/Company/{Id}": {
+    "/Api/V1/company/{Id}": {
       "get": {
         "tags": [
           "Company"
@@ -4628,7 +4628,7 @@
         }
       }
     },
-    "/Api/V1/Company/GetAll": {
+    "/Api/V1/company": {
       "get": {
         "tags": [
           "Company"
@@ -4636,6 +4636,38 @@
         "summary": "Get all companies",
         "description": "Returns a list of all companies. Restricted to Admin role.",
         "operationId": "GetAllCompanies",
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Sort",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SortCompany"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -4661,9 +4693,7 @@
             }
           }
         }
-      }
-    },
-    "/Api/V1/Company/AddNewCompany": {
+      },
       "post": {
         "tags": [
           "Company"
@@ -4735,9 +4765,7 @@
             }
           }
         }
-      }
-    },
-    "/Api/V1/Company/UpdateCompany": {
+      },
       "put": {
         "tags": [
           "Company"
@@ -5494,7 +5522,7 @@
         }
       }
     },
-    "/Api/V1/Company/{Id}/Jobs": {
+    "/Api/V1/company/{Id}/Jobs": {
       "get": {
         "tags": [
           "Job"
@@ -5740,6 +5768,9 @@
         "additionalProperties": false
       },
       "AddCompanyCommand": {
+        "required": [
+          "email"
+        ],
         "type": "object",
         "properties": {
           "companyName": {
@@ -5767,6 +5798,10 @@
             "nullable": true
           },
           "fax": {
+            "type": "string",
+            "nullable": true
+          },
+          "industry": {
             "type": "string",
             "nullable": true
           }
@@ -6160,6 +6195,14 @@
         "type": "integer",
         "format": "int32"
       },
+      "SortCompany": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
       "SortEnum": {
         "enum": [
           0,
@@ -6245,6 +6288,10 @@
             "nullable": true
           },
           "fax": {
+            "type": "string",
+            "nullable": true
+          },
+          "industry": {
             "type": "string",
             "nullable": true
           }

@@ -9,6 +9,7 @@ namespace JobBoard.Core.Mapping.CompanyMapping
 			AddSingleCompanyMapping();
 			AddMappingForAddCommand();
 			AddMappingForUpdateCompany();
+			GetListCompaniesQueryMapping();
 		}
 	}
 }

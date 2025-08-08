@@ -2060,8 +2060,134 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.CompanyController",
+    "Method": "GetAll",
+    "RelativePath": "Api/V1/company",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Search",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Sort",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.CompanyController",
+    "Method": "AddCompany",
+    "RelativePath": "Api/V1/company",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "JobBoard.Core.Feutures.Companies.Commands.Models.AddCompanyCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 201
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.CompanyController",
+    "Method": "UpdateCompany",
+    "RelativePath": "Api/V1/company",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "JobBoard.Core.Feutures.Companies.Commands.Models.UpdateCompanyCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.CompanyController",
     "Method": "GetCompanyById",
-    "RelativePath": "Api/V1/Company/{Id}",
+    "RelativePath": "Api/V1/company/{Id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -2110,7 +2236,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.CompanyController",
     "Method": "DeleteCompany",
-    "RelativePath": "Api/V1/Company/{Id}",
+    "RelativePath": "Api/V1/company/{Id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -2154,7 +2280,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.JobController",
     "Method": "GetCompanyJobs",
-    "RelativePath": "Api/V1/Company/{Id}/Jobs",
+    "RelativePath": "Api/V1/company/{Id}/Jobs",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -2184,73 +2310,8 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.CompanyController",
-    "Method": "AddCompany",
-    "RelativePath": "Api/V1/Company/AddNewCompany",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "JobBoard.Core.Feutures.Companies.Commands.Models.AddCompanyCommand",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 201
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 401
-      }
-    ]
-  },
-  {
-    "ContainingType": "JobBoard.Api.Controllers.CompanyController",
-    "Method": "GetAll",
-    "RelativePath": "Api/V1/Company/GetAll",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 401
-      }
-    ]
-  },
-  {
-    "ContainingType": "JobBoard.Api.Controllers.CompanyController",
     "Method": "GetPaginatedCompanies",
-    "RelativePath": "Api/V1/Company/Paginate",
+    "RelativePath": "Api/V1/company/paginate",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -2276,46 +2337,6 @@
         "Type": "System.Void",
         "MediaTypes": [],
         "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 401
-      }
-    ]
-  },
-  {
-    "ContainingType": "JobBoard.Api.Controllers.CompanyController",
-    "Method": "UpdateCompany",
-    "RelativePath": "Api/V1/Company/UpdateCompany",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "JobBoard.Core.Feutures.Companies.Commands.Models.UpdateCompanyCommand",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",

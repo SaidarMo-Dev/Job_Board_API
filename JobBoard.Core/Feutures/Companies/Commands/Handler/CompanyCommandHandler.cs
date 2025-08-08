@@ -49,6 +49,8 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 		{
 			var company = _mapper.Map<Company>(request);
 
+
+			company.CreatedByUserId = _currentUserService.GetCurrentUserId();
 			await _companyService.AddAsync(company);
 			return Created(company.CompanyId);
 		}

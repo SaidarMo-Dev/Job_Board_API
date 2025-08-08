@@ -9,9 +9,10 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Models
 		public string Description { get; set; } = string.Empty;
 		public string WebsiteUrl { get; set; } = string.Empty;
 		public string Location { get; set; } = string.Empty;
-		public string PhoneNumber { get; set; }
-		public string Email { get; set; }
-		public string Fax { get; set; }
+		public string? PhoneNumber { get; set; }
+		public required string Email { get; set; }
+		public string? Fax { get; set; }
+		public string? Industry { get; set; }
 
 	}
 }

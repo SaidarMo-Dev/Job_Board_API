@@ -2,14 +2,13 @@
 using JobBoard.Core.Feutures.Companies.Commands.Models;
 using JobBoard.Core.Feutures.Companies.Queries.Models;
 using JobBoard.Data.Metadata;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace JobBoard.Api.Controllers
 {
 	[ApiController]
-	[Authorize(Roles = "Admin,Employer")]
+	//[Authorize(Roles = "Admin,Employer")]
 	public class CompanyController : AppControllerbase
 	{
 		[SwaggerOperation(
@@ -51,13 +50,13 @@ namespace JobBoard.Api.Controllers
 			Description = "Returns a list of all companies. Restricted to Admin role.",
 			OperationId = "GetAllCompanies")]
 
-		[Authorize(Roles = "Admin")]
+		//[Authorize(Roles = "Admin")]
 		[HttpGet(Router.CompanyRoute.GetAll)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		public async Task<IActionResult> GetAll()
+		public async Task<IActionResult> GetAll([FromQuery] GetAllCompaiesQuery query)
 		{
-			return NewResult(await Mediator.Send(new GetAllCompaiesQuery()));
+			return Ok(await Mediator.Send(query));
 		}
 
 

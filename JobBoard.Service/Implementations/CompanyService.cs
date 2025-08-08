@@ -101,7 +101,36 @@ namespace JobBoard.Service.Implementations
 			return queryable;
 		}
 
+		public IQueryable<Company> GetCompaniesQueryable(string? search, SortCompany? sort)
+		{
+			var queryable = _companyRepository.GetTableAsNoTracking();
 
+			if (search != null)
+			{
+				queryable = queryable.Where(x => x.CompanyName.Contains(search));
+			}
+
+			if (sort != null)
+			{
+				switch (sort)
+				{
+					case SortCompany.NameAsc:
+						queryable = queryable.OrderBy(x => x.CompanyName);
+						break;
+
+					case SortCompany.NameDesc:
+						queryable = queryable.OrderByDescending(x => x.CompanyName);
+						break;
+
+					default:
+						queryable = queryable.OrderBy(x => x.CompanyName);
+						break;
+				}
+			}
+
+			return queryable;
+
+		}
 		#endregion
 	}
 }

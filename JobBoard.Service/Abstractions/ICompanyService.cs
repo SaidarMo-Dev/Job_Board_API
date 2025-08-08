@@ -75,6 +75,7 @@ namespace JobBoard.Service.Abstractions
 		/// <returns>A task that represents the asynchronous operation.</returns>
 		Task DeleteAsync(Company entity);
 
+		IQueryable<Company> GetCompaniesQueryable(string? search, SortCompany? sort);
 
 
 	}

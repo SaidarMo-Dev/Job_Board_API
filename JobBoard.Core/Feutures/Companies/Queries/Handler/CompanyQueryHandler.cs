@@ -13,7 +13,7 @@ using Microsoft.Extensions.Localization;
 namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 {
 	public class CompanyQueryHandler : ResponseHandler, IRequestHandler<GetSingleCompanyQuery, Response<GetSingleCompanyQueryResponse>>,
-														IRequestHandler<GetAllCompaiesQuery, Response<List<GetSingleCompanyQueryResponse>>>,
+														IRequestHandler<GetAllCompaiesQuery, PaginatedResponse<List<GetListCompaniesQueryesponse>>>,
 														IRequestHandler<GetPaginatedListCompanyQuery, PaginatedResponse<List<GetPaginatedListCompaniesQueryResponse>>>
 	{
 		#region Fields
@@ -39,11 +39,11 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 			return Success(companyResponse);
 		}
 
-		public async Task<Response<List<GetSingleCompanyQueryResponse>>> Handle(GetAllCompaiesQuery request, CancellationToken cancellationToken)
+		public async Task<PaginatedResponse<List<GetListCompaniesQueryesponse>>> Handle(GetAllCompaiesQuery request, CancellationToken cancellationToken)
 		{
-			var companies = await _companyService.GetAllAsync();
+			var queryable = _companyService.GetCompaniesQueryable(request.Search, request.Sort);
 
-			return Success(_mapper.Map<List<GetSingleCompanyQueryResponse>>(companies));
+			return (await _mapper.ProjectTo<GetListCompaniesQueryesponse>(queryable).ToPaginatedAsync(request.Page, request.PageSize));
 		}
 
 		public async Task<PaginatedResponse<List<GetPaginatedListCompaniesQueryResponse>>> Handle(GetPaginatedListCompanyQuery request, CancellationToken cancellationToken)
