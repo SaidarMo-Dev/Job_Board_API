@@ -48,24 +48,24 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Validation
 		{
 			RuleFor(x => x.CompanyName)
 				.MustAsync(async (key, cancellationToken) => !await _companyService.IsExistByNameAsync(key))
-			.WithMessage("{PropertyName} already Exist!");
+			.WithMessage("{PropertyName} already exist!");
 
 			RuleFor(x => x.WebsiteUrl)
 				.Must(key => Util.IsValideUrl(key))
-				.WithMessage("{PropertyName} Is Invalide");
+				.WithMessage("{PropertyName} is invalid");
 
 
 			RuleFor(x => x.Email)
 				.Must(key => Util.IsValideEmail(key))
-				.WithMessage("{PropertyName} Is Invalide");
+				.WithMessage("{PropertyName} is invalid");
 
 			RuleFor(x => x.PhoneNumber)
 				.Must(key => Util.IsValidePhoneNumber(key))
-				.WithMessage("{PropertyName} Is Invalide");
+				.WithMessage("{PropertyName} is invalid");
 
 			RuleFor(x => x.Fax)
 				.Must(key => Util.IsValidePhoneNumber(key))
-				.WithMessage("{PropertyName} Is Invalide");
+				.WithMessage("{PropertyName} is invalid");
 
 
 		}

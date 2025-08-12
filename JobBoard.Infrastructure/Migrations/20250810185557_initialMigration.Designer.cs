@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobBoard.Infrastructure.Migrations
 {
     [DbContext(typeof(appDbContext))]
-    [Migration("20250716174334_UpdateResumeFieldInApplication")]
-    partial class UpdateResumeFieldInApplication
+    [Migration("20250810185557_initialMigration")]
+    partial class initialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,7 +66,6 @@ namespace JobBoard.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LinkedIn")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
@@ -74,7 +73,6 @@ namespace JobBoard.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Portfolio")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ResumeUrl")
@@ -131,6 +129,9 @@ namespace JobBoard.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
 
+                    b.Property<DateOnly>("CreateDate")
+                        .HasColumnType("date");
+
                     b.Property<string>("Description")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
@@ -170,6 +171,9 @@ namespace JobBoard.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Fax")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Industry")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Location")
@@ -478,6 +482,9 @@ namespace JobBoard.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SkillId"));
 
+                    b.Property<DateOnly?>("CreateDate")
+                        .HasColumnType("date");
+
                     b.Property<string>("Description")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
@@ -705,7 +712,7 @@ namespace JobBoard.Infrastructure.Migrations
             modelBuilder.Entity("JobBoard.Data.Entities.JobSkill", b =>
                 {
                     b.HasOne("JobBoard.Data.Entities.JobListing", "jobListing")
-                        .WithMany("Jobkills")
+                        .WithMany("JobSkills")
                         .HasForeignKey("JobListingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -802,7 +809,7 @@ namespace JobBoard.Infrastructure.Migrations
 
             modelBuilder.Entity("JobBoard.Data.Entities.JobListing", b =>
                 {
-                    b.Navigation("Jobkills");
+                    b.Navigation("JobSkills");
 
                     b.Navigation("applications");
 

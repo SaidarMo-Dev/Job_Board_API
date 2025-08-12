@@ -2,8 +2,11 @@
 {
 	public enum JobStatusEnum
 	{
-		New,
-		Accepted,
-		Pending
+		Pending,
+		Active,
+		Rejected,
+		Paused,
+		Closed,
+		Expired
 	}
 }

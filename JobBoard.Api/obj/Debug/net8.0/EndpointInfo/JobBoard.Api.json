@@ -4401,7 +4401,7 @@
         }
       }
     },
-    "/Api/V1/company/paginate": {
+    "/Api/V1/companies/paginate": {
       "get": {
         "tags": [
           "Company"
@@ -4461,7 +4461,7 @@
         }
       }
     },
-    "/Api/V1/company/{Id}": {
+    "/Api/V1/companies/{Id}": {
       "get": {
         "tags": [
           "Company"
@@ -4628,7 +4628,7 @@
         }
       }
     },
-    "/Api/V1/company": {
+    "/Api/V1/companies": {
       "get": {
         "tags": [
           "Company"
@@ -5522,7 +5522,7 @@
         }
       }
     },
-    "/Api/V1/company/{Id}/Jobs": {
+    "/Api/V1/companies/{Id}/Jobs": {
       "get": {
         "tags": [
           "Job"
@@ -5810,6 +5810,7 @@
       },
       "AddJobCommand": {
         "required": [
+          "location",
           "title"
         ],
         "type": "object",
@@ -5822,24 +5823,27 @@
             "type": "string",
             "nullable": true
           },
-          "location": {
-            "type": "string",
-            "nullable": true
-          },
           "companyId": {
             "type": "integer",
             "format": "int32"
           },
-          "jobType": {
-            "$ref": "#/components/schemas/JobTypeEnum"
-          },
-          "salaryRange": {
+          "location": {
             "type": "string",
             "nullable": true
           },
-          "datePosted": {
-            "type": "string",
-            "format": "date-time"
+          "jobType": {
+            "$ref": "#/components/schemas/JobTypeEnum"
+          },
+          "minSalary": {
+            "type": "number",
+            "format": "double"
+          },
+          "maxSalary": {
+            "type": "number",
+            "format": "double"
+          },
+          "experienceLevel": {
+            "$ref": "#/components/schemas/ExperienceLevelEnum"
           },
           "skillsId": {
             "uniqueItems": true,
@@ -6102,7 +6106,10 @@
         "enum": [
           0,
           1,
-          2
+          2,
+          3,
+          4,
+          5
         ],
         "type": "integer",
         "format": "int32"

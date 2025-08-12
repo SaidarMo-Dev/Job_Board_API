@@ -2061,7 +2061,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.CompanyController",
     "Method": "GetAll",
-    "RelativePath": "Api/V1/company",
+    "RelativePath": "Api/V1/companies",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -2107,7 +2107,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.CompanyController",
     "Method": "AddCompany",
-    "RelativePath": "Api/V1/company",
+    "RelativePath": "Api/V1/companies",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -2147,7 +2147,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.CompanyController",
     "Method": "UpdateCompany",
-    "RelativePath": "Api/V1/company",
+    "RelativePath": "Api/V1/companies",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -2187,7 +2187,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.CompanyController",
     "Method": "GetCompanyById",
-    "RelativePath": "Api/V1/company/{Id}",
+    "RelativePath": "Api/V1/companies/{Id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -2236,7 +2236,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.CompanyController",
     "Method": "DeleteCompany",
-    "RelativePath": "Api/V1/company/{Id}",
+    "RelativePath": "Api/V1/companies/{Id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -2280,7 +2280,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.JobController",
     "Method": "GetCompanyJobs",
-    "RelativePath": "Api/V1/company/{Id}/Jobs",
+    "RelativePath": "Api/V1/companies/{Id}/Jobs",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -2311,7 +2311,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.CompanyController",
     "Method": "GetPaginatedCompanies",
-    "RelativePath": "Api/V1/company/paginate",
+    "RelativePath": "Api/V1/companies/paginate",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

@@ -31,7 +31,7 @@
 
 		public static class CompanyRoute
 		{
-			private const string Prefex = Rule + "/company";
+			private const string Prefex = Rule + "/companies";
 
 			public const string GetAll = Prefex;
 			public const string Paginate = Prefex + "/paginate";

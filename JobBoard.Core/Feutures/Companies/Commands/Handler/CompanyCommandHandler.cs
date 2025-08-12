@@ -49,7 +49,6 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 		{
 			var company = _mapper.Map<Company>(request);
 
-
 			company.CreatedByUserId = _currentUserService.GetCurrentUserId();
 			await _companyService.AddAsync(company);
 			return Created(company.CompanyId);
@@ -61,9 +60,14 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 
 			var company = await _companyService.GetCompanyByIdAsync(request.CompanyId);
 
-			var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), company, new CompanyOwnerRequirement());
 
-			if (!isAuthorized.Succeeded) return Forbidden<int>(_stringLocalizer[SharedResourcesKeys.NoAccess]);
+			if (!(await _currentUserService.GetCurrentUserRoles()).Contains("Admin"))
+			{
+				var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), company, new CompanyOwnerRequirement());
+
+				if (!isAuthorized.Succeeded) return Forbidden<int>(_stringLocalizer[SharedResourcesKeys.NoAccess]);
+			}
+
 
 			if (company == null) return NotFound<int>("There is no Company to Ipdate! Make sure to enter the correct Id");
 

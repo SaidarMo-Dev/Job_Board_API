@@ -63,6 +63,21 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 		{
 			var job = _mapper.Map<JobListing>(request);
 
+			job.DatePosted = DateTime.UtcNow;
+
+			// get created user
+			job.CreatedByUserId = _currentUserService.GetCurrentUserId();
+
+			// if admin job approved directly else job waitin to approved
+
+			var userRoles = await _currentUserService.GetCurrentUserRoles();
+
+			if (userRoles.Contains("Admin"))
+				job.Status = Data.enums.JobStatusEnum.Active;
+			else
+				job.Status = Data.enums.JobStatusEnum.Pending;
+
+			// add job 
 			var result = await _jobService.AddNewJobAsync(job);
 
 
@@ -72,7 +87,7 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 				var jobSkills = new HashSet<JobSkill>();
 				var Jobcategories = new HashSet<JobCategory>();
 
-				foreach (int id in request.skillsId)
+				foreach (int id in request.skillIds)
 				{
 					var Exist = _skillService.IsExistById(id);
 					if (Exist)
@@ -80,7 +95,7 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 				}
 				await _jobSkillService.AddRangeAsync(jobSkills);
 
-				foreach (int Id in request.skillsId)
+				foreach (int Id in request.skillIds)
 				{
 					var Exist = _categoryService.IsExistById(Id);
 					if (Exist)

@@ -8,14 +8,15 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Models
 	{
 		public required string Title { get; set; }
 		public string? Description { get; set; }
-		public string? Location { get; set; }
 		public int CompanyId { get; set; }
+		public required string Location { get; set; }
 		public JobTypeEnum JobType { get; set; }
-		public string SalaryRange { get; set; }
-		public DateTime DatePosted { get; set; }
+		public double MinSalary { get; set; }
+		public double MaxSalary { get; set; }
+		public ExperienceLevelEnum ExperienceLevel { get; set; }
 
-		public HashSet<int> skillsId { get; set; }
-		public HashSet<int> CategoriesId { get; set; }
+		public HashSet<int> skillIds { get; set; }
+		public HashSet<int> CategoryIds { get; set; }
 
 
 

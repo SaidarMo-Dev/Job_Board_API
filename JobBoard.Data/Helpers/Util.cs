@@ -14,7 +14,8 @@ namespace JobBoard.Core.Helpers
 
 		public static bool IsValidePhoneNumber(string phoneNumber)
 		{
-			string PhonePattern = @"\+\d{2,}\s\d{6,12}";
+
+			string PhonePattern = @"^\+?\d[\d\s]{6,19}$";
 
 			return Regex.IsMatch(phoneNumber, PhonePattern);
 		}
