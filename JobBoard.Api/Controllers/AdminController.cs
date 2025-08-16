@@ -65,5 +65,21 @@ namespace JobBoard.Api.Controllers
 		{
 			return NewResult(await Mediator.Send(command));
 		}
+
+		[SwaggerOperation(Summary = "get all jobs",
+					  Description = "get all jobs with paginations...",
+					  OperationId = "Admin/GetJobs")]
+
+		[HttpGet(Router.AdminRoute.GetJobs)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		[ProducesResponseType(StatusCodes.Status403Forbidden)]
+		public async Task<IActionResult> GetJobs([FromQuery] GetAdminJobsQuery query)
+		{
+			var response = await Mediator.Send(query);
+
+			return Ok(response);
+		}
 	}
 }

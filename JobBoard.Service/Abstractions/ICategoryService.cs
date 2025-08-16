@@ -84,6 +84,6 @@ namespace JobBoard.Service.Abstractions
 		/// <returns>queryable categories</returns>
 		IQueryable<Category> GetCategoriesQueryable(string? search, SortCategory? sort);
 
-
+		Task<List<Category>> GetPopularCategoriesAsync();
 	}
 }

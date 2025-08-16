@@ -16,6 +16,7 @@
 			public const string AddUser = Prefex + "/users";
 			public const string UpdateUser = Prefex + "/users";
 			public const string Profile = Prefex + "/profile";
+			public const string GetJobs = Prefex + "/jobs";
 
 
 		}
@@ -60,6 +61,7 @@
 			private const string Prefex = Rule + "/categories";
 
 			public const string GetAll = Prefex;
+			public const string Popular = Prefex + "/popular";
 			public const string GetByID = Prefex + "/{Id}";
 			public const string Create = Prefex;
 			public const string Update = Prefex;

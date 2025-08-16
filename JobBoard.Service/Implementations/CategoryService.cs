@@ -1,6 +1,7 @@
 ﻿using JobBoard.Data.Entities;
 using JobBoard.Data.enums;
 using JobBoard.Infrastructure.Abstractions;
+using JobBoard.Infrastructure.context;
 using JobBoard.Service.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,12 +12,14 @@ namespace JobBoard.Service.Implementations
 
 		#region Fileds
 		private readonly ICategoryRepository _categoryRepository;
+		private readonly appDbContext _context;
 		#endregion
 
 		#region Constructors
-		public CategoryService(ICategoryRepository categoryRepository)
+		public CategoryService(ICategoryRepository categoryRepository, appDbContext context)
 		{
 			_categoryRepository = categoryRepository;
+			_context = context;
 		}
 
 
@@ -134,6 +137,29 @@ namespace JobBoard.Service.Implementations
 
 			return queryable;
 
+		}
+
+		public async Task<List<Category>> GetPopularCategoriesAsync()
+		{
+			var cutOffDate = DateTime.UtcNow.AddDays(-30);
+
+			var res = await _context.categories.Select(c => new
+			{
+				Id = c.CategoryId,
+				c.Name,
+				JobsCount = c.JobCategories.Where(x => x.jobListing.DatePosted >= cutOffDate && x.jobListing.Status == JobStatusEnum.Active).Count()
+			})
+				.OrderByDescending(x => x.JobsCount)
+				.Take(10)
+				.Select(c =>
+					new Category
+					{
+						CategoryId = c.Id,
+						Name = c.Name
+					}).ToListAsync();
+
+
+			return res;
 		}
 
 

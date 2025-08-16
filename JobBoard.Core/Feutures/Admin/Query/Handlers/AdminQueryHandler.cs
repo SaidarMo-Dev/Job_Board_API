@@ -2,6 +2,7 @@
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Admin.Query.Models;
 using JobBoard.Core.Feutures.Admin.Query.Responses;
+using JobBoard.Core.Helpers;
 using JobBoard.Core.Resources;
 using JobBoard.Core.Wrapers;
 using JobBoard.Data.Entities.Identity;
@@ -15,14 +16,16 @@ using Microsoft.Extensions.Localization;
 namespace JobBoard.Core.Feutures.Admin.Query.Handlers
 {
 	public class AdminQueryHandler : ResponseHandler,
-		IRequestHandler<GetUsersQuery, PaginatedResponse<List<UserManagementResponse>>>,
-		IRequestHandler<GetAdminProfileQuery, Response<GetAdminProfileQueryResponse>>
+			IRequestHandler<GetUsersQuery, PaginatedResponse<List<UserManagementResponse>>>,
+			IRequestHandler<GetAdminProfileQuery, Response<GetAdminProfileQueryResponse>>,
+			IRequestHandler<GetAdminJobsQuery, PaginatedResponse<List<GetAdminJobsQueryResponse>>>
 	{
 		private readonly IUserService _userService;
 		private readonly UserManager<User> _userManager;
 		private readonly IMapper _mapper;
 		private readonly IStringLocalizer<SharedResources> _stringLocalizer;
 		private readonly ICurrentUserService _currentUserService;
+		private readonly IJobService _jobService;
 		#region Fields
 
 		#endregion
@@ -32,13 +35,16 @@ namespace JobBoard.Core.Feutures.Admin.Query.Handlers
 								UserManager<User> userManager,
 								IMapper mapper,
 								IStringLocalizer<SharedResources> stringLocalizer,
-								ICurrentUserService currentUserService) : base(stringLocalizer)
+								ICurrentUserService currentUserService,
+								IJobService jobService
+							) : base(stringLocalizer)
 		{
 			_userService = userService;
 			_userManager = userManager;
 			_mapper = mapper;
 			_stringLocalizer = stringLocalizer;
 			_currentUserService = currentUserService;
+			_jobService = jobService;
 		}
 		#endregion
 
@@ -67,6 +73,19 @@ namespace JobBoard.Core.Feutures.Admin.Query.Handlers
 
 			return Success(userResponse);
 
+		}
+
+		public async Task<PaginatedResponse<List<GetAdminJobsQueryResponse>>> Handle(GetAdminJobsQuery request, CancellationToken cancellationToken)
+		{
+			var jobsQueryable = _jobService.GetJobsQueryable();
+			jobsQueryable = jobsQueryable.ApplySearch(request.Search);
+			jobsQueryable = jobsQueryable.FilterJobs(request.JobStatus, request.Categories,
+									request.Locations, request.Companies, request.From, request.To);
+
+			var jobs = await _mapper.ProjectTo<GetAdminJobsQueryResponse>(jobsQueryable)
+				.ToPaginatedAsync(request.Page, request.PageSize);
+
+			return jobs;
 		}
 
 		#endregion

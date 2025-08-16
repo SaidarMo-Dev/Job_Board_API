@@ -1,4 +1,5 @@
-﻿using JobBoard.Data.Entities;
+﻿using System.Linq.Expressions;
+using JobBoard.Data.Entities;
 using JobBoard.Data.enums;
 
 namespace JobBoard.Core.Helpers
@@ -41,9 +42,9 @@ namespace JobBoard.Core.Helpers
 		public static IQueryable<JobListing> ApplySearch(this IQueryable<JobListing> queryable, string? title = null, string? location = null)
 		{
 			if (title != null)
-				queryable = queryable.Where(x => x.Title.Equals(title));
+				queryable = queryable.Where(x => x.Title.Contains(title));
 			if (location != null)
-				queryable = queryable.Where(x => x.Location.Equals(location));
+				queryable = queryable.Where(x => x.Location.Contains(location));
 
 			return queryable;
 		}
@@ -67,6 +68,52 @@ namespace JobBoard.Core.Helpers
 			}
 
 			return source;
+		}
+		public static IQueryable<JobListing> FilterJobs(this IQueryable<JobListing> source, JobStatusEnum[]? status = null, string[]? categories = null, string[]? locations = null, string[]? companies = null, DateTime? from = null, DateTime? to = null)
+		{
+			source = source.AddFilter(status, x => x.Status);
+			source = source.AddFilter(locations, x => x.Location);
+			source = source.AddFilter(companies, x => x.company.CompanyName);
+
+			// handle categories 
+			if (categories is { Length: > 0 })
+				source = source.Where(x => x.jobCategories
+					.Any(jc => categories.Contains(jc.category.Name)));
+
+
+			if (from is not null)
+				source = source.Where(x => x.DatePosted >= from);
+
+			if (to is not null)
+				source = source.Where(x => x.DateExpired <= to);
+
+			return source;
+		}
+
+		public static IQueryable<T> AddFilter<T, TValue>(
+	  this IQueryable<T> source,
+	  TValue[]? values,
+	  Expression<Func<T, TValue>> selector)
+		{
+			// If null or empty, do nothing
+			if (values is not { Length: > 0 })
+				return source;
+
+			// Builds: x => values.Contains(selector(x))
+			var parameter = selector.Parameters[0];
+			var property = selector.Body;
+			var valuesConstant = Expression.Constant(values);
+
+			var containsCall = Expression.Call(
+				typeof(Enumerable),
+				nameof(Enumerable.Contains),
+				new[] { typeof(TValue) },
+				valuesConstant,
+				property
+			);
+
+			var lambda = Expression.Lambda<Func<T, bool>>(containsCall, parameter);
+			return source.Where(lambda);
 		}
 	}
 

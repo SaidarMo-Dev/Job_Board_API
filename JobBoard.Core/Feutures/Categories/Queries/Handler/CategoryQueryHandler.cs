@@ -11,7 +11,8 @@ using Microsoft.Extensions.Localization;
 namespace JobBoard.Core.Feutures.Categories.Queries.Handler
 {
 	public class CategoryQueryHandler : ResponseHandler, IRequestHandler<GetSingleCategoryQuery, Response<GetSingleCategoryQueryResponse>>,
-										IRequestHandler<GetListCategoriesQuery, PaginatedResponse<List<GetListCategoriesQueryResponse>>>
+										IRequestHandler<GetListCategoriesQuery, PaginatedResponse<List<GetListCategoriesQueryResponse>>>,
+										IRequestHandler<GetPopularCategoriesQuery, Response<List<GetPopularCategoriesQueryResponse>>>
 	{
 
 		#region Fields
@@ -48,6 +49,14 @@ namespace JobBoard.Core.Feutures.Categories.Queries.Handler
 
 			return categories;
 
+		}
+
+		public async Task<Response<List<GetPopularCategoriesQueryResponse>>> Handle(GetPopularCategoriesQuery request, CancellationToken cancellationToken)
+		{
+			var categories = await _categoryService.GetPopularCategoriesAsync();
+			var categoriesDto = _mapper.Map<List<GetPopularCategoriesQueryResponse>>(categories);
+
+			return Success(categoriesDto);
 		}
 
 

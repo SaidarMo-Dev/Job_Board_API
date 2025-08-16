@@ -16,7 +16,7 @@ namespace JobBoard.Core.Mapping.BookMarkMapping
 				.ForMember(dst => dst.Status, opt => opt.MapFrom(src => src.Status.ToString()))
 				.ForMember(dst => dst.CompanyName, opt => opt.MapFrom(src => src.company.CompanyName))
 				.ForMember(dst => dst.ExperienceLevel, opt => opt.MapFrom(src => src.ExperienceLevel.ToString()))
-				.ForMember(dst => dst.CreatedByUser, opt => opt.MapFrom(src => src.UserInfo.UserName))
+				.ForMember(dst => dst.CreatedByUser, opt => opt.MapFrom(src => src.CreatedByUser.UserName))
 
 				.ForMember(dst => dst.Skills, opt => opt.MapFrom(src => src.JobSkills.Select(x => x.skillInfo)))
 				.ForMember(dst => dst.Categories, opt => opt.MapFrom(src => src.jobCategories.Select(x => x.category)))

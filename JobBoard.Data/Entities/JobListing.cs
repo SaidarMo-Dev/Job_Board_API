@@ -15,7 +15,8 @@ namespace JobBoard.Data.Entities
 		public double MinSalary { get; set; }
 		public double MaxSalary { get; set; }
 		public ExperienceLevelEnum ExperienceLevel { get; set; }
-		public required DateTime DatePosted { get; set; }
+		public DateTime DatePosted { get; set; }
+		public DateTime? DateExpired { get; set; }
 		public JobStatusEnum Status { get; set; }
 		public int CreatedByUserId { get; set; }
 
@@ -24,7 +25,7 @@ namespace JobBoard.Data.Entities
 		public ICollection<Bookmark> bookMarks { get; set; }
 		public ICollection<Application> applications { get; set; }
 		public ICollection<JobCategory> jobCategories { get; set; } = new List<JobCategory>();
-		public User UserInfo { get; set; }
+		public User CreatedByUser { get; set; } = new();
 
 
 	}

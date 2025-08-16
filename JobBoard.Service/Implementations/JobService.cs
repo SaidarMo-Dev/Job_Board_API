@@ -38,7 +38,7 @@ namespace JobBoard.Service.Implementations
 		{
 			var result = await _jobRepository.GetTableAsNoTracking()
 					.Include(x => x.company)
-					.Include(x => x.UserInfo)
+					.Include(x => x.CreatedByUser)
 					.Include(x => x.jobCategories).ThenInclude(x => x.category)
 					.Include(x => x.JobSkills).ThenInclude(x => x.skillInfo)
 					.FirstOrDefaultAsync(x => x.JobId == Id);

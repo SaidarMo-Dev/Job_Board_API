@@ -43,6 +43,22 @@ namespace JobBoard.Api.Controllers
 			return Ok(await Mediator.Send(query));
 		}
 
+		[SwaggerOperation(Summary = "Get popular categories",
+				  Description = "Returns a list of popular categories stored in the system.",
+				  OperationId = "GetPopularCategories")]
+
+		[HttpGet(Router.CategoryRoute.Popular)]
+		[ProducesResponseType(StatusCodes.Status201Created)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		[ProducesResponseType(StatusCodes.Status403Forbidden)]
+
+		public async Task<IActionResult> GetPopularCategories([FromQuery] GetPopularCategoriesQuery query)
+		{
+			return Ok(await Mediator.Send(query));
+		}
+
+
 		[SwaggerOperation(Summary = "Create a new category",
 				  Description = "Creates a new category entry in the system.",
 				  OperationId = "CreateCategory")]

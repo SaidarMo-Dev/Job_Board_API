@@ -10,7 +10,7 @@ namespace JobBoard.Infrastructure.Configuration
 		public void Configure(EntityTypeBuilder<JobListing> builder)
 		{
 
-			builder.HasQueryFilter(x => x.UserInfo.IsDeleted == false);
+			builder.HasQueryFilter(x => x.CreatedByUser.IsDeleted == false);
 
 			builder.HasKey(x => x.JobId);
 			builder.Property(x => x.JobId)
@@ -53,7 +53,7 @@ namespace JobBoard.Infrastructure.Configuration
 				.HasForeignKey(x => x.CompanyId)
 				.IsRequired();
 
-			builder.HasOne(x => x.UserInfo)
+			builder.HasOne(x => x.CreatedByUser)
 				.WithMany(x => x.CreatedJobs)
 				.HasForeignKey(x => x.CreatedByUserId);
 
