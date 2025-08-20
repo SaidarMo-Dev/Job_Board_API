@@ -76,6 +76,7 @@ namespace JobBoard.Service.Abstractions
 		Task DeleteAsync(Company entity);
 
 		IQueryable<Company> GetCompaniesQueryable(string? search, SortCompany? sort);
+		Task<string[]> GetPopularCompanies();
 
 
 	}

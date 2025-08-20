@@ -137,5 +137,18 @@ namespace JobBoard.Api.Controllers
 			return Ok(await Mediator.Send(new GetJobsByCompanyIdQuery(Id)));
 		}
 
+		[AllowAnonymous]
+		[SwaggerOperation(
+			Summary = "Get popular locations",
+			Description = "Retrieves popular locations.",
+			OperationId = "GetPopularLocations")]
+
+		[HttpGet(Router.JobRoute.Locations)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<IActionResult> GetPopularLocations()
+		{
+			return NewResult(await Mediator.Send(new GetPopularLocationsQuery()));
+		}
+
 	}
 }

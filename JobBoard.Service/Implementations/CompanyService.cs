@@ -131,6 +131,29 @@ namespace JobBoard.Service.Implementations
 			return queryable;
 
 		}
+
+		public async Task<string[]> GetPopularCompanies()
+		{
+
+			var cutOffDate = DateTime.UtcNow.AddDays(-30);
+
+			var popularCompanies = await _companyRepository
+				.GetTableAsNoTracking()
+				.Select(c => new
+				{
+					c.CompanyName,
+					JobsCount =
+						c.JobsListing.Count(j => j.Status == JobStatusEnum.Active && j.DatePosted >= cutOffDate)
+
+				})
+				.OrderByDescending(c => c.JobsCount)
+				.Select(c => c.CompanyName)
+				.ToArrayAsync();
+
+			return popularCompanies;
+
+
+		}
 		#endregion
 	}
 }

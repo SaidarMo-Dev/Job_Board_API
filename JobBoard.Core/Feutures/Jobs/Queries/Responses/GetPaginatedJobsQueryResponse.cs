@@ -17,8 +17,8 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Responses
 		public required string Status { get; set; }
 		public required string CretaedByUser { get; set; }
 
-		public List<SkillDto> Skills { get; set; }
-		public List<CategoryDto> Categories { get; set; }
+		public List<SkillDto>? Skills { get; set; }
+		public List<CategoryDto>? Categories { get; set; }
 	}
 
 }

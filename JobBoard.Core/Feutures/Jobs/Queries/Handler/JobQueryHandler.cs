@@ -7,6 +7,7 @@ using JobBoard.Core.Helpers;
 using JobBoard.Core.Resources;
 using JobBoard.Core.Security.Requirements;
 using JobBoard.Core.Wrapers;
+using JobBoard.Data.enums;
 using JobBoard.Service.Abstractions;
 using JobBoard.Service.Authentication.Interfaces;
 using MediatR;
@@ -20,7 +21,8 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 			IRequestHandler<GetPaginatedJobsQuery, PaginatedResponse<List<GetPaginatedJobsQueryResponse>>>,
 			IRequestHandler<GetJobSkillsQuery, Response<List<GetJobSkillsQueryResponse>>>,
 			IRequestHandler<GetJobCategoriesQuery, Response<List<GetJobCategoriesQueryResponse>>>,
-			IRequestHandler<GetJobsByCompanyIdQuery, Response<GetJobsByCompanyIdQueryResponse>>
+			IRequestHandler<GetJobsByCompanyIdQuery, Response<GetJobsByCompanyIdQueryResponse>>,
+			IRequestHandler<GetPopularLocationsQuery, Response<string[]>>
 	{
 
 		#region Fields
@@ -64,9 +66,12 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 
 			// perform filters and sorting
 
+			var parsedJobTypes = request.JobTypes.SafeParseEnums<JobTypeEnum>().ToArray();
+			var parsedExperienceLevels = request.ExperienceLevels.SafeParseEnums<ExperienceLevelEnum>().ToArray();
 			queryable = queryable
 						.ApplySearch(request.SearchByTitle, request.SearchByLocation)
-						.ApplyFilters(request.JobType, request.SalaryMin, request.SalaryMax, request.ExperienceLevel, request.SortBy);
+						.ApplyFilters(parsedJobTypes, parsedExperienceLevels, request.SortBy,
+										request.PopularCompanies, request.PopularCategories);
 
 			var result = await _mapper.ProjectTo<GetPaginatedJobsQueryResponse>(queryable)
 					.ToPaginatedAsync(request.PageNumber, request.PageSize);
@@ -128,6 +133,13 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 
 			return Success(new GetJobsByCompanyIdQueryResponse { Jobs = JobsDto });
 		}
+
+		public async Task<Response<string[]>> Handle(GetPopularLocationsQuery request, CancellationToken cancellationToken)
+		{
+			var res = await _jobService.GetPopularLocations();
+			return Success(res);
+		}
+
 
 		#endregion
 

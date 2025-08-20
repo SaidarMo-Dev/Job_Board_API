@@ -11,11 +11,12 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Models
 		public int PageSize { get; set; }
 		public string? SearchByTitle { get; set; }
 		public string? SearchByLocation { get; set; }
-		public JobTypeEnum? JobType { get; set; }
-		public double? SalaryMin { get; set; }
-		public double? SalaryMax { get; set; }
-		public ExperienceLevelEnum? ExperienceLevel { get; set; }
+
 		public SortEnum? SortBy { get; set; }
+		public string[]? JobTypes { get; set; }
+		public string[]? ExperienceLevels { get; set; }
+		public string[]? PopularCategories { get; set; }
+		public string[]? PopularCompanies { get; set; }
 
 
 

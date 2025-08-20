@@ -106,5 +106,20 @@ namespace JobBoard.Api.Controllers
 		{
 			return NewResult(await Mediator.Send(new DeleteCompanyCommand(Id)));
 		}
+
+
+		[SwaggerOperation(
+			Summary = "Get popular companies",
+			Description = "get most popular companies.",
+			OperationId = "GetPopularCompanies")]
+
+		[HttpGet(Router.CompanyRoute.PopularCompanies)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+
+
+		public async Task<IActionResult> GetPopularCompanies()
+		{
+			return NewResult(await Mediator.Send(new GetPopularCompaniesQuery()));
+		}
 	}
 }

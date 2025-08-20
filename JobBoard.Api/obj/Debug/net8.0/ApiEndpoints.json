@@ -2488,6 +2488,22 @@
     ]
   },
   {
+    "ContainingType": "JobBoard.Api.Controllers.CompanyController",
+    "Method": "GetPopularCompanies",
+    "RelativePath": "Api/V1/companies/popular",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "JobBoard.Api.Controllers.CountryController",
     "Method": "FindCountryById",
     "RelativePath": "Api/V1/Country/{Id}",
@@ -2612,28 +2628,28 @@
         "IsRequired": false
       },
       {
-        "Name": "JobType",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "SalaryMin",
-        "Type": "System.Nullable\u00601[[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "SalaryMax",
-        "Type": "System.Nullable\u00601[[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "ExperienceLevel",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
         "Name": "SortBy",
         "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "JobTypes",
+        "Type": "System.String[]",
+        "IsRequired": false
+      },
+      {
+        "Name": "ExperienceLevels",
+        "Type": "System.String[]",
+        "IsRequired": false
+      },
+      {
+        "Name": "PopularCategories",
+        "Type": "System.String[]",
+        "IsRequired": false
+      },
+      {
+        "Name": "PopularCompanies",
+        "Type": "System.String[]",
         "IsRequired": false
       }
     ],
@@ -2851,6 +2867,22 @@
           "text/json"
         ],
         "StatusCode": 401
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.JobController",
+    "Method": "GetPopularLocations",
+    "RelativePath": "Api/V1/Jobs/locations",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
       }
     ]
   },

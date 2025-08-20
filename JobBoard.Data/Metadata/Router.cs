@@ -42,6 +42,8 @@
 			public const string DeleteById = Prefex + Single;
 			public const string Jobs = Prefex + Single + "/Jobs";
 
+			public const string PopularCompanies = Prefex + "/popular";
+
 		}
 		public static class SkillRoute
 		{
@@ -103,6 +105,7 @@
 			public const string Categories = Prefex + "/Categories";
 
 			public const string Applications = Prefex + Single + "/Applications";
+			public const string Locations = Prefex + "/locations";
 
 		}
 

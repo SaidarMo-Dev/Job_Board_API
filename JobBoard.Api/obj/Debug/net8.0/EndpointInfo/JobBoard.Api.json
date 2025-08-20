@@ -5079,6 +5079,21 @@
         }
       }
     },
+    "/Api/V1/companies/popular": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "summary": "Get popular companies",
+        "description": "get most popular companies.",
+        "operationId": "GetPopularCompanies",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/Api/V1/Country/{Id}": {
       "get": {
         "tags": [
@@ -5270,40 +5285,50 @@
             }
           },
           {
-            "name": "JobType",
-            "in": "query",
-            "schema": {
-              "$ref": "#/components/schemas/JobTypeEnum"
-            }
-          },
-          {
-            "name": "SalaryMin",
-            "in": "query",
-            "schema": {
-              "type": "number",
-              "format": "double"
-            }
-          },
-          {
-            "name": "SalaryMax",
-            "in": "query",
-            "schema": {
-              "type": "number",
-              "format": "double"
-            }
-          },
-          {
-            "name": "ExperienceLevel",
-            "in": "query",
-            "schema": {
-              "$ref": "#/components/schemas/ExperienceLevelEnum"
-            }
-          },
-          {
             "name": "SortBy",
             "in": "query",
             "schema": {
               "$ref": "#/components/schemas/SortEnum"
+            }
+          },
+          {
+            "name": "JobTypes",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "ExperienceLevels",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "PopularCategories",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "PopularCompanies",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           }
         ],
@@ -5804,6 +5829,21 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/Api/V1/Jobs/locations": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "summary": "Get popular locations",
+        "description": "Retrieves popular locations.",
+        "operationId": "GetPopularLocations",
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }

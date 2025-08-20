@@ -7,36 +7,45 @@ namespace JobBoard.Core.Helpers
 	public static class Extention
 	{
 		public static IQueryable<JobListing> ApplyFilters(
-					this IQueryable<JobListing> queryable,
-					JobTypeEnum? jobType = null,
-					double? minSalary = null,
-					double? maxSalary = null,
-					ExperienceLevelEnum? experienceLevel = null,
-					SortEnum? sortBy = null)
+					this IQueryable<JobListing> source,
+					JobTypeEnum[]? jobTypes = null,
+					ExperienceLevelEnum[]? experienceLevels = null,
+					SortEnum? sortBy = null,
+					string[]? companies = null,
+					string[]? categories = null)
 		{
-			if (jobType.HasValue)
-				queryable = queryable.Where(x => x.JobType == jobType.Value);
+			// handle filter by companies
+			source = source.AddFilter(companies, x => x.company.CompanyName);
+			// handle filter by job types
 
-			if (experienceLevel.HasValue)
-				queryable = queryable.Where(x => x.ExperienceLevel == experienceLevel.Value);
+			if (jobTypes != null && !jobTypes.Contains(JobTypeEnum.Any))
+				source = source.AddFilter(jobTypes, x => x.JobType);
 
-			if (minSalary.HasValue)
-				queryable = queryable.Where(x => x.MinSalary >= minSalary.Value);
+			// handle filter by experiences
 
-			if (maxSalary.HasValue)
-				queryable = queryable.Where(x => x.MaxSalary <= maxSalary.Value);
+			if (experienceLevels != null && !experienceLevels.Contains(ExperienceLevelEnum.Any))
+				source = source.AddFilter(experienceLevels, x => x.ExperienceLevel);
 
-
-			queryable = sortBy switch
+			// handle categories 
+			if (categories is { Length: > 0 })
 			{
-				SortEnum.Recent => queryable.OrderByDescending(x => x.DatePosted),
-				SortEnum.HighestSalary => queryable.OrderByDescending(x => x.MaxSalary),
-				SortEnum.LowestSalary => queryable.OrderBy(x => x.MinSalary),
-				_ => queryable.OrderByDescending(x => x.DatePosted),
+				var categorySet = categories.ToHashSet();
+				source = source.Where(x => x.jobCategories
+					.Any(jc => categorySet.Contains(jc.category.Name)));
+
+			}
+
+
+			source = sortBy switch
+			{
+				SortEnum.Recent => source.OrderByDescending(x => x.DatePosted),
+				SortEnum.HighestSalary => source.OrderByDescending(x => x.MaxSalary),
+				SortEnum.LowestSalary => source.OrderBy(x => x.MinSalary),
+				_ => source.OrderByDescending(x => x.DatePosted),
 			};
 
 
-			return queryable;
+			return source;
 		}
 
 		public static IQueryable<JobListing> ApplySearch(this IQueryable<JobListing> queryable, string? title = null, string? location = null)
@@ -115,6 +124,19 @@ namespace JobBoard.Core.Helpers
 			var lambda = Expression.Lambda<Func<T, bool>>(containsCall, parameter);
 			return source.Where(lambda);
 		}
+
+		public static IEnumerable<TEnum> SafeParseEnums<TEnum>(this IEnumerable<string>? values)
+			where TEnum : struct, Enum
+		{
+			if (values == null) yield break;
+
+			foreach (var value in values)
+			{
+				if (Enum.TryParse<TEnum>(value, true, out var parsed))
+					yield return parsed;
+			}
+		}
+
 	}
 
 }

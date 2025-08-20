@@ -119,6 +119,27 @@ namespace JobBoard.Service.Implementations
 
 		}
 
+		public async Task<string[]> GetPopularLocations()
+		{
+			var cutOffDate = DateTime.UtcNow.AddDays(-30);
+
+			return (await _jobRepository.GetTableAsNoTracking()
+				.Where(x => x.Status == Data.enums.JobStatusEnum.Active && x.DatePosted >= cutOffDate)
+				.GroupBy(x => x.Location)
+				.Select(g => new
+				{
+					location = g.Key,
+					jobCount = g.Count()
+				})
+				.OrderByDescending(x => x.jobCount).
+				Take(10)
+				.Select(x => x.location)
+				.ToArrayAsync());
+
+		}
+
+
+
 		#endregion
 
 	}
