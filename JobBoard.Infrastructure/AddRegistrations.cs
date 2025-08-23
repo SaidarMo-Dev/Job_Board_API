@@ -18,7 +18,7 @@ namespace JobBoard.Infrastructure
 
 			services.AddIdentity<User, Role>(options =>
 			{
-				options.SignIn.RequireConfirmedEmail = false;
+				options.SignIn.RequireConfirmedEmail = true;
 
 				// password configuration 
 				options.Password.RequireDigit = true;
