@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using AutoMapper;
 using JobBoard.Core.Bases;
+using JobBoard.Core.Common.DTOs;
 using JobBoard.Core.Feutures.Jobs.Queries.Models;
 using JobBoard.Core.Feutures.Jobs.Queries.Responses;
 using JobBoard.Core.Helpers;
@@ -12,6 +13,7 @@ using JobBoard.Service.Abstractions;
 using JobBoard.Service.Authentication.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
@@ -22,7 +24,8 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 			IRequestHandler<GetJobSkillsQuery, Response<List<GetJobSkillsQueryResponse>>>,
 			IRequestHandler<GetJobCategoriesQuery, Response<List<GetJobCategoriesQueryResponse>>>,
 			IRequestHandler<GetJobsByCompanyIdQuery, Response<GetJobsByCompanyIdQueryResponse>>,
-			IRequestHandler<GetPopularLocationsQuery, Response<string[]>>
+			IRequestHandler<GetPopularLocationsQuery, Response<string[]>>,
+			IRequestHandler<GetRecommendationJobsQuery, Response<List<JobResponseDto>>>
 	{
 
 		#region Fields
@@ -138,6 +141,17 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 		{
 			var res = await _jobService.GetPopularLocations();
 			return Success(res);
+		}
+
+		public async Task<Response<List<JobResponseDto>>> Handle(GetRecommendationJobsQuery request, CancellationToken cancellationToken)
+		{
+
+			var jobsQueryable = _jobService.GetRecommendationJobs(_currentUserService.GetCurrentUser());
+
+
+			return Success(await _mapper.ProjectTo<JobResponseDto>(jobsQueryable).ToListAsync());
+
+
 		}
 
 

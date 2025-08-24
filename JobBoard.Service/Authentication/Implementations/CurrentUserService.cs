@@ -3,6 +3,7 @@ using JobBoard.Data.Helpers;
 using JobBoard.Service.Authentication.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace JobBoard.Service.Authentication.Implementations
 {
@@ -49,7 +50,7 @@ namespace JobBoard.Service.Authentication.Implementations
 		{
 			var userId = GetCurrentUserId();
 
-			var user = _userManager.Users.FirstOrDefault(u => u.Id.Equals(userId));
+			var user = _userManager.Users.Where(u => u.Id.Equals(userId)).Include(x => x.Country).FirstOrDefault();
 
 
 			if (user is null) throw new UnauthorizedAccessException();

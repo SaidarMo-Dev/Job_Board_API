@@ -10,7 +10,7 @@
 		public required string JobType { get; set; }
 		public double MaxSalary { get; set; }
 		public double MinSalary { get; set; }
-		public string ExperienceLevel { get; set; }
+		public string? ExperienceLevel { get; set; }
 		public required DateTime DatePosted { get; set; }
 		public required string Status { get; set; }
 		public List<SkillDto>? Skills { get; set; }

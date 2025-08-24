@@ -106,6 +106,7 @@
 
 			public const string Applications = Prefex + Single + "/Applications";
 			public const string Locations = Prefex + "/locations";
+			public const string Recommendations = Prefex + "/recommendations";
 
 		}
 

@@ -1,4 +1,5 @@
 ﻿using JobBoard.Data.Entities;
+using JobBoard.Data.Entities.Identity;
 using JobBoard.Infrastructure.Abstractions;
 using JobBoard.Service.Abstractions;
 using Microsoft.EntityFrameworkCore;
@@ -135,6 +136,43 @@ namespace JobBoard.Service.Implementations
 				Take(10)
 				.Select(x => x.location)
 				.ToArrayAsync());
+
+		}
+
+		public IQueryable<JobListing> GetRecommendationJobs(User user, int take = 3)
+		{
+
+			var queryableJobs = _jobRepository.GetTableAsNoTracking();
+
+			var interactedCategories = queryableJobs
+						.Where(j => j.bookMarks.Any(b => b.UserId == user.Id)
+							|| j.applications.Any(ap => ap.UserId == user.Id))
+						.SelectMany(j => j.jobCategories).Select(jc => jc.CategoryId)
+						.Distinct().ToList();
+
+
+
+			return queryableJobs.Select(job =>
+			new
+			{
+				Score =   // Location match
+						(job.Location != null && user.Country != null && job.Location.Contains(user.Country.CountryName) ? 0.3 : 0) +
+
+						// Category match
+						(job.jobCategories.Any(x => interactedCategories.Contains(x.CategoryId)) ? 0.5 : 0) +
+
+						// Recency bonus (using DateDiffDay for SQL translation)
+						(1.0 / (EF.Functions.DateDiffDay(job.DatePosted, DateTime.UtcNow) + 1) * 0.1),
+
+				Job = job
+
+			})
+				.Where(x => x.Score > 0 && x.Job.DateExpired > DateTime.Now && x.Job.Status == Data.enums.JobStatusEnum.Active)
+				.OrderByDescending(x => x.Score)
+				.ThenByDescending(x => x.Job.DatePosted)
+				.Take(take)
+				.Select(x => x.Job);
+
 
 		}
 

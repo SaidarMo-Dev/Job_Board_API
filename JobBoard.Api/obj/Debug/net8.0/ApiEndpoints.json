@@ -2888,6 +2888,22 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.JobController",
+    "Method": "GetRecommendationJobs",
+    "RelativePath": "Api/V1/Jobs/recommendations",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.JobController",
     "Method": "GetJobSkills",
     "RelativePath": "Api/V1/Jobs/Skills",
     "HttpMethod": "GET",

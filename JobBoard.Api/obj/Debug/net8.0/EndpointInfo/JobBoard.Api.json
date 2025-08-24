@@ -5848,6 +5848,21 @@
         }
       }
     },
+    "/Api/V1/Jobs/recommendations": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "summary": "Get recommendation jobs",
+        "description": "Retreives recommendation jobs for loged user",
+        "operationId": "GetRecommendationJobs",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/Api/V1/skills/{Id}": {
       "get": {
         "tags": [
