@@ -3569,7 +3569,7 @@
         }
       }
     },
-    "/Api/V1/Bookmarks/{Id}": {
+    "/Api/V1/bookmarks/{Id}": {
       "get": {
         "tags": [
           "BookMark"
@@ -3719,7 +3719,7 @@
         }
       }
     },
-    "/Api/V1/Bookmarks/paginate": {
+    "/Api/V1/bookmarks/paginate": {
       "get": {
         "tags": [
           "BookMark"
@@ -3845,7 +3845,7 @@
         }
       }
     },
-    "/Api/V1/Bookmarks/save-job": {
+    "/Api/V1/bookmarks/save-job": {
       "post": {
         "tags": [
           "BookMark"
@@ -3919,7 +3919,7 @@
         }
       }
     },
-    "/Api/V1/Bookmarks/by-jobId/{Id}": {
+    "/Api/V1/bookmarks/by-jobId/{Id}": {
       "delete": {
         "tags": [
           "BookMark"
@@ -4050,7 +4050,7 @@
         }
       }
     },
-    "/Api/V1/Bookmarks/{Id}/saved-job-ids": {
+    "/Api/V1/bookmarks/{Id}/saved-job-ids": {
       "get": {
         "tags": [
           "BookMark"
@@ -4063,6 +4063,51 @@
             "name": "Id",
             "in": "path",
             "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Api/V1/bookmarks/recent-saved-jobs": {
+      "get": {
+        "tags": [
+          "BookMark"
+        ],
+        "summary": "Get recent user Saved job",
+        "description": "Retrieves recent saved jobs associated with a specific user.",
+        "operationId": "GetRecentSavedJobs",
+        "parameters": [
+          {
+            "name": "Take",
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"

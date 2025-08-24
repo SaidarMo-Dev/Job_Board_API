@@ -1,4 +1,5 @@
 ﻿using JobBoard.Data.Entities;
+using JobBoard.Data.Responses;
 using JobBoard.Infrastructure.Abstractions;
 using JobBoard.Service.Abstractions;
 using Microsoft.EntityFrameworkCore;
@@ -103,6 +104,21 @@ namespace JobBoard.Service.Implementations
 				.FirstOrDefaultAsync(x => x.JobId.Equals(JobId) && x.UserId.Equals(userId));
 
 			return result;
+		}
+
+		public IQueryable<RecentSavedJobsResponse> GetRecentSavedJobs(int take = 3)
+		{
+			return _bookMarkRepository.GetTableAsNoTracking()
+					.OrderByDescending(x => x.DateBooked)
+					.Select(x => new RecentSavedJobsResponse
+					{
+						Id = x.BookMarkId,
+						Company = x.jobListing.company.CompanyName,
+						Title = x.jobListing.Title,
+						SavedAt = x.DateBooked
+					})
+					.Take(take);
+
 		}
 
 

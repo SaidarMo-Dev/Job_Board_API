@@ -6,12 +6,10 @@ using JobBoard.Core.Feutures.BookMarks.Queries.Responses;
 using JobBoard.Core.Resources;
 using JobBoard.Core.Security.Requirements;
 using JobBoard.Core.Wrapers;
-using JobBoard.Data.Entities.Identity;
 using JobBoard.Service.Abstractions;
 using JobBoard.Service.Authentication.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
@@ -21,13 +19,13 @@ namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
 				IRequestHandler<GetPaginatedBookmarkListQuery, PaginatedResponse<List<GetPaginatedBookmarkListQueryResponse>>>,
 				IRequestHandler<GetUserBookmarksQuery, PaginatedResponse<List<GetUserBookmarksQueryResponse>>>,
 				IRequestHandler<GetUserSavedJobsCount, Response<int>>,
-				IRequestHandler<GetSavedJobIdsQuery, Response<GetSavedJobIdsQueryResponse>>
+				IRequestHandler<GetSavedJobIdsQuery, Response<GetSavedJobIdsQueryResponse>>,
+				IRequestHandler<GetRecentSavedJobsQuery, Response<List<GetRecentSavedJobsQueryResponse>>>
 
 	{
 		#region Fields
 		private readonly IBookmarkService _bookmarkService;
 		private readonly IMapper _mapper;
-		private readonly UserManager<User> _userManager;
 		private readonly IAuthorizationService _authorizationService;
 		private readonly ICurrentUserService _currentUserService;
 
@@ -37,14 +35,13 @@ namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
 		public BookmarkQueryHandler(IBookmarkService bookmarkService,
 									IMapper mapper,
 									IStringLocalizer<SharedResources> stringLocalizer,
-									UserManager<User> userManager,
+
 									IAuthorizationService authorizationService,
 									ICurrentUserService currentUserService
 									) : base(stringLocalizer)
 		{
 			_bookmarkService = bookmarkService;
 			_mapper = mapper;
-			_userManager = userManager;
 			_authorizationService = authorizationService;
 			_currentUserService = currentUserService;
 		}
@@ -103,6 +100,15 @@ namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
 			var result = await _bookmarkService.GetUserSavedJobIds(request.UserId);
 
 			return Success(new GetSavedJobIdsQueryResponse { SavedJobIds = result });
+		}
+
+		public async Task<Response<List<GetRecentSavedJobsQueryResponse>>> Handle(GetRecentSavedJobsQuery request, CancellationToken cancellationToken)
+		{
+
+			var queryableJobs = _bookmarkService.GetRecentSavedJobs(request.Take);
+
+			return Success(_mapper.Map<List<GetRecentSavedJobsQueryResponse>>(queryableJobs));
+
 		}
 
 		#endregion

@@ -113,15 +113,17 @@
 
 		public static class BookMarkRoute
 		{
-			private const string Prefex = Rule + "/Bookmarks";
+			private const string Prefex = Rule + "/bookmarks";
 
-			public const string GetAll = Prefex + "/GetAll";
+			public const string GetAll = Prefex;
 			public const string GetByID = Prefex + "/{Id}";
 			public const string Create = Prefex + "/save-job";
 			public const string DeleteById = Prefex + Single;
 			public const string DeleteByJobId = Prefex + "/by-jobId" + Single;
 			public const string Paginate = Prefex + "/paginate";
 			public const string UserSavedJobIds = Prefex + "/{Id}/saved-job-ids";
+
+			public const string RecentSavedJobs = Prefex + "/recent-saved-jobs";
 
 		}
 

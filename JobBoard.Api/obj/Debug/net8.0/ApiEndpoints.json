@@ -1645,7 +1645,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.BookMarkController",
     "Method": "GetBookmarkByID",
-    "RelativePath": "Api/V1/Bookmarks/{Id}",
+    "RelativePath": "Api/V1/bookmarks/{Id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -1685,7 +1685,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.BookMarkController",
     "Method": "DeleteBookMark",
-    "RelativePath": "Api/V1/Bookmarks/{Id}",
+    "RelativePath": "Api/V1/bookmarks/{Id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -1734,7 +1734,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.BookMarkController",
     "Method": "GetUserSavedJobIds",
-    "RelativePath": "Api/V1/Bookmarks/{Id}/saved-job-ids",
+    "RelativePath": "Api/V1/bookmarks/{Id}/saved-job-ids",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -1765,7 +1765,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.BookMarkController",
     "Method": "DeleteBookMarkByJobId",
-    "RelativePath": "Api/V1/Bookmarks/by-jobId/{Id}",
+    "RelativePath": "Api/V1/bookmarks/by-jobId/{Id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -1814,7 +1814,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.BookMarkController",
     "Method": "BookmarksPaginate",
-    "RelativePath": "Api/V1/Bookmarks/paginate",
+    "RelativePath": "Api/V1/bookmarks/paginate",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -1849,8 +1849,39 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.BookMarkController",
+    "Method": "GetRecentSavedJobs",
+    "RelativePath": "Api/V1/bookmarks/recent-saved-jobs",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Take",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.BookMarkController",
     "Method": "AddBookMark",
-    "RelativePath": "Api/V1/Bookmarks/save-job",
+    "RelativePath": "Api/V1/bookmarks/save-job",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

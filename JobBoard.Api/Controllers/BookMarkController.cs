@@ -132,5 +132,19 @@ namespace JobBoard.Api.Controllers
 			return Ok(await Mediator.Send(new GetSavedJobIdsQuery(Id)));
 		}
 
+		[Authorize]
+		[SwaggerOperation(Summary = "Get recent user Saved job",
+		  Description = "Retrieves recent saved jobs associated with a specific user.",
+		  OperationId = "GetRecentSavedJobs")]
+
+		[HttpGet(Router.BookMarkRoute.RecentSavedJobs)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		public async Task<IActionResult> GetRecentSavedJobs([FromQuery] GetRecentSavedJobsQuery query)
+		{
+			return Ok(await Mediator.Send(query));
+		}
+
+
 	}
 }

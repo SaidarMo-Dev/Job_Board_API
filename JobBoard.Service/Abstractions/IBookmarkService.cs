@@ -1,4 +1,5 @@
 ﻿using JobBoard.Data.Entities;
+using JobBoard.Data.Responses;
 
 namespace JobBoard.Service.Abstractions
 {
@@ -69,6 +70,7 @@ namespace JobBoard.Service.Abstractions
 		/// </summary>
 		/// <returns>A list of <see cref="int>"/> represent the ids of saved jobs.</returns>
 		Task<List<int>> GetUserSavedJobIds(int userId);
+		IQueryable<RecentSavedJobsResponse> GetRecentSavedJobs(int take = 3);
 
 	}
 }
