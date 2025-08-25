@@ -10,7 +10,7 @@ namespace JobBoard.Core.Mapping.BookMarkMapping
 			GetBookmarkByIdQueryMapping();
 			GetPaginatedBookmarkListMapping();
 			GetUserBookmarks();
-
+			GetRecentSavedJobsQueryMapping();
 		}
 	}
 }

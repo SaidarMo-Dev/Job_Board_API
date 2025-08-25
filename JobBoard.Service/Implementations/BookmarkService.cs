@@ -100,24 +100,28 @@ namespace JobBoard.Service.Implementations
 
 		public async Task<Bookmark> GetUserBookmarkAsync(int userId, int JobId)
 		{
-			var result = await _bookMarkRepository.GetTableAsNoTracking()
-				.FirstOrDefaultAsync(x => x.JobId.Equals(JobId) && x.UserId.Equals(userId));
+			return (await _bookMarkRepository.GetTableAsNoTracking()
+							.FirstOrDefaultAsync(x => x.JobId.Equals(JobId) && x.UserId.Equals(userId)));
 
-			return result;
 		}
 
-		public IQueryable<RecentSavedJobsResponse> GetRecentSavedJobs(int take = 3)
+		public IQueryable<RecentSavedJobsResponse> GetRecentSavedJobs(int userId, int take)
 		{
+			if (take <= 0) take = 3;
+
 			return _bookMarkRepository.GetTableAsNoTracking()
+					.Where(x => x.UserId == userId)
+
 					.OrderByDescending(x => x.DateBooked)
+					.Take(take)
 					.Select(x => new RecentSavedJobsResponse
+
 					{
 						Id = x.BookMarkId,
 						Company = x.jobListing.company.CompanyName,
 						Title = x.jobListing.Title,
 						SavedAt = x.DateBooked
-					})
-					.Take(take);
+					});
 
 		}
 

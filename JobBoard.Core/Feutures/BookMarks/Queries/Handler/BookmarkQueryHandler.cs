@@ -10,6 +10,7 @@ using JobBoard.Service.Abstractions;
 using JobBoard.Service.Authentication.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
@@ -105,7 +106,8 @@ namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
 		public async Task<Response<List<GetRecentSavedJobsQueryResponse>>> Handle(GetRecentSavedJobsQuery request, CancellationToken cancellationToken)
 		{
 
-			var queryableJobs = _bookmarkService.GetRecentSavedJobs(request.Take);
+			var queryableJobs = await _bookmarkService.GetRecentSavedJobs
+						(_currentUserService.GetCurrentUserId(), request.Take).ToListAsync();
 
 			return Success(_mapper.Map<List<GetRecentSavedJobsQueryResponse>>(queryableJobs));
 
