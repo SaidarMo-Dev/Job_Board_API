@@ -20,7 +20,7 @@ namespace JobBoard.Core.Mapping.ApplicationMapping
 
 			CreateMap<JobListing, ApplicationJobResponse>()
 				.ForMember(x => x.Id, opt => opt.MapFrom(src => src.JobId))
-				.ForMember(x => x.CompanyName, opt => opt.MapFrom(src => src.company.CompanyName));
+				.ForMember(x => x.CompanyName, opt => opt.MapFrom(src => src.Company.CompanyName));
 		}
 	}
 }

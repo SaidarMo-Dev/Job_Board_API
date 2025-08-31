@@ -11,6 +11,7 @@ namespace JobBoard.Core.Mapping.ApplicationMapping
 			GetSingleApplicationMapping();
 			GetApplicationsByJobIdMapping();
 			GetCurrentUserApplicationsMapping();
+			GetRecentApplicationsQueryMapping();
 		}
 	}
 }

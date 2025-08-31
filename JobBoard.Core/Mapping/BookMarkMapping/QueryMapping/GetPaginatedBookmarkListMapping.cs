@@ -15,7 +15,7 @@ namespace JobBoard.Core.Mapping.BookMarkMapping
 				.ForMember(x => x.JobId, opt => opt.MapFrom(src => src.JobId))
 				.ForMember(x => x.Title, opt => opt.MapFrom(src => src.jobListing.Title))
 				.ForMember(x => x.Description, opt => opt.MapFrom(src => src.jobListing.Description))
-				.ForMember(x => x.CompanyName, opt => opt.MapFrom(src => src.jobListing.company.CompanyName))
+				.ForMember(x => x.CompanyName, opt => opt.MapFrom(src => src.jobListing.Company.CompanyName))
 				.ForMember(x => x.Location, opt => opt.MapFrom(src => src.jobListing.Location))
 				.ForMember(x => x.JobType, opt => opt.MapFrom(src => src.jobListing.JobType.ToString()))
 				.ForMember(x => x.DatePosted, opt => opt.MapFrom(src => src.jobListing.DatePosted))

@@ -77,7 +77,7 @@ namespace JobBoard.Core.Feutures.Applications.Commands.Handler
 			var application = await _applicationService.GetByIdAsync(request.ApplicationId);
 			if (application is null) return NotFound<string>();
 
-			application.status = ApplicationStatusEnum.Accepted;
+			application.Status = ApplicationStatusEnum.Accepted;
 			application.LastStatusDate = DateTime.UtcNow;
 
 			return await PerformUpdateApplicationAsync(application);
@@ -88,7 +88,7 @@ namespace JobBoard.Core.Feutures.Applications.Commands.Handler
 			var application = await _applicationService.GetByIdAsync(request.ApplicationId);
 			if (application is null) return NotFound<string>();
 
-			application.status = ApplicationStatusEnum.Rejected;
+			application.Status = ApplicationStatusEnum.Rejected;
 			application.LastStatusDate = DateTime.UtcNow;
 
 			return await PerformUpdateApplicationAsync(application);

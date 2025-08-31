@@ -10,7 +10,7 @@ namespace JobBoard.Core.Mapping.ApplicationMapping
 		public void GetApplicationsByJobIdMapping()
 		{
 			CreateMap<Application, ApplicationResponse>()
-				.ForMember(x => x.Status, opt => opt.MapFrom(src => src.status.ToString()))
+				.ForMember(x => x.Status, opt => opt.MapFrom(src => src.Status.ToString()))
 				.ForMember(x => x.Job, opt => opt.MapFrom(src => src.JobListing))
 				.ForMember(x => x.User, opt => opt.MapFrom(src => src.UserInfo));
 

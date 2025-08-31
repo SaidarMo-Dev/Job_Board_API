@@ -1,4 +1,5 @@
 ﻿using JobBoard.Data.Entities;
+using JobBoard.Data.Responses;
 
 namespace JobBoard.Service.Abstractions
 {
@@ -61,6 +62,7 @@ namespace JobBoard.Service.Abstractions
 		/// An <see cref="IQueryable{T}"/> of <see cref="Application"/> objects associated with the specified user.
 		/// </returns>
 		IQueryable<Application> GetUserApplicationsQueryable(int userId);
+		Task<IReadOnlyList<RecentApplicationsResponse>> GetRecentApplicationsAsync(int userId, int take);
 
 
 	}

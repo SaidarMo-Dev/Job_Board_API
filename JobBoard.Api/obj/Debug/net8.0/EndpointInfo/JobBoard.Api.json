@@ -1125,6 +1125,51 @@
         }
       }
     },
+    "/Api/V1/applications/recent-applications": {
+      "get": {
+        "tags": [
+          "Application"
+        ],
+        "summary": "Get recent applications",
+        "description": "Get recent applications for loged in user.",
+        "operationId": "GetRecentApplications",
+        "parameters": [
+          {
+            "name": "Take",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/Api/V1/users/paginate": {
       "get": {
         "tags": [

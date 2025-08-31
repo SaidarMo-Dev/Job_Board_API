@@ -58,7 +58,7 @@ namespace JobBoard.Service.Implementations
 		{
 			var result = await _bookMarkRepository.GetTableAsNoTracking()
 				.Include(x => x.userInfo)
-				.Include(x => x.jobListing).ThenInclude(x => x.company)
+				.Include(x => x.jobListing).ThenInclude(x => x.Company)
 				.Where(x => x.BookMarkId.Equals(Id))
 				.FirstOrDefaultAsync();
 
@@ -74,7 +74,7 @@ namespace JobBoard.Service.Implementations
 		public async Task<List<Bookmark>> GetUserBookmarks(int UserId)
 		{
 			return await _bookMarkRepository.GetTableAsNoTracking()
-							.Include(x => x.jobListing).ThenInclude(x => x.company)
+							.Include(x => x.jobListing).ThenInclude(x => x.Company)
 							.Where(x => x.UserId.Equals(UserId))
 							.ToListAsync();
 
@@ -118,7 +118,7 @@ namespace JobBoard.Service.Implementations
 
 					{
 						Id = x.BookMarkId,
-						Company = x.jobListing.company.CompanyName,
+						Company = x.jobListing.Company.CompanyName,
 						Title = x.jobListing.Title,
 						SavedAt = x.DateBooked
 					});

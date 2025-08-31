@@ -197,8 +197,8 @@ namespace JobBoard.Service.Implementations
 			{
 				TotalSavedJobs = u.bookmarks.Count(),
 				TotalApplications = u.applications.Count(),
-				Rejected = u.applications.Where(x => x.status == Data.enums.ApplicationStatusEnum.Rejected).Count(),
-				Pending = u.applications.Where(x => x.status == Data.enums.ApplicationStatusEnum.Pending).Count(),
+				Rejected = u.applications.Where(x => x.Status == Data.enums.ApplicationStatusEnum.Rejected).Count(),
+				Pending = u.applications.Where(x => x.Status == Data.enums.ApplicationStatusEnum.Pending).Count(),
 			}).FirstOrDefaultAsync();
 
 			return result;

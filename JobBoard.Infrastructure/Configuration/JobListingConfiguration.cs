@@ -48,7 +48,7 @@ namespace JobBoard.Infrastructure.Configuration
 					)
 				.IsRequired();
 
-			builder.HasOne(x => x.company)
+			builder.HasOne(x => x.Company)
 				.WithMany(x => x.JobsListing)
 				.HasForeignKey(x => x.CompanyId)
 				.IsRequired();

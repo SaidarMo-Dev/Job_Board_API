@@ -15,7 +15,7 @@ namespace JobBoard.Core.Helpers
 					string[]? categories = null)
 		{
 			// handle filter by companies
-			source = source.AddFilter(companies, x => x.company.CompanyName);
+			source = source.AddFilter(companies, x => x.Company.CompanyName);
 			// handle filter by job types
 
 			if (jobTypes != null && !jobTypes.Contains(JobTypeEnum.Any))
@@ -62,13 +62,13 @@ namespace JobBoard.Core.Helpers
 			switch (filter)
 			{
 				case ApplicationStatusFilter.Pending:
-					source = source.Where(x => x.status == ApplicationStatusEnum.Pending);
+					source = source.Where(x => x.Status == ApplicationStatusEnum.Pending);
 					break;
 				case ApplicationStatusFilter.Rejected:
-					source = source.Where(x => x.status.Equals(ApplicationStatusEnum.Rejected));
+					source = source.Where(x => x.Status.Equals(ApplicationStatusEnum.Rejected));
 					break;
 				case ApplicationStatusFilter.Accepted:
-					source = source.Where(x => x.status.Equals(ApplicationStatusEnum.Accepted));
+					source = source.Where(x => x.Status.Equals(ApplicationStatusEnum.Accepted));
 					break;
 				case ApplicationStatusFilter.All:
 				default:
@@ -82,7 +82,7 @@ namespace JobBoard.Core.Helpers
 		{
 			source = source.AddFilter(status, x => x.Status);
 			source = source.AddFilter(locations, x => x.Location);
-			source = source.AddFilter(companies, x => x.company.CompanyName);
+			source = source.AddFilter(companies, x => x.Company.CompanyName);
 
 			// handle categories 
 			if (categories is { Length: > 0 })

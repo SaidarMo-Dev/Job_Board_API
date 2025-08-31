@@ -8,7 +8,7 @@ namespace JobBoard.Core.Mapping.JobMapping
 		public void GetPaginatedJobsQueryMapping()
 		{
 			CreateMap<JobListing, GetPaginatedJobsQueryResponse>()
-				.ForMember(x => x.CompanyName, opt => opt.MapFrom(src => src.company.CompanyName))
+				.ForMember(x => x.CompanyName, opt => opt.MapFrom(src => src.Company.CompanyName))
 				.ForMember(x => x.JobType, opt => opt.MapFrom(src => src.JobType.ToString()))
 				.ForMember(x => x.DatePosted, opt => opt.MapFrom(src => src.DatePosted.ToShortDateString()))
 				.ForMember(x => x.Status, opt => opt.MapFrom(src => src.Status.ToString()))

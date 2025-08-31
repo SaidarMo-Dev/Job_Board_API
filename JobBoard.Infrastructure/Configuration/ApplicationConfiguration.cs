@@ -27,7 +27,7 @@ namespace JobBoard.Infrastructure.Configuration
 				.HasForeignKey(x => x.UserId)
 				.IsRequired();
 
-			builder.Property(x => x.status)
+			builder.Property(x => x.Status)
 				.HasConversion(
 					x => x.ToString(),
 					x => (ApplicationStatusEnum)Enum.Parse(typeof(ApplicationStatusEnum), x)

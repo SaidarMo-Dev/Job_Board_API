@@ -17,7 +17,8 @@ namespace JobBoard.Core.Feutures.Applications.Queries.Handler
 	public class ApplicationQueryHandler : ResponseHandler,
 				IRequestHandler<GetSingleApplicationQuery, Response<GetSingleApplictionQueryResponse>>,
 				IRequestHandler<GetApplicationsByJobIdQuery, Response<GetApplicationsByJobIdQueryResponse>>,
-				IRequestHandler<GetCurrentUserApplicationsQuery, PaginatedResponse<List<GetCurrentUserApplicationsQueryResponse>>>
+				IRequestHandler<GetCurrentUserApplicationsQuery, PaginatedResponse<List<GetCurrentUserApplicationsQueryResponse>>>,
+				IRequestHandler<GetRecentApplicationsQuery, Response<IReadOnlyList<GetRecentApplicationsQueryResponse>>>
 	{
 		private readonly IApplicationService _applicationService;
 		private readonly IMapper _mapper;
@@ -86,6 +87,13 @@ namespace JobBoard.Core.Feutures.Applications.Queries.Handler
 			var result = await applicationsDto.ToPaginatedAsync(request.Page, request.Size);
 
 			return result;
+		}
+
+		public async Task<Response<IReadOnlyList<GetRecentApplicationsQueryResponse>>> Handle(GetRecentApplicationsQuery request, CancellationToken cancellationToken)
+		{
+			var recentApplications = await _applicationService.GetRecentApplicationsAsync(_currentUserService.GetCurrentUserId(), request.Take);
+
+			return Success(_mapper.Map<IReadOnlyList<GetRecentApplicationsQueryResponse>>(recentApplications));
 		}
 
 		#endregion

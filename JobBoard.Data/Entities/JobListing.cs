@@ -21,7 +21,7 @@ namespace JobBoard.Data.Entities
 		public int CreatedByUserId { get; set; }
 
 		public ICollection<JobSkill> JobSkills { get; set; }
-		public Company company { get; set; }
+		public Company Company { get; set; }
 		public ICollection<Bookmark> bookMarks { get; set; }
 		public ICollection<Application> applications { get; set; }
 		public ICollection<JobCategory> jobCategories { get; set; } = new List<JobCategory>();

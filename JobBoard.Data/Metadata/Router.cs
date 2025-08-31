@@ -140,6 +140,8 @@
 
 			public const string SetAccepted = Prefex + "/set-accepted";
 			public const string SetRemoved = Prefex + "/set-removed";
+
+			public const string RecentApplications = Prefex + "/recent-applications";
 		}
 
 

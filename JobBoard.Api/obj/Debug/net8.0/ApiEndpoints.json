@@ -475,6 +475,37 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.ApplicationController",
+    "Method": "GetRecentApplications",
+    "RelativePath": "Api/V1/applications/recent-applications",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Take",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.ApplicationController",
     "Method": "SetToAccepted",
     "RelativePath": "Api/V1/applications/set-accepted",
     "HttpMethod": "PUT",

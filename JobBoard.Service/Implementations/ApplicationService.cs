@@ -1,5 +1,6 @@
 ﻿using JobBoard.Data.Entities;
 using JobBoard.Data.enums;
+using JobBoard.Data.Responses;
 using JobBoard.Infrastructure.Abstractions;
 using JobBoard.Service.Abstractions;
 using Microsoft.EntityFrameworkCore;
@@ -55,7 +56,7 @@ namespace JobBoard.Service.Implementations
 		{
 			var application = await _applicationRepository.GetTableAsNoTracking()
 						.Include(x => x.UserInfo)
-						.Include(x => x.JobListing).ThenInclude(x => x.company)
+						.Include(x => x.JobListing).ThenInclude(x => x.Company)
 						.FirstOrDefaultAsync(app => app.ApplicationId.Equals(Id));
 
 			return application;
@@ -66,8 +67,8 @@ namespace JobBoard.Service.Implementations
 			var result = await _applicationRepository.GetTableAsNoTracking()
 						.FirstOrDefaultAsync(x => x.UserId == UserId
 							&& x.JobId == jobId &&
-							(x.status == ApplicationStatusEnum.Accepted ||
-							x.status == ApplicationStatusEnum.Pending));
+							(x.Status == ApplicationStatusEnum.Accepted ||
+							x.Status == ApplicationStatusEnum.Pending));
 
 
 			return result != null;
@@ -95,6 +96,25 @@ namespace JobBoard.Service.Implementations
 							.Where(x => x.UserId.Equals(UserId)).AsQueryable();
 
 			return result;
+		}
+
+		public async Task<IReadOnlyList<RecentApplicationsResponse>> GetRecentApplicationsAsync(int userId, int take)
+		{
+			if (take <= 0) take = 3;
+
+			return (await _applicationRepository.GetTableAsNoTracking()
+						.Where(ap => ap.UserId == userId)
+						.OrderByDescending(ap => ap.CreatedOn)
+						.Take(take)
+						.Select(app => new RecentApplicationsResponse
+						{
+							Id = app.ApplicationId,
+							Position = app.JobListing.Title,
+							Company = app.JobListing.Company.CompanyName,
+							ApplicantDate = app.CreatedOn,
+							Status = app.Status
+						}).ToListAsync());
+
 		}
 
 

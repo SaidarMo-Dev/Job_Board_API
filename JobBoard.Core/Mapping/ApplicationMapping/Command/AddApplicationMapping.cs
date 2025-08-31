@@ -10,7 +10,7 @@ namespace JobBoard.Core.Mapping.ApplicationMapping
 		{
 			CreateMap<AddApplicationCommand, Application>()
 				.ForMember(x => x.CreatedOn, opt => opt.MapFrom(src => DateTime.UtcNow))
-				.ForMember(x => x.status, opt => opt.MapFrom(src => ApplicationStatusEnum.Pending))
+				.ForMember(x => x.Status, opt => opt.MapFrom(src => ApplicationStatusEnum.Pending))
 				.ForMember(x => x.LastStatusDate, opt => opt.MapFrom(src => DateTime.UtcNow));
 
 		}

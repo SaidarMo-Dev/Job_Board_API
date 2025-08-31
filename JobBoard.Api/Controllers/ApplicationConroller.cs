@@ -141,5 +141,18 @@ namespace JobBoard.Api.Controllers
 		}
 
 
+		[SwaggerOperation(Summary = "Get recent applications",
+						  Description = "Get recent applications for loged in user.",
+						  OperationId = "GetRecentApplications")]
+
+		[Authorize]
+		[HttpGet(Router.ApplicationRoute.RecentApplications)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		public async Task<IActionResult> GetRecentApplications([FromQuery] GetRecentApplicationsQuery query)
+		{
+			return NewResult(await Mediator.Send(query));
+		}
+
 	}
 }

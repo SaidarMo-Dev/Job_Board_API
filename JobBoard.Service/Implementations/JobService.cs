@@ -38,7 +38,7 @@ namespace JobBoard.Service.Implementations
 		public async Task<JobListing> GetJobByIdWithEncludeAsync(int Id)
 		{
 			var result = await _jobRepository.GetTableAsNoTracking()
-					.Include(x => x.company)
+					.Include(x => x.Company)
 					.Include(x => x.CreatedByUser)
 					.Include(x => x.jobCategories).ThenInclude(x => x.category)
 					.Include(x => x.JobSkills).ThenInclude(x => x.skillInfo)

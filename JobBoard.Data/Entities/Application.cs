@@ -20,7 +20,7 @@ namespace JobBoard.Data.Entities
 		public required string Availability { get; set; }
 
 		public required DateTime CreatedOn { get; set; }
-		public ApplicationStatusEnum status { get; set; }
+		public ApplicationStatusEnum Status { get; set; }
 		public required DateTime LastStatusDate { get; set; }
 
 		public JobListing JobListing { get; set; }

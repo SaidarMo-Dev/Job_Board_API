@@ -14,7 +14,7 @@ namespace JobBoard.Core.Mapping.BookMarkMapping
 			CreateMap<JobListing, JobResponseDto>()
 				.ForMember(dst => dst.JobType, opt => opt.MapFrom(src => src.JobType.ToString()))
 				.ForMember(dst => dst.Status, opt => opt.MapFrom(src => src.Status.ToString()))
-				.ForMember(dst => dst.CompanyName, opt => opt.MapFrom(src => src.company.CompanyName))
+				.ForMember(dst => dst.CompanyName, opt => opt.MapFrom(src => src.Company.CompanyName))
 				.ForMember(dst => dst.ExperienceLevel, opt => opt.MapFrom(src => src.ExperienceLevel.ToString()))
 				.ForMember(dst => dst.CreatedByUser, opt => opt.MapFrom(src => src.CreatedByUser.UserName))
 
