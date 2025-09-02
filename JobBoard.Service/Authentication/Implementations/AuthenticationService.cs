@@ -234,7 +234,7 @@ namespace JobBoard.Service.Authentication.Implementations
 
 				// send code to user Email
 
-				await _emailService.SendEmail(Email, user.FullName, Util.FormatVerificationMessage(randomCode), "Your Verification Code");
+				await _emailService.SendEmailAsync(Email, user.FullName, Util.FormatVerificationMessage(randomCode), "Your Verification Code");
 
 				await trans.CommitAsync();
 				return "Success";
@@ -321,7 +321,7 @@ namespace JobBoard.Service.Authentication.Implementations
 				var url = httpAccessor?.Scheme + "://" + host + actionUrl;
 
 
-				var result = await _emailService.SendEmail(user.Email, user.FullName, Util.FormatVerificationLink(url), "Email Confirmation from  Saidar Team");
+				var result = await _emailService.SendEmailAsync(user.Email, user.FullName, Util.FormatVerificationLink(url), "Email Confirmation from  Saidar Team");
 				if (result == "Failed") throw new Exception("Cannot send Email Something wrong!");
 
 				return "Success";
@@ -355,7 +355,7 @@ namespace JobBoard.Service.Authentication.Implementations
 
 				// send code to user Email
 
-				await _emailService.SendEmail(email, user.FullName, Util.FormatVerificationMessage(randomCode), reason ?? "Email Confirmation");
+				await _emailService.SendEmailAsync(email, user.FullName, Util.FormatVerificationMessage(randomCode), reason ?? "Email Confirmation");
 
 				await trans.CommitAsync();
 				return "Success";
@@ -398,7 +398,7 @@ namespace JobBoard.Service.Authentication.Implementations
 
 				// send code to user email
 
-				await _emailService.SendEmail(newEmail, user.FullName, Util.FormatVerificationMessage(randomCode), "Change email confirmation");
+				await _emailService.SendEmailAsync(newEmail, user.FullName, Util.FormatVerificationMessage(randomCode), "Change email confirmation");
 
 				return "Success";
 			}

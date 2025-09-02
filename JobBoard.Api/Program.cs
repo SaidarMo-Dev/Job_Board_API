@@ -1,4 +1,5 @@
 using System.Globalization;
+using Hangfire;
 using JobBoard.Core;
 using JobBoard.Core.Middleware;
 using JobBoard.Core.Security.Handlers;
@@ -30,12 +31,21 @@ builder.Services.AddControllers((options) =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// configure appDbContext 
+#region Configure appDbContext 
 builder.Services.AddDbContext<appDbContext>(
 	options =>
 		options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+#endregion
 
+#region Hangfire configuration
+
+builder.Services.AddHangfire(config =>
+	config.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddHangfireServer();
+
+
+#endregion
 
 #region Cors configurations
 
@@ -100,8 +110,6 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 
 });
 #endregion
-
-
 
 
 #region Serilog Connfiguration
@@ -170,6 +178,8 @@ app.UseHttpsRedirection();
 app.UseCors("MyPolicy");
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
+
+app.UseHangfireDashboard(); // dashboard at /hangfire
 
 app.UseAuthentication();
 app.UseAuthorization();

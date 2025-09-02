@@ -31,7 +31,7 @@ namespace JobBoard.Core.Feutures.Emails.commands.handlers
 		#region Handle Methods
 		public async Task<Response<string>> Handle(SendEmailCommand request, CancellationToken cancellationToken)
 		{
-			var result = await _emailService.SendEmail(request.Email, "", request.Message, "");
+			var result = await _emailService.SendEmailAsync(request.Email, "", request.Message, "");
 
 			if (result == "Failed") return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedSendEmail]);
 

@@ -1,4 +1,5 @@
-﻿using JobBoard.Core.Helpers;
+﻿using Hangfire;
+using JobBoard.Core.Helpers;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Data.enums;
 using JobBoard.Data.Responses;
@@ -21,7 +22,6 @@ namespace JobBoard.Service.Implementations
 		#region Fields
 		private readonly UserManager<User> _userManager;
 		private readonly RoleManager<Role> _roleManager;
-		private readonly ICountryService _countryService;
 		private readonly IHttpContextAccessor _httpContextAccessor;
 		private readonly IEmailService _emailService;
 		private readonly IUrlHelper _urlHelper;
@@ -29,7 +29,7 @@ namespace JobBoard.Service.Implementations
 		private readonly IUserRepository _userRepository;
 		private readonly appDbContext _context;
 		private readonly IAuthenticationService _authenticationService;
-		private readonly appDbContext appDbContext1;
+		private readonly IBackgroundJobClient _backgroundJobClient;
 
 		#endregion
 
@@ -51,7 +51,9 @@ namespace JobBoard.Service.Implementations
 							IEmailService emailService,
 							IUrlHelper urlHelper,
 							appDbContext appDbContext,
-							IAuthenticationService authenticationService
+							IAuthenticationService authenticationService,
+							IBackgroundJobClient backgroundJobClient
+
 
 
 
@@ -66,13 +68,12 @@ namespace JobBoard.Service.Implementations
 			_userRepository = userRepository;
 			_userManager = userManager;
 			_roleManager = roleManager;
-			_countryService = countryService;
 			_httpContextAccessor = httpContextAccessor;
 			_emailService = emailService;
 			_urlHelper = urlHelper;
 			_context = appDbContext;
 			_authenticationService = authenticationService;
-
+			_backgroundJobClient = backgroundJobClient;
 		}
 
 
@@ -102,18 +103,8 @@ namespace JobBoard.Service.Implementations
 				if (!roleAdded)
 					throw new Exception("Failed to assign role to user.");
 
-				var emailResult = await _emailService.SendEmail(
-					user.Email!,
-					user.FullName,
-					Util.FormatVerificationMessage(user.Code),
-					"Email Confirmation");
-
-
-				if (emailResult != "Success")
-					throw new Exception("Failed to send verification email.");
-
 				await trans.CommitAsync();
-				return "Success";
+
 			}
 			catch (Exception ex)
 			{
@@ -121,6 +112,24 @@ namespace JobBoard.Service.Implementations
 				Log.Error(ex, "Failed to add user");
 				return "An error occurred while creating the user.";
 			}
+
+			try
+
+			{
+				_backgroundJobClient.Enqueue<IEmailService>(emailService => emailService.SendEmailAsync(
+					user.Email!,
+					user.FullName,
+					Util.FormatVerificationMessage(user.Code),
+					"Email Confirmation"));
+
+			}
+			catch (Exception ex)
+			{
+				Log.Error(ex, "User created but failed to enqueue verification email");
+
+			}
+
+			return "Success";
 		}
 
 		public async Task<string> UpdateUserAsync(User user)

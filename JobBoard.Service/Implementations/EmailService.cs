@@ -30,7 +30,7 @@ namespace JobBoard.Service.Implementations
 		}
 
 
-		public async Task<string> SendEmail(string recipientEmail, string recipientName, string htmlMessage, string subject)
+		public async Task<string> SendEmailAsync(string recipientEmail, string recipientName, string htmlMessage, string subject)
 		{
 			try
 			{
