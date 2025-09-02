@@ -63,7 +63,7 @@ namespace JobBoard.Service.Abstractions
 		/// </returns>
 		IQueryable<Application> GetUserApplicationsQueryable(int userId);
 		Task<IReadOnlyList<RecentApplicationsResponse>> GetRecentApplicationsAsync(int userId, int take);
-
+		Task<int[]> GetAppliedJobIds(int userId);
 
 	}
 }

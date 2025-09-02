@@ -18,7 +18,8 @@ namespace JobBoard.Core.Feutures.Applications.Queries.Handler
 				IRequestHandler<GetSingleApplicationQuery, Response<GetSingleApplictionQueryResponse>>,
 				IRequestHandler<GetApplicationsByJobIdQuery, Response<GetApplicationsByJobIdQueryResponse>>,
 				IRequestHandler<GetCurrentUserApplicationsQuery, PaginatedResponse<List<GetCurrentUserApplicationsQueryResponse>>>,
-				IRequestHandler<GetRecentApplicationsQuery, Response<IReadOnlyList<GetRecentApplicationsQueryResponse>>>
+				IRequestHandler<GetRecentApplicationsQuery, Response<IReadOnlyList<GetRecentApplicationsQueryResponse>>>,
+				IRequestHandler<GetAppliedJobIdsQuery, Response<int[]>>
 	{
 		private readonly IApplicationService _applicationService;
 		private readonly IMapper _mapper;
@@ -94,6 +95,13 @@ namespace JobBoard.Core.Feutures.Applications.Queries.Handler
 			var recentApplications = await _applicationService.GetRecentApplicationsAsync(_currentUserService.GetCurrentUserId(), request.Take);
 
 			return Success(_mapper.Map<IReadOnlyList<GetRecentApplicationsQueryResponse>>(recentApplications));
+		}
+
+		public async Task<Response<int[]>> Handle(GetAppliedJobIdsQuery request, CancellationToken cancellationToken)
+		{
+			var result = await _applicationService.GetAppliedJobIds(_currentUserService.GetCurrentUserId());
+
+			return Success(result);
 		}
 
 		#endregion

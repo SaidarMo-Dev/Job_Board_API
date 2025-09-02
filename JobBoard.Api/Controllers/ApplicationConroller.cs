@@ -154,5 +154,18 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(query));
 		}
 
+		[SwaggerOperation(Summary = "Get applied job ids",
+						  Description = "Get applied job ids for loged in user.",
+						  OperationId = "GetAppliedJobIds")]
+
+		[Authorize]
+		[HttpGet(Router.ApplicationRoute.AppliedJobIds)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		public async Task<IActionResult> GetAppliedJobIds()
+		{
+			return NewResult(await Mediator.Send(new GetAppliedJobIdsQuery()));
+		}
+
 	}
 }

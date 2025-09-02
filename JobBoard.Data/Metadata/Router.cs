@@ -142,6 +142,9 @@
 			public const string SetRemoved = Prefex + "/set-removed";
 
 			public const string RecentApplications = Prefex + "/recent-applications";
+
+			public const string AppliedJobIds = Prefex + "/applied-job-ids";
+
 		}
 
 

@@ -117,6 +117,13 @@ namespace JobBoard.Service.Implementations
 
 		}
 
+		public async Task<int[]> GetAppliedJobIds(int userId)
+		{
+			return (await _applicationRepository.GetTableAsNoTracking()
+								.Where(app => app.UserId == userId)
+								.Select(x => x.JobListing.JobId).ToArrayAsync());
+		}
+
 
 		#endregion
 

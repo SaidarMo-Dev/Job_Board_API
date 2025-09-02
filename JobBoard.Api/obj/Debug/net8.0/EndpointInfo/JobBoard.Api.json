@@ -1170,6 +1170,41 @@
         }
       }
     },
+    "/Api/V1/applications/applied-job-ids": {
+      "get": {
+        "tags": [
+          "Application"
+        ],
+        "summary": "Get applied job ids",
+        "description": "Get applied job ids for loged in user.",
+        "operationId": "GetAppliedJobIds",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/Api/V1/users/paginate": {
       "get": {
         "tags": [
