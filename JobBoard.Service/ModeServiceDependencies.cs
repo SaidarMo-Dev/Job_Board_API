@@ -25,6 +25,7 @@ namespace JobBoard.Service
 			services.AddScoped<IAuthorizationService, AuthorizationService>();
 			services.AddScoped<IEmailService, EmailService>();
 			services.AddScoped<ICurrentUserService, CurrentUserService>();
+			services.AddScoped<IEmailJobService, EmailJobService>();
 
 
 			return services;

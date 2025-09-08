@@ -1,4 +1,5 @@
 ﻿using JobBoard.Api.Bases;
+using JobBoard.Core.Feutures.Authentication.commands.Models;
 using JobBoard.Core.Feutures.Authentication.Commands.Models;
 using JobBoard.Core.Feutures.Authentication.Queries.Models;
 using JobBoard.Data.Metadata;
@@ -220,6 +221,20 @@ namespace JobBoard.Api.Controllers
 		public async Task<IActionResult> VerifyPassword([FromQuery] VerifyPasswordQuery query)
 		{
 			return NewResult(await Mediator.Send(query));
+		}
+
+		[SwaggerOperation(
+			Summary = "Resend a verification code",
+			Description = "This EndPoint send's verification code",
+			OperationId = "ResendVerificationCode")]
+
+		[HttpPut(Router.AuthenticationRoute.ResendVerificationCode)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		[ProducesResponseType(StatusCodes.Status403Forbidden)]
+		public async Task<IActionResult> ResendVerificationCode([FromQuery] ResendVerificationCodeCommand command)
+		{
+			return NewResult(await Mediator.Send(command));
 		}
 	}
 }

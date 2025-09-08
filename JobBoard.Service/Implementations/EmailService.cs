@@ -1,7 +1,9 @@
-﻿using System.Text.RegularExpressions;
+﻿using JobBoard.Core.Helpers;
+using JobBoard.Data.Entities.Identity;
 using JobBoard.Data.Helpers;
 using JobBoard.Service.Abstractions;
 using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Identity;
 using MimeKit;
 
 namespace JobBoard.Service.Implementations
@@ -10,24 +12,24 @@ namespace JobBoard.Service.Implementations
 	{
 		#region Fields
 		private readonly EmailSettings _emailSettings;
+		private readonly UserManager<User> _userManager;
+		private readonly IEmailJobService _emailJobService;
 
 		#endregion
 
 		#region Constructors
-		public EmailService(EmailSettings emailSettings)
+		public EmailService(EmailSettings emailSettings, UserManager<User> userManager, IEmailJobService emailJobService)
 		{
 			_emailSettings = emailSettings;
+			_userManager = userManager;
+			_emailJobService = emailJobService;
 		}
 
 		#endregion
 
 		#region Methods
 
-		private static string _StripHtml(string input)
-		{
-			if (string.IsNullOrWhiteSpace(input)) return string.Empty;
-			return Regex.Replace(input, "<.*?>", string.Empty);
-		}
+
 
 
 		public async Task<string> SendEmailAsync(string recipientEmail, string recipientName, string htmlMessage, string subject)
@@ -51,7 +53,7 @@ namespace JobBoard.Service.Implementations
 					<p>Best regards,<br/>The Saidar Team</p>
 				</body>
 				</html>",
-					TextBody = $"Dear {recipientName},\n\n{_StripHtml(htmlMessage)}\n\nBest regards,\nThe Saidar Team"
+					TextBody = $"Dear {recipientName},\n\n{Util.StripHtml(htmlMessage)}\n\nBest regards,\nThe Saidar Team"
 
 				};
 				var mMessage = new MimeMessage
@@ -77,6 +79,23 @@ namespace JobBoard.Service.Implementations
 			}
 		}
 
+		public async Task<(bool Success, string Message)> ResendVerificationCodeAsync(string email)
+		{
+			var user = await _userManager.FindByEmailAsync(email);
+			if (user == null)
+				return (false, "User not found.");
+
+			if (user.EmailConfirmed)
+				return (false, "Email already confirmed.");
+
+			// generate new code
+			user.Code = Util.GenerateSixDigitCode();
+			await _userManager.UpdateAsync(user);
+
+			_emailJobService.EnqueueVerificationEmail(email, user.FullName, Util.FormatVerificationMessage(user.Code));
+
+			return (true, "Verification code resent successfully.");
+		}
 
 
 		#endregion

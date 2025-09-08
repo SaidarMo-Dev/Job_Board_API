@@ -169,6 +169,7 @@
 			public const string AddRecoveryContact = Prefex + "/add-recovery-contact";
 
 			public const string VerfiyPassword = Prefex + "/verify-password";
+			public const string ResendVerificationCode = Prefex + "/resend-verification-code";
 
 		}
 
@@ -195,7 +196,7 @@
 		{
 			private const string Prefex = Rule + "/Email";
 
-			public const string SendEmail = Prefex + "/SendEmail";
+			public const string SendEmail = Prefex + "/send-email";
 		}
 	}
 }

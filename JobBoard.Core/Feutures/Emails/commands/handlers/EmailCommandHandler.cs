@@ -8,7 +8,7 @@ using Microsoft.Extensions.Localization;
 namespace JobBoard.Core.Feutures.Emails.commands.handlers
 {
 	public class EmailCommandHandler : ResponseHandler,
-							IRequestHandler<SendEmailCommand, Response<string>>
+						IRequestHandler<SendEmailCommand, Response<string>>
 
 
 	{
@@ -38,6 +38,7 @@ namespace JobBoard.Core.Feutures.Emails.commands.handlers
 			return Success("");
 
 		}
+
 		#endregion
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using JobBoard.Core.Bases;
+using JobBoard.Core.Feutures.Authentication.commands.Models;
 using JobBoard.Core.Feutures.Authentication.Commands.Models;
 using JobBoard.Core.Resources;
 using JobBoard.Core.Security.Requirements;
@@ -23,7 +24,8 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 			IRequestHandler<SendEmailChangeCommand, Response<string>>,
 			IRequestHandler<VerifyEmailChangeCommand, Response<string>>,
 			IRequestHandler<ChangeUserPasswordCommand, Response<string>>,
-			IRequestHandler<AddRecoveryContactCommand, Response<string>>
+			IRequestHandler<AddRecoveryContactCommand, Response<string>>,
+			IRequestHandler<ResendVerificationCodeCommand, Response<string>>
 
 
 
@@ -35,6 +37,7 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 		private readonly IStringLocalizer<SharedResources> _stringLocalizer;
 		private readonly IUserService _userService;
 		private readonly IAuthorizationService _authorizationService;
+		private readonly IEmailService _emailService;
 		#endregion
 
 		#region Constructors
@@ -43,7 +46,8 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 									IAuthenticationService authenticationService,
 									IStringLocalizer<SharedResources> stringLocalizer,
 									IUserService userService,
-									IAuthorizationService authorizationService
+									IAuthorizationService authorizationService,
+									IEmailService emailService
 									) : base(stringLocalizer)
 		{
 			_signInManager = signInManager;
@@ -52,6 +56,7 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 			_stringLocalizer = stringLocalizer;
 			_userService = userService;
 			_authorizationService = authorizationService;
+			_emailService = emailService;
 		}
 
 		#endregion
@@ -186,6 +191,16 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 			}
 
 			return Success("", _stringLocalizer[SharedResourcesKeys.Success]);
+		}
+
+		public async Task<Response<string>> Handle(ResendVerificationCodeCommand request, CancellationToken cancellationToken)
+		{
+
+			var result = await _emailService.ResendVerificationCodeAsync(request.Email);
+
+			if (!result.Success) return BadRequest(result.Message);
+
+			return Success(result.Message);
 		}
 
 

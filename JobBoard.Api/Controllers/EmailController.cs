@@ -26,5 +26,7 @@ namespace JobBoard.Api.Controllers
 		{
 			return NewResult(await Mediator.Send(req));
 		}
+
+
 	}
 }

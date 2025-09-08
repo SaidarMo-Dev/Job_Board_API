@@ -905,6 +905,50 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.AuthenticationController",
+    "Method": "ResendVerificationCode",
+    "RelativePath": "Api/V1/auth/resend-verification-code",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 403
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.AuthenticationController",
     "Method": "ResetPassword",
     "RelativePath": "Api/V1/auth/reset-password",
     "HttpMethod": "POST",
@@ -2640,7 +2684,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.EmailController",
     "Method": "SendEmail",
-    "RelativePath": "Api/V1/Email/SendEmail",
+    "RelativePath": "Api/V1/Email/send-email",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
