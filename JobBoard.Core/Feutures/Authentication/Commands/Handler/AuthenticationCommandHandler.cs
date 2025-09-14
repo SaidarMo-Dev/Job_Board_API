@@ -105,18 +105,21 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 
 		public async Task<Response<string>> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
 		{
-			var result = await _authenticationService.ResetPasswordAsync(request.Email, request.Password);
+			var result = await _authenticationService.ResetPasswordAsync(request.Token, request.Password);
 
-			var switchResult = result switch
+			if (!result.Succeeded)
 			{
-				"UserNotFound" => NotFound<string>(_stringLocalizer[SharedResourcesKeys.UserNotFound]),
-				"FailedRemovePassword" or "FailedAddPassword" => BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedResetPassword]),
-				"Success" => Success("", _stringLocalizer[SharedResourcesKeys.Success]),
-				_ => BadRequest<string>(_stringLocalizer[SharedResourcesKeys.Failed])
-			};
+				var switchResult = result.Message switch
+				{
+					"UserNotFound" => NotFound<string>(_stringLocalizer[SharedResourcesKeys.UserNotFound]),
+					"FailedRemovePassword" or "FailedAddPassword" => BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedResetPassword]),
+					_ => BadRequest<string>(_stringLocalizer[SharedResourcesKeys.Failed])
+				};
 
+				return switchResult;
+			}
 
-			return switchResult;
+			return Success(result.Message);
 		}
 
 		public async Task<Response<string>> Handle(SendConfirmEmail request, CancellationToken cancellationToken)

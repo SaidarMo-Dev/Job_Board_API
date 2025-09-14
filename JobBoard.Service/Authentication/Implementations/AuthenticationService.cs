@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using Hangfire;
 using JobBoard.Core.Helpers;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Data.Helpers;
@@ -14,6 +15,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 
 namespace JobBoard.Service.Authentication.Implementations
 {
@@ -21,6 +23,7 @@ namespace JobBoard.Service.Authentication.Implementations
 	{
 		#region Fields
 		private readonly JwtSettings _jwtSettings;
+		private readonly ITokenHelper _tokenHelper;
 		private readonly IUserRefreshTokenRepository _userRefreshTokenRepository;
 		private readonly UserManager<User> _userManager;
 		private readonly IEmailService _emailService;
@@ -28,25 +31,33 @@ namespace JobBoard.Service.Authentication.Implementations
 		private readonly IHttpContextAccessor _httpContextAccessor;
 		private readonly string host = "http://localhost:5173";
 		private readonly IUrlHelper _urlHelper;
+
+		private readonly IBackgroundJobClient _backgroundJobClient;
 		#endregion
 
 		#region Constructors
 		public AuthenticationService(JwtSettings jwtSettings,
+									 ITokenHelper tokenHelper,
 									 IUserRefreshTokenRepository userRefreshTokenRepository,
 									 UserManager<User> userManager,
 									 IEmailService emailService,
 									 appDbContext appDbContext,
 									 IHttpContextAccessor httpContextAccessor,
-									 IUrlHelper urlHelper
+									 IUrlHelper urlHelper,
+									 IBackgroundJobClient backgroundJobClient
+
+
 									)
 		{
 			_jwtSettings = jwtSettings;
+			_tokenHelper = tokenHelper;
 			_userRefreshTokenRepository = userRefreshTokenRepository;
 			_userManager = userManager;
 			_emailService = emailService;
 			_appDbContext = appDbContext;
 			_httpContextAccessor = httpContextAccessor;
 			_urlHelper = urlHelper;
+			_backgroundJobClient = backgroundJobClient;
 		}
 
 		#endregion
@@ -79,7 +90,7 @@ namespace JobBoard.Service.Authentication.Implementations
 
 			return Convert.ToBase64String(RandomNumber);
 		}
-		private async Task<List<Claim>> _GetUserClaimsAsync(User user, List<string> roles)
+		private async Task<List<Claim>> _GetUserClaimsAsync(User user, List<string>? roles = null)
 		{
 
 			var userClaims = await _userManager.GetClaimsAsync(user);
@@ -90,20 +101,24 @@ namespace JobBoard.Service.Authentication.Implementations
 				new Claim(nameof(JwtClaimModel.Username), user.UserName ?? "Unknown"),
 				new Claim(nameof(JwtClaimModel.Email), user.Email ?? "Unknown"),
 				new Claim(nameof(JwtClaimModel.FirstName), user.FirstName),
-				new Claim(nameof(JwtClaimModel.LastName), user.LastName)
+				new Claim(nameof(JwtClaimModel.LastName), user.LastName),
+
 			};
 
-			foreach (var role in roles)
+			if (roles != null)
 			{
-				claims.Add(new Claim(nameof(JwtClaimModel.role), role));
+				foreach (var role in roles)
+				{
+					claims.Add(new Claim(nameof(JwtClaimModel.role), role));
+				}
 			}
+
 
 			claims.AddRange(userClaims);
 
 			return claims;
 
 		}
-
 
 
 		public async Task<AuthResponse> GenerateUserToken(User user)
@@ -215,76 +230,118 @@ namespace JobBoard.Service.Authentication.Implementations
 
 		}
 
-		public async Task<string> SendResetPasswordAsync(string Email)
+		public async Task<string> SendResetPasswordAsync(string email)
 		{
-			var trans = await _appDbContext.Database.BeginTransactionAsync();
+
+			var user = await _userManager.FindByEmailAsync(email);
+			if (user is null || user.IsDeleted) return "UserNotFound";
+
+
+			var bytes = new byte[4];
+			RandomNumberGenerator.Fill(bytes);
+			var randomCode = BitConverter.ToUInt32(bytes, 0) % 1000000;
+			user.Code = randomCode.ToString("D6");
+
+			var result = await _userManager.UpdateAsync(user);
+			if (!result.Succeeded) return "UpdateFailed";
+
+
 			try
 			{
-				var user = await _userManager.FindByEmailAsync(Email);
-
-				if (user is null) return "UserNotFound";
-
-				var random = new Random();
-
-				var randomCode = random.Next(0, 100000).ToString("D6");
-				user.Code = randomCode;
-
-				var result = await _userManager.UpdateAsync(user);
-				if (!result.Succeeded) return "ErrorUpdateUser";
-
-				// send code to user Email
-
-				await _emailService.SendEmailAsync(Email, user.FullName, Util.FormatVerificationMessage(randomCode), "Your Verification Code");
-
-				await trans.CommitAsync();
-				return "Success";
+				_backgroundJobClient.Enqueue<IEmailService>(emailService =>
+					emailService.SendEmailAsync(email, user.FullName, Util.FormatVerificationMessage(user.Code), "Reset Password Code"));
 			}
-			catch
+			catch (Exception ex)
 			{
-				await trans.RollbackAsync();
-				return "Failed";
+				Log.Error(ex, "Failed to enqueue reset code email");
 			}
+
+			return "Success";
+		}
+		private async Task<string> GenerateResetPasswordTokenAsync(User user)
+		{
+			var claims = await _GetUserClaimsAsync(user);
+
+			var jti = Guid.NewGuid().ToString("N").Substring(0, 10);
+			user.Jti = jti;
+			user.JtiExp = false;
+
+			await _userManager.UpdateAsync(user);
+
+			claims.Add(new Claim(nameof(JwtClaimModel.jti), jti));
+
+			var jwtToken = new JwtSecurityToken(
+						_jwtSettings.Issuer,
+						_jwtSettings.Audience,
+						 claims,
+						expires: DateTime.UtcNow.AddMinutes(_jwtSettings.AccesTokenExpirationDuration),
+						signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtSettings.Secret)), SecurityAlgorithms.HmacSha256));
+
+			return new JwtSecurityTokenHandler().WriteToken(jwtToken);
 
 		}
 
-		public async Task<string> ConfirmResetPasswordAsync(string email, string code)
+
+		public async Task<(bool Succeeded, string Message, string Data)> ConfirmResetPasswordAsync(string email, string code)
 		{
 			var user = await _userManager.FindByEmailAsync(email);
-			if (user is null) return "UserNotFound";
+			if (user is null) return (false, "UserNotFound", "");
 
 			var userCode = user.Code;
 
-			if (userCode != code) return "IncorrectCode";
+			if (userCode != code) return (false, "IncorrectCode", "");
 
-			return "Success";
+			var token = await GenerateResetPasswordTokenAsync(user);
+
+			return (true, "Success", token);
 
 		}
 
-		public async Task<string> ResetPasswordAsync(string email, string password)
+
+		public async Task<(bool Succeeded, string Message)> ResetPasswordAsync(string token, string password)
 		{
 			var trans = await _appDbContext.Database.BeginTransactionAsync();
-
+			var claimsPrincipal = _tokenHelper.ValidateToken(token);
+			if (claimsPrincipal is null) return (false, "InvalideToken");
 			try
 			{
-				var user = await _userManager.FindByEmailAsync(email);
-				if (user is null) return "UserNotFound";
 
-				var removePassResult = await _userManager.RemovePasswordAsync(user);
-				if (!removePassResult.Succeeded) return "FailedRemovePassword";
+				var user = await _userManager.FindByEmailAsync(claimsPrincipal.Claims.FirstOrDefault(c => c.Type.Equals(nameof(JwtClaimModel.Email)))?.Value ?? "");
+				if (user is null) return (false, "UserNotFound");
 
-				var addPassResult = await _userManager.AddPasswordAsync(user, password);
+				var valideToken = user.Jti != null
+								  && user.Jti == claimsPrincipal.Claims
+														.FirstOrDefault(c => c.Type.
+														Equals(nameof(JwtClaimModel.jti)))?.Value
+								  && (!user.JtiExp ?? false);
 
-				if (!addPassResult.Succeeded) return "FailedAddPassword";
+				if (valideToken)
+				{
+					var removePassResult = await _userManager.RemovePasswordAsync(user);
+					if (!removePassResult.Succeeded) return (false, "FailedRemovePassword");
 
-				await trans.CommitAsync();
-				return "Success";
+					var addPassResult = await _userManager.AddPasswordAsync(user, password);
+
+					if (!addPassResult.Succeeded) return (false, "FailedAddPassword");
 
 
+					// make token expire (use one time )
+					user.JtiExp = true;
+
+					await _userManager.UpdateAsync(user);
+
+					await trans.CommitAsync();
+					return (true, "Success");
+
+				}
+
+				throw new InvalidDataException("Invalide token");
 			}
 			catch
 			{
 				await trans.RollbackAsync();
-				return "Failed";
+
+				return (false, "Failed");
 			}
 		}
 
@@ -296,7 +353,7 @@ namespace JobBoard.Service.Authentication.Implementations
 
 			var result = await _userManager.ConfirmEmailAsync(user, Code);
 
-			if (!result.Succeeded) return result.Errors?.FirstOrDefault()?.Description;
+			if (!result.Succeeded) return result.Errors?.FirstOrDefault()?.Description ?? "Failed to confirm email";
 
 			return "Success";
 		}

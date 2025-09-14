@@ -26,6 +26,9 @@ namespace JobBoard.Data.Entities.Identity
 		public string? RecoveryEmail { get; set; }
 		public string? RecoveryPhone { get; set; }
 
+		public string? Jti { get; set; }
+		public bool? JtiExp { get; set; }
+
 		public Country? Country { get; set; }
 		public ICollection<Application> applications { get; set; }
 		public ICollection<Bookmark> bookmarks { get; set; }

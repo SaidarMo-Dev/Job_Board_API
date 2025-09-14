@@ -956,19 +956,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Email",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Password",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "ConfirmPassword",
-        "Type": "System.String",
-        "IsRequired": false
+        "Name": "request",
+        "Type": "JobBoard.Core.Feutures.Authentication.Commands.Models.ResetPasswordCommand",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": [

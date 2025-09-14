@@ -22,7 +22,7 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Validations
 
 		public void ApplyValidations()
 		{
-			RuleFor(x => x.Email)
+			RuleFor(x => x.Token)
 				.NotEmpty().WithMessage(_stringLocalizer[SharedResourcesKeys.EmailNotEmpty])
 				.NotNull().WithMessage(_stringLocalizer[SharedResourcesKeys.EmailNotNull]);
 

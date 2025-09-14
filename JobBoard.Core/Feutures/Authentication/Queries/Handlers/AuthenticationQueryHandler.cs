@@ -56,14 +56,20 @@ namespace JobBoard.Core.Feutures.Authentication.Queries.Handlers
 		{
 			var result = await _authenticationService.ConfirmResetPasswordAsync(request.Email, request.Code);
 
-			switch (result)
+			if (!result.Succeeded)
 			{
-				case "UserNotFound": return NotFound<string>(_stringLocalizer[SharedResourcesKeys.UserNotFound]);
-				case "IncorrectCode": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.IncorrectCode]);
-				case "Success": return Success<string>("", _stringLocalizer[SharedResourcesKeys.Success]);
+				switch (result.Message)
+				{
+					case "UserNotFound": return NotFound<string>(_stringLocalizer[SharedResourcesKeys.UserNotFound]);
+					case "IncorrectCode": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.IncorrectCode]);
 
-				default: return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.Failed]);
+					default: return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.Failed]);
+				}
 			}
+
+			return Success(result.Data, _stringLocalizer[SharedResourcesKeys.Success]);
+
+
 		}
 
 		public async Task<Response<string>> Handle(SendConfirmEmailQuery request, CancellationToken cancellationToken)

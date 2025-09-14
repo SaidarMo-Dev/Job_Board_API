@@ -112,7 +112,7 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 
 
-		public async Task<IActionResult> ResetPassword([FromQuery] ResetPasswordCommand request)
+		public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordCommand request)
 		{
 			return NewResult(await Mediator.Send(request));
 

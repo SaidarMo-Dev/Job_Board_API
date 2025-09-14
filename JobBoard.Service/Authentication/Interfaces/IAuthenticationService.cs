@@ -10,8 +10,8 @@ namespace JobBoard.Service.Authentication.Interfaces
 		JwtSecurityToken ReadJwtToken(string accessToken);
 		Task<AuthResponse> GetRefreshToken(string refreshToken, string accessToken);
 		Task<string> SendResetPasswordAsync(string email);
-		Task<string> ConfirmResetPasswordAsync(string email, string code);
-		Task<string> ResetPasswordAsync(string email, string password);
+		Task<(bool Succeeded, string Message, string Data)> ConfirmResetPasswordAsync(string email, string code);
+		Task<(bool Succeeded, string Message)> ResetPasswordAsync(string token, string password);
 
 		Task<string> SendUrlConfirmEmailAsync(int userId);
 		/// <summary>
