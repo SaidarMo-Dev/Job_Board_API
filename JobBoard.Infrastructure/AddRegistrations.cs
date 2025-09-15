@@ -49,11 +49,11 @@ namespace JobBoard.Infrastructure
 				x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
 				x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 			})
-			.AddJwtBearer(X =>
+			.AddJwtBearer(options =>
 			{
-				X.RequireHttpsMetadata = false;
-				X.SaveToken = true;
-				X.TokenValidationParameters = new TokenValidationParameters
+				options.RequireHttpsMetadata = false;
+				options.SaveToken = true;
+				options.TokenValidationParameters = new TokenValidationParameters
 				{
 					ValidateIssuer = jwtSettings.ValidateIssuer,
 					ValidIssuer = jwtSettings.Issuer,
@@ -64,9 +64,21 @@ namespace JobBoard.Infrastructure
 					ValidateLifetime = jwtSettings.ValidateLifeTime
 				};
 
+				options.Events = new JwtBearerEvents
+				{
+					OnMessageReceived = context =>
+					{
+						// Read from cookie
+						if (context.Request.Cookies.ContainsKey("accessToken"))
+						{
+							context.Token = context.Request.Cookies["accessToken"];
+						}
+						return Task.CompletedTask;
+					}
+				};
 			});
 
-			//configuration of Swager Gen
+			// Configuration of Swager Gen
 
 			services.AddSwaggerGen(x =>
 			{

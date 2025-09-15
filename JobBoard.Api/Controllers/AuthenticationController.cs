@@ -22,7 +22,28 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> SignIn([FromForm] SignInCommand request)
 		{
-			return NewResult(await Mediator.Send(request));
+			var response = await Mediator.Send(request);
+			if (!response.succeeded)
+				return NewResult(response);
+
+
+			Response.HttpContext.Response.Cookies.Append("accessToken", response.data.AccessToken, new CookieOptions
+			{
+				HttpOnly = true,
+				Secure = true,
+				SameSite = SameSiteMode.None,
+				Expires = DateTimeOffset.UtcNow.AddMinutes(10)
+			});
+
+			Response.HttpContext.Response.Cookies.Append("refreshToken", response.data.RefreshToken?.RefreshToken ?? "", new CookieOptions
+			{
+				HttpOnly = true,
+				Secure = true,
+				SameSite = SameSiteMode.None,
+				Expires = response.data.RefreshToken?.ExpirationDate
+			});
+
+			return Ok(new { message = "Login Successfully " });
 		}
 
 		[SwaggerOperation(Summary = "Send confirm email link",
