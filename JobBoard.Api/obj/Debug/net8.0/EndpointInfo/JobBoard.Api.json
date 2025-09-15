@@ -1891,25 +1891,6 @@
         "summary": "Refresh token",
         "description": "Generates a new access token using a valid refresh token.",
         "operationId": "RefreshAccessToken",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RefreshNewAccessToken"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RefreshNewAccessToken"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/RefreshNewAccessToken"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"
@@ -6659,20 +6640,6 @@
           }
         },
         "additionalProperties": { }
-      },
-      "RefreshNewAccessToken": {
-        "type": "object",
-        "properties": {
-          "refreshToken": {
-            "type": "string",
-            "nullable": true
-          },
-          "accessToken": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
       },
       "ResetPasswordCommand": {
         "required": [

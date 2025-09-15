@@ -68,9 +68,54 @@ namespace JobBoard.Api.Controllers
 
 		[HttpPost(Router.AuthenticationRoute.RefreshToken)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<IActionResult> RefreshNewToken([FromBody] RefreshNewAccessToken request)
+		public async Task<IActionResult> RefreshNewToken()
 		{
-			return NewResult(await Mediator.Send(request));
+			var refreshToken = Request.Cookies["refreshToken"];
+			if (string.IsNullOrEmpty(refreshToken))
+			{
+				return Unauthorized(new Core.Bases.Response<string>
+				{
+					succeeded = false,
+					message = "Refresh token is missing",
+					statusCode = System.Net.HttpStatusCode.Unauthorized
+				});
+			}
+
+			var accessToken = Request.Cookies["accessToken"];
+			if (string.IsNullOrEmpty(accessToken))
+			{
+				return Unauthorized(new Core.Bases.Response<string>
+				{
+					succeeded = false,
+					message = "access token is missing",
+					statusCode = System.Net.HttpStatusCode.Unauthorized
+				});
+			}
+
+			var response = await Mediator.Send(new RefreshNewAccessToken { AccessToken = accessToken, RefreshToken = refreshToken });
+
+			if (!response.succeeded)
+			{
+				return Unauthorized(response);
+			}
+
+			Response.Cookies.Append("accessToken", response.data.AccessToken, new CookieOptions
+			{
+				HttpOnly = true,
+				Secure = true,
+				SameSite = SameSiteMode.None,
+				Expires = DateTimeOffset.UtcNow.AddMinutes(10)
+			});
+
+			Response.Cookies.Append("refreshToken", response.data.RefreshToken?.RefreshToken ?? "", new CookieOptions
+			{
+				HttpOnly = true,
+				Secure = true,
+				SameSite = SameSiteMode.None,
+				Expires = response.data.RefreshToken?.ExpirationDate
+			});
+
+			return NewResult(response);
 		}
 
 
