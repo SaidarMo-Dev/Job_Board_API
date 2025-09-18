@@ -171,6 +171,8 @@
 			public const string VerfiyPassword = Prefex + "/verify-password";
 			public const string ResendVerificationCode = Prefex + "/resend-verification-code";
 
+			public const string Logout = Prefex + "/logout";
+
 		}
 
 

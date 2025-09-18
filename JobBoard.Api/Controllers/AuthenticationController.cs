@@ -1,4 +1,5 @@
 ﻿using JobBoard.Api.Bases;
+using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Authentication.commands.Models;
 using JobBoard.Core.Feutures.Authentication.Commands.Models;
 using JobBoard.Core.Feutures.Authentication.Queries.Models;
@@ -22,6 +23,7 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> SignIn([FromForm] SignInCommand request)
 		{
+
 			var response = await Mediator.Send(request);
 			if (!response.succeeded)
 				return NewResult(response);
@@ -39,11 +41,17 @@ namespace JobBoard.Api.Controllers
 			{
 				HttpOnly = true,
 				Secure = true,
-				SameSite = SameSiteMode.None,
+				SameSite = SameSiteMode.Lax,
 				Expires = response.data.RefreshToken?.ExpirationDate
 			});
 
-			return Ok(new { message = "Login Successfully " });
+			return Ok(new Response<string[]>
+			{
+				data = response.data.UserRoles ?? [],
+				succeeded = true,
+				statusCode = System.Net.HttpStatusCode.OK,
+				message = "Login successfully"
+			});
 		}
 
 		[SwaggerOperation(Summary = "Send confirm email link",
@@ -302,5 +310,34 @@ namespace JobBoard.Api.Controllers
 		{
 			return NewResult(await Mediator.Send(command));
 		}
+
+		[SwaggerOperation(
+			Summary = "Logout",
+			Description = "This EndPoint logout the current user",
+			OperationId = "logout")]
+
+		[HttpPost(Router.AuthenticationRoute.Logout)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public IActionResult Logout()
+		{
+			Response.Cookies.Append("accessToken", "", new CookieOptions
+			{
+				Expires = DateTimeOffset.UtcNow.AddDays(-1),
+				HttpOnly = true,
+				Secure = true,
+				SameSite = SameSiteMode.None
+			});
+
+			Response.Cookies.Append("refreshToken", "", new CookieOptions
+			{
+				Expires = DateTimeOffset.UtcNow.AddDays(-1),
+				HttpOnly = true,
+				Secure = true,
+				SameSite = SameSiteMode.None
+			});
+
+			return Ok(new { succeeded = true, message = "Logged out" });
+		}
+
 	}
 }

@@ -160,11 +160,15 @@ namespace JobBoard.Service.Authentication.Implementations
 
 			await _userRefreshTokenRepository.AddAsync(userRefreshToken);
 
+			var roles = await _userManager.GetRolesAsync(user);
+
 			// return response of access and refresh tokens 
 			return new AuthResponse
 			{
 				AccessToken = accessToken,
-				RefreshToken = refreshToken
+				RefreshToken = refreshToken,
+				UserRoles = roles.ToArray()
+
 			};
 
 		}

@@ -2899,6 +2899,21 @@
         }
       }
     },
+    "/Api/V1/auth/logout": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Logout",
+        "description": "This EndPoint logout the current user",
+        "operationId": "logout",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/Api/V1/Authorization/Roles/GetAll": {
       "get": {
         "tags": [

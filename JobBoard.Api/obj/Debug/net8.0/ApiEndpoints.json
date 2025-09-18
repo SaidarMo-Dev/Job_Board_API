@@ -883,6 +883,22 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.AuthenticationController",
+    "Method": "Logout",
+    "RelativePath": "Api/V1/auth/logout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.AuthenticationController",
     "Method": "RefreshNewToken",
     "RelativePath": "Api/V1/auth/refresh-token",
     "HttpMethod": "POST",

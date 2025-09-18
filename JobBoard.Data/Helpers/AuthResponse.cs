@@ -4,6 +4,7 @@
 	{
 		public required string AccessToken { get; set; }
 		public RefreshTokenResponse? RefreshToken { get; set; }
+		public string[]? UserRoles { get; set; }
 	}
 
 }
