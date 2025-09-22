@@ -4914,6 +4914,13 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -5283,6 +5290,39 @@
         "summary": "Get popular companies",
         "description": "get most popular companies.",
         "operationId": "GetPopularCompanies",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Api/V1/companies/summary": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "summary": "Get companies summary",
+        "description": "get companies summary.",
+        "operationId": "GetCompaniesSummary",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"

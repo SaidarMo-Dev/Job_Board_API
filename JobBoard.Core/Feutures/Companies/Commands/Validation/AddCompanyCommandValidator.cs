@@ -29,17 +29,8 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Validation
 				.NotNull().WithMessage("{PropertyName} cannot be Null");
 
 
-			RuleFor(x => x.PhoneNumber)
-				.NotEmpty().WithMessage("{PropertyName} : Cannot be Empty.")
-				.NotNull().WithMessage("{PropertyName} cannot be Null");
-
 
 			RuleFor(x => x.Email)
-				.NotEmpty().WithMessage("{PropertyName} : Cannot be Empty.")
-				.NotNull().WithMessage("{PropertyName} cannot be Null");
-
-
-			RuleFor(x => x.Fax)
 				.NotEmpty().WithMessage("{PropertyName} : Cannot be Empty.")
 				.NotNull().WithMessage("{PropertyName} cannot be Null");
 
@@ -60,11 +51,11 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Validation
 				.WithMessage("{PropertyName} is invalid");
 
 			RuleFor(x => x.PhoneNumber)
-				.Must(key => Util.IsValidePhoneNumber(key))
+				.Must(key => string.IsNullOrEmpty(key) ? true : Util.IsValidePhoneNumber(key))
 				.WithMessage("{PropertyName} is invalid");
 
 			RuleFor(x => x.Fax)
-				.Must(key => Util.IsValidePhoneNumber(key))
+				.Must(key => string.IsNullOrEmpty(key) ? true : Util.IsValidePhoneNumber(key))
 				.WithMessage("{PropertyName} is invalid");
 
 

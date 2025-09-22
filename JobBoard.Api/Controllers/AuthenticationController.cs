@@ -37,11 +37,12 @@ namespace JobBoard.Api.Controllers
 				Expires = DateTimeOffset.UtcNow.AddMinutes(10)
 			});
 
+
 			Response.HttpContext.Response.Cookies.Append("refreshToken", response.data.RefreshToken?.RefreshToken ?? "", new CookieOptions
 			{
 				HttpOnly = true,
 				Secure = true,
-				SameSite = SameSiteMode.Lax,
+				SameSite = SameSiteMode.None,
 				Expires = response.data.RefreshToken?.ExpirationDate
 			});
 

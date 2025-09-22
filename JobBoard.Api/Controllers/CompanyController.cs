@@ -39,9 +39,9 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		public async Task<IActionResult> GetCompanyById([FromRoute] int Id)
+		public async Task<IActionResult> GetCompanyById([FromRoute] int Id, [FromQuery] string? fields)
 		{
-			return NewResult(await Mediator.Send(new GetSingleCompanyQuery(Id)));
+			return NewResult(await Mediator.Send(new GetSingleCompanyQuery(Id, fields)));
 		}
 
 
@@ -120,6 +120,19 @@ namespace JobBoard.Api.Controllers
 		public async Task<IActionResult> GetPopularCompanies()
 		{
 			return NewResult(await Mediator.Send(new GetPopularCompaniesQuery()));
+		}
+
+
+		[SwaggerOperation(
+			Summary = "Get companies summary",
+			Description = "get companies summary.",
+			OperationId = "GetCompaniesSummary")]
+
+		[HttpGet(Router.CompanyRoute.CompaniesSummary)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<IActionResult> GetCompaniesSummary([FromQuery] GetCompaniesSummaryQuery quey)
+		{
+			return Ok(await Mediator.Send(quey));
 		}
 	}
 }

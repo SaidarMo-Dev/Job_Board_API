@@ -43,6 +43,7 @@
 			public const string Jobs = Prefex + Single + "/Jobs";
 
 			public const string PopularCompanies = Prefex + "/popular";
+			public const string CompaniesSummary = Prefex + "/summary";
 
 		}
 		public static class SkillRoute
