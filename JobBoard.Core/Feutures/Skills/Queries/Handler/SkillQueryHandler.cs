@@ -12,7 +12,8 @@ namespace JobBoard.Core.Feutures.Skills.Queries.Handler
 {
 	public class SkillQueryHandler : ResponseHandler,
 									IRequestHandler<GetSingleSkillQuery, Response<GetSingleSkillQueryResponse>>,
-									IRequestHandler<GetListSkillsQuery, PaginatedResponse<List<GetListSkillsQueryResponse>>>
+									IRequestHandler<GetListSkillsQuery, PaginatedResponse<List<GetListSkillsQueryResponse>>>,
+									IRequestHandler<GetSkillsSummaryQuery, PaginatedResponse<List<GetSkillsSummaryQueryResponse>>>
 	{
 		#region Fields
 		private readonly ISkillService _skillService;
@@ -44,6 +45,12 @@ namespace JobBoard.Core.Feutures.Skills.Queries.Handler
 
 			var skills = await _mapper.ProjectTo<GetListSkillsQueryResponse>(queryable).ToPaginatedAsync(request.Page, request.PageSize);
 			return skills;
+		}
+
+		public async Task<PaginatedResponse<List<GetSkillsSummaryQueryResponse>>> Handle(GetSkillsSummaryQuery request, CancellationToken cancellationToken)
+		{
+			var result = _skillService.GetSkillsQueryable();
+			return (await _mapper.ProjectTo<GetSkillsSummaryQueryResponse>(result).ToPaginatedAsync(request.page, request.Size));
 		}
 		#endregion
 	}

@@ -108,6 +108,11 @@ namespace JobBoard.Service.Implementations
 			return queryable;
 		}
 
+		public IQueryable<Skill> GetSkillsQueryable()
+		{
+			return _skillRepository.GetTableAsNoTracking();
+		}
+
 
 		#endregion
 	}

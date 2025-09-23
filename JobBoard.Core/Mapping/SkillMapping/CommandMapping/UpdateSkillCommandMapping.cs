@@ -5,7 +5,7 @@ namespace JobBoard.Core.Mapping.SkillMapping
 {
 	public partial class SkillProfile
 	{
-		public void addMappingForUpdateSkillCommand()
+		public void MapUpdateSkillCommand()
 		{
 			CreateMap<UpdateSkillCommand, Skill>();
 		}

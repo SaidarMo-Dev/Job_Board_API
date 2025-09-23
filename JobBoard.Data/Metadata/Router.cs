@@ -52,6 +52,7 @@
 
 			public const string GetAll = Prefex;
 			public const string Paginate = Prefex + "/paginate";
+			public const string Summary = Prefex + "/summary";
 			public const string GetByID = Prefex + "/{Id}";
 			public const string Create = Prefex;
 			public const string Update = Prefex;

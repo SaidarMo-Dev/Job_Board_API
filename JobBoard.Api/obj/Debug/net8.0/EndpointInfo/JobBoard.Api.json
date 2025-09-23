@@ -6255,8 +6255,8 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created"
           }
         }
       },
@@ -6286,6 +6286,39 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Api/V1/skills/summary": {
+      "get": {
+        "tags": [
+          "Skill"
+        ],
+        "summary": "Get skills summary",
+        "description": "Returns a summary list of skills available in the system.",
+        "operationId": "GetSkillsSummary",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -6456,6 +6489,9 @@
         "additionalProperties": false
       },
       "AddSkillCommand": {
+        "required": [
+          "name"
+        ],
         "type": "object",
         "properties": {
           "name": {

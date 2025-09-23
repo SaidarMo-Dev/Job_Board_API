@@ -5,7 +5,7 @@ namespace JobBoard.Core.Mapping.SkillMapping
 {
 	public partial class SkillProfile
 	{
-		public void AddListSkillsMapping()
+		public void MapGetListSkills()
 		{
 			CreateMap<Skill, GetListSkillsQueryResponse>()
 				.ForMember(x => x.Id, opt => opt.MapFrom(src => src.SkillId))

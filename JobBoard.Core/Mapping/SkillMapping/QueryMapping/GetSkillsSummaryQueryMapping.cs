@@ -5,9 +5,11 @@ namespace JobBoard.Core.Mapping.SkillMapping
 {
 	public partial class SkillProfile
 	{
-		public void MapGetSingleSkillQuery()
+		public void MapGetSkillsSummaryQuery()
 		{
-			CreateMap<Skill, GetSingleSkillQueryResponse>();
+			CreateMap<Skill, GetSkillsSummaryQueryResponse>()
+			.ForMember(dst => dst.Id, opt => opt.MapFrom(src => src.SkillId));
+
 		}
 	}
 }

@@ -82,6 +82,7 @@ namespace JobBoard.Service.Abstractions
 		/// <param name="sort">the sort that we will sort the queryable by.</param>
 		/// <returns>An <see cref="IQueryable{Skill}"/> for further querying.</returns>
 		IQueryable<Skill> GetSkillsQueryable(string? search, SortSkill? sort);
+		IQueryable<Skill> GetSkillsQueryable();
 
 	}
 }

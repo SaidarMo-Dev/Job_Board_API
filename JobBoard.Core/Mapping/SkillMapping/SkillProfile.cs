@@ -6,11 +6,11 @@ namespace JobBoard.Core.Mapping.SkillMapping
 	{
 		public SkillProfile()
 		{
-			AddSingleSkillQueryMapping();
-			AddListSkillsMapping();
-
-			AddMappingForAddSkillCommand();
-			addMappingForUpdateSkillCommand();
+			MapGetSingleSkillQuery();
+			MapGetListSkills();
+			MapAddSkillCommand();
+			MapUpdateSkillCommand();
+			MapGetSkillsSummaryQuery();
 		}
 	}
 }

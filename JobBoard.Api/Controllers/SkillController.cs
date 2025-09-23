@@ -13,6 +13,7 @@ namespace JobBoard.Api.Controllers
 	public class SkillController : AppControllerbase
 	{
 
+		[AllowAnonymous]
 		[SwaggerOperation(
 			Summary = "Get skill by ID",
 			Description = "Retrieves detailed information about a specific skill identified by its ID.",
@@ -25,16 +26,34 @@ namespace JobBoard.Api.Controllers
 
 		}
 
+		[AllowAnonymous]
 		[SwaggerOperation(
 			Summary = "Get all skills",
 			Description = "Returns a list of all skills available in the system.",
 			OperationId = "GetAllSkills")]
 
 		[HttpGet(Router.SkillRoute.GetAll)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+
 		public async Task<IActionResult> GetAll([FromQuery] GetListSkillsQuery query)
 		{
 			return Ok(await Mediator.Send(query));
 
+		}
+
+
+		[AllowAnonymous]
+		[SwaggerOperation(
+		Summary = "Get skills summary",
+		Description = "Returns a summary list of skills available in the system.",
+		OperationId = "GetSkillsSummary")]
+
+		[HttpGet(Router.SkillRoute.Summary)]
+
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<IActionResult> GetSkillsSummary([FromQuery] GetSkillsSummaryQuery query)
+		{
+			return Ok(await Mediator.Send(query));
 		}
 
 
@@ -44,6 +63,7 @@ namespace JobBoard.Api.Controllers
 			OperationId = "AddNewSkill")]
 
 		[HttpPost(Router.SkillRoute.Create)]
+		[ProducesResponseType(StatusCodes.Status201Created)]
 		public async Task<IActionResult> AddNewSkill([FromBody] AddSkillCommand request)
 		{
 			return NewResult(await Mediator.Send(request));
@@ -57,6 +77,8 @@ namespace JobBoard.Api.Controllers
 
 		[Authorize(Roles = "Admin")]
 		[HttpPut(Router.SkillRoute.Update)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+
 		public async Task<IActionResult> UpdateSkill([FromBody] UpdateSkillCommand request)
 		{
 			return NewResult(await Mediator.Send(request));
@@ -71,6 +93,8 @@ namespace JobBoard.Api.Controllers
 
 		[Authorize(Roles = "Admin")]
 		[HttpDelete(Router.SkillRoute.DeleteById)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+
 		public async Task<IActionResult> DeleteSkill([FromRoute] int Id)
 		{
 			return NewResult(await Mediator.Send(new DeleteSkillCommand { Id = Id }));
