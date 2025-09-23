@@ -83,6 +83,7 @@ namespace JobBoard.Service.Abstractions
 		/// <param name="sort"> the enum <see cref="SortCategory"/> to sort categories.</param>
 		/// <returns>queryable categories</returns>
 		IQueryable<Category> GetCategoriesQueryable(string? search, SortCategory? sort);
+		IQueryable<Category> GetCategoriesQueryable();
 
 		Task<List<Category>> GetPopularCategoriesAsync();
 	}

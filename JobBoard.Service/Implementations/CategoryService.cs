@@ -101,7 +101,7 @@ namespace JobBoard.Service.Implementations
 			return "Success";
 		}
 
-		public IQueryable<Category> GetCategoriesQueryable(string? search, SortCategory? sort)
+		public IQueryable<Category> GetCategoriesQueryable(string? search = null, SortCategory? sort = null)
 		{
 			var queryable = _categoryRepository.GetTableAsNoTracking();
 
@@ -160,6 +160,12 @@ namespace JobBoard.Service.Implementations
 
 
 			return res;
+		}
+
+		public IQueryable<Category> GetCategoriesQueryable()
+		{
+			return _categoryRepository.GetTableAsNoTracking();
+
 		}
 
 

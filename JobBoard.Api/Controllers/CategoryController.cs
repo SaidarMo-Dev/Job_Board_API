@@ -48,12 +48,24 @@ namespace JobBoard.Api.Controllers
 				  OperationId = "GetPopularCategories")]
 
 		[HttpGet(Router.CategoryRoute.Popular)]
-		[ProducesResponseType(StatusCodes.Status201Created)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		[ProducesResponseType(StatusCodes.Status403Forbidden)]
 
 		public async Task<IActionResult> GetPopularCategories([FromQuery] GetPopularCategoriesQuery query)
+		{
+			return Ok(await Mediator.Send(query));
+		}
+
+		[SwaggerOperation(Summary = "Get categories summary",
+			  Description = "Returns a list of categories summary stored in the system.",
+			  OperationId = "GetCategoriesSummary")]
+
+		[HttpGet(Router.CategoryRoute.summary)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+
+		public async Task<IActionResult> GetCategoriesSummary([FromQuery] GetCategoriesSummaryQuery query)
 		{
 			return Ok(await Mediator.Send(query));
 		}

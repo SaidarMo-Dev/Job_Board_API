@@ -65,6 +65,7 @@
 
 			public const string GetAll = Prefex;
 			public const string Popular = Prefex + "/popular";
+			public const string summary = Prefex + "/summary";
 			public const string GetByID = Prefex + "/{Id}";
 			public const string Create = Prefex;
 			public const string Update = Prefex;

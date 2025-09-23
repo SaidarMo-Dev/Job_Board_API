@@ -12,7 +12,8 @@ namespace JobBoard.Core.Feutures.Categories.Queries.Handler
 {
 	public class CategoryQueryHandler : ResponseHandler, IRequestHandler<GetSingleCategoryQuery, Response<GetSingleCategoryQueryResponse>>,
 										IRequestHandler<GetListCategoriesQuery, PaginatedResponse<List<GetListCategoriesQueryResponse>>>,
-										IRequestHandler<GetPopularCategoriesQuery, Response<List<GetPopularCategoriesQueryResponse>>>
+										IRequestHandler<GetPopularCategoriesQuery, Response<List<GetPopularCategoriesQueryResponse>>>,
+										IRequestHandler<GetCategoriesSummaryQuery, PaginatedResponse<List<GetCategoriesSummaryQueryResponse>>>
 	{
 
 		#region Fields
@@ -57,6 +58,13 @@ namespace JobBoard.Core.Feutures.Categories.Queries.Handler
 			var categoriesDto = _mapper.Map<List<GetPopularCategoriesQueryResponse>>(categories);
 
 			return Success(categoriesDto);
+		}
+
+		public async Task<PaginatedResponse<List<GetCategoriesSummaryQueryResponse>>> Handle(GetCategoriesSummaryQuery request, CancellationToken cancellationToken)
+		{
+			var categories = _categoryService.GetCategoriesQueryable();
+			return (await _mapper.ProjectTo<GetCategoriesSummaryQueryResponse>(categories).ToPaginatedAsync(request.page, request.size));
+
 		}
 
 

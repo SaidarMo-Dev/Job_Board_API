@@ -2296,7 +2296,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 201
+        "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
@@ -2324,6 +2324,33 @@
           "text/json"
         ],
         "StatusCode": 403
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.CategoryController",
+    "Method": "GetCategoriesSummary",
+    "RelativePath": "Api/V1/categories/summary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "size",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
       }
     ]
   },

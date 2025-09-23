@@ -4771,8 +4771,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created"
+          "200": {
+            "description": "OK"
           },
           "400": {
             "description": "Bad Request",
@@ -4833,6 +4833,39 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/Api/V1/categories/summary": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Get categories summary",
+        "description": "Returns a list of categories summary stored in the system.",
+        "operationId": "GetCategoriesSummary",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -6285,6 +6318,9 @@
         "additionalProperties": false
       },
       "AddCategoryCommand": {
+        "required": [
+          "name"
+        ],
         "type": "object",
         "properties": {
           "name": {

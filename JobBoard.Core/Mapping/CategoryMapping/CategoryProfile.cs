@@ -11,6 +11,7 @@ namespace JobBoard.Core.Mapping.CategoryMapping
 			AddCategoryMapping();
 			UpdateCategoryMapping();
 			GetPopularCategoriesQueryMapping();
+			MapGetCategoriesSummaryQuery();
 		}
 	}
 }
