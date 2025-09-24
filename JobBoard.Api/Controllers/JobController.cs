@@ -46,6 +46,23 @@ namespace JobBoard.Api.Controllers
 
 
 		[SwaggerOperation(
+			Summary = "Get job by Id summary",
+			Description = "Retrieves a summary information about a specific job identified by its Id.",
+			OperationId = "GetJobByIdSummary")]
+
+		[AllowAnonymous]
+		[HttpGet(Router.JobRoute.GetByIDSummary)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+
+		public async Task<IActionResult> GetJobByIdSummary([FromRoute] int Id)
+		{
+			return NewResult(await Mediator.Send(new GetJobByIdSummaryQuery { Id = Id }));
+		}
+
+
+		[SwaggerOperation(
 			Summary = "Get job skills",
 			Description = "Returns a list of skills associated with a specific job identified by its JobId.",
 			OperationId = "GetJobSkills")]

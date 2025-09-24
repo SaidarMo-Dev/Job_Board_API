@@ -129,7 +129,7 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 
 
 			// update job skills
-			foreach (var Id in request.skillIds)
+			foreach (var Id in request.SkillIds)
 			{
 				bool Exist = await _jobSkillService.IsExistById(request.Id, Id);
 
@@ -141,7 +141,7 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 
 			foreach (var item in Oldjob.JobSkills)
 			{
-				if (!request.skillIds.Contains(item.SkillId))
+				if (!request.SkillIds.Contains(item.SkillId))
 				{
 					await _jobSkillService.DeleteAsync(item);
 				}
@@ -149,7 +149,7 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 
 
 			// update JobCategories
-			foreach (var Id in request.CategorieIds)
+			foreach (var Id in request.CategoryIds)
 			{
 				bool Exist = await _jobCategoryService.IsExistById(request.Id, Id);
 
@@ -161,7 +161,7 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 
 			foreach (var item in Oldjob.jobCategories)
 			{
-				if (!request.skillIds.Contains(item.CategoryId))
+				if (!request.SkillIds.Contains(item.CategoryId))
 				{
 					await _jobCategoryService.DeleteAsync(item);
 				}

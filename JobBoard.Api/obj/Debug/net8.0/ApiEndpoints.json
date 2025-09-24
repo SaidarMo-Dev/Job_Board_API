@@ -2862,6 +2862,86 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.JobController",
+    "Method": "AddNewJob",
+    "RelativePath": "Api/V1/Jobs",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "JobBoard.Core.Feutures.Jobs.Commands.Models.AddJobCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 201
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.JobController",
+    "Method": "UpdateJob",
+    "RelativePath": "Api/V1/Jobs",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "JobBoard.Core.Feutures.Jobs.Commands.Models.UpdateJobCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.JobController",
     "Method": "GetJobById",
     "RelativePath": "Api/V1/Jobs/{Id}",
     "HttpMethod": "GET",
@@ -2952,7 +3032,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.ApplicationController",
     "Method": "JobApplications",
-    "RelativePath": "Api/V1/Jobs/{Id}/Applications",
+    "RelativePath": "Api/V1/Jobs/{Id}/applications",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -2982,15 +3062,15 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.JobController",
-    "Method": "AddNewJob",
-    "RelativePath": "Api/V1/Jobs/AddJob",
-    "HttpMethod": "POST",
+    "Method": "GetJobByIdSummary",
+    "RelativePath": "Api/V1/Jobs/{Id}/summary",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "JobBoard.Core.Feutures.Jobs.Commands.Models.AddJobCommand",
+        "Name": "Id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -2998,7 +3078,7 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 201
+        "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
@@ -3007,7 +3087,7 @@
           "application/json",
           "text/json"
         ],
-        "StatusCode": 400
+        "StatusCode": 404
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
@@ -3023,7 +3103,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.JobController",
     "Method": "GetJobCategories",
-    "RelativePath": "Api/V1/Jobs/Categories",
+    "RelativePath": "Api/V1/Jobs/categories",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -3095,7 +3175,7 @@
   {
     "ContainingType": "JobBoard.Api.Controllers.JobController",
     "Method": "GetJobSkills",
-    "RelativePath": "Api/V1/Jobs/Skills",
+    "RelativePath": "Api/V1/Jobs/skills",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -3104,46 +3184,6 @@
         "Name": "JobId",
         "Type": "System.Int32",
         "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 401
-      }
-    ]
-  },
-  {
-    "ContainingType": "JobBoard.Api.Controllers.JobController",
-    "Method": "UpdateJob",
-    "RelativePath": "Api/V1/Jobs/UpdateJob",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "JobBoard.Core.Feutures.Jobs.Commands.Models.UpdateJobCommand",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": [

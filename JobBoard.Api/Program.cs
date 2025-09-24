@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Text.Json.Serialization;
 using Hangfire;
 using JobBoard.Core;
 using JobBoard.Core.Middleware;
@@ -26,8 +27,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers((options) =>
 {
 	options.ModelBinderProviders.Insert(0, new CaseInsensitiveFormModelBinderProvider());
+
+})
+.AddJsonOptions(options =>
+{
+	options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+
 });
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

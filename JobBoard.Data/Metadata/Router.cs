@@ -100,14 +100,15 @@
 
 			public const string GetAll = Prefex;
 			public const string GetByID = Prefex + Single;
-			public const string Create = Prefex + "/AddJob";
-			public const string Update = Prefex + "/UpdateJob";
+			public const string GetByIDSummary = Prefex + Single + "/summary";
+			public const string Create = Prefex;
+			public const string Update = Prefex;
 			public const string DeleteById = Prefex + Single;
-			public const string Paginate = Prefex + "/Paginate";
-			public const string Skills = Prefex + "/Skills";
-			public const string Categories = Prefex + "/Categories";
+			public const string Paginate = Prefex + "/paginate";
+			public const string Skills = Prefex + "/skills";
+			public const string Categories = Prefex + "/categories";
 
-			public const string Applications = Prefex + Single + "/Applications";
+			public const string Applications = Prefex + Single + "/applications";
 			public const string Locations = Prefex + "/locations";
 			public const string Recommendations = Prefex + "/recommendations";
 

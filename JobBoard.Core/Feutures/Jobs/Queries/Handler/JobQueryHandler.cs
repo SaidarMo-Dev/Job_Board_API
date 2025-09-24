@@ -25,7 +25,8 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 			IRequestHandler<GetJobCategoriesQuery, Response<List<GetJobCategoriesQueryResponse>>>,
 			IRequestHandler<GetJobsByCompanyIdQuery, Response<GetJobsByCompanyIdQueryResponse>>,
 			IRequestHandler<GetPopularLocationsQuery, Response<string[]>>,
-			IRequestHandler<GetRecommendationJobsQuery, Response<List<JobResponseDto>>>
+			IRequestHandler<GetRecommendationJobsQuery, Response<List<JobResponseDto>>>,
+			IRequestHandler<GetJobByIdSummaryQuery, Response<GetJobByIdSummaryQueryResponse>>
 	{
 
 		#region Fields
@@ -152,6 +153,14 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 			return Success(await _mapper.ProjectTo<JobResponseDto>(jobsQueryable).ToListAsync());
 
 
+		}
+
+		public async Task<Response<GetJobByIdSummaryQueryResponse>> Handle(GetJobByIdSummaryQuery request, CancellationToken cancellationToken)
+		{
+			var job = await _jobService.GetJobByIdWithEncludeAsync(request.Id);
+			if (job == null) return NotFound<GetJobByIdSummaryQueryResponse>();
+
+			return Success(_mapper.Map<GetJobByIdSummaryQueryResponse>(job));
 		}
 
 

@@ -11,10 +11,11 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Models
 		public string? Description { get; set; }
 		public string? Location { get; set; }
 		public JobTypeEnum JobType { get; set; }
-		public string? SalaryRange { get; set; }
+		public int MinSalary { get; set; }
+		public int MaxSalary { get; set; }
 		public JobStatusEnum? Status { get; set; }
-		public HashSet<int> skillIds { get; set; }
-		public HashSet<int> CategorieIds { get; set; }
+		public HashSet<int> SkillIds { get; set; }
+		public HashSet<int> CategoryIds { get; set; }
 
 
 	}

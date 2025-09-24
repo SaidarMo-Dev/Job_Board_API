@@ -24,8 +24,8 @@ namespace JobBoard.Data.Entities
 		public Company Company { get; set; }
 		public ICollection<Bookmark> bookMarks { get; set; }
 		public ICollection<Application> applications { get; set; }
-		public ICollection<JobCategory> jobCategories { get; set; } = new List<JobCategory>();
-		public User CreatedByUser { get; set; } = new();
+		public ICollection<JobCategory> jobCategories { get; set; }
+		public User CreatedByUser { get; set; }
 
 
 	}

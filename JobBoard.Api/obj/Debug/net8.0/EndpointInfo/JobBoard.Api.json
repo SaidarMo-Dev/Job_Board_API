@@ -743,7 +743,7 @@
         }
       }
     },
-    "/Api/V1/Jobs/{Id}/Applications": {
+    "/Api/V1/Jobs/{Id}/applications": {
       "get": {
         "tags": [
           "Application"
@@ -5626,6 +5626,150 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Job"
+        ],
+        "summary": "Create a new job",
+        "description": "Creates a new job entry with the provided job details.",
+        "operationId": "AddNewJob",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddJobCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddJobCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddJobCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Job"
+        ],
+        "summary": "Update a job",
+        "description": "Updates an existing job with the provided information.",
+        "operationId": "UpdateJob",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateJobCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateJobCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateJobCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/Api/V1/Jobs/{Id}": {
@@ -5778,7 +5922,73 @@
         }
       }
     },
-    "/Api/V1/Jobs/Skills": {
+    "/Api/V1/Jobs/{Id}/summary": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "summary": "Get job by Id summary",
+        "description": "Retrieves a summary information about a specific job identified by its Id.",
+        "operationId": "GetJobByIdSummary",
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Api/V1/Jobs/skills": {
       "get": {
         "tags": [
           "Job"
@@ -5843,7 +6053,7 @@
         }
       }
     },
-    "/Api/V1/Jobs/Categories": {
+    "/Api/V1/Jobs/categories": {
       "get": {
         "tags": [
           "Job"
@@ -5861,154 +6071,6 @@
             }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/Api/V1/Jobs/AddJob": {
-      "post": {
-        "tags": [
-          "Job"
-        ],
-        "summary": "Create a new job",
-        "description": "Creates a new job entry with the provided job details.",
-        "operationId": "AddNewJob",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddJobCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddJobCommand"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddJobCommand"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/Api/V1/Jobs/UpdateJob": {
-      "put": {
-        "tags": [
-          "Job"
-        ],
-        "summary": "Update a job",
-        "description": "Updates an existing job with the provided information.",
-        "operationId": "UpdateJob",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateJobCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateJobCommand"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateJobCommand"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"
@@ -6614,22 +6676,20 @@
       },
       "ApplicationStatusEnum": {
         "enum": [
-          0,
-          1,
-          2
+          "Pending",
+          "Accepted",
+          "Rejected"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "ApplicationStatusFilter": {
         "enum": [
-          0,
-          1,
-          2,
-          3
+          "All",
+          "Pending",
+          "Rejected",
+          "Accepted"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "ChangeUserPasswordCommand": {
         "required": [
@@ -6677,33 +6737,30 @@
       },
       "ExperienceLevelEnum": {
         "enum": [
-          0,
-          1,
-          2,
-          3,
-          4
+          "Any",
+          "EntryLevel",
+          "MidLevel",
+          "SeniorLevel",
+          "LeadPrincipal"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "FilterByRole": {
         "enum": [
-          0,
-          1,
-          2,
-          3
+          "All",
+          "Admin",
+          "Employer",
+          "JobSeeker"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "FilterByStatus": {
         "enum": [
-          0,
-          1,
-          2
+          "All",
+          "Active",
+          "Suspended"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "GetPopularCategoriesQuery": {
         "type": "object",
@@ -6711,35 +6768,32 @@
       },
       "JobStatusEnum": {
         "enum": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5
+          "Pending",
+          "Active",
+          "Rejected",
+          "Paused",
+          "Closed",
+          "Expired"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "JobTypeEnum": {
         "enum": [
-          0,
-          1,
-          2,
-          3,
-          4
+          "Any",
+          "FullTime",
+          "PartTime",
+          "FreeLance",
+          "Contract"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "OrderCompanyEnum": {
         "enum": [
-          0,
-          1,
-          2
+          "OrderByID",
+          "OrderByName",
+          "OrderByLocation"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "ProblemDetails": {
         "type": "object",
@@ -6810,39 +6864,35 @@
       },
       "SortCategory": {
         "enum": [
-          0,
-          1,
-          2,
-          3
+          "NameAsc",
+          "NameDesc",
+          "OlderFirst",
+          "NewestFirst"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "SortCompany": {
         "enum": [
-          0,
-          1
+          "NameAsc",
+          "NameDesc"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "SortEnum": {
         "enum": [
-          0,
-          1,
-          2,
-          3
+          "HighestSalary",
+          "LowestSalary",
+          "Recent",
+          "Relevant"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "SortSkill": {
         "enum": [
-          0,
-          1
+          "Name",
+          "CreateDate"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "UpdateApplicationCommand": {
         "type": "object",
@@ -6946,9 +6996,13 @@
           "jobType": {
             "$ref": "#/components/schemas/JobTypeEnum"
           },
-          "salaryRange": {
-            "type": "string",
-            "nullable": true
+          "minSalary": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxSalary": {
+            "type": "integer",
+            "format": "int32"
           },
           "status": {
             "$ref": "#/components/schemas/JobStatusEnum"
@@ -6962,7 +7016,7 @@
             },
             "nullable": true
           },
-          "categorieIds": {
+          "categoryIds": {
             "uniqueItems": true,
             "type": "array",
             "items": {
