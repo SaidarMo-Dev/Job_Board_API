@@ -82,7 +82,7 @@ namespace JobBoard.Core.Feutures.Authentication.Commands.Handler
 		public async Task<Response<AuthResponse>> Handle(RefreshNewAccessToken request, CancellationToken cancellationToken)
 		{
 
-			var response = await _authenticationService.GetRefreshToken(request.RefreshToken, request.AccessToken);
+			var response = await _authenticationService.GetRefreshToken(request.RefreshToken);
 
 			return Success(response);
 		}

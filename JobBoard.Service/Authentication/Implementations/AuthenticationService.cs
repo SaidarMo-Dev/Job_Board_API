@@ -173,26 +173,12 @@ namespace JobBoard.Service.Authentication.Implementations
 
 		}
 
-		public async Task<AuthResponse> GetRefreshToken(string refreshToken, string accessToken)
+		public async Task<AuthResponse> GetRefreshToken(string refreshToken)
 		{
-			var jwtToken = ReadJwtToken(accessToken);
-
-			if (jwtToken is null || !jwtToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256))
-				throw new SecurityTokenException("Invalid Token Info");
-
-			if (jwtToken.ValidTo > DateTime.UtcNow)
-				throw new SecurityTokenException("Token Not Expired");
-
-			var userId = jwtToken.Claims.Where(x => x.Type.Equals(nameof(JwtClaimModel.UserId)))
-							.FirstOrDefault()?.Value;
-
-			if (string.IsNullOrEmpty(userId))
-				throw new ArgumentNullException(nameof(userId));
 
 			var userrefreshToken = await _userRefreshTokenRepository.GetTableAsTracking()
-								.FirstOrDefaultAsync(x => x.RefreshToken.Equals(refreshToken) &&
-													x.AccessToken.Equals(accessToken) &&
-													x.UserId == int.Parse(userId));
+									.Include(rf => rf.User)
+									.FirstOrDefaultAsync(x => x.RefreshToken.Equals(refreshToken));
 
 			if (userrefreshToken is null)
 				throw new SecurityTokenException("Invalid Token Info");
@@ -200,11 +186,7 @@ namespace JobBoard.Service.Authentication.Implementations
 			if (!userrefreshToken.IsActive)
 				throw new SecurityTokenException("Refresh token Is Expired");
 
-			var user = await _userManager.FindByIdAsync(userId);
-			if (user is null)
-				throw new ArgumentNullException("User Not Found");
-
-			var newAccessToken = await _GenerateAccessTokenAsync(user);
+			var newAccessToken = await _GenerateAccessTokenAsync(userrefreshToken.User);
 
 			// Update Access token
 			userrefreshToken.AccessToken = newAccessToken;
@@ -216,7 +198,7 @@ namespace JobBoard.Service.Authentication.Implementations
 				AccessToken = newAccessToken,
 				RefreshToken = new RefreshTokenResponse
 				{
-					UserId = user.Id,
+					UserId = userrefreshToken.UserId,
 					RefreshToken = userrefreshToken.RefreshToken,
 					ExpirationDate = userrefreshToken.ExpiresOn
 				}

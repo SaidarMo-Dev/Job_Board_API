@@ -77,7 +77,7 @@ namespace JobBoard.Api.Controllers
 
 		[HttpPost(Router.AuthenticationRoute.RefreshToken)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<IActionResult> RefreshNewToken()
+		public async Task<IActionResult> RefreshNewAccessToken()
 		{
 			var refreshToken = Request.Cookies["refreshToken"];
 			if (string.IsNullOrEmpty(refreshToken))
@@ -90,18 +90,9 @@ namespace JobBoard.Api.Controllers
 				});
 			}
 
-			var accessToken = Request.Cookies["accessToken"];
-			if (string.IsNullOrEmpty(accessToken))
-			{
-				return Unauthorized(new Core.Bases.Response<string>
-				{
-					succeeded = false,
-					message = "access token is missing",
-					statusCode = System.Net.HttpStatusCode.Unauthorized
-				});
-			}
 
-			var response = await Mediator.Send(new RefreshNewAccessToken { AccessToken = accessToken, RefreshToken = refreshToken });
+
+			var response = await Mediator.Send(new RefreshNewAccessToken { RefreshToken = refreshToken });
 
 			if (!response.succeeded)
 			{
@@ -124,7 +115,13 @@ namespace JobBoard.Api.Controllers
 				Expires = response.data.RefreshToken?.ExpirationDate
 			});
 
-			return NewResult(response);
+			return Ok(new Response<string>
+			{
+				data = "Success",
+				message = "Genrated successfully",
+				statusCode = System.Net.HttpStatusCode.OK,
+				succeeded = true
+			});
 		}
 
 

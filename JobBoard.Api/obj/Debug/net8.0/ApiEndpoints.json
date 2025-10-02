@@ -899,7 +899,7 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.AuthenticationController",
-    "Method": "RefreshNewToken",
+    "Method": "RefreshNewAccessToken",
     "RelativePath": "Api/V1/auth/refresh-token",
     "HttpMethod": "POST",
     "IsController": true,
