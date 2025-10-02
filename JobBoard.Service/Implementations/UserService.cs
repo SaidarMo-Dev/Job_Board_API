@@ -339,6 +339,20 @@ namespace JobBoard.Service.Implementations
 			return user;
 		}
 
+		public async Task<EmployerDashboardStats> GetEmployerDashboardStats(int userId)
+		{
+			var result = await _userRepository.GetTableAsNoTracking().Where(u => u.Id == userId)
+				.Select(u => new EmployerDashboardStats
+				{
+					TotalJobs = u.CreatedJobs.Count(),
+					ActiveJobs = u.CreatedJobs.Count(j => j.Status == JobStatusEnum.Active),
+					ApplicationsReceived = u.CreatedJobs.Sum(a => a.applications.Count())
+
+				}).FirstOrDefaultAsync();
+
+			return result ?? new EmployerDashboardStats { TotalJobs = 0, ActiveJobs = 0, ApplicationsReceived = 0 };
+		}
+
 		#endregion
 	}
 

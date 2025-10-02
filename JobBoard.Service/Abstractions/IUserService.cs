@@ -62,6 +62,7 @@ namespace JobBoard.Service.Abstractions
 		Task<IdentityResult> AdminUpdateUserAsync(User user, string role);
 		Task<User> GetAdminProfile(int userId);
 
+		Task<EmployerDashboardStats> GetEmployerDashboardStats(int userId);
 
 	}
 }

@@ -3,36 +3,40 @@
   "WorkspaceRootPath": "C:\\Projects\\Job_Board_API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\categories\\commands\\models\\addcategorycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\categories\\commands\\models\\addcategorycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\mapping\\employermapping\\queries\\mapgetemployerjobs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\mapping\\employermapping\\queries\\mapgetemployerjobs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\categories\\queries\\results\\getcategoriessummaryqueryresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\categories\\queries\\results\\getcategoriessummaryqueryresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\employer\\queries\\responses\\getemployerpostedjobsqueryresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\employer\\queries\\responses\\getemployerpostedjobsqueryresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\mapping\\categorymapping\\categoryprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\mapping\\categorymapping\\categoryprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\employer\\queries\\models\\getemployerpostedjobsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\employer\\queries\\models\\getemployerpostedjobsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|c:\\projects\\job_board_api\\jobboard.api\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|solutionrelative:jobboard.api\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\jobs\\commands\\handler\\jobcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\jobs\\commands\\handler\\jobcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\categories\\queries\\handler\\categoryqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\categories\\queries\\handler\\categoryqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\mapping\\employermapping\\employerprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\mapping\\employermapping\\employerprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\mapping\\categorymapping\\querymapping\\getcategoriessummaryquerymapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\mapping\\categorymapping\\querymapping\\getcategoriessummaryquerymapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|c:\\projects\\job_board_api\\jobboard.api\\controllers\\employercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|solutionrelative:jobboard.api\\controllers\\employercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CF1BC049-6506-4CA2-93DC-CC0E7D8BD67E}|JobBoard.Service\\JobBoard.Service.csproj|c:\\projects\\job_board_api\\jobboard.service\\abstractions\\icategoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF1BC049-6506-4CA2-93DC-CC0E7D8BD67E}|JobBoard.Service\\JobBoard.Service.csproj|solutionrelative:jobboard.service\\abstractions\\icategoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{79D9DDE7-61D3-45DB-8E5A-81646E3C13E2}|JobBoard.Data\\JobBoard.Data.csproj|c:\\projects\\job_board_api\\jobboard.data\\metadata\\router.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79D9DDE7-61D3-45DB-8E5A-81646E3C13E2}|JobBoard.Data\\JobBoard.Data.csproj|solutionrelative:jobboard.data\\metadata\\router.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Categories\\Queries\\Models\\GetCategoriesSummaryQuery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:JobBoard.Core\\Feutures\\Categories\\Queries\\Models\\GetCategoriesSummaryQuery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\employer\\queries\\handlers\\employerqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\employer\\queries\\handlers\\employerqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\employer\\queries\\models\\getemployerdashboardstatsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\employer\\queries\\models\\getemployerdashboardstatsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,7 +46,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 382,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -58,106 +62,120 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AddCategoryCommand.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Categories\\Commands\\Models\\AddCategoryCommand.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Categories\\Commands\\Models\\AddCategoryCommand.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Categories\\Commands\\Models\\AddCategoryCommand.cs*",
-              "RelativeToolTip": "JobBoard.Core\\Feutures\\Categories\\Commands\\Models\\AddCategoryCommand.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAASAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "JobCommandHandler.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Jobs\\Commands\\Handler\\JobCommandHandler.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Jobs\\Commands\\Handler\\JobCommandHandler.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Jobs\\Commands\\Handler\\JobCommandHandler.cs",
+              "RelativeToolTip": "JobBoard.Core\\Feutures\\Jobs\\Commands\\Handler\\JobCommandHandler.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAEwDwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-23T12:51:54.024Z",
+              "WhenOpened": "2025-10-02T13:27:42.854Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CategoryController.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\Controllers\\CategoryController.cs",
-              "RelativeDocumentMoniker": "JobBoard.Api\\Controllers\\CategoryController.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\Controllers\\CategoryController.cs",
-              "RelativeToolTip": "JobBoard.Api\\Controllers\\CategoryController.cs",
-              "ViewState": "AgIAADMAAAAAAAAAAAASwEAAAAAXAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "MapGetEmployerJobs.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Mapping\\EmployerMapping\\Queries\\MapGetEmployerJobs.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Mapping\\EmployerMapping\\Queries\\MapGetEmployerJobs.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Mapping\\EmployerMapping\\Queries\\MapGetEmployerJobs.cs*",
+              "RelativeToolTip": "JobBoard.Core\\Mapping\\EmployerMapping\\Queries\\MapGetEmployerJobs.cs*",
+              "ViewState": "AgIAAAIAAAAAAAAAAADgvxIAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-22T20:36:44.039Z",
+              "WhenOpened": "2025-10-02T12:45:03.436Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "CategoryProfile.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Mapping\\CategoryMapping\\CategoryProfile.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Mapping\\CategoryMapping\\CategoryProfile.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Mapping\\CategoryMapping\\CategoryProfile.cs",
-              "RelativeToolTip": "JobBoard.Core\\Mapping\\CategoryMapping\\CategoryProfile.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAYAAAAAAAAAA==",
+              "Title": "GetEmployerPostedJobsQuery.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Employer\\Queries\\Models\\GetEmployerPostedJobsQuery.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Employer\\Queries\\Models\\GetEmployerPostedJobsQuery.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Employer\\Queries\\Models\\GetEmployerPostedJobsQuery.cs",
+              "RelativeToolTip": "JobBoard.Core\\Feutures\\Employer\\Queries\\Models\\GetEmployerPostedJobsQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAYAAABSAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-22T17:25:32.089Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "GetCategoriesSummaryQueryMapping.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Mapping\\CategoryMapping\\Querymapping\\GetCategoriesSummaryQueryMapping.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Mapping\\CategoryMapping\\Querymapping\\GetCategoriesSummaryQueryMapping.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Mapping\\CategoryMapping\\Querymapping\\GetCategoriesSummaryQueryMapping.cs",
-              "RelativeToolTip": "JobBoard.Core\\Mapping\\CategoryMapping\\Querymapping\\GetCategoriesSummaryQueryMapping.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAkAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-22T17:23:56.298Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ICategoryService.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Abstractions\\ICategoryService.cs",
-              "RelativeDocumentMoniker": "JobBoard.Service\\Abstractions\\ICategoryService.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Abstractions\\ICategoryService.cs",
-              "RelativeToolTip": "JobBoard.Service\\Abstractions\\ICategoryService.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAkwBkAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-22T17:08:28.817Z",
+              "WhenOpened": "2025-09-29T14:30:10.14Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "GetCategoriesSummaryQueryResponse.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Categories\\Queries\\Results\\GetCategoriesSummaryQueryResponse.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Categories\\Queries\\Results\\GetCategoriesSummaryQueryResponse.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Categories\\Queries\\Results\\GetCategoriesSummaryQueryResponse.cs",
-              "RelativeToolTip": "JobBoard.Core\\Feutures\\Categories\\Queries\\Results\\GetCategoriesSummaryQueryResponse.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAOAAAAAAAAAA==",
+              "Title": "GetEmployerPostedJobsQueryResponse.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Employer\\Queries\\Responses\\GetEmployerPostedJobsQueryResponse.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Employer\\Queries\\Responses\\GetEmployerPostedJobsQueryResponse.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Employer\\Queries\\Responses\\GetEmployerPostedJobsQueryResponse.cs",
+              "RelativeToolTip": "JobBoard.Core\\Feutures\\Employer\\Queries\\Responses\\GetEmployerPostedJobsQueryResponse.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAA+wBAAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-22T17:02:18.78Z",
+              "WhenOpened": "2025-09-29T14:30:48.15Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "CategoryQueryHandler.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Categories\\Queries\\Handler\\CategoryQueryHandler.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Categories\\Queries\\Handler\\CategoryQueryHandler.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Categories\\Queries\\Handler\\CategoryQueryHandler.cs",
-              "RelativeToolTip": "JobBoard.Core\\Feutures\\Categories\\Queries\\Handler\\CategoryQueryHandler.cs",
-              "ViewState": "AgIAADQAAAAAAAAAAAAEwEEAAAADAAAAAAAAAA==",
+              "Title": "EmployerProfile.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Mapping\\EmployerMapping\\EmployerProfile.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Mapping\\EmployerMapping\\EmployerProfile.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Mapping\\EmployerMapping\\EmployerProfile.cs",
+              "RelativeToolTip": "JobBoard.Core\\Mapping\\EmployerMapping\\EmployerProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-22T17:03:43.139Z",
+              "WhenOpened": "2025-09-29T13:34:26.466Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Router.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Data\\Metadata\\Router.cs",
+              "RelativeDocumentMoniker": "JobBoard.Data\\Metadata\\Router.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Data\\Metadata\\Router.cs",
+              "RelativeToolTip": "JobBoard.Data\\Metadata\\Router.cs",
+              "ViewState": "AgIAAL4AAAAAAAAAAAAiwNEAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T13:38:21.534Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EmployerController.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\Controllers\\EmployerController.cs",
+              "RelativeDocumentMoniker": "JobBoard.Api\\Controllers\\EmployerController.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\Controllers\\EmployerController.cs",
+              "RelativeToolTip": "JobBoard.Api\\Controllers\\EmployerController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAiwCEAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T13:36:37.582Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "GetCategoriesSummaryQuery.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Categories\\Queries\\Models\\GetCategoriesSummaryQuery.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Categories\\Queries\\Models\\GetCategoriesSummaryQuery.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Categories\\Queries\\Models\\GetCategoriesSummaryQuery.cs",
-              "RelativeToolTip": "JobBoard.Core\\Feutures\\Categories\\Queries\\Models\\GetCategoriesSummaryQuery.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABkAAAAAAAAAA==",
+              "Title": "EmployerQueryHandler.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Employer\\Queries\\Handlers\\EmployerQueryHandler.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Employer\\Queries\\Handlers\\EmployerQueryHandler.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Employer\\Queries\\Handlers\\EmployerQueryHandler.cs",
+              "RelativeToolTip": "JobBoard.Core\\Feutures\\Employer\\Queries\\Handlers\\EmployerQueryHandler.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAEwDoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-22T17:01:52.387Z"
+              "WhenOpened": "2025-09-24T19:39:27.344Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "GetEmployerDashboardStatsQuery.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Employer\\Queries\\Models\\GetEmployerDashboardStatsQuery.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Employer\\Queries\\Models\\GetEmployerDashboardStatsQuery.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Employer\\Queries\\Models\\GetEmployerDashboardStatsQuery.cs",
+              "RelativeToolTip": "JobBoard.Core\\Feutures\\Employer\\Queries\\Models\\GetEmployerDashboardStatsQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAYAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-24T19:36:18.44Z",
+              "EditorCaption": ""
             }
           ]
         },

@@ -2790,6 +2790,54 @@
     ]
   },
   {
+    "ContainingType": "JobBoard.Api.Controllers.EmployerController",
+    "Method": "GetmployerDashboardStats",
+    "RelativePath": "Api/V1/employer",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.EmployerController",
+    "Method": "GetmployerPostedJobs",
+    "RelativePath": "Api/V1/employer/posted-jobs",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Size",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Search",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "JobBoard.Api.Controllers.JobController",
     "Method": "GetJobsPaginate",
     "RelativePath": "Api/V1/Jobs",

@@ -204,5 +204,13 @@
 
 			public const string SendEmail = Prefex + "/send-email";
 		}
+
+		public static class EmployerRoute
+		{
+			private const string Prefex = Rule + "/employer";
+
+			public const string dashboard = Prefex;
+			public const string PostedJobs = Prefex + "/posted-jobs";
+		}
 	}
 }

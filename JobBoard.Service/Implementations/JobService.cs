@@ -2,6 +2,7 @@
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Infrastructure.Abstractions;
 using JobBoard.Service.Abstractions;
+using JobBoard.Service.Authentication.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace JobBoard.Service.Implementations
@@ -13,17 +14,20 @@ namespace JobBoard.Service.Implementations
 		private readonly IJobRepository _jobRepository;
 		private readonly ISkillService _skillService;
 		private readonly ICategoryService _categoryService;
+		private readonly ICurrentUserService _currentUserService;
 		#endregion
 
 
 		#region Constructors
 		public JobService(IJobRepository jobRepository,
 						ISkillService skillService,
-						ICategoryService categoryService)
+						ICategoryService categoryService,
+						ICurrentUserService currentUserService)
 		{
 			_jobRepository = jobRepository;
 			_skillService = skillService;
 			_categoryService = categoryService;
+			_currentUserService = currentUserService;
 		}
 		#endregion
 
@@ -175,6 +179,12 @@ namespace JobBoard.Service.Implementations
 
 
 		}
+
+		public IQueryable<JobListing> GetEmployerPotedJobsQueryable(int userId)
+		{
+			return _jobRepository.GetTableAsNoTracking().Where(j => j.CreatedByUserId == userId);
+		}
+
 
 
 

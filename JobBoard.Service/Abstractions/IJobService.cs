@@ -84,5 +84,8 @@ namespace JobBoard.Service.Abstractions
 
 		Task<string[]> GetPopularLocations();
 		IQueryable<JobListing> GetRecommendationJobs(User user, int take = 3);
+		IQueryable<JobListing> GetEmployerPotedJobsQueryable(int userId);
+
+
 	}
 }

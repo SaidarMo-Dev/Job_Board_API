@@ -5514,6 +5514,61 @@
         }
       }
     },
+    "/Api/V1/employer": {
+      "get": {
+        "tags": [
+          "Employer"
+        ],
+        "summary": "Get employer dashboard stats",
+        "description": "Get current employer dashboard stats.",
+        "operationId": "GetEmployerDashboard",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Api/V1/employer/posted-jobs": {
+      "get": {
+        "tags": [
+          "Employer"
+        ],
+        "summary": "Get employer jobs",
+        "description": "Get current employer posted jobs.",
+        "operationId": "GetEmployerJobs",
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/Api/V1/Jobs": {
       "get": {
         "tags": [
