@@ -180,9 +180,13 @@ namespace JobBoard.Service.Implementations
 
 		}
 
-		public IQueryable<JobListing> GetEmployerPotedJobsQueryable(int userId)
+		public IQueryable<JobListing> GetEmployerPostedJobsQueryable(int userId, string? search)
 		{
-			return _jobRepository.GetTableAsNoTracking().Where(j => j.CreatedByUserId == userId);
+			var query = _jobRepository.GetTableAsNoTracking().Where(j => j.CreatedByUserId == userId);
+
+			if (search != null) query = query.Where(j => j.Title.Contains(search));
+
+			return query;
 		}
 
 

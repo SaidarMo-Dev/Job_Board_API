@@ -47,7 +47,8 @@ namespace JobBoard.Core.Feutures.Employer.Queries.Handlers
 
 		public async Task<PaginatedResponse<List<GetEmployerPostedJobsQueryResponse>>> Handle(GetEmployerPostedJobsQuery request, CancellationToken cancellationToken)
 		{
-			var jobs = _jobService.GetEmployerPotedJobsQueryable(_currentUserService.GetCurrentUserId());
+			var jobs = _jobService.GetEmployerPostedJobsQueryable(_currentUserService.GetCurrentUserId(), request.Search);
+
 
 			return (await _mapper.ProjectTo<GetEmployerPostedJobsQueryResponse>(jobs).ToPaginatedAsync(request.Page, request.Size));
 		}
