@@ -3,14 +3,12 @@ using System.Text.Json.Serialization;
 using Hangfire;
 using JobBoard.Core;
 using JobBoard.Core.Middleware;
-using JobBoard.Core.Security.Handlers;
 using JobBoard.Core.Seeders;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Infrastructure;
 using JobBoard.Infrastructure.context;
 using JobBoard.Infrastructure.ModelBinders;
 using JobBoard.Service;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
@@ -132,7 +130,6 @@ builder.Services.AddSerilog();
 
 #endregion
 
-builder.Services.AddScoped<IAuthorizationHandler, SameUserHandler>();
 
 
 var app = builder.Build();

@@ -1,4 +1,5 @@
-﻿using JobBoard.Data.Entities.Identity;
+﻿using System.Security.Claims;
+using JobBoard.Data.Entities.Identity;
 using JobBoard.Data.Helpers;
 using JobBoard.Service.Authentication.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -26,7 +27,7 @@ namespace JobBoard.Service.Authentication.Implementations
 		#region Handle Methods
 		public int GetCurrentUserId()
 		{
-			var UserId = _httpContextAccessor.HttpContext.User.Claims
+			var UserId = _httpContextAccessor.HttpContext?.User.Claims
 							.FirstOrDefault(c => c.Type == nameof(JwtClaimModel.UserId))?.Value;
 
 			if (UserId is null) throw new UnauthorizedAccessException();
@@ -65,6 +66,12 @@ namespace JobBoard.Service.Authentication.Implementations
 			var userRoles = await _userManager.GetRolesAsync(user);
 
 			return userRoles.ToList();
+
+		}
+
+		public ClaimsPrincipal GetCurrentUserPrincipal()
+		{
+			return _httpContextAccessor.HttpContext?.User ?? new ClaimsPrincipal();
 
 		}
 

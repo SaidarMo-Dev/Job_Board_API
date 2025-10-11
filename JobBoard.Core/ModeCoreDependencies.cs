@@ -1,7 +1,9 @@
 ﻿using System.Reflection;
 using FluentValidation;
 using JobBoard.Core.Behaviors;
+using JobBoard.Core.Security.Handlers;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 namespace JobBoard.Core
 {
@@ -35,6 +37,15 @@ namespace JobBoard.Core
 					policy.RequireClaim("Get", "GetJob");
 				});
 			});
+
+
+			// resource based authorization
+
+			services.AddScoped<IAuthorizationHandler, SameUserHandler>();
+			services.AddScoped<IAuthorizationHandler, JobCreatorHandler>();
+			services.AddScoped<IAuthorizationHandler, CompanyOwnerHandler>();
+			services.AddScoped<IAuthorizationHandler, UserBookmarkHandler>();
+			services.AddScoped<IAuthorizationHandler, UserApplicationsHandler>();
 
 			return services;
 		}

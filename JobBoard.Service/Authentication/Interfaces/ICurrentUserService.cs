@@ -1,4 +1,5 @@
-﻿using JobBoard.Data.Entities.Identity;
+﻿using System.Security.Claims;
+using JobBoard.Data.Entities.Identity;
 
 namespace JobBoard.Service.Authentication.Interfaces
 {
@@ -8,6 +9,7 @@ namespace JobBoard.Service.Authentication.Interfaces
 		Task<User> GetCurrentUserAsync();
 		User GetCurrentUser();
 		Task<List<string>> GetCurrentUserRoles();
+		ClaimsPrincipal GetCurrentUserPrincipal();
 
 	}
 }
