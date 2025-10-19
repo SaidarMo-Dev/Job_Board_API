@@ -1,5 +1,6 @@
 ﻿using JobBoard.Data.Entities;
 using JobBoard.Data.Entities.Identity;
+using JobBoard.Data.Responses;
 using JobBoard.Infrastructure.Abstractions;
 using JobBoard.Service.Abstractions;
 using JobBoard.Service.Authentication.Interfaces;
@@ -187,6 +188,21 @@ namespace JobBoard.Service.Implementations
 			if (search != null) query = query.Where(j => j.Title.Contains(search));
 
 			return query;
+		}
+
+		public IQueryable<JobApplicantsSummaryResponse> GetJobApplicants(int jobId)
+		{
+			return _jobRepository.GetTableAsNoTracking().Where(j => j.JobId == jobId)
+											.SelectMany(j => j.applications.Select(app =>
+											new JobApplicantsSummaryResponse
+											{
+												Id = app.UserId,
+												Name = app.FirstName + " " + app.LastName,
+												Email = app.Email,
+												Experience = app.Experience,
+												AppliedDate = app.CreatedOn
+
+											}));
 		}
 
 

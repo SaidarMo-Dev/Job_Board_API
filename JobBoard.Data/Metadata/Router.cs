@@ -112,6 +112,8 @@
 			public const string Locations = Prefex + "/locations";
 			public const string Recommendations = Prefex + "/recommendations";
 
+			public const string JobApplicantsSummary = Prefex + "/applicants/summary";
+
 		}
 
 

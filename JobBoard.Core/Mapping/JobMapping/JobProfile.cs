@@ -6,13 +6,14 @@ namespace JobBoard.Core.Mapping.JobMapping
 	{
 		public JobProfile()
 		{
-			AddJobCommandMapping();
-			GetJobByIdQueryMapping();
-			GetPaginatedJobsQueryMapping();
-			GetJobSkillsMapping();
-			UpdateJobCommandMapping();
-			GetJobsByCompanyIdMapping();
+			MapAddJobCommand();
+			MapGetJobByIdQuery();
+			MapGetPaginatedJobsQuery();
+			MapGetJobSkills();
+			MapUpdateJobCommand();
+			MapGetJobsByCompanyId();
 			MapGetJobByIdSummaryQuery();
+			MapGetJobApplicantsSummary();
 		}
 	}
 }

@@ -5,7 +5,7 @@ namespace JobBoard.Core.Mapping.JobMapping
 {
 	public partial class JobProfile
 	{
-		public void GetJobsByCompanyIdMapping()
+		public void MapGetJobsByCompanyId()
 		{
 			CreateMap<JobListing, JobResponse>()
 				.ForMember(dst => dst.JobType, opt => opt.MapFrom(src => src.JobType.ToString()))

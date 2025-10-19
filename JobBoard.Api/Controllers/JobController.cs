@@ -182,6 +182,22 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(new GetRecommendationJobsQuery()));
 		}
 
+		[Authorize]
+		[SwaggerOperation(
+			Summary = "Get job applicants summary",
+			Description = "Retreives applicants for a job",
+			OperationId = "GetJobApplicantsSummary")]
+
+		[HttpGet(Router.JobRoute.JobApplicantsSummary)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		[ProducesResponseType(StatusCodes.Status403Forbidden)]
+
+		public async Task<IActionResult> GetJobApplicantsSummary([FromQuery] GetJobApplicantSummary query)
+		{
+			return Ok(await Mediator.Send(query));
+		}
+
 
 
 	}

@@ -3150,6 +3150,56 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.JobController",
+    "Method": "GetJobApplicantsSummary",
+    "RelativePath": "Api/V1/Jobs/applicants/summary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "JobId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Size",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 403
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.JobController",
     "Method": "GetJobCategories",
     "RelativePath": "Api/V1/Jobs/categories",
     "HttpMethod": "GET",

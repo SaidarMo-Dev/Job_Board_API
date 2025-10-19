@@ -1,5 +1,6 @@
 ﻿using JobBoard.Data.Entities;
 using JobBoard.Data.Entities.Identity;
+using JobBoard.Data.Responses;
 
 namespace JobBoard.Service.Abstractions
 {
@@ -85,6 +86,7 @@ namespace JobBoard.Service.Abstractions
 		Task<string[]> GetPopularLocations();
 		IQueryable<JobListing> GetRecommendationJobs(User user, int take = 3);
 		IQueryable<JobListing> GetEmployerPostedJobsQueryable(int userId, string? search);
+		IQueryable<JobApplicantsSummaryResponse> GetJobApplicants(int jobId);
 
 
 	}

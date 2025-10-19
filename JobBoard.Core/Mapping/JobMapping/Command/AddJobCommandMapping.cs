@@ -5,7 +5,7 @@ namespace JobBoard.Core.Mapping.JobMapping
 {
 	public partial class JobProfile
 	{
-		public void AddJobCommandMapping()
+		public void MapAddJobCommand()
 		{
 			CreateMap<AddJobCommand, JobListing>();
 
