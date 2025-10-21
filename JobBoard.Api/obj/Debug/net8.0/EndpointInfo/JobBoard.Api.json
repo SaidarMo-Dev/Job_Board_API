@@ -6281,6 +6281,20 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "Sort",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SortApplicantsEnum"
+            }
+          },
+          {
+            "name": "Filter",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/FilterApplicantsEnum"
+            }
           }
         ],
         "responses": {
@@ -6881,6 +6895,14 @@
         ],
         "type": "string"
       },
+      "FilterApplicantsEnum": {
+        "enum": [
+          "Pending",
+          "Accepted",
+          "Rejected"
+        ],
+        "type": "string"
+      },
       "FilterByRole": {
         "enum": [
           "All",
@@ -6997,6 +7019,14 @@
           }
         },
         "additionalProperties": false
+      },
+      "SortApplicantsEnum": {
+        "enum": [
+          "Name",
+          "NewestFirst",
+          "OldestFirst"
+        ],
+        "type": "string"
       },
       "SortCategory": {
         "enum": [

@@ -1,4 +1,6 @@
-﻿namespace JobBoard.Data.Responses
+﻿using JobBoard.Data.enums;
+
+namespace JobBoard.Data.Responses
 {
 	public class JobApplicantsSummaryResponse
 	{
@@ -8,6 +10,8 @@
 		public string? Email { get; set; }
 		public required string Experience { get; set; }
 		public DateTime AppliedDate { get; set; }
+		public ApplicationStatusEnum Status { get; set; }
 		public string? Resume { get; set; }
+
 	}
 }

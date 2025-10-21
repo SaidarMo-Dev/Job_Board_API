@@ -193,7 +193,7 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		[ProducesResponseType(StatusCodes.Status403Forbidden)]
 
-		public async Task<IActionResult> GetJobApplicantsSummary([FromQuery] GetJobApplicantSummary query)
+		public async Task<IActionResult> GetJobApplicantsSummary([FromQuery] GetJobApplicantsSummary query)
 		{
 			return Ok(await Mediator.Send(query));
 		}

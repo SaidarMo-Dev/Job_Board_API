@@ -1,4 +1,6 @@
-﻿namespace JobBoard.Core.Feutures.Jobs.Queries.Responses
+﻿using JobBoard.Data.enums;
+
+namespace JobBoard.Core.Feutures.Jobs.Queries.Responses
 {
 	public class GetJobApplicantSummaryResponse
 	{
@@ -9,6 +11,7 @@
 		public required string Experience { get; set; }
 		public string? Country { get; set; }
 		public DateTime AppliedDate { get; set; }
+		public ApplicationStatusEnum Status { get; set; }
 		public string? Resume { get; set; }
 
 

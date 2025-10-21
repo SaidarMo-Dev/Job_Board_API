@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using AutoMapper;
+﻿using AutoMapper;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Jobs.Commands.Models;
 using JobBoard.Core.Resources;
@@ -115,7 +114,7 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 		{
 			var Oldjob = await _jobService.GetJobByIdWithEncludeSkillsAndCategoriesAsync(request.Id);
 
-			var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), Oldjob, new JobCreatorRequirement());
+			var isAuthorized = await _authorizationService.AuthorizeAsync(_currentUserService.GetCurrentUserPrincipal(), Oldjob, new JobCreatorRequirement());
 
 			if (!isAuthorized.Succeeded) return Forbidden<string>();
 

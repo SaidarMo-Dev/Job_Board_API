@@ -27,7 +27,7 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 			IRequestHandler<GetPopularLocationsQuery, Response<string[]>>,
 			IRequestHandler<GetRecommendationJobsQuery, Response<List<JobResponseDto>>>,
 			IRequestHandler<GetJobByIdSummaryQuery, Response<GetJobByIdSummaryQueryResponse>>,
-			IRequestHandler<GetJobApplicantSummary, PaginatedResponse<List<GetJobApplicantSummaryResponse>>>
+			IRequestHandler<GetJobApplicantsSummary, PaginatedResponse<List<GetJobApplicantSummaryResponse>>>
 	{
 
 		#region Fields
@@ -164,9 +164,9 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 			return Success(_mapper.Map<GetJobByIdSummaryQueryResponse>(job));
 		}
 
-		public async Task<PaginatedResponse<List<GetJobApplicantSummaryResponse>>> Handle(GetJobApplicantSummary request, CancellationToken cancellationToken)
+		public async Task<PaginatedResponse<List<GetJobApplicantSummaryResponse>>> Handle(GetJobApplicantsSummary request, CancellationToken cancellationToken)
 		{
-			var applicants = _jobService.GetJobApplicants(request.JobId);
+			var applicants = _jobService.GetJobApplicants(request.JobId, request.Filter, request.Sort);
 
 			return (await _mapper.ProjectTo<GetJobApplicantSummaryResponse>(applicants)
 											.ToPaginatedAsync(request.Page, request.Size));
