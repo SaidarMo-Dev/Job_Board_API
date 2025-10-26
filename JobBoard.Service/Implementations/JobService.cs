@@ -173,7 +173,7 @@ namespace JobBoard.Service.Implementations
 				Job = job
 
 			})
-				.Where(x => x.Score > 0 && x.Job.DateExpired > DateTime.Now && x.Job.Status == Data.enums.JobStatusEnum.Active)
+				.Where(x => x.Score > 0 && x.Job.DateExpired > DateTime.Now && x.Job.Status == JobStatusEnum.Active)
 				.OrderByDescending(x => x.Score)
 				.ThenByDescending(x => x.Job.DatePosted)
 				.Take(take)

@@ -62,7 +62,24 @@ namespace JobBoard.Service.Abstractions
 		/// An <see cref="IQueryable{T}"/> of <see cref="Application"/> objects associated with the specified user.
 		/// </returns>
 		IQueryable<Application> GetUserApplicationsQueryable(int userId);
+
+		/// <summary>
+		/// Retrieves a collection of recent applications submitted by a specific user.
+		/// </summary>
+		/// <param name="userId">The ID of the user whose applications are to be retrieved.</param>
+		/// <param name="take">The number of applications to be retrieves.</param>
+		/// <returns>
+		/// An <see cref="IReadOnlyList{T}"/> of <see cref="RecentApplicationsResponse"/> objects associated with the specified user.
+		/// </returns>
 		Task<IReadOnlyList<RecentApplicationsResponse>> GetRecentApplicationsAsync(int userId, int take);
+
+		/// <summary>
+		/// Retrieves an array of applied job IDs of a specific user.
+		/// </summary>
+		/// <param name="userId">The ID of the user whose applied job IDs to be retrieved.</param>
+		/// <returns>
+		/// An <see cref="IReadOnlyList{T}"/> of <see cref="RecentApplicationsResponse"/> objects associated with the specified user.
+		/// </returns>
 		Task<int[]> GetAppliedJobIds(int userId);
 
 	}
