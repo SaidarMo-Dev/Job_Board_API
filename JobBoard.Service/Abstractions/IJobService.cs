@@ -84,9 +84,38 @@ namespace JobBoard.Service.Abstractions
 		/// <returns>A list of <see cref="JobListing"/> objects representing the jobs posted by the company.</returns>
 		Task<List<JobListing>> GetJobsByCompanyIdAsync(int CompanyId);
 
+		/// <summary>
+		/// Retrieves an array of popular jobs location.
+		/// </summary>
+		/// <returns>A list of popular jobs location.</returns>
+
 		Task<string[]> GetPopularLocations();
+
+		/// <summary>
+		/// Retrieves a queryable collection of recommendation jobs to a specified user.
+		/// </summary>
+		/// <param name="user">The user whose recommendation jobs are to be retrieved.</param>
+		/// <param name="take">The number of recommendation jobs to be retrieved.</param>
+		/// <returns>A list of <see cref="JobListing"/> objects representing the jobs posted by the company.</returns>
 		IQueryable<JobListing> GetRecommendationJobs(User user, int take = 3);
+
+
+		/// <summary>
+		/// Retrieves a queryable collection of jobs posted by a specific employer.
+		/// </summary>
+		/// <param name="userId">The employer ID whose jobs are to be retrieved.</param>
+		/// <param name="search">Representing The job title to search with.</param>
+		/// <returns>A queryable collection of <see cref="JobListing"/> objects representing the jobs posted by the company.</returns>
+
 		IQueryable<JobListing> GetEmployerPostedJobsQueryable(int userId, string? search);
+
+		/// <summary>
+		/// Retrieves a queryable collection of applicants for that job.
+		/// </summary>
+		/// <param name="jobId">The job ID whose applicants are to be retrieved.</param>
+		/// <param name="filters">The filter of <see cref="FilterApplicantsEnum"/> to use to filter applicants.</param>
+		/// <param name="sort">The sort of <see cref="SortApplicantsEnum"/> to use to sort applicants.</param>
+		/// <returns>A queryable collection of <see cref="JobApplicantsSummaryResponse"/> objects representing the Applicant.</returns>
 		IQueryable<JobApplicantsSummaryResponse> GetJobApplicants(int jobId, FilterApplicantsEnum? filters, SortApplicantsEnum? sort);
 
 
