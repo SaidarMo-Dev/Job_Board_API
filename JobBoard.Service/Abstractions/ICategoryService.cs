@@ -84,6 +84,12 @@ namespace JobBoard.Service.Abstractions
 		/// <returns>queryable categories</returns>
 		IQueryable<Category> GetCategoriesQueryable(string? search, SortCategory? sort);
 
+		/// <summary>
+		/// Retrevies a list of  popular categories
+		/// </summary>
+		/// <returns>
+		/// An <see cref="List{T}"/> of <see cref="Category"/>.
+		/// </returns>
 		Task<List<Category>> GetPopularCategoriesAsync();
 	}
 }
