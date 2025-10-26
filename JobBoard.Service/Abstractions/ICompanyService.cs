@@ -75,7 +75,19 @@ namespace JobBoard.Service.Abstractions
 		/// <returns>A task that represents the asynchronous operation.</returns>
 		Task DeleteAsync(Company entity);
 
+		/// <summary>
+		/// Retrieves a queryable collection of companies.
+		/// </summary>
+		/// <param name="search"> the name to search by.</param>
+		/// <param name="sort"> the enum <see cref="SortCompany"/> to sort companies.</param>
+		/// <returns>queryable companies</returns>
+
 		IQueryable<Company> GetCompaniesQueryable(string? search, SortCompany? sort);
+
+		/// <summary>
+		/// Retrieves an array of popular companies name.
+		/// <returns>array of companies name</returns>
+
 		Task<string[]> GetPopularCompanies();
 
 
