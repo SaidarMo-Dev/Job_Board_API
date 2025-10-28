@@ -85,6 +85,11 @@ namespace JobBoard.Service.Abstractions
 		IQueryable<Category> GetCategoriesQueryable(string? search, SortCategory? sort);
 
 		/// <summary>
+		/// Get categories queryable
+		/// </summary>
+		/// <returns>queryable categories</returns>
+		IQueryable<Category> GetCategoriesQueryable();
+		/// <summary>
 		/// Retrevies a list of  popular categories
 		/// </summary>
 		/// <returns>
