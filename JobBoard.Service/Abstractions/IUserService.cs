@@ -51,17 +51,44 @@ namespace JobBoard.Service.Abstractions
 		/// <param name="email">The email we want to check.</param>
 		/// <returns><c>true</c> if the email exists; otherwise, <c>false</c>.</returns>
 		Task<bool> IsEmailExistAsync(string email);
+
+
+		/// <summary>
+		/// Retrieves user dashboard stats asynchronously by user ID.
+		/// </summary>
+		/// <param name="userId">The ID of the user.</param>
+		/// <returns>The <see cref="DashboardStatsResponse"/> entity with related data if found; otherwise, null.</returns>
 		Task<DashboardStatsResponse> GetUserDashboardStatsAsync(int userId);
+
+		/// <summary>
+		/// Retrieves users queryable.
+		/// </summary>
+		/// <param name="search">Search users by name.</param>
+		/// <param name="role">filter users by role.</param>
+		/// <param name="status">filter users by status.</param>
+		/// <returns>A queryable collection of the <see cref="UserManagementResponse"/> entity with related data if found; otherwise, null.</returns>
 		IQueryable<UserManagementResponse> GetUsersQueryable(string? search, FilterByRole? role, FilterByStatus? status);
 
 		/// <summary>
-		/// Updates an existing user asynchronously.
+		/// Updates an existing user asynchronously and assign a new role if exist.
 		/// </summary>
 		/// <param name="user">The <see cref="User"/> entity to update.</param>
-		/// <returns>A string indicating the result of the update operation.</returns>
+		/// <param name="role">The new role to update.</param>
+		/// <returns>An <see cref="IdentityResult"/>  indicating the result of the update operation.</returns>
 		Task<IdentityResult> AdminUpdateUserAsync(User user, string role);
+
+		/// <summary>
+		/// Retrieves Admin profile.
+		/// </summary>
+		/// <param name="userId">The ID of the Admin.</param>
+		/// <returns>The <see cref="User"/> entity with related data if found; otherwise, null.</returns>
 		Task<User> GetAdminProfile(int userId);
 
+		/// <summary>
+		/// Retrieves Employer dashboard stats asynchronously by Employer ID.
+		/// </summary>
+		/// <param name="userId">The ID of the Employer.</param>
+		/// <returns>The <see cref="EmployerDashboardStats"/> entity with related data if found; otherwise, null.</returns>
 		Task<EmployerDashboardStats> GetEmployerDashboardStats(int userId);
 
 	}
