@@ -150,36 +150,46 @@ namespace JobBoard.Service.Implementations
 
 			var queryableJobs = _jobRepository.GetTableAsNoTracking();
 
+			var InteractedJobIds = queryableJobs
+									.Where(j => j.bookMarks.Any(b => b.UserId == user.Id)
+											|| j.applications.Any(ap => ap.UserId == user.Id))
+									.Select(j => j.JobId).ToHashSet();
+
+
 			var interactedCategories = queryableJobs
-						.Where(j => j.bookMarks.Any(b => b.UserId == user.Id)
-							|| j.applications.Any(ap => ap.UserId == user.Id))
-						.SelectMany(j => j.jobCategories).Select(jc => jc.CategoryId)
-						.Distinct().ToList();
+							.Where(j => InteractedJobIds.Contains(j.JobId))
+							.SelectMany(j => j.jobCategories).Select(jc => jc.CategoryId)
+							.Distinct().ToList();
 
 
 
-			return queryableJobs.Select(job =>
-			new
-			{
-				Score =   // Location match
-						(job.Location != null && user.Country != null && job.Location.Contains(user.Country.CountryName) ? 0.3 : 0) +
+			var recommendations = queryableJobs
+				.Where(j => !InteractedJobIds.Contains(j.JobId)
+						&& j.DateExpired > DateTime.Now
+						&& j.Status == JobStatusEnum.Active)
+				.Select(job =>
+					new
+					{
+						Score =   // Location match
+								(job.Location != null && user.Country != null && job.Location.Contains(user.Country.CountryName) ? 0.3 : 0) +
 
-						// Category match
-						(job.jobCategories.Any(x => interactedCategories.Contains(x.CategoryId)) ? 0.5 : 0) +
+								// Category match
+								(job.jobCategories.Any(x => interactedCategories.Contains(x.CategoryId)) ? 0.5 : 0) +
 
-						// Recency bonus (using DateDiffDay for SQL translation)
-						(1.0 / (EF.Functions.DateDiffDay(job.DatePosted, DateTime.UtcNow) + 1) * 0.1),
+								// Recency bonus (using DateDiffDay for SQL translation)
+								(1.0 / (EF.Functions.DateDiffDay(job.DatePosted, DateTime.UtcNow) + 1) * 0.1),
 
-				Job = job
+						Job = job
 
-			})
-				.Where(x => x.Score > 0 && x.Job.DateExpired > DateTime.Now && x.Job.Status == JobStatusEnum.Active)
+					})
+				.Where(j => j.Score > 0)
 				.OrderByDescending(x => x.Score)
 				.ThenByDescending(x => x.Job.DatePosted)
 				.Take(take)
 				.Select(x => x.Job);
 
 
+			return recommendations;
 		}
 
 		public IQueryable<JobListing> GetEmployerPostedJobsQueryable(int userId, string? search)
