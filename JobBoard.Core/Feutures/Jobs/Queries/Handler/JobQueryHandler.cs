@@ -67,7 +67,7 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 
 		public async Task<PaginatedResponse<List<GetPaginatedJobsQueryResponse>>> Handle(GetPaginatedJobsQuery request, CancellationToken cancellationToken)
 		{
-			var queryable = _jobService.GetJobsQueryable().Where(j => j.Status == JobStatusEnum.Active);
+			var queryable = _jobService.GetJobsQueryable().Where(j => j.Status == JobStatusEnum.Active && j.DateExpired > DateTime.UtcNow);
 
 			// perform filters and sorting
 
