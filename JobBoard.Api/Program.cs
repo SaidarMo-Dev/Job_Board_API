@@ -5,6 +5,7 @@ using JobBoard.Core;
 using JobBoard.Core.Middleware;
 using JobBoard.Core.Seeders;
 using JobBoard.Data.Entities.Identity;
+using JobBoard.Data.Helpers;
 using JobBoard.Infrastructure;
 using JobBoard.Infrastructure.context;
 using JobBoard.Infrastructure.ModelBinders;
@@ -17,6 +18,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Serilog;
+using Supabase;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +38,10 @@ builder.Services.AddControllers((options) =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Configure SupabaseSettings
+builder.Services.Configure<SupabaseSettings>(
+				builder.Configuration.GetSection("Supabase"));
 
 #region Configure appDbContext 
 builder.Services.AddDbContext<appDbContext>(
@@ -134,6 +140,16 @@ builder.Services.AddSerilog();
 
 var app = builder.Build();
 
+//  Supabase Initialization
+
+#region Supabase Initialization
+
+using (var scope = app.Services.CreateScope())
+{
+	var client = scope.ServiceProvider.GetRequiredService<Client>();
+	await client.InitializeAsync();
+}
+#endregion
 
 using (var scope = app.Services.CreateScope())
 {

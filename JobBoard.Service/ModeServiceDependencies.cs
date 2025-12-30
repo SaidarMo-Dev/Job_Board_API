@@ -1,9 +1,12 @@
-﻿using JobBoard.Service.Abstractions;
+﻿using JobBoard.Data.Helpers;
+using JobBoard.Service.Abstractions;
 using JobBoard.Service.Authentication.Implementations;
 using JobBoard.Service.Authentication.Interfaces;
 using JobBoard.Service.Authorization;
 using JobBoard.Service.Implementations;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using Supabase;
 
 namespace JobBoard.Service
 {
@@ -28,6 +31,22 @@ namespace JobBoard.Service
 			services.AddScoped<IEmailJobService, EmailJobService>();
 			services.AddScoped<ITokenHelper, TokenHelper>();
 
+
+
+			services.AddSingleton<Client>(sp =>
+			{
+				var settings = sp.GetRequiredService<IOptions<SupabaseSettings>>().Value;
+
+				var client = new Client(
+					settings.Url,
+					settings.ServiceKey,
+					new SupabaseOptions
+					{
+						AutoConnectRealtime = false
+					});
+
+				return client;
+			});
 
 			return services;
 		}

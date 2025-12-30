@@ -446,3 +446,14 @@ C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\sv\Hangfire.Core.resourc
 C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\tr-TR\Hangfire.Core.resources.dll
 C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\zh-TW\Hangfire.Core.resources.dll
 C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\zh\Hangfire.Core.resources.dll
+C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\MimeMapping.dll
+C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\Supabase.dll
+C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\Supabase.Core.dll
+C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\Supabase.Functions.dll
+C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\Supabase.Gotrue.dll
+C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\Supabase.Postgrest.dll
+C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\Supabase.Realtime.dll
+C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\Supabase.Storage.dll
+C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\System.Reactive.dll
+C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\Websocket.Client.dll

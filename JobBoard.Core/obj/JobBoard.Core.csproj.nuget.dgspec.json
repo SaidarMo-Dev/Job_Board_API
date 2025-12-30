@@ -283,6 +283,10 @@
               "target": "Package",
               "version": "[8.2.0, )"
             },
+            "Supabase": {
+              "target": "Package",
+              "version": "[1.1.1, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[8.1.1, )"
