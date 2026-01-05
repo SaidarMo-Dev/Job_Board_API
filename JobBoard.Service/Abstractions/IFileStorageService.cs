@@ -2,7 +2,7 @@
 
 namespace JobBoard.Service.Abstractions
 {
-	public interface IFileStrageService
+	public interface IFileStorageService
 	{
 
 		Task<string> UploadAsync<TId>(
@@ -10,8 +10,11 @@ namespace JobBoard.Service.Abstractions
 			string fileName,
 			string contentType,
 			StorageResourceEnum resource,
-			TId resourceId)
+			TId resourceId,
+			FilePathType filePathType,
+			CancellationToken cancellationToken)
 			where TId : notnull;
+
 
 		Task DeleteAsync(string filePath);
 

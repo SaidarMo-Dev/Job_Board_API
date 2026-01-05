@@ -5,6 +5,7 @@ using JobBoard.Core.Feutures.ApplicationUser.Commands.Models;
 using JobBoard.Core.Resources;
 using JobBoard.Core.Security.Requirements;
 using JobBoard.Data.Entities.Identity;
+using JobBoard.Data.enums;
 using JobBoard.Service.Abstractions;
 using JobBoard.Service.Authentication.Interfaces;
 using MediatR;
@@ -18,7 +19,8 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 	public class UserCommandHandler : ResponseHandler,
 			IRequestHandler<AddUserCommand, Response<int>>,
 			IRequestHandler<UpdateUserCommand, Response<string>>,
-			IRequestHandler<DeleteUserCommand, Response<string>>
+			IRequestHandler<DeleteUserCommand, Response<string>>,
+			IRequestHandler<SetUserProfileImageCommand, Response<string>>
 
 	{
 
@@ -30,6 +32,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 		private readonly IStringLocalizer<SharedResources> _stringLocalizer;
 		private readonly IAuthorizationService _authorizationService;
 		private readonly IAuthenticationService _authenticationService;
+		private readonly IFileStorageService _fileStorageService;
 		#endregion
 
 		#region Construtors
@@ -39,7 +42,8 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 						IUserService userService,
 						IStringLocalizer<SharedResources> stringLocalizer,
 						IAuthorizationService authorizationService,
-						IAuthenticationService authenticationService
+						IAuthenticationService authenticationService,
+						IFileStorageService fileStrageService
 			) : base(stringLocalizer)
 		{
 			_userManager = userManager;
@@ -49,6 +53,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 			_stringLocalizer = stringLocalizer;
 			_authorizationService = authorizationService;
 			_authenticationService = authenticationService;
+			_fileStorageService = fileStrageService;
 		}
 
 		#endregion
@@ -119,6 +124,30 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 			if (!IsDeleted) return BadRequest<string>("Cannot delete this User");
 
 			return Success("");
+		}
+
+		public async Task<Response<string>> Handle(SetUserProfileImageCommand request, CancellationToken cancellationToken)
+		{
+
+			var user = await _userManager.FindByIdAsync(request.UserId.ToString());
+
+			if (user == null) return NotFound("User not found");
+
+			await using var stream = request.ProfileImage.OpenReadStream();
+
+
+			user.ImagePath = await _fileStorageService.UploadAsync(
+				stream,
+				request.ProfileImage.FileName,
+				request.ProfileImage.ContentType,
+				StorageResourceEnum.Users,
+				user.Id,
+				FilePathType.ResourceId,
+				cancellationToken);
+
+			await _userService.UpdateUserAsync(user);
+
+			return Success(user.ImagePath);
 		}
 
 

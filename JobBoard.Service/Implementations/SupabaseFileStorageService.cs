@@ -7,7 +7,7 @@ using Supabase;
 
 namespace JobBoard.Service.Implementations
 {
-	public class SupabaseFileStorageService : IFileStrageService
+	public class SupabaseFileStorageService : IFileStorageService
 	{
 		private readonly Client _client;
 		private readonly IOptions<SupabaseSettings> _settings;
@@ -26,7 +26,9 @@ namespace JobBoard.Service.Implementations
 			string fileName,
 			string contentType,
 			StorageResourceEnum resource,
-			TId resourceId)
+			TId resourceId,
+			FilePathType filePathType,
+			CancellationToken cancellationToken)
 			where TId : notnull
 		{
 			ArgumentNullException.ThrowIfNull(fileStream);
@@ -41,19 +43,19 @@ namespace JobBoard.Service.Implementations
 
 
 
-			var path = StoragePathBuilder.Build<TId>(resource, resourceId, fileName);
+			var path = StoragePathBuilder.Build<TId>(resource, resourceId, fileName, filePathType);
 
-			using var ms = new MemoryStream();
+			var buffer = new byte[fileStream.Length];
+			await fileStream.ReadAsync(buffer, 0, buffer.Length, cancellationToken);
 
-			await fileStream.CopyToAsync(ms);
 
 			await _client
 				.Storage
 				.From(_settings.Value.BucketName)
-						.Upload(ms.ToArray(), path, new Supabase.Storage.FileOptions
+						.Upload(buffer, path, new Supabase.Storage.FileOptions
 						{
 							ContentType = contentType,
-							Upsert = false
+							Upsert = true
 						});
 
 
@@ -61,9 +63,9 @@ namespace JobBoard.Service.Implementations
 		}
 
 
-
 		public async Task DeleteAsync(string filePath)
 		{
+
 			await _client
 				.Storage
 				.From(_settings.Value.BucketName)
@@ -81,6 +83,7 @@ namespace JobBoard.Service.Implementations
 
 			return signedUrl;
 		}
+
 
 	}
 }

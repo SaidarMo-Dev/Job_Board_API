@@ -126,5 +126,23 @@ namespace JobBoard.Api.Controllers
 		{
 			return NewResult(await Mediator.Send(new GetUserDashboardStatsQuery(Id)));
 		}
+
+
+		// Upload user profile image
+
+		[AllowAnonymous]
+		[SwaggerOperation(Summary = "Upload profile image",
+					  Description = "Upload user profile image",
+					  OperationId = "UploadProfileImage")]
+
+		[HttpPost(Router.ApplicationUserRoute.UploadProfileImage)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		public async Task<IActionResult> UploadUserProfileImage([FromRoute] int Id, [FromForm] UploadProfileImageRequest request)
+		{
+			return NewResult(await Mediator.Send(new SetUserProfileImageCommand { UserId = Id, ProfileImage = request.ProfileImage }));
+		}
 	}
 }

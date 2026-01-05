@@ -7,13 +7,24 @@ namespace JobBoard.Infrastructure.Helpers
 		public static string Build<TId>(
 			StorageResourceEnum resource,
 			TId resourceId,
-			string fileName)
+			string fileName,
+			FilePathType pathType)
 			where TId : notnull
 		{
 			var safeFileName = SanitizeFileName(fileName);
-			var uuid = Guid.NewGuid();
 
-			return $"{resource.ToString().ToLower()}/{resourceId}/{uuid}_{safeFileName}";
+			string basePath = $"{resource.ToString().ToLower()}/{resourceId}";
+
+			return pathType switch
+			{
+				FilePathType.ResourceId => $"{basePath}/{resourceId}{Path.GetExtension(fileName)}",
+				FilePathType.UuidFileName => $"{basePath}/{Guid.NewGuid()}_{safeFileName}",
+				_ => throw new ArgumentOutOfRangeException(
+					nameof(pathType),
+					$"Unsupported FilePathType value: {pathType}")
+			};
+
+
 		}
 
 
