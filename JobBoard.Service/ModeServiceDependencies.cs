@@ -31,6 +31,7 @@ namespace JobBoard.Service
 			services.AddScoped<IEmailJobService, EmailJobService>();
 			services.AddScoped<ITokenHelper, TokenHelper>();
 			services.AddScoped<IFileStorageService, SupabaseFileStorageService>();
+			services.AddScoped<IFileResourceService, FileResourceService>();
 
 
 
