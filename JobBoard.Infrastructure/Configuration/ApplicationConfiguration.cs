@@ -33,6 +33,13 @@ namespace JobBoard.Infrastructure.Configuration
 					x => (ApplicationStatusEnum)Enum.Parse(typeof(ApplicationStatusEnum), x)
 					);
 
+
+			builder.HasOne(x => x.ResumeFile)
+				.WithMany()
+				.HasForeignKey(x => x.ResumeFileId)
+				.OnDelete(DeleteBehavior.Restrict);
+
+
 			builder.ToTable("Applications");
 		}
 	}

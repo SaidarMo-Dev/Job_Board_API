@@ -19,6 +19,7 @@ namespace JobBoard.Data.Entities.Identity
 		public DateTime? DateOfBirth { get; set; }
 		public string? Address { get; set; }
 		public string? ImagePath { get; set; }
+		public int? ProfileImageFileId { get; set; }
 		public bool IsDeleted { get; set; }
 		public DateTime? DeletedAt { get; set; }
 		public int? CountryId { get; set; }
@@ -35,6 +36,7 @@ namespace JobBoard.Data.Entities.Identity
 		public ICollection<JobListing> CreatedJobs { get; set; }
 		public ICollection<UserRefreshToken> UserRefreshTokens { get; set; }
 		public ICollection<Company> CreatedCompanies { get; set; }
+		public FileResource? ProfileImageFile { get; set; }
 	}
 }
 

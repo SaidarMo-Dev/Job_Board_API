@@ -73,8 +73,7 @@ namespace JobBoard.Service.Implementations
 
 		}
 
-		public async Task<string> CreateSignedReadUrlAsync(
-		string filePath)
+		public async Task<string> CreateSignedReadUrlAsync(string filePath)
 		{
 			var signedUrl = await _client
 				.Storage

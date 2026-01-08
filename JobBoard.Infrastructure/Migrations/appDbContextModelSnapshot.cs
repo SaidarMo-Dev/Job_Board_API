@@ -72,8 +72,10 @@ namespace JobBoard.Infrastructure.Migrations
                     b.Property<string>("Portfolio")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ResumeFileId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ResumeUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
@@ -86,6 +88,8 @@ namespace JobBoard.Infrastructure.Migrations
                     b.HasKey("ApplicationId");
 
                     b.HasIndex("JobId");
+
+                    b.HasIndex("ResumeFileId");
 
                     b.HasIndex("UserId");
 
@@ -178,6 +182,9 @@ namespace JobBoard.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<int?>("LogoFileId")
+                        .HasColumnType("int");
+
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -188,6 +195,8 @@ namespace JobBoard.Infrastructure.Migrations
                     b.HasKey("CompanyId");
 
                     b.HasIndex("CreatedByUserId");
+
+                    b.HasIndex("LogoFileId");
 
                     b.ToTable("Companies", (string)null);
                 });
@@ -205,6 +214,42 @@ namespace JobBoard.Infrastructure.Migrations
                     b.HasKey("CountryId");
 
                     b.ToTable("Countries", (string)null);
+                });
+
+            modelBuilder.Entity("JobBoard.Data.Entities.FileResource", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Bucket")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OwnerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OwnerType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Visibility")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Path")
+                        .IsUnique();
+
+                    b.ToTable("FileResources", (string)null);
                 });
 
             modelBuilder.Entity("JobBoard.Data.Entities.Identity.Role", b =>
@@ -320,6 +365,9 @@ namespace JobBoard.Infrastructure.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("ProfileImageFileId")
+                        .HasColumnType("int");
+
                     b.Property<string>("RecoveryEmail")
                         .HasColumnType("nvarchar(max)");
 
@@ -347,6 +395,8 @@ namespace JobBoard.Infrastructure.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("ProfileImageFileId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -616,6 +666,11 @@ namespace JobBoard.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("JobBoard.Data.Entities.FileResource", "ResumeFile")
+                        .WithMany()
+                        .HasForeignKey("ResumeFileId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("JobBoard.Data.Entities.Identity.User", "UserInfo")
                         .WithMany("applications")
                         .HasForeignKey("UserId")
@@ -623,6 +678,8 @@ namespace JobBoard.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("JobListing");
+
+                    b.Navigation("ResumeFile");
 
                     b.Navigation("UserInfo");
                 });
@@ -654,7 +711,14 @@ namespace JobBoard.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("JobBoard.Data.Entities.FileResource", "LogoFile")
+                        .WithMany()
+                        .HasForeignKey("LogoFileId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("CreatedByUser");
+
+                    b.Navigation("LogoFile");
                 });
 
             modelBuilder.Entity("JobBoard.Data.Entities.Identity.User", b =>
@@ -663,7 +727,14 @@ namespace JobBoard.Infrastructure.Migrations
                         .WithMany("Users")
                         .HasForeignKey("CountryId");
 
+                    b.HasOne("JobBoard.Data.Entities.FileResource", "ProfileImageFile")
+                        .WithMany()
+                        .HasForeignKey("ProfileImageFileId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("Country");
+
+                    b.Navigation("ProfileImageFile");
                 });
 
             modelBuilder.Entity("JobBoard.Data.Entities.Identity.UserRefreshToken", b =>

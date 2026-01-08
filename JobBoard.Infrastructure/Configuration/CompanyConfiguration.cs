@@ -35,6 +35,10 @@ namespace JobBoard.Infrastructure.Configuration
 				.HasForeignKey(x => x.CreatedByUserId)
 				.OnDelete(DeleteBehavior.NoAction);
 
+			builder.HasOne(x => x.LogoFile)
+				.WithMany()
+				.HasForeignKey(x => x.LogoFileId)
+				.OnDelete(DeleteBehavior.Restrict);
 
 			builder.ToTable("Companies");
 		}

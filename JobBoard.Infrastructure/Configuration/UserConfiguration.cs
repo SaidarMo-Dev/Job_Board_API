@@ -27,6 +27,13 @@ namespace JobBoard.Infrastructure.Configuration
 				.HasConversion(new EncryptionConverter());
 
 
+			builder
+			.HasOne(x => x.ProfileImageFile)
+			.WithMany()
+			.HasForeignKey(x => x.ProfileImageFileId)
+			.OnDelete(DeleteBehavior.Restrict);
+
+
 		}
 	}
 

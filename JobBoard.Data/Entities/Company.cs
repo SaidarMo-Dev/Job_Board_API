@@ -13,10 +13,13 @@ namespace JobBoard.Data.Entities
 		public required string Email { get; set; }
 		public string? Fax { get; set; }
 		public string? Industry { get; set; }
+		public int? LogoFileId { get; set; }
 		public int CreatedByUserId { get; set; }
 
 		public ICollection<JobListing>? JobsListing { get; set; }
 		public User CreatedByUser { get; set; }
+
+		public FileResource? LogoFile { get; set; }
 
 	}
 }
