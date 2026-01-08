@@ -23,6 +23,8 @@ namespace JobBoard.Infrastructure.context
 		public DbSet<JobSkill> jobSkills { get; set; }
 		public DbSet<Bookmark> bookMarks { get; set; }
 		public DbSet<IdentityUserRole<int>> userRoles { get; set; }
+		public DbSet<FileResource> fileResources { get; set; }
+
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
