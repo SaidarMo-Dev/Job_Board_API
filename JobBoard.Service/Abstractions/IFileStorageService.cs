@@ -9,7 +9,7 @@ namespace JobBoard.Service.Abstractions
 			Stream fileStream,
 			string fileName,
 			string contentType,
-			StorageResourceEnum resource,
+			FileOwnerType resource,
 			TId resourceId,
 			FilePathType filePathType,
 			CancellationToken cancellationToken)

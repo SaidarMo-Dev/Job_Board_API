@@ -25,7 +25,7 @@ namespace JobBoard.Service.Implementations
 			Stream fileStream,
 			string fileName,
 			string contentType,
-			StorageResourceEnum resource,
+			FileOwnerType resource,
 			TId resourceId,
 			FilePathType filePathType,
 			CancellationToken cancellationToken)

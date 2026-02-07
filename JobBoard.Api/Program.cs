@@ -63,15 +63,16 @@ builder.Services.AddHangfireServer();
 
 builder.Services.AddCors(options =>
 {
-	options.AddPolicy("MyPolicy", builder =>
+	options.AddPolicy("iLinkApiCors", builder =>
 	{
 
-		builder.WithOrigins("http://localhost:5173")
+		builder.WithOrigins(
+			"http://localhost:5173"
+			)
+
 		.AllowAnyMethod()
 		.AllowAnyHeader()
 		.AllowCredentials();
-
-
 
 	});
 });
@@ -189,7 +190,7 @@ app.UseSwagger(options =>
 app.UseSwaggerUI();
 
 
-#region Localization Midllware
+#region Localization Midlleware
 
 var options = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
 
@@ -199,7 +200,7 @@ app.UseRequestLocalization(options.Value);
 
 app.UseHttpsRedirection();
 
-app.UseCors("MyPolicy");
+app.UseCors("iLinkApiCors");
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
 

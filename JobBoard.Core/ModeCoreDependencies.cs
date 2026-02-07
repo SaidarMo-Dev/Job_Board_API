@@ -46,6 +46,7 @@ namespace JobBoard.Core
 			services.AddScoped<IAuthorizationHandler, CompanyOwnerHandler>();
 			services.AddScoped<IAuthorizationHandler, UserBookmarkHandler>();
 			services.AddScoped<IAuthorizationHandler, UserApplicationsHandler>();
+			services.AddScoped<IAuthorizationHandler, FileOwnershipHandler>();
 
 			return services;
 		}

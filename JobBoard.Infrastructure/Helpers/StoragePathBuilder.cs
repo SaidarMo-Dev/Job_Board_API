@@ -5,7 +5,7 @@ namespace JobBoard.Infrastructure.Helpers
 	public static class StoragePathBuilder
 	{
 		public static string Build<TId>(
-			StorageResourceEnum resource,
+			FileOwnerType resource,
 			TId resourceId,
 			string fileName,
 			FilePathType pathType)

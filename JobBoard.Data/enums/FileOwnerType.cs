@@ -2,10 +2,10 @@
 {
 	public enum FileOwnerType
 	{
-		User = 1,
-		Company = 2,
-		Job = 3,
-		Application = 4,
+		Users = 1,
+		Companies = 2,
+		Jobs = 3,
+		Applications = 4,
 
 	}
 

@@ -215,5 +215,13 @@
 			public const string dashboard = Prefex;
 			public const string PostedJobs = Prefex + "/posted-jobs";
 		}
+
+
+		public static class FilesRoute
+		{
+			private const string Prefex = Rule + "/files";
+			public const string UploadFile = Prefex + "/upload";
+			public const string DeleteFile = Prefex + Single;
+		}
 	}
 }

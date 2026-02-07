@@ -90,6 +90,7 @@ namespace JobBoard.Service.Abstractions
 
 		Task<string[]> GetPopularCompanies();
 
+		Task<bool> IsCreatedByUserAsync(int companyId, int userId);
 
 	}
 }

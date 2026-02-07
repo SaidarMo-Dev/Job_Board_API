@@ -2,6 +2,7 @@
 using AutoMapper;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.ApplicationUser.Commands.Models;
+using JobBoard.Core.Feutures.Files.Commands.Models;
 using JobBoard.Core.Resources;
 using JobBoard.Core.Security.Requirements;
 using JobBoard.Data.Entities.Identity;
@@ -33,17 +34,21 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 		private readonly IAuthorizationService _authorizationService;
 		private readonly IAuthenticationService _authenticationService;
 		private readonly IFileStorageService _fileStorageService;
+		private readonly IMediator _mediator;
 		#endregion
 
 		#region Construtors
-		public UserCommandHandler(UserManager<User> userManager,
-						IMapper mapper,
-						ICountryService countryService,
-						IUserService userService,
-						IStringLocalizer<SharedResources> stringLocalizer,
-						IAuthorizationService authorizationService,
-						IAuthenticationService authenticationService,
-						IFileStorageService fileStrageService
+		public UserCommandHandler(
+			UserManager<User> userManager,
+			IMapper mapper,
+			ICountryService countryService,
+			IUserService userService,
+			IStringLocalizer<SharedResources> stringLocalizer,
+			IAuthorizationService authorizationService,
+			IAuthenticationService authenticationService,
+			IFileStorageService fileStrageService,
+			IMediator mediator
+
 			) : base(stringLocalizer)
 		{
 			_userManager = userManager;
@@ -54,6 +59,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 			_authorizationService = authorizationService;
 			_authenticationService = authenticationService;
 			_fileStorageService = fileStrageService;
+			_mediator = mediator;
 		}
 
 		#endregion
@@ -133,21 +139,29 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 
 			if (user == null) return NotFound("User not found");
 
-			await using var stream = request.ProfileImage.OpenReadStream();
+
+			var result = await _mediator.Send(
+				new UploadFileCommand(
+					request.ProfileImage,
+					FileOwnerType.Users,
+					user.Id,
+					FileVisibility.Private,
+					FilePathType.ResourceId
+					)
+				);
 
 
-			user.ImagePath = await _fileStorageService.UploadAsync(
-				stream,
-				request.ProfileImage.FileName,
-				request.ProfileImage.ContentType,
-				StorageResourceEnum.Users,
-				user.Id,
-				FilePathType.ResourceId,
-				cancellationToken);
+
+			if (!(result.statusCode == System.Net.HttpStatusCode.OK))
+			{
+				return BadRequest<string>(result.message);
+			}
+
+			user.ProfileImageFileId = result.data;
 
 			await _userService.UpdateUserAsync(user);
 
-			return Success(user.ImagePath);
+			return Success(result.data.ToString());
 		}
 
 

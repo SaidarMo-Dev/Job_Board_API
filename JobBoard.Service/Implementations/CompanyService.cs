@@ -154,6 +154,12 @@ namespace JobBoard.Service.Implementations
 
 
 		}
+
+		public async Task<bool> IsCreatedByUserAsync(int companyId, int userId)
+
+			=> await _companyRepository.GetTableAsNoTracking()
+					.AnyAsync(c => c.CompanyId == companyId && c.CreatedByUserId == userId);
+
 		#endregion
 	}
 }
