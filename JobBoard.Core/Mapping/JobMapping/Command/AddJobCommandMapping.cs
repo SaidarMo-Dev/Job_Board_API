@@ -9,6 +9,7 @@ namespace JobBoard.Core.Mapping.JobMapping
 		{
 			CreateMap<AddJobCommand, JobListing>();
 
+
 		}
 	}
 }

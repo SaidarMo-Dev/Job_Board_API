@@ -64,6 +64,11 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 
 			job.DatePosted = DateTime.UtcNow;
 
+			// Default expiration date if user not set it;
+
+			if (job.DateExpired == null)
+				job.DateExpired = DateTime.UtcNow.AddDays(10);
+
 			// get created user
 			job.CreatedByUserId = _currentUserService.GetCurrentUserId();
 
