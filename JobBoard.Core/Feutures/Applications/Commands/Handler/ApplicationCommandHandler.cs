@@ -61,14 +61,14 @@ namespace JobBoard.Core.Feutures.Applications.Commands.Handler
 				request.UserId, request.JobId)
 				)
 
-				return BadRequest<int>(_localizer[SharedResourcesKeys.UserHasActiveApplication]);
+				return BadRequest<int>("User Has Active Application");
 
 			var application = _mapper.Map<Application>(request);
 
 			// Save application first 
 			var success = await _applicationService.AddAsync(application);
 
-			//if (!success) return BadRequest<int>(_localizer[SharedResourcesKeys.FailedAddApplication]);
+			if (!success) return BadRequest<int>(_localizer[SharedResourcesKeys.FailedAddApplication]);
 
 			Response<int> uploadResult;
 			try
@@ -90,7 +90,8 @@ namespace JobBoard.Core.Feutures.Applications.Commands.Handler
 				// Link the uploaded resume to the application
 				if (uploadResult.statusCode == System.Net.HttpStatusCode.OK)
 				{
-					await _applicationService.AttachResumeAsync(application.ApplicationId, uploadResult.data);
+					application.ResumeFileId = uploadResult.data;
+					await _applicationService.UpdateAsync(application);
 				}
 				else
 					throw new Exception($"Resume upload failed.");
@@ -100,7 +101,7 @@ namespace JobBoard.Core.Feutures.Applications.Commands.Handler
 			}
 			catch
 			{
-				await _applicationService.DeleteByIdAsync(application.ApplicationId);
+				await _applicationService.DeleteAsync(application);
 				throw;
 			}
 
