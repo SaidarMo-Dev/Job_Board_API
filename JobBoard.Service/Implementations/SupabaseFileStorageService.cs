@@ -51,7 +51,7 @@ namespace JobBoard.Service.Implementations
 
 			await _client
 				.Storage
-				.From(_settings.Value.BucketName)
+				.From(_settings.Value.PrivateBucket)
 						.Upload(buffer, path, new Supabase.Storage.FileOptions
 						{
 							ContentType = contentType,
@@ -68,7 +68,7 @@ namespace JobBoard.Service.Implementations
 
 			await _client
 				.Storage
-				.From(_settings.Value.BucketName)
+				.From(_settings.Value.PrivateBucket)
 				.Remove(new List<string> { filePath });
 
 		}
@@ -77,7 +77,7 @@ namespace JobBoard.Service.Implementations
 		{
 			var signedUrl = await _client
 				.Storage
-				.From(_settings.Value.BucketName)
+				.From(_settings.Value.PrivateBucket)
 				.CreateSignedUrl(filePath, _settings.Value.SignedUrlExpirySeconds);
 
 			return signedUrl;

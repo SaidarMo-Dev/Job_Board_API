@@ -6766,6 +6766,10 @@
           "experienceLevel": {
             "$ref": "#/components/schemas/ExperienceLevelEnum"
           },
+          "dateExpired": {
+            "type": "string",
+            "format": "date-time"
+          },
           "skillIds": {
             "uniqueItems": true,
             "type": "array",
