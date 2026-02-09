@@ -31,14 +31,14 @@ namespace JobBoard.Service.Abstractions
 		/// </summary>
 		/// <param name="application">The <see cref="Application"/> with updated data.</param>
 		/// <returns><c>true</c> if the update was successful; otherwise, <c>false</c>.</returns>
-		Task<bool> UpdateAsnyc(Application application);
+		Task<bool> UpdateAsync(Application application);
 
 		/// <summary>
 		/// Checks if a user has any active or accepted <see cref="Application"/>.
 		/// </summary>
 		/// <param name="UserId">The ID of the user.</param>
 		/// <returns><c>true</c> if the user with ID <paramref name="UserId"/> has an active or accepted <see cref="Application"/>; otherwise, <c>false</c>.</returns>
-		Task<bool> HasActiveOrAcceptedApplicationAsnycWithJob(int UserId, int jobId);
+		Task<bool> HasActiveOrAcceptedApplicationWithJobAsync(int UserId, int jobId);
 
 		/// <summary>
 		/// Deletes an existing <see cref="Application"/> from the database.
@@ -46,6 +46,13 @@ namespace JobBoard.Service.Abstractions
 		/// <param name="app">The <see cref="Application"/> to delete.</param>
 		/// <returns><c>true</c> if the <paramref name="app"/> was successfully deleted; otherwise, <c>false</c>.</returns>
 		Task<bool> DeleteAsync(Application app);
+
+
+		/// <summary>
+		/// Deletes an existing <see cref="Application"/> from the database.
+		/// </summary>
+		/// <param name="applicationId">The Application Id to delete.</param>
+		Task DeleteByIdAsync(int applicationId);
 
 		/// <summary>
 		/// Retrieves all <see cref="Application"/> entities associated with a specific job.
@@ -81,6 +88,8 @@ namespace JobBoard.Service.Abstractions
 		/// An <see cref="IReadOnlyList{T}"/> of <see cref="RecentApplicationsResponse"/> objects associated with the specified user.
 		/// </returns>
 		Task<int[]> GetAppliedJobIds(int userId);
+
+		Task AttachResumeAsync(int applicationId, int resumeFileId);
 
 	}
 }

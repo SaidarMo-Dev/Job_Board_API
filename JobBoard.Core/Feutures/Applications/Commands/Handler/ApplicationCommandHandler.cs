@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Applications.Commands.Models;
+using JobBoard.Core.Feutures.Files.Commands.Models;
 using JobBoard.Core.Resources;
 using JobBoard.Data.Entities;
 using JobBoard.Data.enums;
@@ -22,18 +23,23 @@ namespace JobBoard.Core.Feutures.Applications.Commands.Handler
 		private readonly IMapper _mapper;
 		private readonly IStringLocalizer<SharedResources> _localizer;
 		private readonly IJobService _jobService;
+		private readonly IMediator _mediator;
 
 		#endregion
 
 		#region Constructors
 		public ApplicationCommandHandler(IApplicationService applicationService, IMapper mapper,
-										IStringLocalizer<SharedResources> localizer,
-										IJobService jobService) : base(localizer)
+			IStringLocalizer<SharedResources> localizer,
+			IJobService jobService,
+			IMediator mediator
+
+			) : base(localizer)
 		{
 			_applicationService = applicationService;
 			_mapper = mapper;
 			_localizer = localizer;
 			_jobService = jobService;
+			_mediator = mediator;
 		}
 
 		#endregion
@@ -41,23 +47,62 @@ namespace JobBoard.Core.Feutures.Applications.Commands.Handler
 		#region Handle Methods
 		public async Task<Response<int>> Handle(AddApplicationCommand request, CancellationToken cancellationToken)
 		{
+			// Check job existence
+
 			var jobExist = await _jobService.IsExistByIdAsync(request.JobId);
 
 			if (!jobExist) return BadRequest<int>("Job not found");
-			var hasApp = await _applicationService.HasActiveOrAcceptedApplicationAsnycWithJob(request.UserId, request.JobId);
 
-			if (hasApp) return BadRequest<int>(_localizer[SharedResourcesKeys.UserHasActiveApplication]);
+			// Check if the user has already an active application for the current job 
+
+
+			if (await _applicationService
+				.HasActiveOrAcceptedApplicationWithJobAsync(
+				request.UserId, request.JobId)
+				)
+
+				return BadRequest<int>(_localizer[SharedResourcesKeys.UserHasActiveApplication]);
 
 			var application = _mapper.Map<Application>(request);
 
-			// TODO : handle saving resume to cloud storage 
-
-			application.ResumeUrl = "Test Url";
+			// Save application first 
 			var success = await _applicationService.AddAsync(application);
 
-			if (!success) return BadRequest<int>(_localizer[SharedResourcesKeys.FailedAddApplication]);
+			//if (!success) return BadRequest<int>(_localizer[SharedResourcesKeys.FailedAddApplication]);
 
-			return Created(application.ApplicationId);
+			Response<int> uploadResult;
+			try
+			{
+
+
+				// Upload resume using ApplicationId as owner
+
+				uploadResult = await _mediator.Send(
+					new UploadFileCommand(
+						request.resume,
+						FileOwnerType.Applications,
+						application.ApplicationId,
+						FileVisibility.Private,
+						FilePathType.UuidFileName
+					)
+				);
+
+				// Link the uploaded resume to the application
+				if (uploadResult.statusCode == System.Net.HttpStatusCode.OK)
+				{
+					await _applicationService.AttachResumeAsync(application.ApplicationId, uploadResult.data);
+				}
+				else
+					throw new Exception($"Resume upload failed.");
+
+
+				return Created(application.ApplicationId);
+			}
+			catch
+			{
+				await _applicationService.DeleteByIdAsync(application.ApplicationId);
+				throw;
+			}
 
 		}
 
@@ -107,7 +152,7 @@ namespace JobBoard.Core.Feutures.Applications.Commands.Handler
 
 		private async Task<Response<string>> PerformUpdateApplicationAsync(Application application)
 		{
-			var succeded = await _applicationService.UpdateAsnyc(application);
+			var succeded = await _applicationService.UpdateAsync(application);
 
 			if (!succeded) return BadRequest<string>(_localizer[SharedResourcesKeys.FailedUpdateApplication]);
 

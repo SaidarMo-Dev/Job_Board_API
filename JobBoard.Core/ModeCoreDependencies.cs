@@ -41,12 +41,12 @@ namespace JobBoard.Core
 
 			// resource based authorization
 
-			services.AddSingleton<IAuthorizationHandler, SameUserHandler>();
-			services.AddSingleton<IAuthorizationHandler, JobCreatorHandler>();
-			services.AddSingleton<IAuthorizationHandler, CompanyOwnerHandler>();
-			services.AddSingleton<IAuthorizationHandler, UserBookmarkHandler>();
-			services.AddSingleton<IAuthorizationHandler, UserApplicationsHandler>();
-			services.AddSingleton<IAuthorizationHandler, FileOwnershipHandler>();
+			services.AddScoped<IAuthorizationHandler, SameUserHandler>();
+			services.AddScoped<IAuthorizationHandler, JobCreatorHandler>();
+			services.AddScoped<IAuthorizationHandler, CompanyOwnerHandler>();
+			services.AddScoped<IAuthorizationHandler, UserBookmarkHandler>();
+			services.AddScoped<IAuthorizationHandler, UserApplicationsHandler>();
+			services.AddScoped<IAuthorizationHandler, FileOwnershipHandler>();
 
 			return services;
 		}

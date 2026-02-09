@@ -3,20 +3,8 @@
   "WorkspaceRootPath": "C:\\Projects\\Job_Board_API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\files\\commands\\handlers\\filescommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\files\\commands\\handlers\\filescommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF1BC049-6506-4CA2-93DC-CC0E7D8BD67E}|JobBoard.Service\\JobBoard.Service.csproj|c:\\projects\\job_board_api\\jobboard.service\\implementations\\fileresourceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF1BC049-6506-4CA2-93DC-CC0E7D8BD67E}|JobBoard.Service\\JobBoard.Service.csproj|solutionrelative:jobboard.service\\implementations\\fileresourceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\security\\resources\\fileuploadresource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\security\\resources\\fileuploadresource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|c:\\projects\\job_board_api\\jobboard.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|solutionrelative:jobboard.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\jobs\\commands\\handler\\jobcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\jobs\\commands\\handler\\jobcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 382,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,54 +26,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FileResourceService.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Implementations\\FileResourceService.cs",
-              "RelativeDocumentMoniker": "JobBoard.Service\\Implementations\\FileResourceService.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Implementations\\FileResourceService.cs",
-              "RelativeToolTip": "JobBoard.Service\\Implementations\\FileResourceService.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAIAzwCgAAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-07T16:30:47.386Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "FilesCommandHandler.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Files\\Commands\\Handlers\\FilesCommandHandler.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Files\\Commands\\Handlers\\FilesCommandHandler.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Files\\Commands\\Handlers\\FilesCommandHandler.cs",
-              "RelativeToolTip": "JobBoard.Core\\Feutures\\Files\\Commands\\Handlers\\FilesCommandHandler.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAASwCEAAAAAAAAAAAAAAA==",
+              "Title": "JobCommandHandler.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Jobs\\Commands\\Handler\\JobCommandHandler.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Jobs\\Commands\\Handler\\JobCommandHandler.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Jobs\\Commands\\Handler\\JobCommandHandler.cs",
+              "RelativeToolTip": "JobBoard.Core\\Feutures\\Jobs\\Commands\\Handler\\JobCommandHandler.cs",
+              "ViewState": "AgIAAEEAAAAAAAAAAAASwFAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-07T14:39:53.474Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FileUploadResource.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Security\\Resources\\FileUploadResource.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Security\\Resources\\FileUploadResource.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Security\\Resources\\FileUploadResource.cs",
-              "RelativeToolTip": "JobBoard.Core\\Security\\Resources\\FileUploadResource.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAQAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-28T18:28:01.549Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\Program.cs",
-              "RelativeDocumentMoniker": "JobBoard.Api\\Program.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\Program.cs",
-              "RelativeToolTip": "JobBoard.Api\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFQAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-28T15:53:20.975Z",
+              "WhenOpened": "2026-02-09T15:00:51.479Z",
               "EditorCaption": ""
             }
           ]

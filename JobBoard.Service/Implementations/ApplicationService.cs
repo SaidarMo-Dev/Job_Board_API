@@ -62,7 +62,7 @@ namespace JobBoard.Service.Implementations
 			return application;
 		}
 
-		public async Task<bool> HasActiveOrAcceptedApplicationAsnycWithJob(int UserId, int jobId)
+		public async Task<bool> HasActiveOrAcceptedApplicationWithJobAsync(int UserId, int jobId)
 		{
 			var result = await _applicationRepository.GetTableAsNoTracking()
 						.FirstOrDefaultAsync(x => x.UserId == UserId
@@ -74,7 +74,7 @@ namespace JobBoard.Service.Implementations
 			return result != null;
 		}
 
-		public async Task<bool> UpdateAsnyc(Application application)
+		public async Task<bool> UpdateAsync(Application application)
 		{
 			await _applicationRepository.UpdateAsync(application);
 			return true;
@@ -122,6 +122,38 @@ namespace JobBoard.Service.Implementations
 			return (await _applicationRepository.GetTableAsNoTracking()
 								.Where(app => app.UserId == userId)
 								.Select(x => x.JobListing.JobId).ToArrayAsync());
+		}
+
+		public async Task AttachResumeAsync(int applicationId, int resumeFileId)
+		{
+			var application = await _applicationRepository.GetTableAsNoTracking()
+				.FirstOrDefaultAsync(app => app.ApplicationId == applicationId);
+
+			if (application == null)
+				throw new Exception("Application Not Found for Id:" + applicationId);
+
+
+			// Idempotency
+			if (application.ResumeFileId == resumeFileId)
+				return;
+
+			if (application.ResumeFileId != null)
+				throw new Exception("Resume already attached for appliction with id :" + applicationId);
+
+
+			application.ResumeFileId = resumeFileId;
+			await _applicationRepository.UpdateAsync(application);
+
+		}
+
+		public async Task DeleteByIdAsync(int applicationId)
+		{
+			var app = await _applicationRepository.GetTableAsNoTracking().
+				FirstOrDefaultAsync(ap => ap.ApplicationId == applicationId);
+
+			if (app != null)
+				await _applicationRepository.DeleteAsync(app);
+
 		}
 
 
