@@ -2611,6 +2611,33 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.CompanyController",
+    "Method": "UploadCompanyLogo",
+    "RelativePath": "Api/V1/companies/{Id}/logo",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "Logo",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.CompanyController",
     "Method": "GetPaginatedCompanies",
     "RelativePath": "Api/V1/companies/paginate",
     "HttpMethod": "GET",

@@ -2,6 +2,7 @@
 using AutoMapper;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Companies.Commands.Models;
+using JobBoard.Core.Feutures.Files.Commands.Models;
 using JobBoard.Core.Resources;
 using JobBoard.Core.Security.Requirements;
 using JobBoard.Data.Entities;
@@ -15,7 +16,8 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 {
 	public class CompanyCommandHandler : ResponseHandler, IRequestHandler<AddCompanyCommand, Response<int>>,
 										IRequestHandler<UpdateCompanyCommand, Response<int>>,
-										IRequestHandler<DeleteCompanyCommand, Response<string>>
+										IRequestHandler<DeleteCompanyCommand, Response<string>>,
+										IRequestHandler<SetCompanyLogoCommand, Response<string>>
 	{
 		#region Fields 
 		private readonly ICompanyService _companyService;
@@ -23,6 +25,7 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 		private readonly IStringLocalizer<SharedResources> _stringLocalizer;
 		private readonly IAuthorizationService _authorizationService;
 		private readonly ICurrentUserService _currentUserService;
+		private readonly IMediator _mediator;
 
 		#endregion
 
@@ -31,7 +34,8 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 									IMapper mapper,
 									IStringLocalizer<SharedResources> stringLocalizer,
 									IAuthorizationService authorizationService,
-									ICurrentUserService currentUserService
+									ICurrentUserService currentUserService,
+									IMediator mediator
 									) : base(stringLocalizer)
 		{
 			_companyService = companyService;
@@ -39,6 +43,7 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 			_stringLocalizer = stringLocalizer;
 			_authorizationService = authorizationService;
 			_currentUserService = currentUserService;
+			_mediator = mediator;
 		}
 		#endregion
 
@@ -97,6 +102,38 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 			await _companyService.DeleteAsync(company);
 
 			return Deleted("Deleted");
+		}
+
+		public async Task<Response<string>> Handle(SetCompanyLogoCommand request, CancellationToken cancellationToken)
+		{
+			if (request.Logo is null)
+				return BadRequest("Logo file is required");
+
+			var company = await _companyService.GetCompanyByIdAsync(request.CompanyId);
+
+			if (company is null) return BadRequest("Target company not found");
+
+			var result = await _mediator.Send(new UploadFileCommand(
+				request.Logo,
+				Data.enums.FileOwnerType.Companies,
+				request.CompanyId,
+				Data.enums.FileVisibility.Private,
+				Data.enums.FilePathType.UuidFileName));
+
+			if (!result.succeeded)
+			{
+				return new Response<string>
+				{
+					statusCode = result.statusCode,
+					succeeded = false,
+					message = result.message
+				};
+			}
+
+			company.LogoFileId = result.data;
+			await _companyService.UpdateAsync(company);
+
+			return Success("Company logo updated successfully");
 		}
 		#endregion
 	}

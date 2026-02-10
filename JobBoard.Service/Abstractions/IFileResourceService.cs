@@ -1,4 +1,5 @@
 ﻿using JobBoard.Data.Entities;
+using JobBoard.Data.enums;
 
 namespace JobBoard.Service.Abstractions
 {
@@ -17,6 +18,15 @@ namespace JobBoard.Service.Abstractions
 		/// <param name="Id">The ID of the fileResource.</param>
 		/// <returns>The <see cref="FileResource"/> entity if found; otherwise, null.</returns>
 		Task<FileResource> GetByIdAsync(int Id);
+
+
+		/// <summary>
+		/// Retrieves a fileResource by owner asynchronously.
+		/// </summary>
+		/// <param name="ownerType">The the owner type.</param>
+		/// <param name="ownerId">The ID of the owner.</param>
+		/// <returns>The <see cref="FileResource"/> entity if found; otherwise, null.</returns>
+		Task<FileResource> GetByOwnerAsync(FileOwnerType ownerType, int ownerId);
 
 		/// <summary>
 		/// Updates an existing fileResource asynchronously.

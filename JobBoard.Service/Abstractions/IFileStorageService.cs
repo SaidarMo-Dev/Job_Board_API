@@ -16,7 +16,7 @@ namespace JobBoard.Service.Abstractions
 			where TId : notnull;
 
 
-		Task DeleteAsync(string filePath);
+		Task DeleteAsync(FileOwnerType ownerType, string filePath);
 
 		Task<string> CreateSignedReadUrlAsync(string filePath);
 	}

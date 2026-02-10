@@ -5472,6 +5472,55 @@
         }
       }
     },
+    "/Api/V1/companies/{Id}/logo": {
+      "put": {
+        "tags": [
+          "Company"
+        ],
+        "summary": "Update company logo",
+        "description": "Upload company logo",
+        "operationId": "UploadCompanyLogo",
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "Logo"
+                ],
+                "type": "object",
+                "properties": {
+                  "Logo": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "Logo": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/Api/V1/Country/{Id}": {
       "get": {
         "tags": [

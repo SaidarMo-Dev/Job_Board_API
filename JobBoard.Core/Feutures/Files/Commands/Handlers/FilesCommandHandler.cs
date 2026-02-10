@@ -4,6 +4,7 @@ using JobBoard.Core.Resources;
 using JobBoard.Core.Security.Requirements;
 using JobBoard.Core.Security.Resources;
 using JobBoard.Data.Entities;
+using JobBoard.Data.enums;
 using JobBoard.Service.Abstractions;
 using JobBoard.Service.Authentication.Interfaces;
 using MediatR;
@@ -69,16 +70,26 @@ namespace JobBoard.Core.Feutures.Files.Commands.Handlers
 				return Forbidden<int>("You are not authorized to upload file for this owner.");
 			}
 
+			// Get existing file (if any)
+			var existingFile = await _fileResourceService
+				.GetByOwnerAsync(request.OwnerType, request.OwnerId);
 
-			string? path = null;
+			// BUSINESS RULE: Application resume is immutable
+			if (request.OwnerType == FileOwnerType.Applications && existingFile is not null)
+			{
+				return BadRequest<int>(
+					"Resume cannot be updated after the application is created.");
+			}
+
+			string? newPath = null;
+			string? oldPath = existingFile?.Path;
+
 			try
 			{
-
-
 				await using var stream = request.File.OpenReadStream();
 
-				// Upload the file to storage 
-				path = await _fileStorageService.UploadAsync(
+				// Upload new physical file
+				newPath = await _fileStorageService.UploadAsync(
 					stream,
 					request.File.FileName,
 					request.File.ContentType,
@@ -87,30 +98,44 @@ namespace JobBoard.Core.Feutures.Files.Commands.Handlers
 					request.FilePathType,
 					cancellationToken);
 
-
-				// Create and save a FileResource record
-
-				var fileResource = new FileResource
+				// First-time upload (no existing record)
+				if (existingFile is null)
 				{
-					Bucket = request.OwnerType.ToString().ToLower(),
-					Path = path,
-					OwnerType = request.OwnerType,
-					OwnerId = request.OwnerId,
-					Visibility = request.Visibility,
-				};
+					var fileResource = new FileResource
+					{
+						Bucket = request.OwnerType.ToString().ToLower(),
+						Path = newPath,
+						OwnerType = request.OwnerType,
+						OwnerId = request.OwnerId,
+						Visibility = request.Visibility,
+					};
 
-				fileResource = await _fileResourceService.AddAsync(fileResource);
+					fileResource = await _fileResourceService.AddAsync(fileResource);
+					return Success(fileResource.Id);
+				}
 
+				// Replace behavior (User / Company)
+				existingFile.Path = newPath;
+				existingFile.Visibility = request.Visibility;
 
-				return Success(fileResource.Id);
+				await _fileResourceService.UpdateAsync(existingFile);
+
+				// Cleanup old physical file AFTER successful update
+				if (!string.IsNullOrWhiteSpace(oldPath))
+				{
+					await _fileStorageService.DeleteAsync(request.OwnerType, oldPath);
+				}
+
+				return Success(existingFile.Id);
 			}
 			catch
 			{
-
-				if (path != null)
+				// Rollback new upload if something failed
+				if (!string.IsNullOrWhiteSpace(newPath))
 				{
-					await _fileStorageService.DeleteAsync(path);
+					await _fileStorageService.DeleteAsync(request.OwnerType, newPath);
 				}
+
 				throw;
 			}
 

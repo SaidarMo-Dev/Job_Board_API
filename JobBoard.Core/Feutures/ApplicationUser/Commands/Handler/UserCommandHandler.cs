@@ -146,7 +146,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 					FileOwnerType.Users,
 					user.Id,
 					FileVisibility.Private,
-					FilePathType.ResourceId
+					FilePathType.UuidFileName
 					)
 				);
 

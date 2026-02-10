@@ -134,5 +134,19 @@ namespace JobBoard.Api.Controllers
 		{
 			return Ok(await Mediator.Send(quey));
 		}
+
+		[SwaggerOperation(
+			Summary = "Update company logo",
+			Description = "Upload company logo",
+			OperationId = "UploadCompanyLogo")]
+
+		[HttpPut(Router.CompanyRoute.UploadCompanyLogo)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<IActionResult> UploadCompanyLogo([FromRoute] int Id, [FromForm] UploadCompanyLogoRequest request)
+		{
+			return NewResult(await Mediator.Send(new SetCompanyLogoCommand { CompanyId = Id, Logo = request.Logo }));
+		}
+
+
 	}
 }
