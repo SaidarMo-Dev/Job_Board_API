@@ -1,7 +1,60 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Projects\\Job_Board_API\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\files\\commands\\handlers\\filescommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\files\\commands\\handlers\\filescommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF1BC049-6506-4CA2-93DC-CC0E7D8BD67E}|JobBoard.Service\\JobBoard.Service.csproj|c:\\projects\\job_board_api\\jobboard.service\\implementations\\supabasefilestorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF1BC049-6506-4CA2-93DC-CC0E7D8BD67E}|JobBoard.Service\\JobBoard.Service.csproj|solutionrelative:jobboard.service\\implementations\\supabasefilestorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF1BC049-6506-4CA2-93DC-CC0E7D8BD67E}|JobBoard.Service\\JobBoard.Service.csproj|c:\\projects\\job_board_api\\jobboard.service\\abstractions\\ifilestorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF1BC049-6506-4CA2-93DC-CC0E7D8BD67E}|JobBoard.Service\\JobBoard.Service.csproj|solutionrelative:jobboard.service\\abstractions\\ifilestorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\companies\\commands\\handler\\companycommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\companies\\commands\\handler\\companycommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\applicationuser\\commands\\handler\\usercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\applicationuser\\commands\\handler\\usercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|c:\\projects\\job_board_api\\jobboard.api\\controllers\\applicationusercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|solutionrelative:jobboard.api\\controllers\\applicationusercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF1BC049-6506-4CA2-93DC-CC0E7D8BD67E}|JobBoard.Service\\JobBoard.Service.csproj|c:\\projects\\job_board_api\\jobboard.service\\abstractions\\ifileresourceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF1BC049-6506-4CA2-93DC-CC0E7D8BD67E}|JobBoard.Service\\JobBoard.Service.csproj|solutionrelative:jobboard.service\\abstractions\\ifileresourceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF1BC049-6506-4CA2-93DC-CC0E7D8BD67E}|JobBoard.Service\\JobBoard.Service.csproj|c:\\projects\\job_board_api\\jobboard.service\\implementations\\fileresourceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF1BC049-6506-4CA2-93DC-CC0E7D8BD67E}|JobBoard.Service\\JobBoard.Service.csproj|solutionrelative:jobboard.service\\implementations\\fileresourceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79D9DDE7-61D3-45DB-8E5A-81646E3C13E2}|JobBoard.Data\\JobBoard.Data.csproj|c:\\projects\\job_board_api\\jobboard.data\\helpers\\supabsesettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79D9DDE7-61D3-45DB-8E5A-81646E3C13E2}|JobBoard.Data\\JobBoard.Data.csproj|solutionrelative:jobboard.data\\helpers\\supabsesettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\companies\\commands\\models\\setcompanylogocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\companies\\commands\\models\\setcompanylogocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\companies\\commands\\models\\uploadcompanylogorequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\companies\\commands\\models\\uploadcompanylogorequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|c:\\projects\\job_board_api\\jobboard.api\\controllers\\companycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|solutionrelative:jobboard.api\\controllers\\companycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79D9DDE7-61D3-45DB-8E5A-81646E3C13E2}|JobBoard.Data\\JobBoard.Data.csproj|c:\\projects\\job_board_api\\jobboard.data\\metadata\\router.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79D9DDE7-61D3-45DB-8E5A-81646E3C13E2}|JobBoard.Data\\JobBoard.Data.csproj|solutionrelative:jobboard.data\\metadata\\router.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
@@ -9,7 +62,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 382,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -18,6 +71,173 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IFileStorageService.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Abstractions\\IFileStorageService.cs",
+              "RelativeDocumentMoniker": "JobBoard.Service\\Abstractions\\IFileStorageService.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Abstractions\\IFileStorageService.cs",
+              "RelativeToolTip": "JobBoard.Service\\Abstractions\\IFileStorageService.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAhwBIAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-10T20:45:46.454Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UserCommandHandler.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\ApplicationUser\\Commands\\Handler\\UserCommandHandler.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\ApplicationUser\\Commands\\Handler\\UserCommandHandler.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\ApplicationUser\\Commands\\Handler\\UserCommandHandler.cs",
+              "RelativeToolTip": "JobBoard.Core\\Feutures\\ApplicationUser\\Commands\\Handler\\UserCommandHandler.cs",
+              "ViewState": "AgIAAIkAAAAAAAAAAAApwJQAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-10T19:52:15.238Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "FileResourceService.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Implementations\\FileResourceService.cs",
+              "RelativeDocumentMoniker": "JobBoard.Service\\Implementations\\FileResourceService.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Implementations\\FileResourceService.cs",
+              "RelativeToolTip": "JobBoard.Service\\Implementations\\FileResourceService.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAowCcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-10T19:37:57.372Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "IFileResourceService.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Abstractions\\IFileResourceService.cs",
+              "RelativeDocumentMoniker": "JobBoard.Service\\Abstractions\\IFileResourceService.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Abstractions\\IFileResourceService.cs",
+              "RelativeToolTip": "JobBoard.Service\\Abstractions\\IFileResourceService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-10T18:44:14.962Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SupabaseFileStorageService.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Implementations\\SupabaseFileStorageService.cs",
+              "RelativeDocumentMoniker": "JobBoard.Service\\Implementations\\SupabaseFileStorageService.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Implementations\\SupabaseFileStorageService.cs",
+              "RelativeToolTip": "JobBoard.Service\\Implementations\\SupabaseFileStorageService.cs",
+              "ViewState": "AgIAAHEAAAAAAAAAAAAlwIAAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-10T18:01:51.331Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "SupabseSettings.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Data\\Helpers\\SupabseSettings.cs",
+              "RelativeDocumentMoniker": "JobBoard.Data\\Helpers\\SupabseSettings.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Data\\Helpers\\SupabseSettings.cs",
+              "RelativeToolTip": "JobBoard.Data\\Helpers\\SupabseSettings.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAswAgAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-10T17:56:10.693Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ApplicationUserController.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\Controllers\\ApplicationUserController.cs",
+              "RelativeDocumentMoniker": "JobBoard.Api\\Controllers\\ApplicationUserController.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\Controllers\\ApplicationUserController.cs",
+              "RelativeToolTip": "JobBoard.Api\\Controllers\\ApplicationUserController.cs",
+              "ViewState": "AgIAAH8AAAAAAAAAAAApwI4AAABgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-10T16:04:14.102Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Router.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Data\\Metadata\\Router.cs",
+              "RelativeDocumentMoniker": "JobBoard.Data\\Metadata\\Router.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Data\\Metadata\\Router.cs",
+              "RelativeToolTip": "JobBoard.Data\\Metadata\\Router.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAAC4AAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T21:22:51.679Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CompanyController.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\Controllers\\CompanyController.cs",
+              "RelativeDocumentMoniker": "JobBoard.Api\\Controllers\\CompanyController.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\Controllers\\CompanyController.cs",
+              "RelativeToolTip": "JobBoard.Api\\Controllers\\CompanyController.cs",
+              "ViewState": "AgIAAH8AAAAAAAAAAAAuwJIAAABkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T21:21:02.783Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FilesCommandHandler.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Files\\Commands\\Handlers\\FilesCommandHandler.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Files\\Commands\\Handlers\\FilesCommandHandler.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Files\\Commands\\Handlers\\FilesCommandHandler.cs",
+              "RelativeToolTip": "JobBoard.Core\\Feutures\\Files\\Commands\\Handlers\\FilesCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T21:02:38.549Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CompanyCommandHandler.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Companies\\Commands\\Handler\\CompanyCommandHandler.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Companies\\Commands\\Handler\\CompanyCommandHandler.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Companies\\Commands\\Handler\\CompanyCommandHandler.cs",
+              "RelativeToolTip": "JobBoard.Core\\Feutures\\Companies\\Commands\\Handler\\CompanyCommandHandler.cs",
+              "ViewState": "AgIAAG0AAAAAAAAAAAAswHsAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T20:52:57.723Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "SetCompanyLogoCommand.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Companies\\Commands\\Models\\SetCompanyLogoCommand.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Companies\\Commands\\Models\\SetCompanyLogoCommand.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Companies\\Commands\\Models\\SetCompanyLogoCommand.cs",
+              "RelativeToolTip": "JobBoard.Core\\Feutures\\Companies\\Commands\\Models\\SetCompanyLogoCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAgAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T20:50:09.58Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UploadCompanyLogoRequest.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Companies\\Commands\\Models\\UploadCompanyLogoRequest.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Companies\\Commands\\Models\\UploadCompanyLogoRequest.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Companies\\Commands\\Models\\UploadCompanyLogoRequest.cs",
+              "RelativeToolTip": "JobBoard.Core\\Feutures\\Companies\\Commands\\Models\\UploadCompanyLogoRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-10T16:05:24.341Z",
+              "EditorCaption": ""
             }
           ]
         },
