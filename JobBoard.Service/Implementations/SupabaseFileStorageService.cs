@@ -11,14 +11,15 @@ namespace JobBoard.Service.Implementations
 	public class SupabaseFileStorageService : IFileStorageService
 	{
 		private readonly Client _client;
+		private readonly ISignedUrlCache _signedUrlCache;
 		private readonly IOptions<SupabaseSettings> _settings;
 
-		public SupabaseFileStorageService(IOptions<SupabaseSettings> settigns, Client client)
+		public SupabaseFileStorageService(IOptions<SupabaseSettings> settigns, Client client, ISignedUrlCache signedUrlCache)
 		{
 
 			_settings = settigns;
-
 			_client = client;
+			_signedUrlCache = signedUrlCache;
 		}
 
 
@@ -135,16 +136,32 @@ namespace JobBoard.Service.Implementations
 		public async Task<string> CreateSignedReadUrlAsync(string bucket, string filePath)
 		{
 
+			var cacheKey = $"signed-url:{bucket}:{filePath}";
 
-			var result = await _client
+			// Try cache
+			var cachedUrl = await _signedUrlCache.GetAsync(cacheKey);
+			if (!string.IsNullOrEmpty(cachedUrl))
+				return cachedUrl;
+
+			// Generate new signed URL
+
+			var signedUrl = await _client
 				.Storage
 				.From(bucket)
 				.CreateSignedUrl(filePath, _settings.Value.SignedUrlExpirySeconds);
 
-			if (result == null)
+			if (signedUrl == null)
 				throw new Exception("Failed to generate signed URL.");
 
-			return result;
+			// Cache slightly less than expiration
+			var cacheDuration = TimeSpan.FromSeconds(_settings.Value.SignedUrlExpirySeconds - 60);
+
+			await _signedUrlCache.SetAsync(
+				cacheKey,
+				signedUrl,
+				cacheDuration);
+
+			return signedUrl;
 		}
 
 		public string GetPublicUrl(string bucket, string filePath)

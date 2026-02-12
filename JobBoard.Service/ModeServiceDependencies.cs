@@ -50,6 +50,10 @@ namespace JobBoard.Service
 				return client;
 			});
 
+			services.AddMemoryCache();
+
+			services.AddScoped<ISignedUrlCache, MemorySignedUrlCache>();
+
 			return services;
 		}
 	}
