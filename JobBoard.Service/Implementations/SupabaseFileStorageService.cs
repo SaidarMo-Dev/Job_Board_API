@@ -132,16 +132,37 @@ namespace JobBoard.Service.Implementations
 
 		}
 
-		public async Task<string> CreateSignedReadUrlAsync(string filePath)
+		public async Task<string> CreateSignedReadUrlAsync(string bucket, string filePath)
 		{
-			var signedUrl = await _client
+
+
+			var result = await _client
 				.Storage
-				.From(_settings.Value.PrivateBucket)
+				.From(bucket)
 				.CreateSignedUrl(filePath, _settings.Value.SignedUrlExpirySeconds);
 
-			return signedUrl;
+			if (result == null)
+				throw new Exception("Failed to generate signed URL.");
+
+			return result;
 		}
 
+		public string GetPublicUrl(string bucket, string filePath)
+		{
+			var result = _client
+				.Storage
+				.From(bucket)
+				.GetPublicUrl(filePath);
 
+			if (result == null)
+				throw new Exception("Failed to generate public URL.");
+
+			return result;
+		}
+
+		public string GetBucket(FileOwnerType ownerType)
+		{
+			return (ownerType == FileOwnerType.Companies) ? _settings.Value.PublicBucket : _settings.Value.PrivateBucket;
+		}
 	}
 }

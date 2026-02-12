@@ -117,7 +117,7 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 				request.Logo,
 				Data.enums.FileOwnerType.Companies,
 				request.CompanyId,
-				Data.enums.FileVisibility.Private,
+				Data.enums.FileVisibility.Public,
 				Data.enums.FilePathType.UuidFileName));
 
 			if (!result.succeeded)

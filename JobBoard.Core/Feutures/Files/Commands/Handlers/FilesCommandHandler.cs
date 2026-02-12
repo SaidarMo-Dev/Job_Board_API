@@ -117,6 +117,7 @@ namespace JobBoard.Core.Feutures.Files.Commands.Handlers
 				// Replace behavior (User / Company)
 				existingFile.Path = newPath;
 				existingFile.Visibility = request.Visibility;
+				existingFile.CreatedAt = DateTime.UtcNow;
 
 				await _fileResourceService.UpdateAsync(existingFile);
 

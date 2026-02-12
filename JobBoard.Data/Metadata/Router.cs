@@ -223,6 +223,8 @@
 			private const string Prefex = Rule + "/files";
 			public const string UploadFile = Prefex + "/upload";
 			public const string DeleteFile = Prefex + Single;
+			public const string SignedUrl = Prefex + "/signed-url" + Single;
+
 		}
 	}
 }

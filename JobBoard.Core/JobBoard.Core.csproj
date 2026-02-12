@@ -31,8 +31,6 @@
     <Folder Include="Feutures\Employer\Commands\Validations\" />
     <Folder Include="Feutures\Employer\Commands\Models\" />
     <Folder Include="Feutures\Employer\Commands\Handlers\" />
-    <Folder Include="Feutures\Files\Queries\Handlers\" />
-    <Folder Include="Feutures\Files\Queries\Models\" />
     <Folder Include="Feutures\Files\Queries\Responses\" />
     <Folder Include="Mapping\AuthorizationMapping\Commands\" />
     <Folder Include="Mapping\EmployerMapping\Commands\" />
