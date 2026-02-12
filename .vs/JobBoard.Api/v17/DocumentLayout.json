@@ -58,8 +58,7 @@
               "RelativeToolTip": "JobBoard.Core\\Feutures\\Files\\Commands\\Handlers\\FilesCommandHandler.cs",
               "ViewState": "AgIAAF4AAAAAAAAAAAD4v3gAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-12T16:09:01.322Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-12T16:09:01.322Z"
             },
             {
               "$type": "Document",
@@ -71,8 +70,7 @@
               "RelativeToolTip": "JobBoard.Service\\Abstractions\\IFileStorageService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-12T15:45:34.953Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-12T15:45:34.953Z"
             },
             {
               "$type": "Document",
@@ -84,8 +82,7 @@
               "RelativeToolTip": "JobBoard.Core\\Feutures\\Companies\\Commands\\Handler\\CompanyCommandHandler.cs",
               "ViewState": "AgIAAFQAAAAAAAAAAAAqwHMAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-11T21:23:45.165Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-11T21:23:45.165Z"
             },
             {
               "$type": "Document",
@@ -97,8 +94,7 @@
               "RelativeToolTip": "JobBoard.Core\\Security\\Handlers\\FileOwnershipHandler .cs",
               "ViewState": "AgIAABkAAAAAAAAAAAASwC4AAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-11T21:23:02.992Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-11T21:23:02.992Z"
             },
             {
               "$type": "Document",
@@ -123,8 +119,7 @@
               "RelativeToolTip": "JobBoard.Core\\Feutures\\Files\\Queries\\Models\\GenerateFileAccessUrlQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-11T20:42:34.337Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-11T20:42:34.337Z"
             },
             {
               "$type": "Document",
@@ -136,8 +131,7 @@
               "RelativeToolTip": "JobBoard.Service\\Implementations\\SupabaseFileStorageService.cs",
               "ViewState": "AgIAAJUAAAAAAAAAAIA2wKQAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-11T18:37:43.508Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-11T18:37:43.508Z"
             }
           ]
         },
