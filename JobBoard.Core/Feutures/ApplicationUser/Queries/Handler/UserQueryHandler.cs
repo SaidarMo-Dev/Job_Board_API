@@ -37,6 +37,8 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 		private readonly IAuthorizationService _authorizationService;
 		private readonly IHttpContextAccessor _httpContextAccessor;
 		private readonly ICurrentUserService _currentUserservice;
+		private readonly IFileStorageService _storageService;
+		private readonly IFileResourceService _fileResourceService;
 
 
 		#endregion
@@ -50,7 +52,9 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 								IStringLocalizer<SharedResources> stringLocalizer,
 								IAuthorizationService authorizationService,
 								IHttpContextAccessor httpContextAccessor,
-								ICurrentUserService currentUserService)
+								ICurrentUserService currentUserService,
+								IFileStorageService StorageService,
+								IFileResourceService fileResourceService)
 
 								: base(stringLocalizer)
 		{
@@ -61,6 +65,8 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 			_authorizationService = authorizationService;
 			_httpContextAccessor = httpContextAccessor;
 			_currentUserservice = currentUserService;
+			_storageService = StorageService;
+			_fileResourceService = fileResourceService;
 		}
 
 		#endregion
@@ -94,20 +100,43 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 		public async Task<Response<GetCurrentUserQueryResponse>> Handle(GetCurrentUserQuery request, CancellationToken cancellationToken)
 		{
 
+			// Retrieve the current user's ID from JWT claims
 			var userId = _httpContextAccessor.HttpContext?.User
 						.FindFirst(nameof(JwtClaimModel.UserId))?.Value;
 
-			if (userId is null) return BadRequest<GetCurrentUserQueryResponse>("No Claim userId Found");
+			// Validate the user ID claim and ensure it can be parsed to an integer
+			if (!int.TryParse(userId, out var userIdInt))
+				return BadRequest<GetCurrentUserQueryResponse>("Invalid userId claim.");
 
-			var user = await _userManager.Users.Include(x => x.Country).FirstOrDefaultAsync(x => x.Id == Convert.ToInt32(userId));
+			// Fetch the user from the database, including related Country information
+			var user = await _userManager.Users
+						.Include(x => x.Country)
+						.FirstOrDefaultAsync(x => x.Id == userIdInt);
 
-			if (user is null) return NotFound<GetCurrentUserQueryResponse>("User not Found");
+			if (user is null)
+				return NotFound<GetCurrentUserQueryResponse>("User not Found");
+
+			// Map the user entity to the response DTO
 			var userResponse = _mapper.Map<GetCurrentUserQueryResponse>(user);
 
+			// If the user has a profile image, fetch the corresponding FileResource
+			// and generate a signed URL for secure access
+			if (user.ProfileImageFileId is int fileId)
+			{
+				var file = await _fileResourceService.GetByIdAsync(fileId);
+				if (file != null)
+				{
+					userResponse.ProfileImageUrl = await _storageService.CreateSignedReadUrlAsync(
+						_storageService.GetBucket(file.OwnerType),
+						file.Path
+					);
+				}
+			}
+
+			// Return the final user response, including the signed URL for the profile image if available
 			return Success(userResponse);
 
 		}
-
 		public async Task<Response<GetUserDashboardStatsQueryResponse>> Handle(GetUserDashboardStatsQuery request, CancellationToken cancellationToken)
 		{
 			var curretUserId = _currentUserservice.GetCurrentUserId();
