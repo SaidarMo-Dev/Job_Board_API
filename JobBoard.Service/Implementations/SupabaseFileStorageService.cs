@@ -123,13 +123,18 @@ namespace JobBoard.Service.Implementations
 
 		public async Task DeleteAsync(FileOwnerType ownerType, string filePath)
 		{
+			var bucket = GetBucket(ownerType);
 
-			var bucket = (ownerType == FileOwnerType.Companies) ? _settings.Value.PublicBucket : _settings.Value.PrivateBucket;
-
-			await _client
+			// Delete file from storage
+			var result = await _client
 				.Storage
 				.From(bucket)
 				.Remove(new List<string> { filePath });
+
+			// Invalidate signed URL cache after successful deletion
+			var cacheKey = $"signed-url:{bucket}:{filePath}";
+			await _signedUrlCache.RemoveAsync(cacheKey);
+
 
 		}
 
