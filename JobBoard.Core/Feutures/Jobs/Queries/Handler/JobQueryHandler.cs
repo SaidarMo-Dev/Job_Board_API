@@ -36,6 +36,7 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 		private readonly ICompanyService _companyService;
 		private readonly IAuthorizationService _authorizationService;
 		private readonly ICurrentUserService _currentUserService;
+		private readonly IFileStorageService _storageService;
 		#endregion
 
 		#region Constructors
@@ -44,7 +45,8 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 							IStringLocalizer<SharedResources> stringLocalizer,
 							ICompanyService companyService,
 							IAuthorizationService authorizationService,
-							ICurrentUserService currentUserService
+							ICurrentUserService currentUserService,
+							IFileStorageService storageService
 
 			) : base(stringLocalizer)
 		{
@@ -53,6 +55,7 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 			_companyService = companyService;
 			_authorizationService = authorizationService;
 			_currentUserService = currentUserService;
+			_storageService = storageService;
 		}
 		#endregion
 
@@ -80,6 +83,19 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 
 			var result = await _mapper.ProjectTo<GetPaginatedJobsQueryResponse>(queryable)
 					.ToPaginatedAsync(request.PageNumber, request.PageSize);
+
+			foreach (var job in result.data)
+			{
+
+				if (!string.IsNullOrEmpty(job.Company.LogoUrl))
+				{
+					job.Company.LogoUrl =
+						_storageService.GetPublicUrl(
+							_storageService.GetBucket(FileOwnerType.Companies),
+							job.Company.LogoUrl);
+				}
+
+			}
 
 			return result;
 

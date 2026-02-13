@@ -8,6 +8,7 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Responses
 		public required string Title { get; set; }
 		public string? Description { get; set; }
 		public required string CompanyName { get; set; }
+		public required CompanyPreviewDto Company { get; set; }
 		public required string Location { get; set; }
 		public required string JobType { get; set; }
 		public string? MaxSalary { get; set; }

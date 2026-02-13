@@ -19,6 +19,13 @@ namespace JobBoard.Core.Mapping.JobMapping
 				.ForMember(x => x.Categories, opt => opt.MapFrom(src => src.jobCategories.Select(x => x.category)));
 
 
+			CreateMap<Company, CompanyPreviewDto>()
+			.ForMember(dest => dest.CompanyId, opt => opt.MapFrom(src => src.CompanyId))
+			.ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.CompanyName))
+			.ForMember(dest => dest.LogoUrl, opt =>
+				opt.MapFrom(src => src.LogoFile != null ? src.LogoFile.Path : null));
+
+
 
 		}
 	}
