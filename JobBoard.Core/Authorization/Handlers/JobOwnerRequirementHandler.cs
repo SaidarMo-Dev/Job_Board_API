@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace JobBoard.Core.Authrization.Handlers
 {
-	public class JobCreatorHandler : AuthorizationHandler<JobOwnerRequirement, JobListing>
+	public class JobOwnerRequirementHandler : AuthorizationHandler<JobOwnerRequirement, JobListing>
 	{
 
-		public JobCreatorHandler(ICurrentUserService currentUserService)
+		public JobOwnerRequirementHandler(ICurrentUserService currentUserService)
 		{
 
 		}

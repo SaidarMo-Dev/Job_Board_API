@@ -5,24 +5,25 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace JobBoard.Core.Authrization.Handlers
 {
-	public class CompanyOwnerHandler : AuthorizationHandler<CompanyCreatorRequirement, Company>
+	public class OwnApplicationsRequirementHandler : AuthorizationHandler<OwnApplicationsRequirement, Application>
 	{
 		private readonly ICurrentUserService _currentUserService;
 
-		public CompanyOwnerHandler(ICurrentUserService currentUserService)
+		public OwnApplicationsRequirementHandler(ICurrentUserService currentUserService)
 		{
 			_currentUserService = currentUserService;
 		}
-		protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, CompanyCreatorRequirement requirement, Company resource)
+
+		protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, OwnApplicationsRequirement requirement, Application resource)
 		{
 			var userId = _currentUserService.GetCurrentUserId();
 
-			if (resource.CreatedByUserId.Equals(userId))
+			if (resource.UserId.Equals(userId))
+			{
 				context.Succeed(requirement);
+			}
 
 			return Task.CompletedTask;
-
-
 		}
 	}
 }

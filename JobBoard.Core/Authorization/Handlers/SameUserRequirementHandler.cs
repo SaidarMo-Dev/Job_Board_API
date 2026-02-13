@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Identity;
 
 namespace JobBoard.Core.Authrization.Handlers
 {
-	public class SameUserHandler : AuthorizationHandler<SameUserRequirement, User>
+	public class SameUserRequirementHandler : AuthorizationHandler<SameUserRequirement, User>
 	{
 		private readonly ICurrentUserService _currentUserService;
 		private readonly UserManager<User> _userManager;
 
-		public SameUserHandler(ICurrentUserService currentUserService, UserManager<User> userManager)
+		public SameUserRequirementHandler(ICurrentUserService currentUserService, UserManager<User> userManager)
 		{
 			_currentUserService = currentUserService;
 			_userManager = userManager;

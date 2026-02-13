@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace JobBoard.Core.Authrization.Handlers
 {
-	public class FileOwnershipHandler : AuthorizationHandler<FileOwnerRequirement, FileUploadResource>
+	public class FileOwnerRequirementHandler : AuthorizationHandler<FileOwnerRequirement, FileUploadResource>
 	{
 		private readonly ICompanyService _companyService;
 
-		public FileOwnershipHandler(ICompanyService companyService)
+		public FileOwnerRequirementHandler(ICompanyService companyService)
 		{
 			_companyService = companyService;
 		}

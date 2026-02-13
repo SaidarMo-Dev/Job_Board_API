@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace JobBoard.Core.Authrization.Handlers
 {
-	public class UserBookmarkHandler : AuthorizationHandler<OwnBookmarkRequirement, Bookmark>
+	public class OwnBookmarkRequirementHandler : AuthorizationHandler<OwnBookmarkRequirement, Bookmark>
 	{
 
 		private readonly ICurrentUserService _currentUserService;
 
-		public UserBookmarkHandler(ICurrentUserService currentUserService)
+		public OwnBookmarkRequirementHandler(ICurrentUserService currentUserService)
 		{
 			_currentUserService = currentUserService;
 		}

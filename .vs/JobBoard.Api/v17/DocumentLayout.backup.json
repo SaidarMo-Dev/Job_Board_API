@@ -50,8 +50,16 @@
       "DocumentGroups": [
         {
           "DockedHeight": 382,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -84,9 +92,9 @@
               "Title": "JobCreatorHandler.cs",
               "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Handlers\\JobCreatorHandler.cs",
               "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Handlers\\JobCreatorHandler.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Handlers\\JobCreatorHandler.cs*",
-              "RelativeToolTip": "JobBoard.Core\\Authorization\\Handlers\\JobCreatorHandler.cs*",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAqwA0AAAADAAAAAAAAAA==",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Handlers\\JobCreatorHandler.cs",
+              "RelativeToolTip": "JobBoard.Core\\Authorization\\Handlers\\JobCreatorHandler.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAqwA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-13T18:35:44.409Z",
               "EditorCaption": ""
@@ -181,14 +189,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-13T18:18:45.265Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             }
           ]
         },
