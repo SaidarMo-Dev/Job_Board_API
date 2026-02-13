@@ -138,7 +138,7 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 
 			if (!userRoles.Contains("Admin"))
 			{
-				var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), company, new CompanyOwnerRequirement());
+				var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), company, new CompanyCreatorRequirement());
 
 				if (!isAuthorized.Succeeded) return Forbidden<GetJobsByCompanyIdQueryResponse>();
 

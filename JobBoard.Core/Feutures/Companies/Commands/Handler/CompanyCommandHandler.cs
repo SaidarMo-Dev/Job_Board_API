@@ -68,7 +68,7 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 
 			if (!(await _currentUserService.GetCurrentUserRoles()).Contains("Admin"))
 			{
-				var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), company, new CompanyOwnerRequirement());
+				var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), company, new CompanyCreatorRequirement());
 
 				if (!isAuthorized.Succeeded) return Forbidden<int>(_stringLocalizer[SharedResourcesKeys.NoAccess]);
 			}
@@ -91,7 +91,7 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 
 			if (!userRoles.Contains("Admin"))
 			{
-				var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), company, new CompanyOwnerRequirement());
+				var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), company, new CompanyCreatorRequirement());
 
 				if (!isAuthorized.Succeeded) return Forbidden<string>(_stringLocalizer[SharedResourcesKeys.NoAccess]);
 

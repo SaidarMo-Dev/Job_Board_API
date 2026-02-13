@@ -119,7 +119,7 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 		{
 			var Oldjob = await _jobService.GetJobByIdWithEncludeSkillsAndCategoriesAsync(request.Id);
 
-			var isAuthorized = await _authorizationService.AuthorizeAsync(_currentUserService.GetCurrentUserPrincipal(), Oldjob, new JobCreatorRequirement());
+			var isAuthorized = await _authorizationService.AuthorizeAsync(_currentUserService.GetCurrentUserPrincipal(), Oldjob, new JobOwnerRequirement());
 
 			if (!isAuthorized.Succeeded) return Forbidden<string>();
 
@@ -185,7 +185,7 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 			// of not Admin then apply resource based Authorizatin for job creator
 			if (!userRoles.Contains("Admin"))
 			{
-				var isAuthorized = await _authorizationService.AuthorizeAsync(_currentUserService.GetCurrentUserPrincipal(), job, new JobCreatorRequirement());
+				var isAuthorized = await _authorizationService.AuthorizeAsync(_currentUserService.GetCurrentUserPrincipal(), job, new JobOwnerRequirement());
 				if (!isAuthorized.Succeeded) return Forbidden<string>();
 
 			}

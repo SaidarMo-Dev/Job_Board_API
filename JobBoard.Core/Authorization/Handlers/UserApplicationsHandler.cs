@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace JobBoard.Core.Authrization.Handlers
 {
-	public class UserApplicationsHandler : AuthorizationHandler<UserApplicationsRequirement, Application>
+	public class UserApplicationsHandler : AuthorizationHandler<OwnApplicationsRequirement, Application>
 	{
 		private readonly ICurrentUserService _currentUserService;
 
@@ -14,7 +14,7 @@ namespace JobBoard.Core.Authrization.Handlers
 			_currentUserService = currentUserService;
 		}
 
-		protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, UserApplicationsRequirement requirement, Application resource)
+		protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, OwnApplicationsRequirement requirement, Application resource)
 		{
 			var userId = _currentUserService.GetCurrentUserId();
 

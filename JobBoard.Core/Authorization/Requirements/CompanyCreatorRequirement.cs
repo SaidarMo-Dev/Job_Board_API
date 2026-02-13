@@ -2,7 +2,7 @@
 
 namespace JobBoard.Core.Authrization.Requirements
 {
-	public class FileOwnershipRequirement : IAuthorizationRequirement
+	public class CompanyCreatorRequirement : IAuthorizationRequirement
 	{
 	}
 }

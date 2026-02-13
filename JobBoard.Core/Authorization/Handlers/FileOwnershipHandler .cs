@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace JobBoard.Core.Authrization.Handlers
 {
-	public class FileOwnershipHandler : AuthorizationHandler<FileOwnershipRequirement, FileUploadResource>
+	public class FileOwnershipHandler : AuthorizationHandler<FileOwnerRequirement, FileUploadResource>
 	{
 		private readonly ICompanyService _companyService;
 
@@ -15,7 +15,7 @@ namespace JobBoard.Core.Authrization.Handlers
 			_companyService = companyService;
 		}
 
-		protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, FileOwnershipRequirement requirement, FileUploadResource resource)
+		protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, FileOwnerRequirement requirement, FileUploadResource resource)
 		{
 			// Authorizes access to a resource based on ownership and type.
 			// Users can access their own resources, any authenticated user can access applications/jobs,

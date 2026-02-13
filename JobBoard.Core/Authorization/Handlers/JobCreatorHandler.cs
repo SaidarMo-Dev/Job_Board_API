@@ -6,15 +6,14 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace JobBoard.Core.Authrization.Handlers
 {
-	public class JobCreatorHandler : AuthorizationHandler<JobCreatorRequirement, JobListing>
+	public class JobCreatorHandler : AuthorizationHandler<JobOwnerRequirement, JobListing>
 	{
-		private readonly ICurrentUserService _currentUserService;
 
 		public JobCreatorHandler(ICurrentUserService currentUserService)
 		{
-			_currentUserService = currentUserService;
+
 		}
-		protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, JobCreatorRequirement requirement, JobListing resource)
+		protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, JobOwnerRequirement requirement, JobListing resource)
 		{
 
 			var userId = context.User.FindFirst(c => c.Type == nameof(JwtClaimModel.UserId))?.Value;

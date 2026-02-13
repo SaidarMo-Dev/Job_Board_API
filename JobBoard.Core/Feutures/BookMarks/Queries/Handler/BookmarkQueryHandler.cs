@@ -54,7 +54,7 @@ namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
 		{
 			var Bookmark = await _bookmarkService.GetBookmarkByIdWithIncludeAsync(request.Id);
 
-			var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), Bookmark, new UserBookmarkRequirement());
+			var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), Bookmark, new OwnBookmarkRequirement());
 
 			if (!isAuthorized.Succeeded) return Forbidden<GetBookmarkByIdQueryResponse>();
 

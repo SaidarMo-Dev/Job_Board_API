@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace JobBoard.Core.Authrization.Handlers
 {
-	public class UserBookmarkHandler : AuthorizationHandler<UserBookmarkRequirement, Bookmark>
+	public class UserBookmarkHandler : AuthorizationHandler<OwnBookmarkRequirement, Bookmark>
 	{
 
 		private readonly ICurrentUserService _currentUserService;
@@ -14,7 +14,7 @@ namespace JobBoard.Core.Authrization.Handlers
 		{
 			_currentUserService = currentUserService;
 		}
-		protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, UserBookmarkRequirement requirement, Bookmark resource)
+		protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, OwnBookmarkRequirement requirement, Bookmark resource)
 		{
 			var userId = _currentUserService.GetCurrentUserId();
 

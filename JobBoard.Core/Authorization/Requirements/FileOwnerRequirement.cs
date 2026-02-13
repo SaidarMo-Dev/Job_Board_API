@@ -2,7 +2,7 @@
 
 namespace JobBoard.Core.Authrization.Requirements
 {
-	public class UserBookmarkRequirement : IAuthorizationRequirement
+	public class FileOwnerRequirement : IAuthorizationRequirement
 	{
 	}
 }

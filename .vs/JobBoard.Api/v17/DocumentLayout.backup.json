@@ -3,108 +3,44 @@
   "WorkspaceRootPath": "C:\\Projects\\Job_Board_API\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\authorization\\handlers\\sameuserhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\authorization\\handlers\\sameuserhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\modecoredependencies.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\modecoredependencies.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\jobs\\commands\\handler\\jobcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\jobs\\commands\\handler\\jobcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\jobs\\queries\\handler\\jobqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\jobs\\queries\\handler\\jobqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\files\\queries\\handlers\\generatefileaccessurlhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\files\\queries\\handlers\\generatefileaccessurlhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\files\\commands\\handlers\\filescommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\files\\commands\\handlers\\filescommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\companies\\commands\\handler\\companycommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\companies\\commands\\handler\\companycommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\bookmarks\\queries\\handler\\bookmarkqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\bookmarks\\queries\\handler\\bookmarkqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\authentication\\commands\\handler\\authenticationcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\authentication\\commands\\handler\\authenticationcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\applicationuser\\queries\\handler\\userqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\applicationuser\\queries\\handler\\userqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\applicationuser\\commands\\handler\\usercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\applicationuser\\commands\\handler\\usercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\authorization\\handlers\\companyownerhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\authorization\\handlers\\companyownerhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\authorization\\handlers\\userapplicationshandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\authorization\\handlers\\userapplicationshandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\authorization\\handlers\\userbookmarkhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\authorization\\handlers\\userbookmarkhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\authorization\\handlers\\sameuserhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\authorization\\handlers\\sameuserhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\authorization\\policies\\authorizationpolicyextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\authorization\\policies\\authorizationpolicyextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\authorization\\handlers\\jobcreatorhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\authorization\\handlers\\jobcreatorhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\authorization\\handlers\\fileownershiphandler .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\authorization\\handlers\\fileownershiphandler .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\authorization\\policies\\authorizationpolicies.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\authorization\\policies\\authorizationpolicies.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\authorization\\requirements\\fileownershiprequirement .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\authorization\\requirements\\fileownershiprequirement .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\authorization\\requirements\\ownbookmarkrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\authorization\\requirements\\ownbookmarkrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\authorization\\requirements\\companyownerrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\authorization\\requirements\\companyownerrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\authorization\\requirements\\ownapplicationsrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\authorization\\requirements\\ownapplicationsrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\authorization\\resources\\fileuploadresource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\authorization\\resources\\fileuploadresource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\authorization\\requirements\\jobownerrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\authorization\\requirements\\jobownerrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\authorization\\requirements\\userbookmarkrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\authorization\\requirements\\userbookmarkrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\authorization\\requirements\\fileownerrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\authorization\\requirements\\fileownerrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\authorization\\requirements\\userapplicationsrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\authorization\\requirements\\userapplicationsrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\authorization\\requirements\\sameuserrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\authorization\\requirements\\sameuserrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\authorization\\requirements\\jobcreatorrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\authorization\\requirements\\jobcreatorrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\jobboard.core.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\jobboard.core.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\applications\\queries\\handler\\applicationqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\applications\\queries\\handler\\applicationqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\applications\\commands\\handler\\applicationcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\applications\\commands\\handler\\applicationcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\authorization\\requirements\\companycreatorrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\authorization\\requirements\\companycreatorrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -114,344 +50,136 @@
       "DocumentGroups": [
         {
           "DockedHeight": 382,
-          "SelectedChildIndex": 23,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "JobCommandHandler.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Jobs\\Commands\\Handler\\JobCommandHandler.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Jobs\\Commands\\Handler\\JobCommandHandler.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Jobs\\Commands\\Handler\\JobCommandHandler.cs*",
-              "RelativeToolTip": "JobBoard.Core\\Feutures\\Jobs\\Commands\\Handler\\JobCommandHandler.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T18:12:06.289Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "JobQueryHandler.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Jobs\\Queries\\Handler\\JobQueryHandler.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Jobs\\Queries\\Handler\\JobQueryHandler.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Jobs\\Queries\\Handler\\JobQueryHandler.cs*",
-              "RelativeToolTip": "JobBoard.Core\\Feutures\\Jobs\\Queries\\Handler\\JobQueryHandler.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T18:11:53.956Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "GenerateFileAccessUrlHandler.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Files\\Queries\\Handlers\\GenerateFileAccessUrlHandler.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Files\\Queries\\Handlers\\GenerateFileAccessUrlHandler.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Files\\Queries\\Handlers\\GenerateFileAccessUrlHandler.cs*",
-              "RelativeToolTip": "JobBoard.Core\\Feutures\\Files\\Queries\\Handlers\\GenerateFileAccessUrlHandler.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T18:11:46.128Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "FilesCommandHandler.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Files\\Commands\\Handlers\\FilesCommandHandler.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Files\\Commands\\Handlers\\FilesCommandHandler.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Files\\Commands\\Handlers\\FilesCommandHandler.cs*",
-              "RelativeToolTip": "JobBoard.Core\\Feutures\\Files\\Commands\\Handlers\\FilesCommandHandler.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T18:11:38.475Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CompanyCommandHandler.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Companies\\Commands\\Handler\\CompanyCommandHandler.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Companies\\Commands\\Handler\\CompanyCommandHandler.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Companies\\Commands\\Handler\\CompanyCommandHandler.cs*",
-              "RelativeToolTip": "JobBoard.Core\\Feutures\\Companies\\Commands\\Handler\\CompanyCommandHandler.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T18:11:31.416Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "BookmarkQueryHandler.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\BookMarks\\Queries\\Handler\\BookmarkQueryHandler.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\BookMarks\\Queries\\Handler\\BookmarkQueryHandler.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\BookMarks\\Queries\\Handler\\BookmarkQueryHandler.cs*",
-              "RelativeToolTip": "JobBoard.Core\\Feutures\\BookMarks\\Queries\\Handler\\BookmarkQueryHandler.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T18:11:22.859Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AuthenticationCommandHandler.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Authentication\\Commands\\Handler\\AuthenticationCommandHandler.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Authentication\\Commands\\Handler\\AuthenticationCommandHandler.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Authentication\\Commands\\Handler\\AuthenticationCommandHandler.cs*",
-              "RelativeToolTip": "JobBoard.Core\\Feutures\\Authentication\\Commands\\Handler\\AuthenticationCommandHandler.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T18:11:14.628Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "UserQueryHandler.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\ApplicationUser\\Queries\\Handler\\UserQueryHandler.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\ApplicationUser\\Queries\\Handler\\UserQueryHandler.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\ApplicationUser\\Queries\\Handler\\UserQueryHandler.cs*",
-              "RelativeToolTip": "JobBoard.Core\\Feutures\\ApplicationUser\\Queries\\Handler\\UserQueryHandler.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T18:11:06.345Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "UserCommandHandler.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\ApplicationUser\\Commands\\Handler\\UserCommandHandler.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\ApplicationUser\\Commands\\Handler\\UserCommandHandler.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\ApplicationUser\\Commands\\Handler\\UserCommandHandler.cs*",
-              "RelativeToolTip": "JobBoard.Core\\Feutures\\ApplicationUser\\Commands\\Handler\\UserCommandHandler.cs*",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAIwAYAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T18:10:52.534Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "UserBookmarkHandler.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Handlers\\UserBookmarkHandler.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Handlers\\UserBookmarkHandler.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Handlers\\UserBookmarkHandler.cs",
-              "RelativeToolTip": "JobBoard.Core\\Authorization\\Handlers\\UserBookmarkHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T18:08:28.045Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "UserApplicationsHandler.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Handlers\\UserApplicationsHandler.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Handlers\\UserApplicationsHandler.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Handlers\\UserApplicationsHandler.cs",
-              "RelativeToolTip": "JobBoard.Core\\Authorization\\Handlers\\UserApplicationsHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T18:08:20.059Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "SameUserHandler.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Handlers\\SameUserHandler.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Handlers\\SameUserHandler.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Handlers\\SameUserHandler.cs",
-              "RelativeToolTip": "JobBoard.Core\\Authorization\\Handlers\\SameUserHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T18:08:15.006Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "JobCreatorHandler.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Handlers\\JobCreatorHandler.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Handlers\\JobCreatorHandler.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Handlers\\JobCreatorHandler.cs",
-              "RelativeToolTip": "JobBoard.Core\\Authorization\\Handlers\\JobCreatorHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T18:08:08.335Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "FileOwnershipHandler .cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Handlers\\FileOwnershipHandler .cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Handlers\\FileOwnershipHandler .cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Handlers\\FileOwnershipHandler .cs",
-              "RelativeToolTip": "JobBoard.Core\\Authorization\\Handlers\\FileOwnershipHandler .cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T18:07:57.986Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "CompanyOwnerHandler.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Handlers\\CompanyOwnerHandler.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Handlers\\CompanyOwnerHandler.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Handlers\\CompanyOwnerHandler.cs",
-              "RelativeToolTip": "JobBoard.Core\\Authorization\\Handlers\\CompanyOwnerHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T18:07:52.18Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "FileUploadResource.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Resources\\FileUploadResource.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Resources\\FileUploadResource.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Resources\\FileUploadResource.cs",
-              "RelativeToolTip": "JobBoard.Core\\Authorization\\Resources\\FileUploadResource.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T18:07:42.66Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "UserBookmarkRequirement.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Requirements\\UserBookmarkRequirement.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Requirements\\UserBookmarkRequirement.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Requirements\\UserBookmarkRequirement.cs",
-              "RelativeToolTip": "JobBoard.Core\\Authorization\\Requirements\\UserBookmarkRequirement.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T18:07:36.239Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "UserApplicationsRequirement.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Requirements\\UserApplicationsRequirement.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Requirements\\UserApplicationsRequirement.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Requirements\\UserApplicationsRequirement.cs",
-              "RelativeToolTip": "JobBoard.Core\\Authorization\\Requirements\\UserApplicationsRequirement.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T18:07:32.522Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "SameUserRequirement.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Requirements\\SameUserRequirement.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Requirements\\SameUserRequirement.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Requirements\\SameUserRequirement.cs",
-              "RelativeToolTip": "JobBoard.Core\\Authorization\\Requirements\\SameUserRequirement.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T18:07:28.397Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "JobCreatorRequirement.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Requirements\\JobCreatorRequirement.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Requirements\\JobCreatorRequirement.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Requirements\\JobCreatorRequirement.cs",
-              "RelativeToolTip": "JobBoard.Core\\Authorization\\Requirements\\JobCreatorRequirement.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T18:07:21.334Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "FileOwnershipRequirement .cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Requirements\\FileOwnershipRequirement .cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Requirements\\FileOwnershipRequirement .cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Requirements\\FileOwnershipRequirement .cs",
-              "RelativeToolTip": "JobBoard.Core\\Authorization\\Requirements\\FileOwnershipRequirement .cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T18:07:15.767Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "CompanyOwnerRequirement.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Requirements\\CompanyOwnerRequirement.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Requirements\\CompanyOwnerRequirement.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Requirements\\CompanyOwnerRequirement.cs",
-              "RelativeToolTip": "JobBoard.Core\\Authorization\\Requirements\\CompanyOwnerRequirement.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T18:06:53.621Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "JobBoard.Core",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\JobBoard.Core.csproj",
-              "RelativeDocumentMoniker": "JobBoard.Core\\JobBoard.Core.csproj",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\JobBoard.Core.csproj",
-              "RelativeToolTip": "JobBoard.Core\\JobBoard.Core.csproj",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-02-13T18:05:59.432Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "ModeCoreDependencies.cs",
               "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\ModeCoreDependencies.cs",
               "RelativeDocumentMoniker": "JobBoard.Core\\ModeCoreDependencies.cs",
               "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\ModeCoreDependencies.cs",
               "RelativeToolTip": "JobBoard.Core\\ModeCoreDependencies.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAlwCIAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAlwCgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T17:54:17.069Z",
+              "WhenOpened": "2026-02-13T18:38:23.876Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "ApplicationQueryHandler.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Applications\\Queries\\Handler\\ApplicationQueryHandler.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Applications\\Queries\\Handler\\ApplicationQueryHandler.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Applications\\Queries\\Handler\\ApplicationQueryHandler.cs",
-              "RelativeToolTip": "JobBoard.Core\\Feutures\\Applications\\Queries\\Handler\\ApplicationQueryHandler.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAEwDMAAAADAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "SameUserHandler.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Handlers\\SameUserHandler.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Handlers\\SameUserHandler.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Handlers\\SameUserHandler.cs",
+              "RelativeToolTip": "JobBoard.Core\\Authorization\\Handlers\\SameUserHandler.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAhwCIAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T17:53:19.037Z",
+              "WhenOpened": "2026-02-13T18:36:22.577Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "ApplicationCommandHandler.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Applications\\Commands\\Handler\\ApplicationCommandHandler.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Applications\\Commands\\Handler\\ApplicationCommandHandler.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Applications\\Commands\\Handler\\ApplicationCommandHandler.cs",
-              "RelativeToolTip": "JobBoard.Core\\Feutures\\Applications\\Commands\\Handler\\ApplicationCommandHandler.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAADgv20AAABzAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "JobCreatorHandler.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Handlers\\JobCreatorHandler.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Handlers\\JobCreatorHandler.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Handlers\\JobCreatorHandler.cs*",
+              "RelativeToolTip": "JobBoard.Core\\Authorization\\Handlers\\JobCreatorHandler.cs*",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAqwA0AAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T17:51:43.924Z",
+              "WhenOpened": "2026-02-13T18:35:44.409Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AuthorizationPolicyExtensions.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Policies\\AuthorizationPolicyExtensions.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Policies\\AuthorizationPolicyExtensions.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Policies\\AuthorizationPolicyExtensions.cs",
+              "RelativeToolTip": "JobBoard.Core\\Authorization\\Policies\\AuthorizationPolicyExtensions.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAuwA8AAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-13T18:34:31.041Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "OwnBookmarkRequirement.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Requirements\\OwnBookmarkRequirement.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Requirements\\OwnBookmarkRequirement.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Requirements\\OwnBookmarkRequirement.cs",
+              "RelativeToolTip": "JobBoard.Core\\Authorization\\Requirements\\OwnBookmarkRequirement.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-13T18:29:17.247Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "OwnApplicationsRequirement.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Requirements\\OwnApplicationsRequirement.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Requirements\\OwnApplicationsRequirement.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Requirements\\OwnApplicationsRequirement.cs",
+              "RelativeToolTip": "JobBoard.Core\\Authorization\\Requirements\\OwnApplicationsRequirement.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-13T18:28:49.41Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "JobOwnerRequirement.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Requirements\\JobOwnerRequirement.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Requirements\\JobOwnerRequirement.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Requirements\\JobOwnerRequirement.cs",
+              "RelativeToolTip": "JobBoard.Core\\Authorization\\Requirements\\JobOwnerRequirement.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-13T18:28:32.718Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "FileOwnerRequirement.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Requirements\\FileOwnerRequirement.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Requirements\\FileOwnerRequirement.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Requirements\\FileOwnerRequirement.cs",
+              "RelativeToolTip": "JobBoard.Core\\Authorization\\Requirements\\FileOwnerRequirement.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-13T18:27:58.411Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CompanyCreatorRequirement.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Requirements\\CompanyCreatorRequirement.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Requirements\\CompanyCreatorRequirement.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Requirements\\CompanyCreatorRequirement.cs",
+              "RelativeToolTip": "JobBoard.Core\\Authorization\\Requirements\\CompanyCreatorRequirement.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-13T18:27:13.468Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AuthorizationPolicies.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Policies\\AuthorizationPolicies.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Authorization\\Policies\\AuthorizationPolicies.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Authorization\\Policies\\AuthorizationPolicies.cs",
+              "RelativeToolTip": "JobBoard.Core\\Authorization\\Policies\\AuthorizationPolicies.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-13T18:18:45.265Z",
               "EditorCaption": ""
             },
             {

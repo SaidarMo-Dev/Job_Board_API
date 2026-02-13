@@ -34,7 +34,6 @@ namespace JobBoard.Core.Authrization.Handlers
 				context.Succeed(requirement);
 			}
 
-
 		}
 	}
 }

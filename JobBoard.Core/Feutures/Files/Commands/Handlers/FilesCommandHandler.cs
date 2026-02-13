@@ -62,7 +62,7 @@ namespace JobBoard.Core.Feutures.Files.Commands.Handlers
 			var isAuthorized = await _authorizationService.AuthorizeAsync(
 				_currentUserService.GetCurrentUserPrincipal(),
 				uploadResource,
-				new FileOwnershipRequirement()
+				new FileOwnerRequirement()
 				);
 
 			if (!isAuthorized.Succeeded)

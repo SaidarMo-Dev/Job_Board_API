@@ -2,7 +2,5 @@
 
 namespace JobBoard.Core.Authrization.Requirements
 {
-	public class UserApplicationsRequirement : IAuthorizationRequirement
-	{
-	}
+	public class JobOwnerRequirement : IAuthorizationRequirement { }
 }

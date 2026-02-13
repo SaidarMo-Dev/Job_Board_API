@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using FluentValidation;
+using JobBoard.Core.Authorization.Policies;
 using JobBoard.Core.Authrization.Handlers;
 using JobBoard.Core.Behaviors;
 using MediatR;
@@ -47,6 +48,13 @@ namespace JobBoard.Core
 			services.AddScoped<IAuthorizationHandler, UserBookmarkHandler>();
 			services.AddScoped<IAuthorizationHandler, UserApplicationsHandler>();
 			services.AddScoped<IAuthorizationHandler, FileOwnershipHandler>();
+
+			// Registrate policies
+
+			services.AddAuthorization(options =>
+			{
+				options.AddApplicationPolicies();
+			});
 
 			return services;
 		}
