@@ -1,10 +1,10 @@
-﻿using JobBoard.Core.Security.Requirements;
-using JobBoard.Core.Security.Resources;
+﻿using JobBoard.Core.Authrization.Requirements;
+using JobBoard.Core.Authrization.Resources;
 using JobBoard.Data.Helpers;
 using JobBoard.Service.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 
-namespace JobBoard.Core.Security.Handlers
+namespace JobBoard.Core.Authrization.Handlers
 {
 	public class FileOwnershipHandler : AuthorizationHandler<FileOwnershipRequirement, FileUploadResource>
 	{

@@ -1,9 +1,9 @@
-﻿using JobBoard.Core.Security.Requirements;
+﻿using JobBoard.Core.Authrization.Requirements;
 using JobBoard.Data.Entities;
 using JobBoard.Service.Authentication.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 
-namespace JobBoard.Core.Security.Handlers
+namespace JobBoard.Core.Authrization.Handlers
 {
 	public class CompanyOwnerHandler : AuthorizationHandler<CompanyOwnerRequirement, Company>
 	{

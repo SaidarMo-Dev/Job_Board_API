@@ -1,10 +1,10 @@
 ﻿using System.Security.Claims;
 using AutoMapper;
+using JobBoard.Core.Authrization.Requirements;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.BookMarks.Queries.Models;
 using JobBoard.Core.Feutures.BookMarks.Queries.Responses;
 using JobBoard.Core.Resources;
-using JobBoard.Core.Security.Requirements;
 using JobBoard.Core.Wrapers;
 using JobBoard.Service.Abstractions;
 using JobBoard.Service.Authentication.Interfaces;

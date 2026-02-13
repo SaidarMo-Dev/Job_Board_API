@@ -1,6 +1,6 @@
 ﻿using JobBoard.Data.enums;
 
-namespace JobBoard.Core.Security.Resources
+namespace JobBoard.Core.Authrization.Resources
 {
 	public class FileUploadResource
 	{

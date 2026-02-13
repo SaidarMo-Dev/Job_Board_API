@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using FluentValidation;
+using JobBoard.Core.Authrization.Handlers;
 using JobBoard.Core.Behaviors;
-using JobBoard.Core.Security.Handlers;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,19 +24,19 @@ namespace JobBoard.Core
 			services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
 
-			services.AddAuthorization(option =>
-			{
-				option.AddPolicy("Edit", policy =>
-				{
-					policy.RequireClaim("Edit", ["EditJob", "EditUser", "EditCompany"]);
+			//services.AddAuthorization(option =>
+			//{
+			//	option.AddPolicy("Edit", policy =>
+			//	{
+			//		policy.RequireClaim("Edit", ["EditJob", "EditUser", "EditCompany"]);
 
-				});
+			//	});
 
-				option.AddPolicy("Get", policy =>
-				{
-					policy.RequireClaim("Get", "GetJob");
-				});
-			});
+			//	option.AddPolicy("Get", policy =>
+			//	{
+			//		policy.RequireClaim("Get", "GetJob");
+			//	});
+			//});
 
 
 			// resource based authorization

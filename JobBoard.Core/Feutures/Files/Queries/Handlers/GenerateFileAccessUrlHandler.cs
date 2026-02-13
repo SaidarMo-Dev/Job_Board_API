@@ -1,8 +1,8 @@
-﻿using JobBoard.Core.Bases;
+﻿using JobBoard.Core.Authrization.Requirements;
+using JobBoard.Core.Authrization.Resources;
+using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Files.Queries.Models;
 using JobBoard.Core.Resources;
-using JobBoard.Core.Security.Requirements;
-using JobBoard.Core.Security.Resources;
 using JobBoard.Data.enums;
 using JobBoard.Service.Abstractions;
 using JobBoard.Service.Authentication.Interfaces;

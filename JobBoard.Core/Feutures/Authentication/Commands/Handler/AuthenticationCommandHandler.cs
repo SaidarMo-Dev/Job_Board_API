@@ -1,9 +1,9 @@
 ﻿using System.Security.Claims;
+using JobBoard.Core.Authrization.Requirements;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Authentication.commands.Models;
 using JobBoard.Core.Feutures.Authentication.Commands.Models;
 using JobBoard.Core.Resources;
-using JobBoard.Core.Security.Requirements;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Data.Helpers;
 using JobBoard.Service.Abstractions;

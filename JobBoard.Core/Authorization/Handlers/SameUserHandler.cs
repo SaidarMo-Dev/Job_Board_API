@@ -1,10 +1,10 @@
-﻿using JobBoard.Core.Security.Requirements;
+﻿using JobBoard.Core.Authrization.Requirements;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Service.Authentication.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
-namespace JobBoard.Core.Security.Handlers
+namespace JobBoard.Core.Authrization.Handlers
 {
 	public class SameUserHandler : AuthorizationHandler<SameUserRequirement, User>
 	{

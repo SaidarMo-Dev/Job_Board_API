@@ -1,11 +1,11 @@
 ﻿using System.Security.Claims;
 using AutoMapper;
+using JobBoard.Core.Authrization.Requirements;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.ApplicationUser.Queries.Models;
 using JobBoard.Core.Feutures.ApplicationUser.Queries.Responses;
 using JobBoard.Core.Helpers;
 using JobBoard.Core.Resources;
-using JobBoard.Core.Security.Requirements;
 using JobBoard.Core.Wrapers;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Data.Helpers;

@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using JobBoard.Core.Authrization.Requirements;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Jobs.Commands.Models;
 using JobBoard.Core.Resources;
-using JobBoard.Core.Security.Requirements;
 using JobBoard.Data.Entities;
 using JobBoard.Service.Abstractions;
 using JobBoard.Service.Authentication.Interfaces;
