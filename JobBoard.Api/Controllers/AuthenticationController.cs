@@ -59,7 +59,7 @@ namespace JobBoard.Api.Controllers
 			  Description = "Sends a confirm email link or code to the user's registered email address.",
 			  OperationId = "SendConfirmEmailLink")]
 
-		[HttpGet(Router.AuthenticationRoute.SendConfirmeEmail)]
+		[HttpGet(Router.AuthenticationRoute.SendConfirmEmail)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -255,7 +255,7 @@ namespace JobBoard.Api.Controllers
 					  Description = "add a recovery contact informations including email and phone number to an existing user account.",
 					  OperationId = "AddRecoveryContact")]
 
-		[AllowAnonymous]
+		[Authorize]
 		[HttpPut(Router.AuthenticationRoute.AddRecoveryContact)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -309,6 +309,8 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(command));
 		}
 
+
+		[Authorize]
 		[SwaggerOperation(
 			Summary = "Logout",
 			Description = "This EndPoint logout the current user",

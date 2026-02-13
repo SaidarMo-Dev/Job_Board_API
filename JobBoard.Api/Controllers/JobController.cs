@@ -115,7 +115,6 @@ namespace JobBoard.Api.Controllers
 			Description = "Updates an existing job with the provided information.",
 			OperationId = "UpdateJob")]
 
-		[Authorize(Roles = "Employer")]
 		[HttpPut(Router.JobRoute.Update)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -146,6 +145,7 @@ namespace JobBoard.Api.Controllers
 			Description = "Retrieves all jobs posted by a specific company identified by its ID.",
 			OperationId = "GetCompanyJobs")]
 
+		[Authorize]
 		[HttpGet(Router.CompanyRoute.Jobs)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -169,7 +169,7 @@ namespace JobBoard.Api.Controllers
 
 
 
-		[AllowAnonymous]
+		[Authorize]
 		[SwaggerOperation(
 			Summary = "Get recommendation jobs",
 			Description = "Retreives recommendation jobs for loged user",

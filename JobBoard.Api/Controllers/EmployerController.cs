@@ -1,12 +1,14 @@
 ﻿using JobBoard.Api.Bases;
 using JobBoard.Core.Feutures.Employer.Queries.Models;
 using JobBoard.Data.Metadata;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace JobBoard.Api.Controllers
 {
 	[ApiController]
+	[Authorize(Roles = "Employer,Admin")]
 	public class EmployerController : AppControllerbase
 	{
 		[SwaggerOperation(

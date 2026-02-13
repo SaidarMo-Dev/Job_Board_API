@@ -132,7 +132,6 @@ namespace JobBoard.Api.Controllers
 			return Ok(await Mediator.Send(new GetSavedJobIdsQuery(Id)));
 		}
 
-		[Authorize]
 		[SwaggerOperation(Summary = "Get recent user Saved job",
 		  Description = "Retrieves recent saved jobs associated with a specific user.",
 		  OperationId = "GetRecentSavedJobs")]

@@ -166,7 +166,7 @@
 			public const string SendResetPassword = Prefex + "/send-reset-password";
 			public const string ConfirmResetPassword = Prefex + "/confirm-reset-password";
 			public const string ResetPassword = Prefex + "/reset-password";
-			public const string SendConfirmeEmail = Prefex + "/send-confirm-email";
+			public const string SendConfirmEmail = Prefex + "/send-confirm-email";
 
 			public const string SendConfirmeEmailCode = Prefex + "/send-confirm-email-code";
 			public const string SendEmailChange = Prefex + "/send-email-change";

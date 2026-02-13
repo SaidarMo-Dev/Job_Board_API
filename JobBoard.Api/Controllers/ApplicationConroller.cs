@@ -52,6 +52,7 @@ namespace JobBoard.Api.Controllers
 			)]
 
 		[Authorize(Roles = "Admin,Employer")]
+
 		[HttpGet(Router.JobRoute.Applications)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]

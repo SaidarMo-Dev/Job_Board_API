@@ -9,7 +9,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace JobBoard.Api.Controllers
 {
 	[ApiController]
-	//[Authorize(Roles = "Admin,Employer")]
+	[Authorize(Roles = "Admin,Employer")]
 	public class CategoryController : AppControllerbase
 	{
 		[SwaggerOperation(Summary = "Get category by ID",
@@ -43,6 +43,7 @@ namespace JobBoard.Api.Controllers
 			return Ok(await Mediator.Send(query));
 		}
 
+		[AllowAnonymous]
 		[SwaggerOperation(Summary = "Get popular categories",
 				  Description = "Returns a list of popular categories stored in the system.",
 				  OperationId = "GetPopularCategories")]

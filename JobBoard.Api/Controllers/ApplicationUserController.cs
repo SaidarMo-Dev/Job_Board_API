@@ -130,7 +130,6 @@ namespace JobBoard.Api.Controllers
 
 		// Upload user profile image
 
-		[AllowAnonymous]
 		[SwaggerOperation(Summary = "Upload profile image",
 					  Description = "Upload user profile image",
 					  OperationId = "UploadProfileImage")]

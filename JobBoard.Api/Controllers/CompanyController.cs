@@ -2,13 +2,14 @@
 using JobBoard.Core.Feutures.Companies.Commands.Models;
 using JobBoard.Core.Feutures.Companies.Queries.Models;
 using JobBoard.Data.Metadata;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace JobBoard.Api.Controllers
 {
 	[ApiController]
-	//[Authorize(Roles = "Admin,Employer")]
+	[Authorize(Roles = "Admin,Employer")]
 	public class CompanyController : AppControllerbase
 	{
 		[SwaggerOperation(
