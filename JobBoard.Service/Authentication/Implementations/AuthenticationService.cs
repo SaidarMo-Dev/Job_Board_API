@@ -97,11 +97,11 @@ namespace JobBoard.Service.Authentication.Implementations
 
 			var claims = new List<Claim>()
 			{
-				new Claim(nameof(JwtClaimModel.UserId), user.Id.ToString()),
-				new Claim(nameof(JwtClaimModel.Username), user.UserName ?? "Unknown"),
-				new Claim(nameof(JwtClaimModel.Email), user.Email ?? "Unknown"),
-				new Claim(nameof(JwtClaimModel.FirstName), user.FirstName),
-				new Claim(nameof(JwtClaimModel.LastName), user.LastName),
+				new Claim(JwtClaimTypes.UserId, user.Id.ToString()),
+				new Claim(JwtClaimTypes.Username, user.UserName ?? "Unknown"),
+				new Claim(JwtClaimTypes.Email, user.Email ?? "Unknown"),
+				new Claim(JwtClaimTypes.FirstName, user.FirstName),
+				new Claim(JwtClaimTypes.LastName, user.LastName),
 
 			};
 
@@ -109,7 +109,7 @@ namespace JobBoard.Service.Authentication.Implementations
 			{
 				foreach (var role in roles)
 				{
-					claims.Add(new Claim(nameof(JwtClaimModel.role), role));
+					claims.Add(new Claim(JwtClaimTypes.Role, role));
 				}
 			}
 
@@ -254,7 +254,7 @@ namespace JobBoard.Service.Authentication.Implementations
 
 			await _userManager.UpdateAsync(user);
 
-			claims.Add(new Claim(nameof(JwtClaimModel.jti), jti));
+			claims.Add(new Claim(JwtClaimTypes.Jti, jti));
 
 			var jwtToken = new JwtSecurityToken(
 						_jwtSettings.Issuer,
@@ -292,13 +292,13 @@ namespace JobBoard.Service.Authentication.Implementations
 			try
 			{
 
-				var user = await _userManager.FindByEmailAsync(claimsPrincipal.Claims.FirstOrDefault(c => c.Type.Equals(nameof(JwtClaimModel.Email)))?.Value ?? "");
+				var user = await _userManager.FindByEmailAsync(claimsPrincipal.Claims.FirstOrDefault(c => c.Type.Equals(JwtClaimTypes.Email))?.Value ?? "");
 				if (user is null) return (false, "UserNotFound");
 
 				var valideToken = user.Jti != null
 								  && user.Jti == claimsPrincipal.Claims
 														.FirstOrDefault(c => c.Type.
-														Equals(nameof(JwtClaimModel.jti)))?.Value
+														Equals(JwtClaimTypes.Jti))?.Value
 								  && (!user.JtiExp ?? false);
 
 				if (valideToken)

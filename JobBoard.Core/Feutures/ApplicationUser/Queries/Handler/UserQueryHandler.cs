@@ -102,7 +102,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 
 			// Retrieve the current user's ID from JWT claims
 			var userId = _httpContextAccessor.HttpContext?.User
-						.FindFirst(nameof(JwtClaimModel.UserId))?.Value;
+						.FindFirst(JwtClaimTypes.UserId)?.Value;
 
 			// Validate the user ID claim and ensure it can be parsed to an integer
 			if (!int.TryParse(userId, out var userIdInt))

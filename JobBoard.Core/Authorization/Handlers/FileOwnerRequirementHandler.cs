@@ -22,7 +22,7 @@ namespace JobBoard.Core.Authrization.Handlers
 			// and only company creators can access company resources.
 
 
-			var userIdClaim = context.User.FindFirst(c => c.Type == nameof(JwtClaimModel.UserId))?.Value;
+			var userIdClaim = context.User.FindFirst(c => c.Type == JwtClaimTypes.UserId)?.Value;
 
 			if (!int.TryParse(userIdClaim, out var currentUserId))
 			{

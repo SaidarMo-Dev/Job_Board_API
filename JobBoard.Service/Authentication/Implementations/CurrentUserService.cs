@@ -28,7 +28,7 @@ namespace JobBoard.Service.Authentication.Implementations
 		public int GetCurrentUserId()
 		{
 			var UserId = _httpContextAccessor.HttpContext?.User.Claims
-							.FirstOrDefault(c => c.Type == nameof(JwtClaimModel.UserId))?.Value;
+							.FirstOrDefault(c => c.Type == JwtClaimTypes.UserId)?.Value;
 
 			if (UserId is null) throw new UnauthorizedAccessException();
 

@@ -16,7 +16,7 @@ namespace JobBoard.Core.Authrization.Handlers
 		protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, JobOwnerRequirement requirement, JobListing resource)
 		{
 
-			var userId = context.User.FindFirst(c => c.Type == nameof(JwtClaimModel.UserId))?.Value;
+			var userId = context.User.FindFirst(c => c.Type == JwtClaimTypes.UserId)?.Value;
 
 
 			if (resource.CreatedByUserId == int.Parse(userId ?? "-1"))
