@@ -37,6 +37,12 @@ namespace JobBoard.Api.Bases
 
 				case HttpStatusCode.UnprocessableEntity:
 					return new UnprocessableEntityObjectResult(response);
+				case HttpStatusCode.Forbidden:
+					return new ObjectResult(response)
+					{
+						StatusCode = StatusCodes.Status403Forbidden
+					};
+
 
 				default:
 					return new BadRequestObjectResult(response);

@@ -56,6 +56,7 @@ namespace JobBoard.Api.Controllers
 		[Authorize]
 		[HttpGet(Router.ApplicationUserRoute.GetByID)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		public async Task<IActionResult> FindById([FromRoute] int Id)
 		{
