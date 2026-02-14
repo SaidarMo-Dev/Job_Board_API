@@ -16,10 +16,32 @@ namespace JobBoard.Core.Authrization.Handlers
 		}
 		protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, OwnBookmarkRequirement requirement, Bookmark resource)
 		{
-			var userId = _currentUserService.GetCurrentUserId();
-
-			if (resource.UserId.Equals(userId))
+			// Admin bypass
+			if (context.User.IsInRole("Admin"))
+			{
 				context.Succeed(requirement);
+				return Task.CompletedTask;
+			}
+
+			// Validate resource
+			if (resource == null)
+			{
+				context.Fail();
+				return Task.CompletedTask;
+			}
+
+			// Get current user id
+			var currentUserId = _currentUserService.GetCurrentUserId();
+
+			// Ownership check
+			if (resource.UserId == currentUserId)
+			{
+				context.Succeed(requirement);
+			}
+			else
+			{
+				context.Fail();
+			}
 
 			return Task.CompletedTask;
 		}

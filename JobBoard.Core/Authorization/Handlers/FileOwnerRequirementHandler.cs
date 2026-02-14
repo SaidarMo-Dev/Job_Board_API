@@ -21,7 +21,14 @@ namespace JobBoard.Core.Authrization.Handlers
 			// Users can access their own resources, any authenticated user can access applications/jobs,
 			// and only company creators can access company resources.
 
+			// Admin bypass
+			if (context.User.IsInRole("Admin"))
+			{
+				context.Succeed(requirement);
+				return;
+			}
 
+			// Validate user id claim
 			var userIdClaim = context.User.FindFirst(c => c.Type == JwtClaimTypes.UserId)?.Value;
 
 			if (!int.TryParse(userIdClaim, out var currentUserId))
@@ -30,32 +37,43 @@ namespace JobBoard.Core.Authrization.Handlers
 				return;
 			}
 
-			bool isAuthorized;
+			// Validate resource
+			if (resource == null)
+			{
+				context.Fail();
+				return;
+			}
 
+			// Authorization logic
 			switch (resource.OwnerType)
 			{
 				case Data.enums.FileOwnerType.Users:
-					isAuthorized = resource.OwnerId == currentUserId;
-					break;
+					if (resource.OwnerId == currentUserId)
+						context.Succeed(requirement);
+					else
+						context.Fail();
+					return;
 
 				case Data.enums.FileOwnerType.Applications:
 				case Data.enums.FileOwnerType.Jobs:
-					isAuthorized = true;
-					break;
+					context.Succeed(requirement);
+					return;
 
 				case Data.enums.FileOwnerType.Companies:
-					isAuthorized = await _companyService.IsCreatedByUserAsync(resource.OwnerId, currentUserId);
-					break;
+					var isCompanyOwner =
+						await _companyService.IsCreatedByUserAsync(resource.OwnerId, currentUserId);
+
+					if (isCompanyOwner)
+						context.Succeed(requirement);
+					else
+						context.Fail();
+					return;
 
 				default:
-					isAuthorized = false;
-					break;
+					context.Fail();
+					return;
 			}
 
-			if (isAuthorized)
-				context.Succeed(requirement);
-			else
-				context.Fail();
 
 		}
 	}

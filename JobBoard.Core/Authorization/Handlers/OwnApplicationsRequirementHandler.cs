@@ -16,13 +16,21 @@ namespace JobBoard.Core.Authrization.Handlers
 
 		protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, OwnApplicationsRequirement requirement, Application resource)
 		{
-			var userId = _currentUserService.GetCurrentUserId();
-
-			if (resource.UserId.Equals(userId))
+			// Admin bypass
+			if (context.User.IsInRole("Admin"))
 			{
 				context.Succeed(requirement);
+				return Task.CompletedTask;
+			}
+			// Ownership checks
+			if (resource == null ||
+				resource.UserId != _currentUserService.GetCurrentUserId())
+			{
+				context.Fail();
+				return Task.CompletedTask;
 			}
 
+			context.Succeed(requirement);
 			return Task.CompletedTask;
 		}
 	}

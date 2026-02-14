@@ -22,22 +22,20 @@ namespace JobBoard.Core.Authrization.Handlers
 														User resource)
 		{
 
-
-			var id = _currentUserService.GetCurrentUserId();
-
 			if (context.User.IsInRole("Admin"))
 			{
 				context.Succeed(requirement);
 				return Task.CompletedTask;
-
 			}
 
-
-			if (resource.Id == id)
+			if (resource == null ||
+				resource.Id != _currentUserService.GetCurrentUserId())
 			{
-				context.Succeed(requirement);
+				context.Fail();
+				return Task.CompletedTask;
 			}
 
+			context.Succeed(requirement);
 			return Task.CompletedTask;
 		}
 	}
