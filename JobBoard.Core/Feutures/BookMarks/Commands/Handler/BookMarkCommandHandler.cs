@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using JobBoard.Core.Authorization.Policies;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.BookMarks.Commands.Models;
 using JobBoard.Core.Resources;
@@ -51,6 +52,14 @@ namespace JobBoard.Core.Feutures.BookMarks.Commands.Handler
 		{
 			var bookmark = await _bookMarkService.GetBookmarkByIdAsync(request.Id);
 			if (bookmark is null) return NotFound<string>();
+
+			var isAuthorized = await _authorizationService.AuthorizeAsync(
+				_currentUserService.GetCurrentUserPrincipal(),
+				bookmark,
+				AuthorizationPolicies.CanAccessOwnBookmarks);
+
+			if (!isAuthorized.Succeeded)
+				return Forbidden<string>("Access denied");
 
 			bool IsDeleted = await _bookMarkService.DeleteBookmarkAsync(bookmark);
 

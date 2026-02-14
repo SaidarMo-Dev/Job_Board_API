@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using JobBoard.Core.Authorization.Policies;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Applications.Queries.Models;
 using JobBoard.Core.Feutures.Applications.Queries.Responses;
@@ -54,6 +55,14 @@ namespace JobBoard.Core.Feutures.Applications.Queries.Handler
 
 			if (application is null) return NotFound<GetSingleApplictionQueryResponse>();
 
+			var isAuthrized = await _authorizationService.AuthorizeAsync(
+				_currentUserService.GetCurrentUserPrincipal(),
+				application,
+				AuthorizationPolicies.CanAccessOwnApplications);
+
+			if (!isAuthrized.Succeeded)
+				return Forbidden<GetSingleApplictionQueryResponse>("Access Denied");
+
 			return Success(_mapper.Map<GetSingleApplictionQueryResponse>(application));
 
 		}
@@ -62,10 +71,20 @@ namespace JobBoard.Core.Feutures.Applications.Queries.Handler
 		{
 			// check the existense of the job
 
-			var exist = await _jobService.IsExistByIdAsync(request.JobId);
-			if (!exist) return NotFound<GetApplicationsByJobIdQueryResponse>();
+			var job = await _jobService.GetJobByIdAsync(request.JobId);
 
+			if (job is null) return NotFound<GetApplicationsByJobIdQueryResponse>();
 
+			// Check Ownership
+			var isAuthorized = await _authorizationService.AuthorizeAsync(
+				_currentUserService.GetCurrentUserPrincipal(),
+				job,
+				AuthorizationPolicies.IsJobCreator);
+
+			if (!isAuthorized.Succeeded)
+				return Forbidden<GetApplicationsByJobIdQueryResponse>("Access Denied");
+
+			// Get applications for the job
 			var applications = await _applicationService.GetApplicationsByJobIdAsync(request.JobId);
 
 			var applicationDto = _mapper.Map<List<ApplicationResponse>>(applications);
@@ -92,14 +111,17 @@ namespace JobBoard.Core.Feutures.Applications.Queries.Handler
 
 		public async Task<Response<IReadOnlyList<GetRecentApplicationsQueryResponse>>> Handle(GetRecentApplicationsQuery request, CancellationToken cancellationToken)
 		{
-			var recentApplications = await _applicationService.GetRecentApplicationsAsync(_currentUserService.GetCurrentUserId(), request.Take);
+			var recentApplications = await _applicationService.GetRecentApplicationsAsync(
+				_currentUserService.GetCurrentUserId(),
+				request.Take);
 
 			return Success(_mapper.Map<IReadOnlyList<GetRecentApplicationsQueryResponse>>(recentApplications));
 		}
 
 		public async Task<Response<int[]>> Handle(GetAppliedJobIdsQuery request, CancellationToken cancellationToken)
 		{
-			var result = await _applicationService.GetAppliedJobIds(_currentUserService.GetCurrentUserId());
+			var result = await _applicationService.GetAppliedJobIds(
+				_currentUserService.GetCurrentUserId());
 
 			return Success(result);
 		}

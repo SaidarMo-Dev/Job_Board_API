@@ -1,6 +1,5 @@
-﻿using System.Security.Claims;
-using AutoMapper;
-using JobBoard.Core.Authrization.Requirements;
+﻿using AutoMapper;
+using JobBoard.Core.Authorization.Policies;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Common.DTOs;
 using JobBoard.Core.Feutures.Jobs.Queries.Models;
@@ -131,22 +130,15 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 		{
 
 			var company = _companyService.GetCompanyByIdAsync(request.CompanyId);
-
-			var userRoles = await _currentUserService.GetCurrentUserRoles();
-
-			// of not Admin apply entity based authorization (resource-based-Authorization)
-
-			if (!userRoles.Contains("Admin"))
-			{
-				var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), company, new CompanyCreatorRequirement());
-
-				if (!isAuthorized.Succeeded) return Forbidden<GetJobsByCompanyIdQueryResponse>();
-
-			}
-
-
-
 			if (company is null) return NotFound<GetJobsByCompanyIdQueryResponse>();
+
+			var isAuthorized = await _authorizationService.AuthorizeAsync(
+					_currentUserService.GetCurrentUserPrincipal(),
+					company,
+					AuthorizationPolicies.IsCompanyCreator);
+
+			if (!isAuthorized.Succeeded)
+				return Forbidden<GetJobsByCompanyIdQueryResponse>();
 
 			var result = await _jobService.GetJobsByCompanyIdAsync(request.CompanyId);
 

@@ -1,4 +1,5 @@
 ﻿using JobBoard.Api.Bases;
+using JobBoard.Core.Authorization.Policies;
 using JobBoard.Core.Feutures.Companies.Commands.Models;
 using JobBoard.Core.Feutures.Companies.Queries.Models;
 using JobBoard.Data.Metadata;
@@ -141,6 +142,7 @@ namespace JobBoard.Api.Controllers
 			Description = "Upload company logo",
 			OperationId = "UploadCompanyLogo")]
 
+		[Authorize(Policy = AuthorizationPolicies.IsCompanyCreator)]
 		[HttpPut(Router.CompanyRoute.UploadCompanyLogo)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		public async Task<IActionResult> UploadCompanyLogo([FromRoute] int Id, [FromForm] UploadCompanyLogoRequest request)

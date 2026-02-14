@@ -1,6 +1,5 @@
-﻿using System.Security.Claims;
-using AutoMapper;
-using JobBoard.Core.Authrization.Requirements;
+﻿using AutoMapper;
+using JobBoard.Core.Authorization.Policies;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.ApplicationUser.Queries.Models;
 using JobBoard.Core.Feutures.ApplicationUser.Queries.Responses;
@@ -76,11 +75,16 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 		{
 			var user = await _userService.GetUserInfoByIdWithInclude(request.Id);
 
-			var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), user, new SameUserRequirement());
-
-			if (!isAuthorized.Succeeded) return Forbidden<GetUserByIdQueryResponse>();
-
 			if (user == null) return NotFound<GetUserByIdQueryResponse>();
+
+			var isAuthorized = await _authorizationService.AuthorizeAsync(
+				_currentUserservice.GetCurrentUserPrincipal(),
+				user,
+				AuthorizationPolicies.SameUser);
+
+			if (!isAuthorized.Succeeded)
+				return Forbidden<GetUserByIdQueryResponse>();
+
 
 			var UserResponse = _mapper.Map<GetUserByIdQueryResponse>(user);
 
@@ -116,6 +120,15 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 			if (user is null)
 				return NotFound<GetCurrentUserQueryResponse>("User not Found");
 
+			// Check Ownership
+			var isAuthorized = await _authorizationService.AuthorizeAsync(
+				_currentUserservice.GetCurrentUserPrincipal(),
+				user,
+				AuthorizationPolicies.SameUser);
+
+			if (!isAuthorized.Succeeded)
+				return Forbidden<GetCurrentUserQueryResponse>("Access denied");
+
 			// Map the user entity to the response DTO
 			var userResponse = _mapper.Map<GetCurrentUserQueryResponse>(user);
 
@@ -139,15 +152,14 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 		}
 		public async Task<Response<GetUserDashboardStatsQueryResponse>> Handle(GetUserDashboardStatsQuery request, CancellationToken cancellationToken)
 		{
-			var curretUserId = _currentUserservice.GetCurrentUserId();
+			var user = _currentUserservice.GetCurrentUser();
 
-			if (!curretUserId.Equals(request.Id)) return Forbidden<GetUserDashboardStatsQueryResponse>("You don't have access to perform this operation!");
+			if (user.Id != request.Id) return Forbidden<GetUserDashboardStatsQueryResponse>("You don't have access to perform this operation!");
 
 			var stats = await _userService.GetUserDashboardStatsAsync(request.Id);
 
 			if (stats is null) return Success(new GetUserDashboardStatsQueryResponse());
 
-			var user = _currentUserservice.GetCurrentUser();
 
 			return Success(new GetUserDashboardStatsQueryResponse
 			{

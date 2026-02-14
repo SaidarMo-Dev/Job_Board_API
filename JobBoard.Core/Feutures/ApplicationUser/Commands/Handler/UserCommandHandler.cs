@@ -1,6 +1,5 @@
-﻿using System.Security.Claims;
-using AutoMapper;
-using JobBoard.Core.Authrization.Requirements;
+﻿using AutoMapper;
+using JobBoard.Core.Authorization.Policies;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.ApplicationUser.Commands.Models;
 using JobBoard.Core.Feutures.Files.Commands.Models;
@@ -34,6 +33,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 		private readonly IAuthorizationService _authorizationService;
 		private readonly IAuthenticationService _authenticationService;
 		private readonly IFileStorageService _fileStorageService;
+		private readonly ICurrentUserService _currentUserService;
 		private readonly IMediator _mediator;
 		#endregion
 
@@ -47,6 +47,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 			IAuthorizationService authorizationService,
 			IAuthenticationService authenticationService,
 			IFileStorageService fileStrageService,
+			ICurrentUserService currentUserService,
 			IMediator mediator
 
 			) : base(stringLocalizer)
@@ -59,6 +60,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 			_authorizationService = authorizationService;
 			_authenticationService = authenticationService;
 			_fileStorageService = fileStrageService;
+			_currentUserService = currentUserService;
 			_mediator = mediator;
 		}
 
@@ -92,9 +94,12 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 		{
 			var OldUser = await _userManager.FindByIdAsync(request.Id.ToString());
 
-			var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), OldUser, new SameUserRequirement());
+			var isAuthorized = await _authorizationService.AuthorizeAsync(
+				_currentUserService.GetCurrentUserPrincipal(),
+				OldUser,
+				AuthorizationPolicies.SameUser);
 
-			if (!isAuthorized.Succeeded) return Forbidden<string>();
+			if (!isAuthorized.Succeeded) return Forbidden<string>("Access Denied");
 
 			if (OldUser == null) return NotFound("");
 
@@ -119,9 +124,13 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 		{
 			var user = await _userManager.FindByIdAsync(request.Id.ToString());
 
-			var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), user, new SameUserRequirement());
+			var isAuthorized = await _authorizationService.AuthorizeAsync(
+				_currentUserService.GetCurrentUserPrincipal(),
+				user,
+				AuthorizationPolicies.SameUser);
 
-			if (!isAuthorized.Succeeded) return Forbidden<string>();
+			if (!isAuthorized.Succeeded)
+				return Forbidden<string>("Access Denied");
 
 
 			if (user == null) return NotFound("");
@@ -139,6 +148,13 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 
 			if (user == null) return NotFound("User not found");
 
+			var isAuthorized = await _authorizationService.AuthorizeAsync(
+						_currentUserService.GetCurrentUserPrincipal(),
+						user,
+						AuthorizationPolicies.SameUser);
+
+			if (!isAuthorized.Succeeded)
+				return Forbidden<string>("Access Denied");
 
 			var result = await _mediator.Send(
 				new UploadFileCommand(

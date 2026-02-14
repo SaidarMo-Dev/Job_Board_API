@@ -17,23 +17,28 @@ namespace JobBoard.Core.Authrization.Handlers
 			_userManager = userManager;
 		}
 
-		protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context,
+		protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
 														SameUserRequirement requirement,
 														User resource)
 		{
 
 
-			var user = _currentUserService.GetCurrentUser();
+			var id = _currentUserService.GetCurrentUserId();
+
+			if (context.User.IsInRole("Admin"))
+			{
+				context.Succeed(requirement);
+				return Task.CompletedTask;
+
+			}
 
 
-			if (await _userManager.IsInRoleAsync(user, "Admin")) context.Succeed(requirement);
-
-
-			if (resource.Id == user.Id)
+			if (resource.Id == id)
 			{
 				context.Succeed(requirement);
 			}
 
+			return Task.CompletedTask;
 		}
 	}
 }

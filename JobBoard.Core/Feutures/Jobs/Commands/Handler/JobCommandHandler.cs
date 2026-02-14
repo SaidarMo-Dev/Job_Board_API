@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using JobBoard.Core.Authrization.Requirements;
+using JobBoard.Core.Authorization.Policies;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Jobs.Commands.Models;
 using JobBoard.Core.Resources;
@@ -119,11 +119,14 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 		{
 			var Oldjob = await _jobService.GetJobByIdWithEncludeSkillsAndCategoriesAsync(request.Id);
 
-			var isAuthorized = await _authorizationService.AuthorizeAsync(_currentUserService.GetCurrentUserPrincipal(), Oldjob, new JobOwnerRequirement());
-
-			if (!isAuthorized.Succeeded) return Forbidden<string>();
-
 			if (Oldjob == null) return NotFound<string>($"Job With Id = {request.Id} Not Found");
+
+			var isAuthorized = await _authorizationService.AuthorizeAsync(
+			_currentUserService.GetCurrentUserPrincipal(),
+			Oldjob, AuthorizationPolicies.IsJobCreator);
+
+			if (!isAuthorized.Succeeded)
+				return Forbidden<string>("Access denied");
 
 			var newJob = _mapper.Map(request, Oldjob);
 
@@ -179,18 +182,15 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 		{
 			var job = await _jobService.GetJobByIdAsync(request.Id);
 
-			var userRoles = await _currentUserService.GetCurrentUserRoles();
-
-			Console.WriteLine("Test ");
-			// of not Admin then apply resource based Authorizatin for job creator
-			if (!userRoles.Contains("Admin"))
-			{
-				var isAuthorized = await _authorizationService.AuthorizeAsync(_currentUserService.GetCurrentUserPrincipal(), job, new JobOwnerRequirement());
-				if (!isAuthorized.Succeeded) return Forbidden<string>();
-
-			}
-
 			if (job == null) return NotFound<string>($"Job with Id = {request.Id} Not Found");
+
+
+			var isAuthorized = await _authorizationService.AuthorizeAsync(
+				_currentUserService.GetCurrentUserPrincipal(),
+				job, AuthorizationPolicies.IsJobCreator);
+
+			if (!isAuthorized.Succeeded)
+				return Forbidden<string>("Access denied");
 
 
 			var result = await _jobService.DeleteJobAsync(job);

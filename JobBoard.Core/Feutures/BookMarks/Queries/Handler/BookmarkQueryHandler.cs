@@ -1,6 +1,5 @@
-﻿using System.Security.Claims;
-using AutoMapper;
-using JobBoard.Core.Authrization.Requirements;
+﻿using AutoMapper;
+using JobBoard.Core.Authorization.Policies;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.BookMarks.Queries.Models;
 using JobBoard.Core.Feutures.BookMarks.Queries.Responses;
@@ -54,11 +53,15 @@ namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
 		{
 			var Bookmark = await _bookmarkService.GetBookmarkByIdWithIncludeAsync(request.Id);
 
-			var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), Bookmark, new OwnBookmarkRequirement());
-
-			if (!isAuthorized.Succeeded) return Forbidden<GetBookmarkByIdQueryResponse>();
-
 			if (Bookmark == null) return NotFound<GetBookmarkByIdQueryResponse>();
+
+			var isAuthorized = await _authorizationService.AuthorizeAsync(
+				_currentUserService.GetCurrentUserPrincipal(),
+				Bookmark,
+				AuthorizationPolicies.CanAccessOwnBookmarks);
+
+			if (!isAuthorized.Succeeded)
+				return Forbidden<GetBookmarkByIdQueryResponse>();
 
 			var BookmarkMapping = _mapper.Map<GetBookmarkByIdQueryResponse>(Bookmark);
 
@@ -91,14 +94,14 @@ namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
 
 		public async Task<Response<int>> Handle(GetUserSavedJobsCount request, CancellationToken cancellationToken)
 		{
-			var result = await _bookmarkService.GetUserSavedJobsCount(request.UserId);
+			var result = await _bookmarkService.GetUserSavedJobsCount(_currentUserService.GetCurrentUserId());
 			return Success(result);
 		}
 
 		public async Task<Response<GetSavedJobIdsQueryResponse>> Handle(GetSavedJobIdsQuery request, CancellationToken cancellationToken)
 		{
 
-			var result = await _bookmarkService.GetUserSavedJobIds(request.UserId);
+			var result = await _bookmarkService.GetUserSavedJobIds(_currentUserService.GetCurrentUserId());
 
 			return Success(new GetSavedJobIdsQueryResponse { SavedJobIds = result });
 		}

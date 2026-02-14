@@ -1,6 +1,5 @@
-﻿using System.Security.Claims;
-using AutoMapper;
-using JobBoard.Core.Authrization.Requirements;
+﻿using AutoMapper;
+using JobBoard.Core.Authorization.Policies;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Companies.Commands.Models;
 using JobBoard.Core.Feutures.Files.Commands.Models;
@@ -65,16 +64,16 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 
 			var company = await _companyService.GetCompanyByIdAsync(request.CompanyId);
 
-
-			if (!(await _currentUserService.GetCurrentUserRoles()).Contains("Admin"))
-			{
-				var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), company, new CompanyCreatorRequirement());
-
-				if (!isAuthorized.Succeeded) return Forbidden<int>(_stringLocalizer[SharedResourcesKeys.NoAccess]);
-			}
-
-
 			if (company == null) return NotFound<int>("There is no Company to Ipdate! Make sure to enter the correct Id");
+
+			var isAuthorized = await _authorizationService.AuthorizeAsync(
+				_currentUserService.GetCurrentUserPrincipal(),
+				company,
+				AuthorizationPolicies.IsCompanyCreator);
+
+			if (!isAuthorized.Succeeded)
+				return Forbidden<int>(_stringLocalizer[SharedResourcesKeys.NoAccess]);
+
 
 			company = _mapper.Map(request, company);
 
@@ -87,17 +86,16 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 		{
 			var company = await _companyService.GetCompanyByIdAsync(request.Id);
 
-			var userRoles = await _currentUserService.GetCurrentUserRoles();
+			if (company == null) return BadRequest<string>($"There Is No Company With Id = {request.Id}");
 
-			if (!userRoles.Contains("Admin"))
-			{
-				var isAuthorized = await _authorizationService.AuthorizeAsync(new ClaimsPrincipal(), company, new CompanyCreatorRequirement());
+			var isAuthorized = await _authorizationService.AuthorizeAsync(
+				_currentUserService.GetCurrentUserPrincipal(),
+				company,
+				AuthorizationPolicies.IsCompanyCreator);
 
-				if (!isAuthorized.Succeeded) return Forbidden<string>(_stringLocalizer[SharedResourcesKeys.NoAccess]);
+			if (!isAuthorized.Succeeded)
+				return Forbidden<string>(_stringLocalizer[SharedResourcesKeys.NoAccess]);
 
-			}
-
-			if (company == null) return BadRequest<string>($"There Is No Country With Id = {request.Id}");
 
 			await _companyService.DeleteAsync(company);
 
