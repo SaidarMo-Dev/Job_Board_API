@@ -10,6 +10,9 @@ namespace JobBoard.Api.Controllers
 {
 	[ApiController]
 	[Authorize(Roles = "Admin,Employer")]
+
+	[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	public class CategoryController : AppControllerbase
 	{
 		[SwaggerOperation(Summary = "Get category by ID",
@@ -19,8 +22,6 @@ namespace JobBoard.Api.Controllers
 		[HttpGet(Router.CategoryRoute.GetByID)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		[ProducesResponseType(StatusCodes.Status403Forbidden)]
 
 		public async Task<ActionResult> GetCategoryByID([FromRoute] int Id)
 		{
@@ -35,8 +36,6 @@ namespace JobBoard.Api.Controllers
 		[HttpGet(Router.CategoryRoute.GetAll)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		[ProducesResponseType(StatusCodes.Status403Forbidden)]
 
 		public async Task<IActionResult> GetAll([FromQuery] GetListCategoriesQuery query)
 		{
@@ -51,8 +50,6 @@ namespace JobBoard.Api.Controllers
 		[HttpGet(Router.CategoryRoute.Popular)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		[ProducesResponseType(StatusCodes.Status403Forbidden)]
 
 		public async Task<IActionResult> GetPopularCategories([FromQuery] GetPopularCategoriesQuery query)
 		{
@@ -79,8 +76,6 @@ namespace JobBoard.Api.Controllers
 		[HttpPost(Router.CategoryRoute.Create)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		[ProducesResponseType(StatusCodes.Status403Forbidden)]
 
 		public async Task<IActionResult> CreateCategory([FromBody] AddCategoryCommand request)
 		{
@@ -97,8 +92,6 @@ namespace JobBoard.Api.Controllers
 		[HttpPut(Router.CategoryRoute.Update)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		[ProducesResponseType(StatusCodes.Status403Forbidden)]
 
 		public async Task<IActionResult> UpdateCategory([FromBody] UpdateCategoryCommand request)
 		{
@@ -113,8 +106,6 @@ namespace JobBoard.Api.Controllers
 		[HttpDelete(Router.CategoryRoute.DeleteById)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		[ProducesResponseType(StatusCodes.Status403Forbidden)]
 
 		public async Task<IActionResult> DeleteCategory([FromRoute] int Id)
 		{

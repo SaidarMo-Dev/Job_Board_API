@@ -10,6 +10,9 @@ namespace JobBoard.Api.Controllers
 {
 	[ApiController]
 	[Authorize]
+
+	[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	public class ApplicationUserController : AppControllerbase
 	{
 		// paginate users
@@ -21,7 +24,6 @@ namespace JobBoard.Api.Controllers
 		[HttpGet(Router.ApplicationUserRoute.Paginate)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 
 		public async Task<IActionResult> PaginateUsers([FromQuery] GetPaginatedListUsersQuery query)
 		{
@@ -39,7 +41,6 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> GetCurrentUser()
 		{
 			return NewResult(await Mediator.Send(new GetCurrentUserQuery()));
@@ -56,7 +57,6 @@ namespace JobBoard.Api.Controllers
 		[HttpGet(Router.ApplicationUserRoute.GetByID)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> FindById([FromRoute] int Id)
 		{
 			return NewResult(await Mediator.Send(new GetUserByIdQuery(Id)));
@@ -89,7 +89,6 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand request)
 		{
 			return NewResult(await Mediator.Send(request));
@@ -106,7 +105,6 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> DeleteUser([FromRoute] int Id)
 		{
 			return NewResult(await Mediator.Send(new DeleteUserCommand { Id = Id }));
@@ -121,7 +119,6 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> GetDashboardStats([FromRoute] int Id)
 		{
 			return NewResult(await Mediator.Send(new GetUserDashboardStatsQuery(Id)));
@@ -138,7 +135,6 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> UploadUserProfileImage([FromRoute] int Id, [FromForm] UploadProfileImageRequest request)
 		{
 			return NewResult(await Mediator.Send(new SetUserProfileImageCommand { UserId = Id, ProfileImage = request.ProfileImage }));

@@ -10,6 +10,9 @@ namespace JobBoard.Api.Controllers
 {
 	[ApiController]
 	[Authorize]
+
+	[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	public class ApplicationController : AppControllerbase
 	{
 		[SwaggerOperation(
@@ -134,8 +137,6 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		[ProducesResponseType(StatusCodes.Status403Forbidden)]
 		public async Task<IActionResult> DeleteApplication([FromRoute] int Id)
 		{
 			return NewResult(await Mediator.Send(new DeleteApplicationCommand { Id = Id }));
@@ -149,7 +150,6 @@ namespace JobBoard.Api.Controllers
 		[Authorize]
 		[HttpGet(Router.ApplicationRoute.RecentApplications)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> GetRecentApplications([FromQuery] GetRecentApplicationsQuery query)
 		{
 			return NewResult(await Mediator.Send(query));
@@ -162,7 +162,6 @@ namespace JobBoard.Api.Controllers
 		[Authorize]
 		[HttpGet(Router.ApplicationRoute.AppliedJobIds)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> GetAppliedJobIds()
 		{
 			return NewResult(await Mediator.Send(new GetAppliedJobIdsQuery()));

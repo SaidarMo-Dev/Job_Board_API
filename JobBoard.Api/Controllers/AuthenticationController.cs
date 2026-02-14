@@ -12,6 +12,9 @@ namespace JobBoard.Api.Controllers
 {
 	[ApiController]
 	[AllowAnonymous]
+
+	[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	public class AuthenticationController : AppControllerbase
 	{
 		[SwaggerOperation(Summary = "Sign in",
@@ -62,7 +65,6 @@ namespace JobBoard.Api.Controllers
 		[HttpGet(Router.AuthenticationRoute.SendConfirmEmail)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 
 		public async Task<IActionResult> SendConfirmEmail([FromQuery] int userId)
 		{
@@ -131,7 +133,6 @@ namespace JobBoard.Api.Controllers
 
 		[HttpGet(Router.AuthenticationRoute.ConfirmEmailByUrl)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 
 		public async Task<IActionResult> ConfirmEmail([FromQuery] ConfirmEmailQuery request)
 		{
@@ -147,7 +148,6 @@ namespace JobBoard.Api.Controllers
 		[HttpPut(Router.AuthenticationRoute.SendResetPassword)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 
 		public async Task<IActionResult> SendResetPassword([FromQuery] SendResetPasswordCommand request)
 		{
@@ -164,7 +164,6 @@ namespace JobBoard.Api.Controllers
 		[HttpGet(Router.AuthenticationRoute.ConfirmResetPassword)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 
 		public async Task<IActionResult> ConfirmResetPassword([FromQuery] ConfirmResetPasswordQuery request)
 		{
@@ -181,7 +180,6 @@ namespace JobBoard.Api.Controllers
 		[HttpPost(Router.AuthenticationRoute.ResetPassword)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 
 
 		public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordCommand request)
@@ -197,7 +195,6 @@ namespace JobBoard.Api.Controllers
 		[HttpPut(Router.AuthenticationRoute.SendConfirmeEmailCode)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 
 		public async Task<IActionResult> SendConfirmeEmailCode([FromQuery] SendConfirmEmail request)
 		{
@@ -212,7 +209,6 @@ namespace JobBoard.Api.Controllers
 		[HttpPut(Router.AuthenticationRoute.SendEmailChange)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 
 		public async Task<IActionResult> SendEmailChange([FromQuery] SendEmailChangeCommand request)
 		{
@@ -228,7 +224,6 @@ namespace JobBoard.Api.Controllers
 		[HttpPut(Router.AuthenticationRoute.VerifyEmailChange)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 
 		public async Task<IActionResult> VerifyEmailChange([FromBody] VerifyEmailChangeCommand request)
 		{
@@ -245,7 +240,6 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> ChangePassword([FromBody] ChangeUserPasswordCommand request)
 		{
 			return NewResult(await Mediator.Send(request));
@@ -275,7 +269,6 @@ namespace JobBoard.Api.Controllers
 		[HttpGet(Router.AuthenticationRoute.ConfirmEmailByCode)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> ConfirmEmailByCode([FromQuery] ConfirmEmailByCode request)
 		{
 			return NewResult(await Mediator.Send(request));
@@ -289,7 +282,6 @@ namespace JobBoard.Api.Controllers
 		[HttpGet(Router.AuthenticationRoute.VerfiyPassword)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> VerifyPassword([FromQuery] VerifyPasswordQuery query)
 		{
 			return NewResult(await Mediator.Send(query));
@@ -302,8 +294,6 @@ namespace JobBoard.Api.Controllers
 
 		[HttpPut(Router.AuthenticationRoute.ResendVerificationCode)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		[ProducesResponseType(StatusCodes.Status403Forbidden)]
 		public async Task<IActionResult> ResendVerificationCode([FromQuery] ResendVerificationCodeCommand command)
 		{
 			return NewResult(await Mediator.Send(command));

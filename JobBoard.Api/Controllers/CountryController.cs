@@ -9,6 +9,9 @@ namespace JobBoard.Api.Controllers
 {
 	[ApiController]
 	[AllowAnonymous]
+
+	[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	public class CountryController : AppControllerbase
 	{
 		[SwaggerOperation(

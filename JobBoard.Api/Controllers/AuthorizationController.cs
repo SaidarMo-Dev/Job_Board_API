@@ -10,6 +10,9 @@ namespace JobBoard.Api.Controllers
 {
 	[ApiController]
 	[Authorize(Roles = "Admin,SuperAdmin")]
+
+	[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	public class AuthorizationController : AppControllerbase
 	{
 		[SwaggerOperation(Summary = "Get all roles",
@@ -20,8 +23,6 @@ namespace JobBoard.Api.Controllers
 
 		[HttpGet(Router.AuthorizationRoute.GetAllRoles)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		[ProducesResponseType(StatusCodes.Status403Forbidden)]
 		public async Task<IActionResult> GetAll()
 		{
 			return NewResult(await Mediator.Send(new GetListRolesQuery()));
@@ -33,8 +34,6 @@ namespace JobBoard.Api.Controllers
 
 		[HttpGet(Router.AuthorizationRoute.GetRoleById)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		[ProducesResponseType(StatusCodes.Status403Forbidden)]
 		public async Task<IActionResult> GetRoleById([FromRoute] int Id)
 		{
 			return NewResult(await Mediator.Send(new GetSingleRoleQuery { Id = Id }));
@@ -49,8 +48,6 @@ namespace JobBoard.Api.Controllers
 		[HttpGet(Router.AuthorizationRoute.GetManageUserRoles)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		[ProducesResponseType(StatusCodes.Status403Forbidden)]
 		public async Task<IActionResult> GetManageUserRoles([FromRoute] int Id)
 		{
 			return NewResult(await Mediator.Send(new ManageUserRolesQuery { UserId = Id }));
@@ -66,8 +63,6 @@ namespace JobBoard.Api.Controllers
 		[HttpPut(Router.AuthorizationRoute.UpdateUserRoles)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		[ProducesResponseType(StatusCodes.Status403Forbidden)]
 		public async Task<IActionResult> UpdateUserRoles([FromBody] UpdateUserRolesCommand request)
 		{
 			return NewResult(await Mediator.Send(request));
@@ -82,8 +77,6 @@ namespace JobBoard.Api.Controllers
 
 		[HttpPost(Router.AuthorizationRoute.Create)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		[ProducesResponseType(StatusCodes.Status403Forbidden)]
 		public async Task<IActionResult> AddRole([FromForm] AddRoleCommand request)
 		{
 			return NewResult(await Mediator.Send(request));
@@ -95,7 +88,6 @@ namespace JobBoard.Api.Controllers
 
 		[HttpPut(Router.AuthorizationRoute.Update)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		[ProducesResponseType(StatusCodes.Status403Forbidden)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -112,8 +104,6 @@ namespace JobBoard.Api.Controllers
 
 		[HttpDelete(Router.AuthorizationRoute.DeleteById)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		[ProducesResponseType(StatusCodes.Status403Forbidden)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> DeleteRole([FromRoute] int Id)
@@ -130,8 +120,6 @@ namespace JobBoard.Api.Controllers
 		[HttpGet(Router.AuthorizationRoute.ManageUserClaims)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		[ProducesResponseType(StatusCodes.Status403Forbidden)]
 		public async Task<IActionResult> ManageUserClaims([FromRoute] int Id)
 		{
 			return NewResult(await Mediator.Send(new ManageUserClaimsQuery { UserId = Id }));
@@ -145,8 +133,6 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		[ProducesResponseType(StatusCodes.Status403Forbidden)]
 		public async Task<IActionResult> UpdateUserClaims([FromBody] UpdateUserClaimCommand request)
 		{
 

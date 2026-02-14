@@ -9,6 +9,8 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace JobBoard.Api.Controllers
 {
 	[Authorize(Roles = "Admin")]
+	[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	[ApiController]
 
 	public class AdminController : AppControllerbase

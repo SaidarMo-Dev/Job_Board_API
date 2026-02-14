@@ -9,6 +9,9 @@ namespace JobBoard.Api.Controllers
 {
 	[ApiController]
 	[Authorize(Roles = "Employer,Admin")]
+
+	[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	public class EmployerController : AppControllerbase
 	{
 		[SwaggerOperation(

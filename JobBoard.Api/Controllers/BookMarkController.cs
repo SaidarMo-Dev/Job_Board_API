@@ -11,6 +11,9 @@ namespace JobBoard.Api.Controllers
 
 	[ApiController]
 	[Authorize]
+
+	[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	public class BookMarkController : AppControllerbase
 	{
 		[SwaggerOperation(Summary = "Get bookmark by ID",
@@ -21,7 +24,6 @@ namespace JobBoard.Api.Controllers
 		[HttpGet(Router.BookMarkRoute.GetByID)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> GetBookmarkByID([FromRoute] int Id)
 		{
 			return NewResult(await Mediator.Send(new GetBookmarkByIdQuery { Id = Id }));
@@ -35,7 +37,6 @@ namespace JobBoard.Api.Controllers
 		[Authorize(Roles = "Admin")]
 		[HttpGet(Router.BookMarkRoute.Paginate)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> BookmarksPaginate([FromQuery] GetPaginatedBookmarkListQuery request)
 		{
 			return Ok(await Mediator.Send(request));
@@ -51,7 +52,6 @@ namespace JobBoard.Api.Controllers
 		[HttpGet(Router.ApplicationUserRoute.Bookmarks)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> UserBookmarks([FromQuery] GetUserBookmarksQuery request)
 		{
 			return Ok(await Mediator.Send(request));
@@ -66,7 +66,6 @@ namespace JobBoard.Api.Controllers
 		[HttpPost(Router.BookMarkRoute.Create)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> AddBookMark([FromBody] AddBookMarkCommand request)
 		{
 			return NewResult(await Mediator.Send(request));
@@ -83,7 +82,6 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> DeleteBookMark([FromRoute] int Id)
 		{
 			return NewResult(await Mediator.Send(new DeleteBookmarkByIdCommand { Id = Id }));
@@ -98,7 +96,6 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> DeleteBookMarkByJobId([FromRoute] int Id)
 		{
 			return NewResult(await Mediator.Send(new DeleteBookmarkByJobIdCommand(Id)));
@@ -113,7 +110,6 @@ namespace JobBoard.Api.Controllers
 
 		[HttpGet(Router.ApplicationUserRoute.TotaleBookmarks)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> TotalUserBookmarks([FromQuery] GetUserSavedJobsCount request)
 		{
 			return Ok(await Mediator.Send(request));
@@ -126,7 +122,6 @@ namespace JobBoard.Api.Controllers
 
 		[HttpGet(Router.BookMarkRoute.UserSavedJobIds)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> GetUserSavedJobIds([FromRoute] int Id)
 		{
 			return Ok(await Mediator.Send(new GetSavedJobIdsQuery(Id)));
@@ -138,7 +133,6 @@ namespace JobBoard.Api.Controllers
 
 		[HttpGet(Router.BookMarkRoute.RecentSavedJobs)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> GetRecentSavedJobs([FromQuery] GetRecentSavedJobsQuery query)
 		{
 			return Ok(await Mediator.Send(query));

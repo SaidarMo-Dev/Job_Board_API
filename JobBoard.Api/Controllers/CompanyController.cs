@@ -11,6 +11,9 @@ namespace JobBoard.Api.Controllers
 {
 	[ApiController]
 	[Authorize(Roles = "Admin,Employer")]
+
+	[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	public class CompanyController : AppControllerbase
 	{
 		[SwaggerOperation(
@@ -21,7 +24,6 @@ namespace JobBoard.Api.Controllers
 
 		[HttpGet(Router.CompanyRoute.Paginate)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 
 		public async Task<IActionResult> GetPaginatedCompanies([FromQuery] GetPaginatedListCompanyQuery query)
 		{
@@ -40,7 +42,6 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> GetCompanyById([FromRoute] int Id, [FromQuery] string? fields)
 		{
 			return NewResult(await Mediator.Send(new GetSingleCompanyQuery(Id, fields)));
@@ -55,7 +56,6 @@ namespace JobBoard.Api.Controllers
 		//[Authorize(Roles = "Admin")]
 		[HttpGet(Router.CompanyRoute.GetAll)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> GetAll([FromQuery] GetAllCompaiesQuery query)
 		{
 			return Ok(await Mediator.Send(query));
@@ -70,7 +70,6 @@ namespace JobBoard.Api.Controllers
 		[HttpPost(Router.CompanyRoute.Create)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		public async Task<IActionResult> AddCompany([FromBody] AddCompanyCommand request)
 		{
 			return NewResult(await Mediator.Send(request));
@@ -85,7 +84,6 @@ namespace JobBoard.Api.Controllers
 		[HttpPut(Router.CompanyRoute.Update)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 
 		public async Task<IActionResult> UpdateCompany([FromBody] UpdateCompanyCommand request)
 		{
@@ -102,7 +100,6 @@ namespace JobBoard.Api.Controllers
 		[HttpDelete(Router.CompanyRoute.DeleteById)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 
 		public async Task<IActionResult> DeleteCompany([FromRoute] int Id)
 		{

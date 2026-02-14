@@ -10,6 +10,9 @@ namespace JobBoard.Api.Controllers
 	[ApiController]
 
 	[Authorize]
+
+	[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	public class FilesController : AppControllerbase
 	{
 
@@ -21,8 +24,6 @@ namespace JobBoard.Api.Controllers
 		[HttpGet(Router.FilesRoute.SignedUrl)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		[ProducesResponseType(StatusCodes.Status403Forbidden)]
 
 		public async Task<IActionResult> GenerateSignedUrl([FromRoute] int Id)
 		{

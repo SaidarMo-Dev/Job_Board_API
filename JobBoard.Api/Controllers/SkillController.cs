@@ -10,6 +10,9 @@ namespace JobBoard.Api.Controllers
 {
 	[ApiController]
 	[Authorize(Roles = "Admin,Employer")]
+
+	[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	public class SkillController : AppControllerbase
 	{
 
