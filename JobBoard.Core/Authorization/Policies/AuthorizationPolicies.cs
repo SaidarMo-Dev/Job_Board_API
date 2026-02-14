@@ -5,6 +5,11 @@
 		/// <summary>
 		/// Allows users to access only their own applications
 		/// </summary>
+		public const string SameUser = "SameUserPolicy";
+
+		/// <summary>
+		/// Allows users to access only their own applications
+		/// </summary>
 		public const string CanAccessOwnApplications = "CanAccessOwnApplicationsPolicy";
 
 		/// <summary>

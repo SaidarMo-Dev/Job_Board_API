@@ -11,6 +11,10 @@ namespace JobBoard.Core.Authorization.Policies
 		/// <param name="options"></param>
 		public static void AddApplicationPolicies(this AuthorizationOptions options)
 		{
+			// User can access only thier info
+			options.AddPolicy(AuthorizationPolicies.SameUser, policy =>
+				policy.Requirements.Add(new SameUserRequirement()));
+
 			// Users can access only their own applications
 			options.AddPolicy(AuthorizationPolicies.CanAccessOwnApplications, policy =>
 				policy.Requirements.Add(new OwnApplicationsRequirement()));
