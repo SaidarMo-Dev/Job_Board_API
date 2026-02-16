@@ -1,4 +1,4 @@
-﻿using JobBoard.Core.Authrization.Requirements;
+﻿using JobBoard.Core.Authorization.Policies;
 using JobBoard.Core.Authrization.Resources;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Files.Queries.Models;
@@ -73,7 +73,7 @@ namespace JobBoard.Core.Feutures.Files.Queries.Handlers
 			var isAuthorized = await _aspNetauthorizationService.AuthorizeAsync(
 				_currentUserService.GetCurrentUserPrincipal(),
 				uploadResource,
-				new FileOwnerRequirement());
+				AuthorizationPolicies.IsFileOwner);
 
 
 			if (!isAuthorized.Succeeded)

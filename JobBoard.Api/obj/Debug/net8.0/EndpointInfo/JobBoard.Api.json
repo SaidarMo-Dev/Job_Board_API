@@ -9415,6 +9415,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "dateExpired": {
+            "type": "string",
+            "format": "date-time"
+          },
           "status": {
             "$ref": "#/components/schemas/JobStatusEnum"
           },

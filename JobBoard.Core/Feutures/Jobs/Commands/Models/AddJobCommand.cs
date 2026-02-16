@@ -14,7 +14,7 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Models
 		public double MinSalary { get; set; }
 		public double MaxSalary { get; set; }
 		public ExperienceLevelEnum ExperienceLevel { get; set; }
-		public DateTime DateExpired { get; set; }
+		public DateTime DateExpired { get; set; } = DateTime.UtcNow.AddDays(10);
 
 		public HashSet<int> skillIds { get; set; } = new HashSet<int>();
 		public HashSet<int> CategoryIds { get; set; } = new HashSet<int>();

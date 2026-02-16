@@ -49,12 +49,16 @@ namespace JobBoard.Core.Feutures.Applications.Commands.Handler
 		{
 			// Check job existence
 
-			var jobExist = await _jobService.IsExistByIdAsync(request.JobId);
+			var job = await _jobService.GetJobByIdAsync(request.JobId);
 
-			if (!jobExist) return BadRequest<int>("Job not found");
+
+			if (job == null
+				|| job.Status != JobStatusEnum.Active
+				|| job.DateExpired < DateTime.UtcNow)
+
+				return BadRequest<int>("Failed to apply");
 
 			// Check if the user has already an active application for the current job 
-
 
 			if (await _applicationService
 				.HasActiveOrAcceptedApplicationWithJobAsync(

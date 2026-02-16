@@ -64,11 +64,6 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 
 			job.DatePosted = DateTime.UtcNow;
 
-			// Default expiration date if user not set it;
-
-			if (job.DateExpired == null)
-				job.DateExpired = DateTime.UtcNow.AddDays(10);
-
 			// get created user
 			job.CreatedByUserId = _currentUserService.GetCurrentUserId();
 
@@ -129,6 +124,9 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 				return Forbidden<string>("Access denied");
 
 			var newJob = _mapper.Map(request, Oldjob);
+
+			if (!newJob.DateExpired.HasValue)
+				newJob.DateExpired = Oldjob.DateExpired;
 
 			await _jobService.UpdateAsync(newJob);
 
