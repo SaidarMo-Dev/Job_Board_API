@@ -66,6 +66,19 @@ namespace JobBoard.Service.Implementations
 
 		}
 
+		public async Task<List<(int Id, string Path)>> GetPathByIdsAsync(IEnumerable<int> ids)
+		{
+			if (ids == null || !ids.Any())
+				return new List<(int, string)>();
+
+			return await _fileResourceRepository.GetTableAsNoTracking()
+				.Where(file => ids.Any(id => file.Id == id))
+				.Select(file => new ValueTuple<int, string>(file.Id, file.Path))
+				.ToListAsync();
+
+
+		}
+
 		public async Task<FileResource> UpdateAsync(FileResource fileResource)
 		{
 			await _fileResourceRepository.UpdateAsync(fileResource);

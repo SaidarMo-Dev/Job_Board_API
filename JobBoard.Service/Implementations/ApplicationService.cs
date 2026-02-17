@@ -156,6 +156,55 @@ namespace JobBoard.Service.Implementations
 
 		}
 
+		public IQueryable<JobApplicantsSummaryResponse> GetJobApplicants(int jobId, FilterApplicantsEnum? filters, SortApplicantsEnum? sort)
+		{
+			var applicantsQuery = _applicationRepository.GetTableAsNoTracking().Where(app => app.JobId == jobId);
+
+
+			// Apply filtering
+			if (filters.HasValue)
+			{
+				applicantsQuery = filters.Value switch
+				{
+					FilterApplicantsEnum.Pending =>
+						applicantsQuery.Where(a => a.Status == ApplicationStatusEnum.Pending),
+					FilterApplicantsEnum.Accepted =>
+						applicantsQuery.Where(a => a.Status == ApplicationStatusEnum.Accepted),
+					FilterApplicantsEnum.Rejected =>
+						applicantsQuery.Where(a => a.Status == ApplicationStatusEnum.Rejected),
+
+					_ => applicantsQuery
+				};
+			}
+
+
+			// Apply sorting
+			applicantsQuery = sort switch
+			{
+				SortApplicantsEnum.Name =>
+					applicantsQuery.OrderBy(a => a.FirstName).ThenBy(a => a.LastName),
+
+				SortApplicantsEnum.OldestFirst =>
+					applicantsQuery.OrderBy(a => a.CreatedOn),
+
+				_ =>
+					applicantsQuery.OrderByDescending(a => a.CreatedOn)
+			};
+
+
+			return applicantsQuery.Select(app =>
+											new JobApplicantsSummaryResponse
+											{
+												Id = app.ApplicationId,
+												Name = app.FirstName + " " + app.LastName,
+												Email = app.Email,
+												Experience = app.Experience,
+												AppliedDate = app.CreatedOn,
+												Status = app.Status,
+												ResumeFileId = app.ResumeFileId,
+												ProfileImageFileId = app.UserInfo.ProfileImageFileId
+											});
+		}
 
 		#endregion
 

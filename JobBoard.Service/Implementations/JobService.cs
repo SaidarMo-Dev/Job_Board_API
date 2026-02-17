@@ -1,7 +1,6 @@
 ﻿using JobBoard.Data.Entities;
 using JobBoard.Data.Entities.Identity;
 using JobBoard.Data.enums;
-using JobBoard.Data.Responses;
 using JobBoard.Infrastructure.Abstractions;
 using JobBoard.Service.Abstractions;
 using JobBoard.Service.Authentication.Interfaces;
@@ -200,50 +199,6 @@ namespace JobBoard.Service.Implementations
 
 			return query;
 		}
-
-		public IQueryable<JobApplicantsSummaryResponse> GetJobApplicants(int jobId, FilterApplicantsEnum? filters, SortApplicantsEnum? sort)
-		{
-			var applicantsQuery = _jobRepository.GetTableAsNoTracking().Where(j => j.JobId == jobId)
-											.SelectMany(j => j.applications);
-
-
-			if (filters != null)
-			{
-				applicantsQuery = filters switch
-				{
-					FilterApplicantsEnum.Pending => applicantsQuery.Where(a => a.Status == ApplicationStatusEnum.Pending),
-					FilterApplicantsEnum.Accepted => applicantsQuery.Where(a => a.Status == ApplicationStatusEnum.Accepted),
-					FilterApplicantsEnum.Rejected => applicantsQuery.Where(a => a.Status == ApplicationStatusEnum.Rejected),
-					_ => applicantsQuery
-				};
-
-
-			}
-
-			if (sort != null)
-			{
-				applicantsQuery = sort switch
-				{
-					SortApplicantsEnum.Name => applicantsQuery.OrderBy(a => a.FirstName).ThenBy(a => a.LastName),
-					SortApplicantsEnum.NewestFirst => applicantsQuery.OrderByDescending(a => a.CreatedOn),
-					SortApplicantsEnum.OldestFirst => applicantsQuery.OrderBy(a => a.CreatedOn),
-					_ => applicantsQuery
-				};
-			}
-
-			return applicantsQuery.Select(app =>
-											new JobApplicantsSummaryResponse
-											{
-												Id = app.UserId,
-												Name = app.FirstName + " " + app.LastName,
-												Email = app.Email,
-												Experience = app.Experience,
-												AppliedDate = app.CreatedOn,
-												Status = app.Status
-
-											});
-		}
-
 
 
 

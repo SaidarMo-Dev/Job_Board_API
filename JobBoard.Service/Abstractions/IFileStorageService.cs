@@ -21,6 +21,8 @@ namespace JobBoard.Service.Abstractions
 		Task<string> CreateSignedReadUrlAsync(string bucket, string filePath);
 		string GetPublicUrl(string bucket, string filePath);
 		string GetBucket(FileOwnerType ownerType);
+
+		Task<Dictionary<int, string>> CreateSignedReadUrlsAsync(string bucket, IEnumerable<int> fileIds);
 	}
 
 

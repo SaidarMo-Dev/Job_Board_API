@@ -1,7 +1,5 @@
 ﻿using JobBoard.Data.Entities;
 using JobBoard.Data.Entities.Identity;
-using JobBoard.Data.enums;
-using JobBoard.Data.Responses;
 
 namespace JobBoard.Service.Abstractions
 {
@@ -116,7 +114,6 @@ namespace JobBoard.Service.Abstractions
 		/// <param name="filters">The filter of <see cref="FilterApplicantsEnum"/> to use to filter applicants.</param>
 		/// <param name="sort">The sort of <see cref="SortApplicantsEnum"/> to use to sort applicants.</param>
 		/// <returns>A queryable collection of <see cref="JobApplicantsSummaryResponse"/> objects representing the Applicant.</returns>
-		IQueryable<JobApplicantsSummaryResponse> GetJobApplicants(int jobId, FilterApplicantsEnum? filters, SortApplicantsEnum? sort);
 
 
 	}

@@ -1,4 +1,5 @@
 ﻿using JobBoard.Data.Entities;
+using JobBoard.Data.enums;
 using JobBoard.Data.Responses;
 
 namespace JobBoard.Service.Abstractions
@@ -91,5 +92,6 @@ namespace JobBoard.Service.Abstractions
 
 		Task AttachResumeAsync(int applicationId, int resumeFileId);
 
+		public IQueryable<JobApplicantsSummaryResponse> GetJobApplicants(int jobId, FilterApplicantsEnum? filters, SortApplicantsEnum? sort);
 	}
 }

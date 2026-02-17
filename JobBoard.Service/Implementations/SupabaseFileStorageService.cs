@@ -12,14 +12,20 @@ namespace JobBoard.Service.Implementations
 	{
 		private readonly Client _client;
 		private readonly ISignedUrlCache _signedUrlCache;
+		private readonly IFileResourceService _fileResourceService;
 		private readonly IOptions<SupabaseSettings> _settings;
 
-		public SupabaseFileStorageService(IOptions<SupabaseSettings> settigns, Client client, ISignedUrlCache signedUrlCache)
+		public SupabaseFileStorageService(
+			IOptions<SupabaseSettings> settigns,
+			Client client,
+			ISignedUrlCache signedUrlCache,
+			IFileResourceService fileResourceService)
 		{
 
 			_settings = settigns;
 			_client = client;
 			_signedUrlCache = signedUrlCache;
+			_fileResourceService = fileResourceService;
 		}
 
 
@@ -185,6 +191,85 @@ namespace JobBoard.Service.Implementations
 		public string GetBucket(FileOwnerType ownerType)
 		{
 			return (ownerType == FileOwnerType.Companies) ? _settings.Value.PublicBucket : _settings.Value.PrivateBucket;
+		}
+
+		public async Task<Dictionary<int, string>> CreateSignedReadUrlsAsync(string bucket, IEnumerable<int> fileIds)
+		{
+			var result = new Dictionary<int, string>();
+			var ids = fileIds.Distinct().ToList();
+
+
+			if (!ids.Any())
+				return result;
+
+			// Load file paths from repository
+			var files = await _fileResourceService
+				.GetPathByIdsAsync(ids); // Returns list of { Id, Path }
+
+			if (!files.Any())
+				return result;
+
+
+			var missingFiles = new List<(int Id, string Path)>();
+
+			// Check cache
+			foreach (var file in files)
+			{
+				var cacheKey = $"signed-url:{bucket}:{file.Path}";
+				var cachedUrl = await _signedUrlCache.GetAsync(cacheKey);
+
+				if (!string.IsNullOrEmpty(cachedUrl))
+				{
+					result[file.Id] = cachedUrl;
+				}
+				else
+				{
+					missingFiles.Add((file.Id, file.Path));
+				}
+			}
+
+			// Generate signed URLs for missing files
+			if (missingFiles.Any())
+			{
+				var semaphore = new SemaphoreSlim(10);
+
+				var tasks = missingFiles.Select(async f =>
+				{
+					await semaphore.WaitAsync();
+					try
+					{
+						var signedUrl = await _client
+							.Storage
+							.From(bucket)
+							.CreateSignedUrl(f.Path, _settings.Value.SignedUrlExpirySeconds);
+
+						if (string.IsNullOrEmpty(signedUrl))
+							throw new Exception($"Failed to generate signed URL for file {f.Id}");
+
+						// Cache the signed URL
+						var cacheKey = $"signed-url:{bucket}:{f.Path}";
+						var cacheDuration = TimeSpan.FromSeconds(_settings.Value.SignedUrlExpirySeconds - 60);
+						await _signedUrlCache.SetAsync(cacheKey, signedUrl, cacheDuration);
+
+						return (f.Id, signedUrl);
+					}
+					finally
+					{
+						semaphore.Release();
+					}
+				});
+
+				var generatedUrls = await Task.WhenAll(tasks);
+
+				foreach (var (id, url) in generatedUrls)
+				{
+					result[id] = url;
+				}
+
+			}
+
+			return result;
+
 		}
 	}
 }

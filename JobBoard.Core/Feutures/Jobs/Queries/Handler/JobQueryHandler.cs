@@ -36,6 +36,7 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 		private readonly IAuthorizationService _authorizationService;
 		private readonly ICurrentUserService _currentUserService;
 		private readonly IFileStorageService _storageService;
+		private readonly IApplicationService _applicationService;
 		#endregion
 
 		#region Constructors
@@ -45,7 +46,8 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 							ICompanyService companyService,
 							IAuthorizationService authorizationService,
 							ICurrentUserService currentUserService,
-							IFileStorageService storageService
+							IFileStorageService storageService,
+							IApplicationService applicationService
 
 			) : base(stringLocalizer)
 		{
@@ -55,6 +57,7 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 			_authorizationService = authorizationService;
 			_currentUserService = currentUserService;
 			_storageService = storageService;
+			_applicationService = applicationService;
 		}
 		#endregion
 
@@ -174,12 +177,33 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 
 		public async Task<PaginatedResponse<List<GetJobApplicantSummaryResponse>>> Handle(GetJobApplicantsSummary request, CancellationToken cancellationToken)
 		{
-			var applicants = _jobService.GetJobApplicants(request.JobId, request.Filter, request.Sort);
+			var applicants = _applicationService.GetJobApplicants(request.JobId, request.Filter, request.Sort);
 
-			return (await _mapper.ProjectTo<GetJobApplicantSummaryResponse>(applicants)
-											.ToPaginatedAsync(request.Page, request.Size));
+			var result = await _mapper.ProjectTo<GetJobApplicantSummaryResponse>(applicants)
+											.ToPaginatedAsync(request.Page, request.Size);
+
+			if (result.data == null)
+				return result;
 
 
+			var fileIds = result.data
+				.Where(app => app.ProfileImageFileId.HasValue)
+				.Select(app => app.ProfileImageFileId!.Value);
+
+			var signedUrls = await _storageService.CreateSignedReadUrlsAsync(
+				_storageService.GetBucket(FileOwnerType.Applications), fileIds);
+
+			foreach (var applicant in result.data)
+			{
+				if (applicant.ProfileImageFileId.HasValue &&
+					signedUrls.TryGetValue(applicant.ProfileImageFileId.Value, out var url))
+				{
+					applicant.ProfileImageUrl = url;
+				}
+			}
+
+
+			return result;
 		}
 
 

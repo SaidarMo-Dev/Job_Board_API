@@ -41,6 +41,7 @@ namespace JobBoard.Service.Abstractions
 		/// <param name="fileResource">The <see cref="FileResource"/> entity to delete.</param>
 		/// <returns><c>true</c> if the deletion was successful; otherwise, <c>false</c>.</returns>
 		Task<bool> DeleteAsync(FileResource fileResource);
+		Task<List<(int Id, string Path)>> GetPathByIdsAsync(IEnumerable<int> ids);
 
 	}
 }

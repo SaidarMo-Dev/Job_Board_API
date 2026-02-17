@@ -6,12 +6,12 @@ namespace JobBoard.Data.Responses
 	{
 		public int Id { get; set; }
 		public required string Name { get; set; }
-		public string? ImagePath { get; set; }
+		public int? ProfileImageFileId { get; set; }
 		public string? Email { get; set; }
 		public required string Experience { get; set; }
 		public DateTime AppliedDate { get; set; }
 		public ApplicationStatusEnum Status { get; set; }
-		public string? Resume { get; set; }
+		public int? ResumeFileId { get; set; }
 
 	}
 }
