@@ -1195,8 +1195,8 @@
         }
       }
     },
-    "/Api/V1/applications/set-accepted": {
-      "put": {
+    "/Api/V1/applications/{Id}/accept": {
+      "patch": {
         "tags": [
           "Application"
         ],
@@ -1205,8 +1205,9 @@
         "operationId": "SetApplicationStatusToAccepted",
         "parameters": [
           {
-            "name": "ApplicationId",
-            "in": "query",
+            "name": "Id",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -1300,8 +1301,8 @@
         }
       }
     },
-    "/Api/V1/applications/set-removed": {
-      "put": {
+    "/Api/V1/applications{Id}/remove": {
+      "patch": {
         "tags": [
           "Application"
         ],
@@ -1310,8 +1311,9 @@
         "operationId": "SetApplicationStatusToRemoved",
         "parameters": [
           {
-            "name": "ApplicationId",
-            "in": "query",
+            "name": "Id",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int32"

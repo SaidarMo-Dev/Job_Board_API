@@ -103,13 +103,13 @@ namespace JobBoard.Api.Controllers
 						  OperationId = "SetApplicationStatusToAccepted")]
 
 		[Authorize(Roles = "Admin,Employer")]
-		[HttpPut(Router.ApplicationRoute.SetAccepted)]
+		[HttpPatch(Router.ApplicationRoute.Accept)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		public async Task<IActionResult> SetToAccepted([FromQuery] SetApplicationStatusToAcceptedCommand request)
+		public async Task<IActionResult> SetToAccepted([FromRoute] int Id)
 		{
-			return NewResult(await Mediator.Send(request));
+			return NewResult(await Mediator.Send(new SetApplicationStatusToAcceptedCommand { ApplicationId = Id }));
 		}
 
 
@@ -118,13 +118,13 @@ namespace JobBoard.Api.Controllers
 						  OperationId = "SetApplicationStatusToRemoved")]
 
 		[Authorize(Roles = "Admin,Employer")]
-		[HttpPut(Router.ApplicationRoute.SetRemoved)]
+		[HttpPatch(Router.ApplicationRoute.Remove)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		public async Task<IActionResult> SetToRemoved([FromQuery] SetApplicationStatusToRemovedCommand request)
+		public async Task<IActionResult> SetToRemoved([FromRoute] int Id)
 		{
-			return NewResult(await Mediator.Send(request));
+			return NewResult(await Mediator.Send(new SetApplicationStatusToRemovedCommand { ApplicationId = Id }));
 		}
 
 
