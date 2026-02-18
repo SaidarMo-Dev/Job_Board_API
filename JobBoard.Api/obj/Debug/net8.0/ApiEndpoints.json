@@ -3416,6 +3416,11 @@
         "Name": "Id",
         "Type": "System.Int32",
         "IsRequired": true
+      },
+      {
+        "Name": "Download",
+        "Type": "System.Boolean",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [

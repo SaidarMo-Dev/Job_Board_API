@@ -144,7 +144,7 @@ namespace JobBoard.Service.Implementations
 
 		}
 
-		public async Task<string> CreateSignedReadUrlAsync(string bucket, string filePath)
+		public async Task<string> CreateSignedReadUrlAsync(string bucket, string filePath, bool download = false)
 		{
 
 			var cacheKey = $"signed-url:{bucket}:{filePath}";
@@ -163,6 +163,15 @@ namespace JobBoard.Service.Implementations
 
 			if (signedUrl == null)
 				throw new Exception("Failed to generate signed URL.");
+
+
+
+			if (download)
+			{
+				var fileName = $"{StoragePathBuilder.GetOriginalFileName(filePath)}";
+				signedUrl = $"{signedUrl}&download={Uri.EscapeDataString(fileName)}";
+
+			}
 
 			// Cache slightly less than expiration
 			var cacheDuration = TimeSpan.FromSeconds(_settings.Value.SignedUrlExpirySeconds - 60);
@@ -193,7 +202,7 @@ namespace JobBoard.Service.Implementations
 			return (ownerType == FileOwnerType.Companies) ? _settings.Value.PublicBucket : _settings.Value.PrivateBucket;
 		}
 
-		public async Task<Dictionary<int, string>> CreateSignedReadUrlsAsync(string bucket, IEnumerable<int> fileIds)
+		public async Task<Dictionary<int, string>> CreateSignedReadUrlsAsync(string bucket, IEnumerable<int> fileIds, bool download = false)
 		{
 			var result = new Dictionary<int, string>();
 			var ids = fileIds.Distinct().ToList();

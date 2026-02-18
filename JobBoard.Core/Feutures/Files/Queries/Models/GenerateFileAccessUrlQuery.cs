@@ -7,5 +7,7 @@ namespace JobBoard.Core.Feutures.Files.Queries.Models
 	public class GenerateFileAccessUrlQuery : IRequest<Response<string>>
 	{
 		public int FileResourceId { get; set; }
+		public bool Download { get; set; } = false;
+
 	}
 }

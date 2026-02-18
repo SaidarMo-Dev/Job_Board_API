@@ -7244,6 +7244,13 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "Download",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
           }
         ],
         "responses": {

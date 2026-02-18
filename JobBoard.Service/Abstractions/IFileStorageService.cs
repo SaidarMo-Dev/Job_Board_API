@@ -18,11 +18,11 @@ namespace JobBoard.Service.Abstractions
 
 		Task DeleteAsync(FileOwnerType ownerType, string filePath);
 
-		Task<string> CreateSignedReadUrlAsync(string bucket, string filePath);
+		Task<string> CreateSignedReadUrlAsync(string bucket, string filePath, bool download = false);
 		string GetPublicUrl(string bucket, string filePath);
 		string GetBucket(FileOwnerType ownerType);
 
-		Task<Dictionary<int, string>> CreateSignedReadUrlsAsync(string bucket, IEnumerable<int> fileIds);
+		Task<Dictionary<int, string>> CreateSignedReadUrlsAsync(string bucket, IEnumerable<int> fileIds, bool download = false);
 	}
 
 

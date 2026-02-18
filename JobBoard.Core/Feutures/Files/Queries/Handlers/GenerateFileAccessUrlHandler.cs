@@ -81,7 +81,8 @@ namespace JobBoard.Core.Feutures.Files.Queries.Handlers
 
 			var signedUrl = await _storageService.CreateSignedReadUrlAsync(
 				bucket,
-				file.Path);
+				file.Path,
+				request.Download);
 
 			return Success(signedUrl);
 		}

@@ -27,6 +27,22 @@ namespace JobBoard.Infrastructure.Helpers
 
 		}
 
+		public static string GetOriginalFileName(string fullPath)
+		{
+			// Extract filename with extension
+			var fileName = Path.GetFileName(fullPath);
+
+			// Find first underscore
+			var underscoreIndex = fileName.IndexOf('_');
+
+			if (underscoreIndex >= 0)
+			{
+				return fileName.Substring(underscoreIndex + 1);
+			}
+
+			return fileName; // fallback if format is unexpected
+		}
+
 
 		private static string SanitizeFileName(string fileName)
 		{

@@ -25,9 +25,9 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 
-		public async Task<IActionResult> GenerateSignedUrl([FromRoute] int Id)
+		public async Task<IActionResult> GenerateSignedUrl([FromRoute] int Id, [FromQuery] bool Download)
 		{
-			return Ok(await Mediator.Send(new GenerateFileAccessUrlQuery { FileResourceId = Id }));
+			return Ok(await Mediator.Send(new GenerateFileAccessUrlQuery { FileResourceId = Id, Download = Download }));
 		}
 
 	}
