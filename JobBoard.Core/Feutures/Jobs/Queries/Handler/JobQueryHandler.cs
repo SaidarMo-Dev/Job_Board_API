@@ -86,6 +86,9 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 			var result = await _mapper.ProjectTo<GetPaginatedJobsQueryResponse>(queryable)
 					.ToPaginatedAsync(request.PageNumber, request.PageSize);
 
+			if (result.data == null)
+				return result;
+
 			foreach (var job in result.data)
 			{
 

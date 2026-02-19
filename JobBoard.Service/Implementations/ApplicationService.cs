@@ -172,6 +172,7 @@ namespace JobBoard.Service.Implementations
 						applicantsQuery.Where(a => a.Status == ApplicationStatusEnum.Accepted),
 					FilterApplicantsEnum.Rejected =>
 						applicantsQuery.Where(a => a.Status == ApplicationStatusEnum.Rejected),
+					FilterApplicantsEnum.All => applicantsQuery,
 
 					_ => applicantsQuery
 				};

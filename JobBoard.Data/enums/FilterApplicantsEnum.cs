@@ -2,6 +2,7 @@
 {
 	public enum FilterApplicantsEnum
 	{
+		All,
 		Pending,
 		Accepted,
 		Rejected
