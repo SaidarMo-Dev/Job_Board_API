@@ -144,7 +144,11 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 		public async Task<Response<string>> Handle(SetUserProfileImageCommand request, CancellationToken cancellationToken)
 		{
 
-			var user = await _userManager.FindByIdAsync(request.UserId.ToString());
+			var user = await _userManager.FindByIdAsync(
+				_currentUserService.
+				GetCurrentUserId()
+				.ToString());
+
 
 			if (user == null) return NotFound("User not found");
 

@@ -132,13 +132,13 @@ namespace JobBoard.Api.Controllers
 					  Description = "Upload user profile image",
 					  OperationId = "UploadProfileImage")]
 
-		[HttpPost(Router.ApplicationUserRoute.UploadProfileImage)]
+		[HttpPatch(Router.ApplicationUserRoute.UploadProfileImage)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> UploadUserProfileImage([FromRoute] int Id, [FromForm] UploadProfileImageRequest request)
 		{
-			return NewResult(await Mediator.Send(new SetUserProfileImageCommand { UserId = Id, ProfileImage = request.ProfileImage }));
+			return NewResult(await Mediator.Send(new SetUserProfileImageCommand { ProfileImage = request.ProfileImage }));
 		}
 	}
 }
