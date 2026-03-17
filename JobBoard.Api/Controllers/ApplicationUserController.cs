@@ -136,7 +136,7 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		public async Task<IActionResult> UploadUserProfileImage([FromRoute] int Id, [FromForm] UploadProfileImageRequest request)
+		public async Task<IActionResult> UploadUserProfileImage([FromForm] UploadProfileImageRequest request)
 		{
 			return NewResult(await Mediator.Send(new SetUserProfileImageCommand { ProfileImage = request.ProfileImage }));
 		}

@@ -13,7 +13,9 @@ namespace JobBoard.Core.Mapping.JobMapping
 			.ForMember(dst => dst.SkillIds, opt =>
 						opt.MapFrom(src => src.JobSkills.Select(jc => jc.SkillId)))
 			.ForMember(dst => dst.CretaedByUser, opt =>
-						opt.MapFrom(src => src.CreatedByUser.FullName));
+						opt.MapFrom(src => src.CreatedByUser.FullName))
+			.ForMember(dst => dst.DateExpired, opt =>
+						opt.MapFrom(src => src.DateExpired));
 
 		}
 	}

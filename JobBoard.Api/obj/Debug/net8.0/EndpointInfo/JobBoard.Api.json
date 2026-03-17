@@ -2239,25 +2239,14 @@
         }
       }
     },
-    "/Api/V1/users/{Id}/profile-image": {
-      "post": {
+    "/Api/V1/users/profile-image": {
+      "patch": {
         "tags": [
           "ApplicationUser"
         ],
         "summary": "Upload profile image",
         "description": "Upload user profile image",
         "operationId": "UploadProfileImage",
-        "parameters": [
-          {
-            "name": "Id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
         "requestBody": {
           "content": {
             "multipart/form-data": {

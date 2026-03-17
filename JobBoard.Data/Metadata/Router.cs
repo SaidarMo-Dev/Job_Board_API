@@ -93,7 +93,7 @@
 			public const string Applications = Prefex + "/applications";
 			public const string DashboardStats = Prefex + "/{Id}/dashboard-stats";
 
-			public const string UploadProfileImage = Prefex + "/{Id}/profile-image";
+			public const string UploadProfileImage = Prefex + "/profile-image";
 
 		}
 		public static class JobRoute

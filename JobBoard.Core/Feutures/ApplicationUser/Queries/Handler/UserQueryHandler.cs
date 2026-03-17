@@ -139,10 +139,17 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 				var file = await _fileResourceService.GetByIdAsync(fileId);
 				if (file != null)
 				{
-					userResponse.ProfileImageUrl = await _storageService.CreateSignedReadUrlAsync(
+					try
+					{
+						userResponse.ProfileImageUrl = await _storageService.CreateSignedReadUrlAsync(
 						_storageService.GetBucket(file.OwnerType),
-						file.Path
-					);
+						file.Path);
+
+					}
+					catch (Exception ex)
+					{
+						// TODO : Log error into error file
+					}
 				}
 			}
 

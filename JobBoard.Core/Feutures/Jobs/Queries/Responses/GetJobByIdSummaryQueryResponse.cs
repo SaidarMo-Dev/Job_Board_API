@@ -12,6 +12,7 @@
 		public string? MinSalary { get; set; }
 		public string? ExperienceLevel { get; set; }
 		public required string DatePosted { get; set; }
+		public required DateTime DateExpired { get; set; }
 		public required string Status { get; set; }
 		public required string CretaedByUser { get; set; }
 
