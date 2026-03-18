@@ -9,7 +9,7 @@ namespace JobBoard.Core.Mapping.CompanyMapping
 		{
 			CreateMap<Company, GetListCompaniesQueryesponse>()
 				.ForMember(dst => dst.TotalJobs, opt =>
-								opt.MapFrom(src => src.JobsListing != null ? src.JobsListing.Count() : 0))
+								opt.MapFrom(src => src.JobListings != null ? src.JobListings.Count() : 0))
 				.ForMember(dst => dst.CreatedByUser, opt =>
 								opt.MapFrom(src => src.CreatedByUser.FullName));
 

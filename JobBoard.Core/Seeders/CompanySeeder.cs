@@ -19,7 +19,8 @@ namespace JobBoard.Core.Seeders
 					PhoneNumber = "212-555-1001",
 					Email = "info@technovaxy.com",
 					Fax = "212-555-1002",
-					CreatedByUserId = 1
+					CreatedByUserId = 1,
+					Slug = "tech-novaxy"
 				},
 				new Company
 				{
@@ -31,7 +32,8 @@ namespace JobBoard.Core.Seeders
 					PhoneNumber = "310-555-2001",
 					Email = "contact@designify.com",
 					Fax = "310-555-2002",
-					CreatedByUserId = 1
+					CreatedByUserId = 1,
+					Slug = "designity"
 				},
 				new Company
 				{
@@ -43,7 +45,8 @@ namespace JobBoard.Core.Seeders
 					PhoneNumber = "312-555-3001",
 					Email = "support@datasolvedf.com",
 					Fax = "312-555-3002",
-					CreatedByUserId = 1
+					CreatedByUserId = 1,
+					Slug = "data-solve"
 				}
 			};
 

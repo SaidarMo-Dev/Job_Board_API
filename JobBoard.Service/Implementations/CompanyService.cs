@@ -143,7 +143,7 @@ namespace JobBoard.Service.Implementations
 				{
 					c.CompanyName,
 					JobsCount =
-						c.JobsListing.Count(j => j.Status == JobStatusEnum.Active && j.DatePosted >= cutOffDate)
+						c.JobListings.Count(j => j.Status == JobStatusEnum.Active && j.DatePosted >= cutOffDate)
 
 				})
 				.OrderByDescending(c => c.JobsCount)
