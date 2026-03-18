@@ -6070,86 +6070,6 @@
         }
       }
     },
-    "/Api/V1/companies/paginate": {
-      "get": {
-        "tags": [
-          "Company"
-        ],
-        "summary": "Get paginated companies",
-        "description": "Retrieves a paginated list of companies based on the specified query parameters.",
-        "operationId": "GetPaginatedCompanies",
-        "parameters": [
-          {
-            "name": "PageNumber",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "PageSize",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Order",
-            "in": "query",
-            "schema": {
-              "$ref": "#/components/schemas/OrderCompanyEnum"
-            }
-          }
-        ],
-        "responses": {
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/Api/V1/companies/{Id}": {
       "get": {
         "tags": [
@@ -6390,7 +6310,14 @@
             }
           },
           {
-            "name": "Search",
+            "name": "Name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Location",
             "in": "query",
             "schema": {
               "type": "string"
@@ -9186,14 +9113,6 @@
           "PartTime",
           "FreeLance",
           "Contract"
-        ],
-        "type": "string"
-      },
-      "OrderCompanyEnum": {
-        "enum": [
-          "OrderByID",
-          "OrderByName",
-          "OrderByLocation"
         ],
         "type": "string"
       },

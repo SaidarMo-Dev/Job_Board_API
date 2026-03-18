@@ -4,7 +4,7 @@ using MediatR;
 
 namespace JobBoard.Core.Feutures.Categories.Queries.Models
 {
-	public class GetCategoriesSummaryQuery : IRequest<PaginatedResponse<List<GetCategoriesSummaryQueryResponse>>>
+	public class GetCategoriesSummaryQuery : IRequest<PaginatedResponse<GetCategoriesSummaryQueryResponse>>
 	{
 		public int page { get; set; }
 		public int size { get; set; }

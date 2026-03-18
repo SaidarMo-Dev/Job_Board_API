@@ -1,12 +1,10 @@
-﻿using System.Linq.Expressions;
-using System.Reflection;
+﻿using System.Reflection;
 using AutoMapper;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Companies.Queries.Models;
 using JobBoard.Core.Feutures.Companies.Queries.Results;
 using JobBoard.Core.Resources;
 using JobBoard.Core.Wrapers;
-using JobBoard.Data.Entities;
 using JobBoard.Service.Abstractions;
 using MediatR;
 using Microsoft.Extensions.Localization;
@@ -15,10 +13,9 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 {
 	public class CompanyQueryHandler : ResponseHandler,
 						IRequestHandler<GetSingleCompanyQuery, Response<object>>,
-						IRequestHandler<GetAllCompaiesQuery, PaginatedResponse<List<GetListCompaniesQueryesponse>>>,
-						IRequestHandler<GetPaginatedListCompanyQuery, PaginatedResponse<List<GetPaginatedListCompaniesQueryResponse>>>,
+						IRequestHandler<GetCompaiesQuery, PaginatedResponse<GetListCompaniesQueryesponse>>,
 						IRequestHandler<GetPopularCompaniesQuery, Response<string[]>>,
-						IRequestHandler<GetCompaniesSummaryQuery, PaginatedResponse<List<GetCompaniesSummaryQueryResponse>>>
+						IRequestHandler<GetCompaniesSummaryQuery, PaginatedResponse<GetCompaniesSummaryQueryResponse>>
 	{
 		#region Fields
 		private readonly ICompanyService _companyService;
@@ -81,25 +78,11 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 			return Success<object>(fullCompanyResponse);
 		}
 
-		public async Task<PaginatedResponse<List<GetListCompaniesQueryesponse>>> Handle(GetAllCompaiesQuery request, CancellationToken cancellationToken)
+		public async Task<PaginatedResponse<GetListCompaniesQueryesponse>> Handle(GetCompaiesQuery request, CancellationToken cancellationToken)
 		{
-			var queryable = _companyService.GetCompaniesQueryable(request.Search, request.Sort);
+			var queryable = _companyService.GetCompaniesQueryable(request.Name, request.Sort);
 
 			return (await _mapper.ProjectTo<GetListCompaniesQueryesponse>(queryable).ToPaginatedAsync(request.Page, request.PageSize));
-		}
-
-		public async Task<PaginatedResponse<List<GetPaginatedListCompaniesQueryResponse>>> Handle(GetPaginatedListCompanyQuery request, CancellationToken cancellationToken)
-		{
-			Expression<Func<Company, GetPaginatedListCompaniesQueryResponse>>
-					expression = comp => new GetPaginatedListCompaniesQueryResponse(comp.CompanyId, comp.CompanyName, comp.Description,
-													comp.WebsiteUrl, comp.Location, comp.PhoneNumber ?? "",
-													comp.Email, comp.Fax ?? "");
-
-			var queryable = _companyService.FilterPaginatedQueryable(request.Order);
-
-			var result = await queryable.Select(expression).ToPaginatedAsync(request.PageNumber, request.PageSize);
-
-			return result;
 		}
 
 		public async Task<Response<string[]>> Handle(GetPopularCompaniesQuery request, CancellationToken cancellationToken)
@@ -108,7 +91,7 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 
 		}
 
-		public async Task<PaginatedResponse<List<GetCompaniesSummaryQueryResponse>>> Handle(GetCompaniesSummaryQuery request, CancellationToken cancellationToken)
+		public async Task<PaginatedResponse<GetCompaniesSummaryQueryResponse>> Handle(GetCompaniesSummaryQuery request, CancellationToken cancellationToken)
 		{
 			var companies = _companyService.GetPaginatedQueryable();
 			return (await _mapper.ProjectTo<GetCompaniesSummaryQueryResponse>(companies).ToPaginatedAsync(request.page, request.size));

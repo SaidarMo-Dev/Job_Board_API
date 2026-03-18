@@ -16,8 +16,8 @@ namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
 {
 	public class BookmarkQueryHandler : ResponseHandler,
 				IRequestHandler<GetBookmarkByIdQuery, Response<GetBookmarkByIdQueryResponse>>,
-				IRequestHandler<GetPaginatedBookmarkListQuery, PaginatedResponse<List<GetPaginatedBookmarkListQueryResponse>>>,
-				IRequestHandler<GetUserBookmarksQuery, PaginatedResponse<List<GetUserBookmarksQueryResponse>>>,
+				IRequestHandler<GetPaginatedBookmarkListQuery, PaginatedResponse<GetPaginatedBookmarkListQueryResponse>>,
+				IRequestHandler<GetUserBookmarksQuery, PaginatedResponse<GetUserBookmarksQueryResponse>>,
 				IRequestHandler<GetUserSavedJobsCount, Response<int>>,
 				IRequestHandler<GetSavedJobIdsQuery, Response<GetSavedJobIdsQueryResponse>>,
 				IRequestHandler<GetRecentSavedJobsQuery, Response<List<GetRecentSavedJobsQueryResponse>>>
@@ -70,7 +70,7 @@ namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
 
 		}
 
-		public async Task<PaginatedResponse<List<GetPaginatedBookmarkListQueryResponse>>> Handle(GetPaginatedBookmarkListQuery request, CancellationToken cancellationToken)
+		public async Task<PaginatedResponse<GetPaginatedBookmarkListQueryResponse>> Handle(GetPaginatedBookmarkListQuery request, CancellationToken cancellationToken)
 		{
 			var ListBookmarksQueryable = _bookmarkService.GetBookmarksQueryable();
 
@@ -80,7 +80,7 @@ namespace JobBoard.Core.Feutures.BookMarks.Queries.Handler
 			return BookmarksPaginatedResult;
 		}
 
-		public async Task<PaginatedResponse<List<GetUserBookmarksQueryResponse>>> Handle(GetUserBookmarksQuery request, CancellationToken cancellationToken)
+		public async Task<PaginatedResponse<GetUserBookmarksQueryResponse>> Handle(GetUserBookmarksQuery request, CancellationToken cancellationToken)
 		{
 			var currentUserId = _currentUserService.GetCurrentUserId();
 

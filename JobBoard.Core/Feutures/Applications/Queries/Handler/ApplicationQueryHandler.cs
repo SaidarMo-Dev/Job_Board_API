@@ -18,7 +18,7 @@ namespace JobBoard.Core.Feutures.Applications.Queries.Handler
 	public class ApplicationQueryHandler : ResponseHandler,
 				IRequestHandler<GetSingleApplicationQuery, Response<GetSingleApplictionQueryResponse>>,
 				IRequestHandler<GetApplicationsByJobIdQuery, Response<GetApplicationsByJobIdQueryResponse>>,
-				IRequestHandler<GetCurrentUserApplicationsQuery, PaginatedResponse<List<GetCurrentUserApplicationsQueryResponse>>>,
+				IRequestHandler<GetCurrentUserApplicationsQuery, PaginatedResponse<GetCurrentUserApplicationsQueryResponse>>,
 				IRequestHandler<GetRecentApplicationsQuery, Response<IReadOnlyList<GetRecentApplicationsQueryResponse>>>,
 				IRequestHandler<GetAppliedJobIdsQuery, Response<int[]>>
 	{
@@ -93,7 +93,7 @@ namespace JobBoard.Core.Feutures.Applications.Queries.Handler
 			return Success(new GetApplicationsByJobIdQueryResponse { Applications = applicationDto });
 		}
 
-		public async Task<PaginatedResponse<List<GetCurrentUserApplicationsQueryResponse>>> Handle(GetCurrentUserApplicationsQuery request, CancellationToken cancellationToken)
+		public async Task<PaginatedResponse<GetCurrentUserApplicationsQueryResponse>> Handle(GetCurrentUserApplicationsQuery request, CancellationToken cancellationToken)
 		{
 			int userId = _currentUserService.GetCurrentUserId();
 

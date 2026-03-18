@@ -13,7 +13,7 @@ namespace JobBoard.Core.Feutures.Employer.Queries.Handlers
 {
 	public class EmployerQueryHandler : ResponseHandler,
 							IRequestHandler<GetEmployerDashboardStatsQuery, Response<GetEmployerDashboardStatsQueryResponse>>,
-							IRequestHandler<GetEmployerPostedJobsQuery, PaginatedResponse<List<GetEmployerPostedJobsQueryResponse>>>
+							IRequestHandler<GetEmployerPostedJobsQuery, PaginatedResponse<GetEmployerPostedJobsQueryResponse>>
 	{
 
 		#region Fields
@@ -45,7 +45,7 @@ namespace JobBoard.Core.Feutures.Employer.Queries.Handlers
 			return Success(_mapper.Map<GetEmployerDashboardStatsQueryResponse>(result));
 		}
 
-		public async Task<PaginatedResponse<List<GetEmployerPostedJobsQueryResponse>>> Handle(GetEmployerPostedJobsQuery request, CancellationToken cancellationToken)
+		public async Task<PaginatedResponse<GetEmployerPostedJobsQueryResponse>> Handle(GetEmployerPostedJobsQuery request, CancellationToken cancellationToken)
 		{
 			var jobs = _jobService.GetEmployerPostedJobsQueryable(_currentUserService.GetCurrentUserId(), request.Search);
 

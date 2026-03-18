@@ -21,7 +21,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 {
 	public class UserQueryHandler : ResponseHandler,
 									IRequestHandler<GetUserByIdQuery, Response<GetUserByIdQueryResponse>>,
-									IRequestHandler<GetPaginatedListUsersQuery, PaginatedResponse<List<GetPaginatedListUsersQueryResponse>>>,
+									IRequestHandler<GetPaginatedListUsersQuery, PaginatedResponse<GetPaginatedListUsersQueryResponse>>,
 									IRequestHandler<GetCurrentUserQuery, Response<GetCurrentUserQueryResponse>>,
 									IRequestHandler<GetUserDashboardStatsQuery, Response<GetUserDashboardStatsQueryResponse>>
 
@@ -91,7 +91,7 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 			return Success(UserResponse);
 		}
 
-		public async Task<PaginatedResponse<List<GetPaginatedListUsersQueryResponse>>> Handle(GetPaginatedListUsersQuery request, CancellationToken cancellationToken)
+		public async Task<PaginatedResponse<GetPaginatedListUsersQueryResponse>> Handle(GetPaginatedListUsersQuery request, CancellationToken cancellationToken)
 		{
 			var users = _userManager.Users.AsQueryable();
 

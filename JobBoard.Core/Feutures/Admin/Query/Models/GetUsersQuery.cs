@@ -5,7 +5,7 @@ using MediatR;
 
 namespace JobBoard.Core.Feutures.Admin.Query.Models
 {
-	public class GetUsersQuery : IRequest<PaginatedResponse<List<UserManagementResponse>>>
+	public class GetUsersQuery : IRequest<PaginatedResponse<UserManagementResponse>>
 	{
 		public int Page { get; set; }
 		public int Size { get; set; }

@@ -11,9 +11,9 @@ using Microsoft.Extensions.Localization;
 namespace JobBoard.Core.Feutures.Categories.Queries.Handler
 {
 	public class CategoryQueryHandler : ResponseHandler, IRequestHandler<GetSingleCategoryQuery, Response<GetSingleCategoryQueryResponse>>,
-										IRequestHandler<GetListCategoriesQuery, PaginatedResponse<List<GetListCategoriesQueryResponse>>>,
+										IRequestHandler<GetListCategoriesQuery, PaginatedResponse<GetListCategoriesQueryResponse>>,
 										IRequestHandler<GetPopularCategoriesQuery, Response<List<GetPopularCategoriesQueryResponse>>>,
-										IRequestHandler<GetCategoriesSummaryQuery, PaginatedResponse<List<GetCategoriesSummaryQueryResponse>>>
+										IRequestHandler<GetCategoriesSummaryQuery, PaginatedResponse<GetCategoriesSummaryQueryResponse>>
 	{
 
 		#region Fields
@@ -41,7 +41,7 @@ namespace JobBoard.Core.Feutures.Categories.Queries.Handler
 
 		}
 
-		public async Task<PaginatedResponse<List<GetListCategoriesQueryResponse>>> Handle(GetListCategoriesQuery request, CancellationToken cancellationToken)
+		public async Task<PaginatedResponse<GetListCategoriesQueryResponse>> Handle(GetListCategoriesQuery request, CancellationToken cancellationToken)
 		{
 			var queryable = _categoryService.GetCategoriesQueryable(request.Search, request.sort);
 
@@ -60,7 +60,7 @@ namespace JobBoard.Core.Feutures.Categories.Queries.Handler
 			return Success(categoriesDto);
 		}
 
-		public async Task<PaginatedResponse<List<GetCategoriesSummaryQueryResponse>>> Handle(GetCategoriesSummaryQuery request, CancellationToken cancellationToken)
+		public async Task<PaginatedResponse<GetCategoriesSummaryQueryResponse>> Handle(GetCategoriesSummaryQuery request, CancellationToken cancellationToken)
 		{
 			var categories = _categoryService.GetCategoriesQueryable();
 			return (await _mapper.ProjectTo<GetCategoriesSummaryQueryResponse>(categories).ToPaginatedAsync(request.page, request.size));

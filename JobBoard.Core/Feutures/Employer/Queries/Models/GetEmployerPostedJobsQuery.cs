@@ -4,7 +4,7 @@ using MediatR;
 
 namespace JobBoard.Core.Feutures.Employer.Queries.Models
 {
-	public class GetEmployerPostedJobsQuery : IRequest<PaginatedResponse<List<GetEmployerPostedJobsQueryResponse>>>
+	public class GetEmployerPostedJobsQuery : IRequest<PaginatedResponse<GetEmployerPostedJobsQueryResponse>>
 	{
 		public int Page { get; set; }
 		public int Size { get; set; }

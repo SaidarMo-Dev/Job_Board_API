@@ -4,11 +4,11 @@ namespace JobBoard.Core.Wrapers
 {
 	public class PaginatedResponse<T>
 	{
-		public PaginatedResponse(T data)
+		public PaginatedResponse(IEnumerable<T> data)
 		{
 			this.data = data;
 		}
-		public PaginatedResponse(T data, int page, int size, int totalRecords, string message = null)
+		public PaginatedResponse(IEnumerable<T> data, int page, int size, int totalRecords, string message = null)
 		{
 			this.data = data;
 			totalPages = (int)Math.Ceiling((double)totalRecords / size);
@@ -20,12 +20,12 @@ namespace JobBoard.Core.Wrapers
 			currentPage = page > totalPages ? totalPages : page;
 		}
 
-		public static PaginatedResponse<T> Success(T data, int page, int size, int totalRecords, string message = null)
+		public static PaginatedResponse<T> Success(IEnumerable<T> data, int page, int size, int totalRecords, string message = null)
 		{
 			return new(data, page, size, totalRecords, message);
 		}
 
-		public T data { get; set; }
+		public IEnumerable<T> data { get; set; }
 		public string message { get; set; } = string.Empty;
 		public HttpStatusCode statusCode { get; set; }
 		public bool succeeded { get; set; }

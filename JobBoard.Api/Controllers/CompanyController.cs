@@ -16,21 +16,6 @@ namespace JobBoard.Api.Controllers
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	public class CompanyController : AppControllerbase
 	{
-		[SwaggerOperation(
-			Summary = "Get paginated companies",
-			Description = "Retrieves a paginated list of companies based on the specified query parameters.",
-			OperationId = "GetPaginatedCompanies")]
-
-
-		[HttpGet(Router.CompanyRoute.Paginate)]
-		[ProducesResponseType(StatusCodes.Status200OK)]
-
-		public async Task<IActionResult> GetPaginatedCompanies([FromQuery] GetPaginatedListCompanyQuery query)
-		{
-
-			return Ok(await Mediator.Send(query));
-
-		}
 
 
 		[SwaggerOperation(
@@ -53,10 +38,10 @@ namespace JobBoard.Api.Controllers
 			Description = "Returns a list of all companies. Restricted to Admin role.",
 			OperationId = "GetAllCompanies")]
 
-		//[Authorize(Roles = "Admin")]
-		[HttpGet(Router.CompanyRoute.GetAll)]
+		[AllowAnonymous]
+		[HttpGet(Router.CompanyRoute.GetCompanies)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<IActionResult> GetAll([FromQuery] GetAllCompaiesQuery query)
+		public async Task<IActionResult> GetAll([FromQuery] GetCompaiesQuery query)
 		{
 			return Ok(await Mediator.Send(query));
 		}

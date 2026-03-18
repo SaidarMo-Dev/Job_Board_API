@@ -5,7 +5,7 @@ using MediatR;
 
 namespace JobBoard.Core.Feutures.Jobs.Queries.Models
 {
-	public class GetJobApplicantsSummary : IRequest<PaginatedResponse<List<GetJobApplicantSummaryResponse>>>
+	public class GetJobApplicantsSummary : IRequest<PaginatedResponse<GetJobApplicantSummaryResponse>>
 	{
 		public int JobId { get; set; }
 		public int Page { get; set; }

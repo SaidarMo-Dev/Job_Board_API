@@ -16,9 +16,9 @@ using Microsoft.Extensions.Localization;
 namespace JobBoard.Core.Feutures.Admin.Query.Handlers
 {
 	public class AdminQueryHandler : ResponseHandler,
-			IRequestHandler<GetUsersQuery, PaginatedResponse<List<UserManagementResponse>>>,
+			IRequestHandler<GetUsersQuery, PaginatedResponse<UserManagementResponse>>,
 			IRequestHandler<GetAdminProfileQuery, Response<GetAdminProfileQueryResponse>>,
-			IRequestHandler<GetAdminJobsQuery, PaginatedResponse<List<GetAdminJobsQueryResponse>>>
+			IRequestHandler<GetAdminJobsQuery, PaginatedResponse<GetAdminJobsQueryResponse>>
 	{
 		private readonly IUserService _userService;
 		private readonly UserManager<User> _userManager;
@@ -49,7 +49,7 @@ namespace JobBoard.Core.Feutures.Admin.Query.Handlers
 		#endregion
 
 		#region Handles
-		public async Task<PaginatedResponse<List<UserManagementResponse>>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
+		public async Task<PaginatedResponse<UserManagementResponse>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
 		{
 			var users = _userService.GetUsersQueryable(request.Search, request.FilterByRole, request.FilterStatus);
 
@@ -75,7 +75,7 @@ namespace JobBoard.Core.Feutures.Admin.Query.Handlers
 
 		}
 
-		public async Task<PaginatedResponse<List<GetAdminJobsQueryResponse>>> Handle(GetAdminJobsQuery request, CancellationToken cancellationToken)
+		public async Task<PaginatedResponse<GetAdminJobsQueryResponse>> Handle(GetAdminJobsQuery request, CancellationToken cancellationToken)
 		{
 			var jobsQueryable = _jobService.GetJobsQueryable();
 			jobsQueryable = jobsQueryable.ApplySearch(request.Search);

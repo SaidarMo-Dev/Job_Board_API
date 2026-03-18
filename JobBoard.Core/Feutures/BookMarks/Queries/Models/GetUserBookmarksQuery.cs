@@ -4,7 +4,7 @@ using MediatR;
 
 namespace JobBoard.Core.Feutures.BookMarks.Queries.Models
 {
-	public class GetUserBookmarksQuery : IRequest<PaginatedResponse<List<GetUserBookmarksQueryResponse>>>
+	public class GetUserBookmarksQuery : IRequest<PaginatedResponse<GetUserBookmarksQueryResponse>>
 	{
 
 		public int page { get; set; }

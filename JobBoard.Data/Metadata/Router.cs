@@ -34,7 +34,7 @@
 		{
 			private const string Prefex = Rule + "/companies";
 
-			public const string GetAll = Prefex;
+			public const string GetCompanies = Prefex;
 			public const string Paginate = Prefex + "/paginate";
 			public const string GetByID = Prefex + Single;
 			public const string Create = Prefex;

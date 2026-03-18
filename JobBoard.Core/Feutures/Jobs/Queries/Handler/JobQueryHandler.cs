@@ -19,14 +19,14 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 {
 	public class JobQueryHandler : ResponseHandler,
 			IRequestHandler<GetJobByIdQuery, Response<GetJobByIdQueryResponse>>,
-			IRequestHandler<GetPaginatedJobsQuery, PaginatedResponse<List<GetPaginatedJobsQueryResponse>>>,
+			IRequestHandler<GetPaginatedJobsQuery, PaginatedResponse<GetPaginatedJobsQueryResponse>>,
 			IRequestHandler<GetJobSkillsQuery, Response<List<GetJobSkillsQueryResponse>>>,
 			IRequestHandler<GetJobCategoriesQuery, Response<List<GetJobCategoriesQueryResponse>>>,
 			IRequestHandler<GetJobsByCompanyIdQuery, Response<GetJobsByCompanyIdQueryResponse>>,
 			IRequestHandler<GetPopularLocationsQuery, Response<string[]>>,
 			IRequestHandler<GetRecommendationJobsQuery, Response<List<JobResponseDto>>>,
 			IRequestHandler<GetJobByIdSummaryQuery, Response<GetJobByIdSummaryQueryResponse>>,
-			IRequestHandler<GetJobApplicantsSummary, PaginatedResponse<List<GetJobApplicantSummaryResponse>>>
+			IRequestHandler<GetJobApplicantsSummary, PaginatedResponse<GetJobApplicantSummaryResponse>>
 	{
 
 		#region Fields
@@ -70,7 +70,7 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 			return Success(_mapper.Map<GetJobByIdQueryResponse>(job));
 		}
 
-		public async Task<PaginatedResponse<List<GetPaginatedJobsQueryResponse>>> Handle(GetPaginatedJobsQuery request, CancellationToken cancellationToken)
+		public async Task<PaginatedResponse<GetPaginatedJobsQueryResponse>> Handle(GetPaginatedJobsQuery request, CancellationToken cancellationToken)
 		{
 			var queryable = _jobService.GetJobsQueryable().Where(j => j.Status == JobStatusEnum.Active && j.DateExpired > DateTime.UtcNow);
 
@@ -178,7 +178,7 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 			return Success(_mapper.Map<GetJobByIdSummaryQueryResponse>(job));
 		}
 
-		public async Task<PaginatedResponse<List<GetJobApplicantSummaryResponse>>> Handle(GetJobApplicantsSummary request, CancellationToken cancellationToken)
+		public async Task<PaginatedResponse<GetJobApplicantSummaryResponse>> Handle(GetJobApplicantsSummary request, CancellationToken cancellationToken)
 		{
 			var applicants = _applicationService.GetJobApplicants(request.JobId, request.Filter, request.Sort);
 

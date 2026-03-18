@@ -4,7 +4,7 @@ using MediatR;
 
 namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Models
 {
-	public class GetPaginatedListUsersQuery : IRequest<PaginatedResponse<List<GetPaginatedListUsersQueryResponse>>>
+	public class GetPaginatedListUsersQuery : IRequest<PaginatedResponse<GetPaginatedListUsersQueryResponse>>
 	{
 		public int PageNumber { get; set; }
 		public int PageSize { get; set; }

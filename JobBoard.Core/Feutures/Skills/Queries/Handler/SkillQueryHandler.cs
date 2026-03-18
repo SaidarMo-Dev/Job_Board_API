@@ -12,8 +12,8 @@ namespace JobBoard.Core.Feutures.Skills.Queries.Handler
 {
 	public class SkillQueryHandler : ResponseHandler,
 									IRequestHandler<GetSingleSkillQuery, Response<GetSingleSkillQueryResponse>>,
-									IRequestHandler<GetListSkillsQuery, PaginatedResponse<List<GetListSkillsQueryResponse>>>,
-									IRequestHandler<GetSkillsSummaryQuery, PaginatedResponse<List<GetSkillsSummaryQueryResponse>>>
+									IRequestHandler<GetListSkillsQuery, PaginatedResponse<GetListSkillsQueryResponse>>,
+									IRequestHandler<GetSkillsSummaryQuery, PaginatedResponse<GetSkillsSummaryQueryResponse>>
 	{
 		#region Fields
 		private readonly ISkillService _skillService;
@@ -39,7 +39,7 @@ namespace JobBoard.Core.Feutures.Skills.Queries.Handler
 			return Success(_mapper.Map<GetSingleSkillQueryResponse>(skill));
 		}
 
-		public async Task<PaginatedResponse<List<GetListSkillsQueryResponse>>> Handle(GetListSkillsQuery request, CancellationToken cancellationToken)
+		public async Task<PaginatedResponse<GetListSkillsQueryResponse>> Handle(GetListSkillsQuery request, CancellationToken cancellationToken)
 		{
 			var queryable = _skillService.GetSkillsQueryable(request.Search, request.SortBy);
 
@@ -47,7 +47,7 @@ namespace JobBoard.Core.Feutures.Skills.Queries.Handler
 			return skills;
 		}
 
-		public async Task<PaginatedResponse<List<GetSkillsSummaryQueryResponse>>> Handle(GetSkillsSummaryQuery request, CancellationToken cancellationToken)
+		public async Task<PaginatedResponse<GetSkillsSummaryQueryResponse>> Handle(GetSkillsSummaryQuery request, CancellationToken cancellationToken)
 		{
 			var result = _skillService.GetSkillsQueryable();
 			return (await _mapper.ProjectTo<GetSkillsSummaryQueryResponse>(result).ToPaginatedAsync(request.page, request.Size));

@@ -4,18 +4,18 @@ namespace JobBoard.Core.Wrapers
 {
 	public static class PaginateExtention
 	{
-		public static async Task<PaginatedResponse<List<T>>> ToPaginatedAsync<T>(this IQueryable<T> source, int PageNumber = 1, int PageSize = 10)
+		public static async Task<PaginatedResponse<T>> ToPaginatedAsync<T>(this IQueryable<T> source, int PageNumber = 1, int PageSize = 10)
 		{
 			if (source == null) throw new ArgumentNullException("Source is empty");
 
 			PageNumber = PageNumber <= 0 ? 1 : PageNumber;
 			PageSize = PageSize <= 0 ? 10 : PageSize;
 			int count = await source.CountAsync();
-			if (count == 0) return PaginatedResponse<List<T>>.Success(null!, PageNumber, PageSize, count);
+			if (count == 0) return PaginatedResponse<T>.Success(null!, PageNumber, PageSize, count);
 
 			var result = await source.AsQueryable<T>().Skip((PageNumber - 1) * PageSize).Take(PageSize).ToListAsync();
 
-			return PaginatedResponse<List<T>>.Success(result, PageNumber, PageSize, count);
+			return PaginatedResponse<T>.Success(result, PageNumber, PageSize, count);
 
 		}
 	}
