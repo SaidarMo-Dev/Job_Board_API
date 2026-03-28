@@ -82,15 +82,17 @@ namespace JobBoard.Service.Abstractions
 		/// <param name="sort"> the enum <see cref="SortCompany"/> to sort companies.</param>
 		/// <returns>queryable companies</returns>
 
-		IQueryable<Company> GetCompaniesQueryable(string? search, SortCompany? sort);
+		IQueryable<Company> GetCompaniesQueryable();
 
 		/// <summary>
 		/// Retrieves an array of popular companies name.
 		/// <returns>array of companies name</returns>
 
-		Task<string[]> GetPopularCompanies();
+		Task<string[]> GetPopularCompaniesAsync();
 
 		Task<bool> IsCreatedByUserAsync(int companyId, int userId);
 
+		Task<Company> GetCompanyBySlugAsync(string slug);
+		IQueryable<Company> GetFeaturedCompanies();
 	}
 }

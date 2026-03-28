@@ -1,10 +1,12 @@
 ﻿using System.Reflection;
 using AutoMapper;
 using JobBoard.Core.Bases;
+using JobBoard.Core.Common.DTOs;
 using JobBoard.Core.Feutures.Companies.Queries.Models;
 using JobBoard.Core.Feutures.Companies.Queries.Results;
 using JobBoard.Core.Resources;
 using JobBoard.Core.Wrapers;
+using JobBoard.Infrastructure.Extentions.Queries.Companies;
 using JobBoard.Service.Abstractions;
 using MediatR;
 using Microsoft.Extensions.Localization;
@@ -15,22 +17,35 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 						IRequestHandler<GetSingleCompanyQuery, Response<object>>,
 						IRequestHandler<GetCompaiesQuery, PaginatedResponse<GetListCompaniesQueryesponse>>,
 						IRequestHandler<GetPopularCompaniesQuery, Response<string[]>>,
-						IRequestHandler<GetCompaniesSummaryQuery, PaginatedResponse<GetCompaniesSummaryQueryResponse>>
+						IRequestHandler<GetCompaniesSummaryQuery, PaginatedResponse<GetCompaniesSummaryQueryResponse>>,
+						IRequestHandler<GetCompanyBySlug, Response<GetCompanyBySlugQueryResponse>>,
+						IRequestHandler<GetCompanyJobs, PaginatedResponse<GlobalJobResponseDto>>,
+						IRequestHandler<GetFeaturedCompaniesQuery, PaginatedResponse<GetSingleCompanyQueryResponse>>
 	{
 		#region Fields
 		private readonly ICompanyService _companyService;
 		private readonly IMapper _mapper;
-
+		private readonly IJobService _jobService;
+		private readonly IFileUrlResolver _fileUrlResolver;
 		private static readonly List<PropertyInfo> _cachedCompanyProperties =
 	typeof(GetSingleCompanyQueryResponse).GetProperties().ToList();
 
 		#endregion
 
 		#region Constructors
-		public CompanyQueryHandler(ICompanyService companyService, IMapper mapper, IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
+		public CompanyQueryHandler(ICompanyService companyService,
+			IMapper mapper,
+			IStringLocalizer<SharedResources> stringLocalizer,
+			IJobService jobService,
+			IFileUrlResolver fileUrlResolver
+			)
+
+			: base(stringLocalizer)
 		{
 			_companyService = companyService;
 			_mapper = mapper;
+			_jobService = jobService;
+			_fileUrlResolver = fileUrlResolver;
 		}
 		#endregion
 
@@ -80,14 +95,30 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 
 		public async Task<PaginatedResponse<GetListCompaniesQueryesponse>> Handle(GetCompaiesQuery request, CancellationToken cancellationToken)
 		{
-			var queryable = _companyService.GetCompaniesQueryable(request.Name, request.Sort);
+			var queryable = _companyService.GetCompaniesQueryable();
 
-			return (await _mapper.ProjectTo<GetListCompaniesQueryesponse>(queryable).ToPaginatedAsync(request.Page, request.PageSize));
+			queryable = queryable.ApplyCompanySearch(request.Search)
+				.ApplyCompanySorting(request.SortBy, request.SortDirection)
+				.WhereCompanySizeIs(request.Size);
+
+			var result = await _mapper.ProjectTo<GetListCompaniesQueryesponse>(queryable)
+				.ToPaginatedAsync(request.Page, request.PageSize);
+
+			if (result.data is null) return result;
+
+
+			foreach (var company in result.data)
+			{
+				company.LogoUrl =
+					_fileUrlResolver.ResolveCompanyLogo(company.LogoUrl);
+
+			}
+			return result;
 		}
 
 		public async Task<Response<string[]>> Handle(GetPopularCompaniesQuery request, CancellationToken cancellationToken)
 		{
-			return Success(await _companyService.GetPopularCompanies());
+			return Success(await _companyService.GetPopularCompaniesAsync());
 
 		}
 
@@ -96,6 +127,64 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 			var companies = _companyService.GetPaginatedQueryable();
 			return (await _mapper.ProjectTo<GetCompaniesSummaryQueryResponse>(companies).ToPaginatedAsync(request.page, request.size));
 
+		}
+
+		public async Task<Response<GetCompanyBySlugQueryResponse>> Handle(GetCompanyBySlug request, CancellationToken cancellationToken)
+		{
+			if (string.IsNullOrWhiteSpace(request.slug))
+				return BadRequest<GetCompanyBySlugQueryResponse>("Invalid slug");
+
+			var company = await _companyService.GetCompanyBySlugAsync(request.slug);
+
+			if (company == null) return NotFound<GetCompanyBySlugQueryResponse>("company not found");
+
+			var result = _mapper.Map<GetCompanyBySlugQueryResponse>(company);
+
+
+			result.LogoUrl =
+				_fileUrlResolver.ResolveCompanyLogo(company.LogoFile != null ? company.LogoFile.Path : null);
+
+			return Success(result);
+
+		}
+
+		public async Task<PaginatedResponse<GlobalJobResponseDto>> Handle(GetCompanyJobs request, CancellationToken cancellationToken)
+		{
+			var jobs = _jobService.GetCompanyJobsBySlug(request.Slug);
+
+			var result = await _mapper.ProjectTo<GlobalJobResponseDto>(jobs)
+				.ToPaginatedAsync(request.Page, request.PageSize);
+
+			if (result.data is null) return result;
+
+			foreach (var job in result.data)
+			{
+				job.Company.LogoUrl =
+					_fileUrlResolver.ResolveCompanyLogo(job.Company.LogoUrl);
+			}
+
+
+
+			return result;
+		}
+
+		public async Task<PaginatedResponse<GetSingleCompanyQueryResponse>> Handle(GetFeaturedCompaniesQuery request, CancellationToken cancellationToken)
+		{
+			var query = _companyService.GetFeaturedCompanies();
+
+			var result = await _mapper
+				.ProjectTo<GetSingleCompanyQueryResponse>(query)
+				.ToPaginatedAsync(request.Page, request.PageSize);
+
+			if (result.data is null) return result;
+
+			foreach (var company in result.data)
+			{
+				company.LogoUrl =
+					_fileUrlResolver.ResolveCompanyLogo(company.LogoUrl);
+			}
+
+			return result;
 		}
 
 		#endregion

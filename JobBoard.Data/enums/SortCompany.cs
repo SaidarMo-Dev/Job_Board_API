@@ -1,8 +1,10 @@
 ﻿namespace JobBoard.Data.enums
 {
-	public enum SortCompany
+	public enum CompanySortBy
 	{
-		NameAsc,
-		NameDesc,
+		Name,
+		CreatedAt,
+		CompanySize,
+		JobsCount
 	}
 }

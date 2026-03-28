@@ -200,6 +200,15 @@ namespace JobBoard.Service.Implementations
 			return query;
 		}
 
+		public IQueryable<JobListing> GetCompanyJobsBySlug(string slug)
+		{
+			string slugLowercase = slug.ToLower();
+			var jobs = _jobRepository.GetTableAsNoTracking()
+				.Where(j => j.Company.Slug == slugLowercase);
+
+			return jobs;
+		}
+
 
 
 		#endregion

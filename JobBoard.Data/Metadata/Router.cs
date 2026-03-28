@@ -5,7 +5,7 @@
 		private const string Api = "/Api";
 		private const string Version = "/V1";
 		private const string Rule = Api + Version;
-		private const string Single = "/{Id}";
+		private const string Single = "/{Id:int}";
 
 
 		public static class AdminRoute
@@ -35,8 +35,11 @@
 			private const string Prefex = Rule + "/companies";
 
 			public const string GetCompanies = Prefex;
+			public const string GetFeaturedCompanies = Prefex + "/featured";
 			public const string Paginate = Prefex + "/paginate";
 			public const string GetByID = Prefex + Single;
+			public const string GetBySlug = Prefex + "/{slug}";
+			public const string GetJobsBySlug = Prefex + "/{slug}/jobs";
 			public const string Create = Prefex;
 			public const string Update = Prefex;
 			public const string DeleteById = Prefex + Single;

@@ -8,10 +8,13 @@ namespace JobBoard.Core.Mapping.CompanyMapping
 		public void GetListCompaniesQueryMapping()
 		{
 			CreateMap<Company, GetListCompaniesQueryesponse>()
+
 				.ForMember(dst => dst.TotalJobs, opt =>
 								opt.MapFrom(src => src.JobListings != null ? src.JobListings.Count() : 0))
 				.ForMember(dst => dst.CreatedByUser, opt =>
-								opt.MapFrom(src => src.CreatedByUser.FullName));
+								opt.MapFrom(src => src.CreatedByUser.FullName))
+				.ForMember(dst => dst.LogoUrl, opt =>
+								opt.MapFrom(src => src.LogoFile != null ? src.LogoFile.Path : null));
 
 		}
 	}

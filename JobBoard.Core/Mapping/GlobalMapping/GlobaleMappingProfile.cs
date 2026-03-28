@@ -9,7 +9,8 @@ namespace JobBoard.Core.Mapping.GlobalMapping
 			GetSkillDtoMapping();
 			GetJobSummaryDto();
 			GetCategoryDtoMapping();
-
+			MapCompanyPreview();
+			MapGlobalJobResponse();
 		}
 	}
 }

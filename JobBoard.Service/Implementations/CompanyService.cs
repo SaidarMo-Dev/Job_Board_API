@@ -101,38 +101,15 @@ namespace JobBoard.Service.Implementations
 			return queryable;
 		}
 
-		public IQueryable<Company> GetCompaniesQueryable(string? search, SortCompany? sort)
+		public IQueryable<Company> GetCompaniesQueryable()
 		{
 			var queryable = _companyRepository.GetTableAsNoTracking();
-
-			if (search != null)
-			{
-				queryable = queryable.Where(x => x.CompanyName.Contains(search));
-			}
-
-			if (sort != null)
-			{
-				switch (sort)
-				{
-					case SortCompany.NameAsc:
-						queryable = queryable.OrderBy(x => x.CompanyName);
-						break;
-
-					case SortCompany.NameDesc:
-						queryable = queryable.OrderByDescending(x => x.CompanyName);
-						break;
-
-					default:
-						queryable = queryable.OrderBy(x => x.CompanyName);
-						break;
-				}
-			}
 
 			return queryable;
 
 		}
 
-		public async Task<string[]> GetPopularCompanies()
+		public async Task<string[]> GetPopularCompaniesAsync()
 		{
 
 			var cutOffDate = DateTime.UtcNow.AddDays(-30);
@@ -159,6 +136,23 @@ namespace JobBoard.Service.Implementations
 
 			=> await _companyRepository.GetTableAsNoTracking()
 					.AnyAsync(c => c.CompanyId == companyId && c.CreatedByUserId == userId);
+
+		public async Task<Company> GetCompanyBySlugAsync(string slug)
+		{
+			var result = await _companyRepository.GetTableAsNoTracking()
+				.Include(c => c.LogoFile)
+				.FirstOrDefaultAsync(c => c.Slug == slug);
+
+			return result;
+
+		}
+
+		public IQueryable<Company> GetFeaturedCompanies()
+		{
+			var result = _companyRepository.GetTableAsNoTracking().Where(c => c.IsFeatured);
+
+			return result;
+		}
 
 		#endregion
 	}

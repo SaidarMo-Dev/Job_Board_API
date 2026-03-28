@@ -46,6 +46,51 @@ namespace JobBoard.Api.Controllers
 			return Ok(await Mediator.Send(query));
 		}
 
+		[SwaggerOperation(
+			Summary = "Get company by slug",
+			Description = "Retrieves the details of a company by its unique slug identifier.",
+			OperationId = "GetCompanyBySlug")]
+
+		[AllowAnonymous]
+		[HttpGet(Router.CompanyRoute.GetBySlug)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		public async Task<IActionResult> GetCompanyBySlug([FromRoute] string slug)
+		{
+			return NewResult(await Mediator.Send(new GetCompanyBySlug { slug = slug }));
+		}
+
+		[SwaggerOperation(
+		Summary = "Get company jobs by slug",
+		Description = "Retrieves company active jobs by unique slug identifier.",
+		OperationId = "GetCompanJobsBySlug")]
+
+		[AllowAnonymous]
+		[HttpGet(Router.CompanyRoute.GetJobsBySlug)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		public async Task<IActionResult> GetCompanJobsBySlug([FromRoute] string slug, [FromQuery] int Page, [FromQuery] int PageSize)
+		{
+			return Ok(await Mediator.Send(new GetCompanyJobs { Slug = slug, Page = Page, PageSize = PageSize }));
+		}
+
+
+		[SwaggerOperation(
+			Summary = "Get featured companies",
+			Description = "Retrieves a paginated list of featured companies highlighted on the platform, including basic company information and active job count.",
+			OperationId = "GetFeaturedCompanies")]
+
+		[AllowAnonymous]
+		[HttpGet(Router.CompanyRoute.GetFeaturedCompanies)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		public async Task<IActionResult> GetFeaturedCompanies([FromQuery] GetFeaturedCompaniesQuery query)
+		{
+			return Ok(await Mediator.Send(query));
+		}
 
 		[SwaggerOperation(
 			Summary = "Add a new company",

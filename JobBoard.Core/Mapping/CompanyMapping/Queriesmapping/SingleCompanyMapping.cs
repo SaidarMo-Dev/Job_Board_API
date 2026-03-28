@@ -8,8 +8,8 @@ namespace JobBoard.Core.Mapping.CompanyMapping
 		public void AddSingleCompanyMapping()
 		{
 			CreateMap<Company, GetSingleCompanyQueryResponse>()
-				.ForMember(dst => dst.Id, opt => opt.MapFrom(src => src.CompanyId))
-				.ForMember(dst => dst.Name, opt => opt.MapFrom(src => src.CompanyName));
+				.ForMember(dst => dst.LogoUrl, opt => opt.MapFrom(src => src.LogoFile != null ? src.LogoFile.Path : null))
+				.ForMember(dst => dst.CreatedByUser, opt => opt.MapFrom(src => src.CreatedByUser.FullName));
 		}
 	}
 }

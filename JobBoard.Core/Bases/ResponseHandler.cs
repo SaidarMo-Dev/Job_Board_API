@@ -104,7 +104,7 @@ namespace JobBoard.Core.Bases
 			{
 				data = data,
 				statusCode = System.Net.HttpStatusCode.BadRequest,
-				message = message == null ? "Bad Request" : message,
+				message = message == null ? "Bad request" : message,
 				succeeded = false
 			};
 		}
@@ -114,7 +114,7 @@ namespace JobBoard.Core.Bases
 			{
 
 				statusCode = System.Net.HttpStatusCode.NotFound,
-				message = message == null ? "Bad Request" : message,
+				message = message == null ? "Not found" : message,
 				succeeded = false
 			};
 		}

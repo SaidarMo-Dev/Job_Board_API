@@ -9,8 +9,12 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Models
 	{
 		public int Page { get; set; }
 		public int PageSize { get; set; }
-		public string? Name { get; set; }
-		public string? Location { get; set; }
-		public SortCompany Sort { get; set; }
+
+		public string? Search { get; set; }
+
+		public CompanySize? Size { get; set; }
+
+		public CompanySortBy SortBy { get; set; } = CompanySortBy.Name;
+		public SortDirection SortDirection { get; set; } = SortDirection.Ascending;
 	}
 }

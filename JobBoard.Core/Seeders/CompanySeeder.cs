@@ -20,6 +20,7 @@ namespace JobBoard.Core.Seeders
 					Email = "info@technovaxy.com",
 					Fax = "212-555-1002",
 					CreatedByUserId = 1,
+					CreatedAt = DateTime.UtcNow,
 					Slug = "tech-novaxy"
 				},
 				new Company
@@ -32,6 +33,7 @@ namespace JobBoard.Core.Seeders
 					PhoneNumber = "310-555-2001",
 					Email = "contact@designify.com",
 					Fax = "310-555-2002",
+					CreatedAt = DateTime.UtcNow,
 					CreatedByUserId = 1,
 					Slug = "designity"
 				},
@@ -46,6 +48,7 @@ namespace JobBoard.Core.Seeders
 					Email = "support@datasolvedf.com",
 					Fax = "312-555-3002",
 					CreatedByUserId = 1,
+					CreatedAt = DateTime.UtcNow,
 					Slug = "data-solve"
 				}
 			};

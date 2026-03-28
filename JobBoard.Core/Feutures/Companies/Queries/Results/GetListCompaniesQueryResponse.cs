@@ -41,6 +41,7 @@
 		public bool IsFeatured { get; set; } = false;
 		public bool IsVerified { get; set; } = false;
 
+		public DateTime CreatedAt { get; set; }
 		public int TotalJobs { get; set; }
 		public string CreatedByUser { get; set; } = default!;
 

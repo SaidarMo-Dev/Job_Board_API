@@ -11,6 +11,7 @@ namespace JobBoard.Core.Mapping.CompanyMapping
 			AddMappingForUpdateCompany();
 			GetListCompaniesQueryMapping();
 			MapGetCompaniesSummaryQuery();
+			MapGetCompanyBySlug();
 		}
 	}
 }

@@ -32,7 +32,7 @@ namespace JobBoard.Service
 			services.AddScoped<ITokenHelper, TokenHelper>();
 			services.AddScoped<IFileStorageService, SupabaseFileStorageService>();
 			services.AddScoped<IFileResourceService, FileResourceService>();
-
+			services.AddScoped<IFileUrlResolver, FileUrlResolver>();
 
 
 			services.AddSingleton<Client>(sp =>
