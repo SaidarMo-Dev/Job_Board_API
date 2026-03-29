@@ -33,6 +33,7 @@ namespace JobBoard.Service
 			services.AddScoped<IFileStorageService, SupabaseFileStorageService>();
 			services.AddScoped<IFileResourceService, FileResourceService>();
 			services.AddScoped<IFileUrlResolver, FileUrlResolver>();
+			services.AddScoped<IIndustryService, IndustryService>();
 
 
 			services.AddSingleton<Client>(sp =>

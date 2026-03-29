@@ -20,6 +20,7 @@ namespace JobBoard.Infrastructure
 			services.AddScoped<IUserRefreshTokenRepository, UserRefreshTokenRepository>();
 			services.AddScoped<IApplicationRepository, ApplicationRepository>();
 			services.AddScoped<IFileResourceRepository, FileResourceRepository>();
+			services.AddScoped<IIndustryRepository, IndustryRepository>();
 
 			return services;
 		}

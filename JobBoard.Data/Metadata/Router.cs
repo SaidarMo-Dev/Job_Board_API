@@ -229,5 +229,17 @@
 			public const string SignedUrl = Prefex + "/signed-url" + Single;
 
 		}
+
+		public static class IndustryRoute
+		{
+			private const string Prefex = Rule + "/industries";
+
+			public const string GetAll = Prefex;
+
+			public const string Create = Prefex;
+			public const string Update = Prefex;
+			public const string Delete = Prefex;
+
+		}
 	}
 }

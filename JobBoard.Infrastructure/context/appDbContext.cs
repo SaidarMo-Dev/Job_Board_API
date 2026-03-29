@@ -24,6 +24,8 @@ namespace JobBoard.Infrastructure.context
 		public DbSet<Bookmark> bookMarks { get; set; }
 		public DbSet<IdentityUserRole<int>> userRoles { get; set; }
 		public DbSet<FileResource> fileResources { get; set; }
+		public DbSet<Industry> Industries { get; set; }
+		public DbSet<CompanyIndustry> CompanyIndustries { get; set; }
 
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)

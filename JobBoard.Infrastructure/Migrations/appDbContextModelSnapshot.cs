@@ -261,6 +261,23 @@ namespace JobBoard.Infrastructure.Migrations
                     b.ToTable("Companies", (string)null);
                 });
 
+            modelBuilder.Entity("JobBoard.Data.Entities.CompanyIndustry", b =>
+                {
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IndustryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CompanyId", "IndustryId");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("IndustryId");
+
+                    b.ToTable("CompanyIndustries", (string)null);
+                });
+
             modelBuilder.Entity("JobBoard.Data.Entities.Country", b =>
                 {
                     b.Property<int>("CountryId")
@@ -497,6 +514,37 @@ namespace JobBoard.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserRefreshTokens", (string)null);
+                });
+
+            modelBuilder.Entity("JobBoard.Data.Entities.Industry", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETUTCDATE()");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasMaxLength(160)
+                        .HasColumnType("nvarchar(160)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Slug")
+                        .IsUnique();
+
+                    b.ToTable("Industries", (string)null);
                 });
 
             modelBuilder.Entity("JobBoard.Data.Entities.JobCategory", b =>
@@ -781,6 +829,25 @@ namespace JobBoard.Infrastructure.Migrations
                     b.Navigation("LogoFile");
                 });
 
+            modelBuilder.Entity("JobBoard.Data.Entities.CompanyIndustry", b =>
+                {
+                    b.HasOne("JobBoard.Data.Entities.Company", "Company")
+                        .WithMany("CompanyIndustries")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JobBoard.Data.Entities.Industry", "Industry")
+                        .WithMany("CompanyIndustries")
+                        .HasForeignKey("IndustryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+
+                    b.Navigation("Industry");
+                });
+
             modelBuilder.Entity("JobBoard.Data.Entities.Identity.User", b =>
                 {
                     b.HasOne("JobBoard.Data.Entities.Country", "Country")
@@ -923,6 +990,8 @@ namespace JobBoard.Infrastructure.Migrations
 
             modelBuilder.Entity("JobBoard.Data.Entities.Company", b =>
                 {
+                    b.Navigation("CompanyIndustries");
+
                     b.Navigation("JobListings");
                 });
 
@@ -942,6 +1011,11 @@ namespace JobBoard.Infrastructure.Migrations
                     b.Navigation("applications");
 
                     b.Navigation("bookmarks");
+                });
+
+            modelBuilder.Entity("JobBoard.Data.Entities.Industry", b =>
+                {
+                    b.Navigation("CompanyIndustries");
                 });
 
             modelBuilder.Entity("JobBoard.Data.Entities.JobListing", b =>

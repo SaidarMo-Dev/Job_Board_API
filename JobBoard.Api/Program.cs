@@ -175,7 +175,7 @@ using (var service = app.Services.CreateScope())
 	await CategorySeeder.SeedAsync(context);
 	await JobSkillSeeder.SeedAsync(context);
 	await JobCategorySeeder.SeedAsync(context);
-
+	await IndustrySeeder.SeedAsync(context);
 
 }
 
