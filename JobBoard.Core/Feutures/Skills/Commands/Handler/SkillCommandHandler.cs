@@ -37,7 +37,7 @@ namespace JobBoard.Core.Feutures.Skills.Commands.Handler
 
 			var dateNow = DateTime.UtcNow;
 
-			skill.CreateDate = new DateOnly(dateNow.Year, dateNow.Month, dateNow.Day);
+			skill.CreateAt = new DateOnly(dateNow.Year, dateNow.Month, dateNow.Day);
 
 			skill = await _skillService.AddNewSkillAsync(skill);
 

@@ -103,7 +103,7 @@ namespace JobBoard.Service.Implementations
 			if (sort != null && sort == SortSkill.Name)
 				queryable = queryable.OrderBy(x => x.Name);
 			else
-				queryable = queryable.OrderBy(x => x.CreateDate);
+				queryable = queryable.OrderBy(x => x.CreateAt);
 
 			return queryable;
 		}

@@ -18,8 +18,16 @@ namespace JobBoard.Infrastructure.Configuration
 				.IsRequired();
 
 			builder.Property(x => x.Description)
-					.HasMaxLength(255)
-					.IsRequired(false);
+				.HasMaxLength(255)
+				.IsRequired(false);
+
+			builder.Property(x => x.NormalizedName)
+				.IsRequired()
+				.HasMaxLength(100);
+
+
+			builder.Property(x => x.IsApproved)
+				.HasDefaultValue(false);
 
 			builder.ToTable("Skills");
 

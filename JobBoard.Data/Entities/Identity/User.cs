@@ -12,8 +12,8 @@ namespace JobBoard.Data.Entities.Identity
 			CreatedJobs = new HashSet<JobListing>();
 		}
 
-		public string FirstName { get; set; }
-		public string LastName { get; set; }
+		public string FirstName { get; set; } = null!;
+		public string LastName { get; set; } = null!;
 		public string FullName => FirstName + " " + LastName;
 		public GendorEnum? Gender { get; set; }
 		public DateTime? DateOfBirth { get; set; }
@@ -30,13 +30,22 @@ namespace JobBoard.Data.Entities.Identity
 		public string? Jti { get; set; }
 		public bool? JtiExp { get; set; }
 
+		// Navigation
 		public Country? Country { get; set; }
 		public ICollection<Application> applications { get; set; }
 		public ICollection<Bookmark> bookmarks { get; set; }
 		public ICollection<JobListing> CreatedJobs { get; set; }
-		public ICollection<UserRefreshToken> UserRefreshTokens { get; set; }
-		public ICollection<Company> CreatedCompanies { get; set; }
+		public ICollection<UserRefreshToken> UserRefreshTokens { get; set; } = new List<UserRefreshToken>();
+		public ICollection<Company> CreatedCompanies { get; set; } = new List<Company>();
 		public FileResource? ProfileImageFile { get; set; }
+
+		public ICollection<UserSkill> Skills { get; set; } = new List<UserSkill>();
+		public ICollection<UserExperience> Experiences { get; set; } = new List<UserExperience>();
+		public ICollection<UserEducation> Educations { get; set; } = new List<UserEducation>();
+		public ICollection<UserCertification> Certifications { get; set; } = new List<UserCertification>();
+		public ICollection<UserLanguage> Languages { get; set; } = new List<UserLanguage>();
+		public UserJobPreference? JobPreference { get; set; }
+		public UserProfileStats? ProfileStats { get; set; }
 	}
 }
 
