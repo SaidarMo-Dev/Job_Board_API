@@ -18,7 +18,7 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 						IRequestHandler<GetCompaiesQuery, PaginatedResponse<GetListCompaniesQueryesponse>>,
 						IRequestHandler<GetPopularCompaniesQuery, Response<string[]>>,
 						IRequestHandler<GetCompaniesSummaryQuery, PaginatedResponse<GetCompaniesSummaryQueryResponse>>,
-						IRequestHandler<GetCompanyBySlug, Response<GetCompanyBySlugQueryResponse>>,
+						IRequestHandler<GetCompanyBySlug, Response<GetSingleCompanyQueryResponse>>,
 						IRequestHandler<GetCompanyJobs, PaginatedResponse<GlobalJobResponseDto>>,
 						IRequestHandler<GetFeaturedCompaniesQuery, PaginatedResponse<GetSingleCompanyQueryResponse>>
 	{
@@ -99,7 +99,8 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 
 			queryable = queryable.ApplyCompanySearch(request.Search)
 				.ApplyCompanySorting(request.SortBy, request.SortDirection)
-				.WhereCompanySizeIs(request.Size);
+				.WhereCompanySizeIs(request.Size)
+				.WhereIndustriesIn(request.Industries);
 
 			var result = await _mapper.ProjectTo<GetListCompaniesQueryesponse>(queryable)
 				.ToPaginatedAsync(request.Page, request.PageSize);
@@ -129,16 +130,16 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 
 		}
 
-		public async Task<Response<GetCompanyBySlugQueryResponse>> Handle(GetCompanyBySlug request, CancellationToken cancellationToken)
+		public async Task<Response<GetSingleCompanyQueryResponse>> Handle(GetCompanyBySlug request, CancellationToken cancellationToken)
 		{
 			if (string.IsNullOrWhiteSpace(request.slug))
-				return BadRequest<GetCompanyBySlugQueryResponse>("Invalid slug");
+				return BadRequest<GetSingleCompanyQueryResponse>("Invalid slug");
 
 			var company = await _companyService.GetCompanyBySlugAsync(request.slug);
 
-			if (company == null) return NotFound<GetCompanyBySlugQueryResponse>("company not found");
+			if (company == null) return NotFound<GetSingleCompanyQueryResponse>("company not found");
 
-			var result = _mapper.Map<GetCompanyBySlugQueryResponse>(company);
+			var result = _mapper.Map<GetSingleCompanyQueryResponse>(company);
 
 
 			result.LogoUrl =

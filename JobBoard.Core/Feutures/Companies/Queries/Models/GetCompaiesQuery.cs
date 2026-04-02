@@ -12,7 +12,8 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Models
 
 		public string? Search { get; set; }
 
-		public CompanySize? Size { get; set; }
+		public CompanySize[]? Size { get; set; }
+		public string[]? Industries { get; set; }
 
 		public CompanySortBy SortBy { get; set; } = CompanySortBy.Name;
 		public SortDirection SortDirection { get; set; } = SortDirection.Ascending;

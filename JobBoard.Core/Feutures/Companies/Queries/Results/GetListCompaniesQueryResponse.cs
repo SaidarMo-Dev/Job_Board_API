@@ -43,7 +43,10 @@
 
 		public DateTime CreatedAt { get; set; }
 		public int TotalJobs { get; set; }
+		public int TotalOpenJobs { get; set; }
 		public string CreatedByUser { get; set; } = default!;
+
+		public List<string> Industries { get; set; } = new List<string>();
 
 	}
 

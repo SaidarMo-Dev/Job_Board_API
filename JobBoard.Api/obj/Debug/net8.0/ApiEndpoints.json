@@ -2730,7 +2730,12 @@
       },
       {
         "Name": "Size",
-        "Type": "System.String",
+        "Type": "JobBoard.Data.enums.CompanySize[]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Industries",
+        "Type": "System.String[]",
         "IsRequired": false
       },
       {

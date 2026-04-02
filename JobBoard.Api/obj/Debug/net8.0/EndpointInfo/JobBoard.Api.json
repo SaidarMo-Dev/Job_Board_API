@@ -6320,7 +6320,20 @@
             "name": "Size",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/CompanySize"
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/CompanySize"
+              }
+            }
+          },
+          {
+            "name": "Industries",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           {

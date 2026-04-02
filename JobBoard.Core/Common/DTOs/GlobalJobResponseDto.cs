@@ -16,5 +16,8 @@ namespace JobBoard.Core.Common.DTOs
 		public required DateTime DatePosted { get; set; }
 		public required string Status { get; set; }
 		public required string CretaedByUser { get; set; }
+
+		public List<SkillDto>? Skills { get; set; }
+		public List<CategoryDto>? Categories { get; set; }
 	}
 }

@@ -23,6 +23,7 @@ namespace JobBoard.Api.Controllers
 			Description = "Retrieves the details of a company by its unique identifier.",
 			OperationId = "GetCompanyById")]
 
+		[AllowAnonymous]
 		[HttpGet(Router.CompanyRoute.GetByID)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]

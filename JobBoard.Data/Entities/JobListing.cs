@@ -15,8 +15,8 @@ namespace JobBoard.Data.Entities
 		public double MinSalary { get; set; }
 		public double MaxSalary { get; set; }
 		public ExperienceLevelEnum ExperienceLevel { get; set; }
-		public DateTime DatePosted { get; set; }
-		public DateTime? DateExpired { get; set; }
+		public DateTime DatePosted { get; set; } = DateTime.UtcNow;
+		public DateTime? DateExpired { get; set; } = DateTime.UtcNow.AddDays(15);
 		public JobStatusEnum Status { get; set; }
 		public int CreatedByUserId { get; set; }
 

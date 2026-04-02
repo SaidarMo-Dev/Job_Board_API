@@ -4,7 +4,7 @@ using MediatR;
 
 namespace JobBoard.Core.Feutures.Companies.Queries.Models
 {
-	public class GetCompanyBySlug : IRequest<Response<GetCompanyBySlugQueryResponse>>
+	public class GetCompanyBySlug : IRequest<Response<GetSingleCompanyQueryResponse>>
 	{
 		public required string slug { get; set; }
 	}

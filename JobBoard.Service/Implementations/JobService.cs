@@ -204,7 +204,9 @@ namespace JobBoard.Service.Implementations
 		{
 			string slugLowercase = slug.ToLower();
 			var jobs = _jobRepository.GetTableAsNoTracking()
-				.Where(j => j.Company.Slug == slugLowercase);
+				.Where(j => j.Status == JobStatusEnum.Active &&
+						j.DateExpired > DateTime.UtcNow &&
+						j.Company.Slug == slugLowercase);
 
 			return jobs;
 		}

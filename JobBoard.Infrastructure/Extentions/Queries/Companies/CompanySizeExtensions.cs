@@ -8,20 +8,26 @@ namespace JobBoard.Infrastructure.Extentions.Queries.Companies
 		/// <summary>
 		/// Filters companies based on the CompanySize enum mapping to DB strings.
 		/// </summary>
-		public static IQueryable<Company> WhereCompanySizeIs(this IQueryable<Company> query, CompanySize? size)
+		public static IQueryable<Company> WhereCompanySizeIs(this IQueryable<Company> query, CompanySize[]? sizes)
 		{
-			if (size == null) return query;
+			if (sizes == null || sizes.Length == 0)
+				return query;
 
-			// Map Enum to the exact string stored in your Database
-			string sizeString = size switch
-			{
-				CompanySize.Small => "0-50",
-				CompanySize.Medium => "51-500",
-				CompanySize.Large => "500+",
-				_ => string.Empty
-			};
+			var sizeStrings = sizes
+				.Select(s => s switch
+				{
+					CompanySize.Small => "0-50",
+					CompanySize.Medium => "51-500",
+					CompanySize.Large => "500+",
+					_ => null
+				})
+				.Where(s => s != null)
+				.ToArray();
 
-			return query.Where(c => c.CompanySize! == sizeString);
+			if (sizeStrings.Length == 0)
+				return query;
+
+			return query.Where(c => sizeStrings.Contains(c.CompanySize));
 		}
 
 	}
