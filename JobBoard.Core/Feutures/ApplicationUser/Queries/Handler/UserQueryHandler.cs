@@ -132,6 +132,11 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Queries.Handler
 			// Map the user entity to the response DTO
 			var userResponse = _mapper.Map<GetCurrentUserQueryResponse>(user);
 
+			// Get user roles
+
+			var roles = await _userManager.GetRolesAsync(user);
+
+			userResponse.Roles = roles.ToList();
 			// If the user has a profile image, fetch the corresponding FileResource
 			// and generate a signed URL for secure access
 			if (user.ProfileImageFileId is int fileId)

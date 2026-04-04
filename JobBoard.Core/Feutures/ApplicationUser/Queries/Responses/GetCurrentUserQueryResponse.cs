@@ -15,5 +15,7 @@
 		public string? RecoveryEmail { get; set; }
 		public string? RecoveryPhone { get; set; }
 		public string? ProfileImageUrl { get; set; }
+
+		public List<string> Roles { get; set; } = new List<string>();
 	}
 }

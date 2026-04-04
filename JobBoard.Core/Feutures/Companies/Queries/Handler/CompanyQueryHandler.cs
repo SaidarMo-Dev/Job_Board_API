@@ -9,6 +9,7 @@ using JobBoard.Core.Wrapers;
 using JobBoard.Infrastructure.Extentions.Queries.Companies;
 using JobBoard.Service.Abstractions;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Companies.Queries.Handler
@@ -95,25 +96,68 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 
 		public async Task<PaginatedResponse<GetListCompaniesQueryesponse>> Handle(GetCompaiesQuery request, CancellationToken cancellationToken)
 		{
-			var queryable = _companyService.GetCompaniesQueryable();
+			// Get the base query for companies with split query to avoid cartesian explosion
+			var queryable = _companyService.GetCompaniesQueryable().AsSplitQuery();
 
-			queryable = queryable.ApplyCompanySearch(request.Search)
+			// Apply filters and sorting based on request parameters
+			queryable = queryable
+				.ApplyCompanySearch(request.Search)
 				.ApplyCompanySorting(request.SortBy, request.SortDirection)
 				.WhereCompanySizeIs(request.Size)
 				.WhereIndustriesIn(request.Industries);
 
-			var result = await _mapper.ProjectTo<GetListCompaniesQueryesponse>(queryable)
+			// Project the filtered companies to DTOs and apply pagination
+			// This executes the query for the current page only
+			var result = await _mapper
+				.ProjectTo<GetListCompaniesQueryesponse>(queryable)
 				.ToPaginatedAsync(request.Page, request.PageSize);
 
+			// If no companies found, return early
 			if (result.data is null) return result;
 
+			// Extract company IDs from the paginated results
+			// This allows us to fetch job counts only for visible companies
+			var companyIds = result.data
+				.Select(c => c.CompanyId)
+				.ToList();
 
+			// Current UTC time for calculating open jobs
+			var now = DateTime.UtcNow;
+
+			// Fetch job statistics for all companies in a single query
+			// Group by company to get total jobs and open jobs
+			var jobStats = await _jobService.GetJobsQueryable()
+				.Where(j => companyIds.Contains(j.CompanyId))      // Only consider companies on the current page
+				.GroupBy(j => j.CompanyId)
+				.Select(g => new
+				{
+					CompanyId = g.Key,
+					TotalJobs = g.Count(),                          // Total jobs per company
+					OpenJobs = g.Count(j =>
+						j.Status == Data.enums.JobStatusEnum.Active && // Only active jobs
+						j.DateExpired > now)                            // Only jobs that haven't expired
+				})
+				.ToDictionaryAsync(x => x.CompanyId);              // Convert to dictionary for fast lookup
+
+			// Merge job stats and resolve company logos
 			foreach (var company in result.data)
 			{
-				company.LogoUrl =
-					_fileUrlResolver.ResolveCompanyLogo(company.LogoUrl);
+				if (jobStats.TryGetValue(company.CompanyId, out var stats))
+				{
+					company.TotalJobs = stats.TotalJobs;          // Assign total jobs
+					company.TotalOpenJobs = stats.OpenJobs;       // Assign open jobs
+				}
+				else
+				{
+					company.TotalJobs = 0;                        // No jobs found
+					company.TotalOpenJobs = 0;
+				}
 
+				// Resolve the full URL for the company logo
+				company.LogoUrl = _fileUrlResolver.ResolveCompanyLogo(company.LogoUrl);
 			}
+
+			// Return the final paginated list with stats and resolved logos
 			return result;
 		}
 

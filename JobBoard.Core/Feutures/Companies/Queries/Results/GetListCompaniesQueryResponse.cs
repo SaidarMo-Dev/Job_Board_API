@@ -11,15 +11,7 @@
 
 
 		// Classification
-		public string? Industry { get; set; }
 		public string? CompanySize { get; set; }
-
-		public int? FoundedYear { get; set; }
-
-		// Links
-		public string WebsiteUrl { get; set; } = default!;
-		public string? LinkedInUrl { get; set; }
-		public string? TwitterUrl { get; set; }
 
 		// Location
 		public string? Country { get; set; }
@@ -30,11 +22,6 @@
 
 		// Media
 		public string? LogoUrl { get; set; }
-		public string? BannerUrl { get; set; }
-
-		public string? PhoneNumber { get; set; }
-		public required string Email { get; set; }
-		public string? Fax { get; set; }
 
 
 		// Flags
@@ -44,9 +31,7 @@
 		public DateTime CreatedAt { get; set; }
 		public int TotalJobs { get; set; }
 		public int TotalOpenJobs { get; set; }
-		public string CreatedByUser { get; set; } = default!;
 
-		public List<string> Industries { get; set; } = new List<string>();
 
 	}
 
