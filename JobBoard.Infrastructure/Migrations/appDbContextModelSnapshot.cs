@@ -158,10 +158,6 @@ namespace JobBoard.Infrastructure.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("BannerUrl")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
@@ -218,12 +214,8 @@ namespace JobBoard.Infrastructure.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Location")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
-
-                    b.Property<int?>("LogoFileId")
-                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
                         .HasMaxLength(50)
@@ -252,8 +244,6 @@ namespace JobBoard.Infrastructure.Migrations
                     b.HasKey("CompanyId");
 
                     b.HasIndex("CreatedByUserId");
-
-                    b.HasIndex("LogoFileId");
 
                     b.HasIndex("Slug")
                         .IsUnique();
@@ -329,6 +319,9 @@ namespace JobBoard.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -349,6 +342,9 @@ namespace JobBoard.Infrastructure.Migrations
 
                     b.HasIndex("Path")
                         .IsUnique();
+
+                    b.HasIndex("OwnerId", "OwnerType", "Category")
+                        .HasDatabaseName("IX_FileResource_Owner_Category");
 
                     b.ToTable("FileResources", (string)null);
                 });
@@ -1189,14 +1185,7 @@ namespace JobBoard.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("JobBoard.Data.Entities.FileResource", "LogoFile")
-                        .WithMany()
-                        .HasForeignKey("LogoFileId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.Navigation("CreatedByUser");
-
-                    b.Navigation("LogoFile");
                 });
 
             modelBuilder.Entity("JobBoard.Data.Entities.CompanyIndustry", b =>

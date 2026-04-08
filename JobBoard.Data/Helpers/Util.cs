@@ -12,15 +12,20 @@ namespace JobBoard.Core.Helpers
 			return Regex.IsMatch(email, EmailPattern);
 		}
 
-		public static bool IsValidePhoneNumber(string phoneNumber)
+		public static bool IsValidePhoneNumber(string? phoneNumber)
 		{
+
+			if (string.IsNullOrEmpty(phoneNumber)) return false;
+
 
 			string PhonePattern = @"^\+?\d[\d\s]{6,19}$";
 
 			return Regex.IsMatch(phoneNumber, PhonePattern);
 		}
-		public static bool IsValideUrl(string Url)
+		public static bool IsValideUrl(string? Url)
 		{
+			if (string.IsNullOrEmpty(Url)) return false;
+
 			string UrlPattern = @"(https?:\/\/)?(www.)?[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$";
 			return Regex.IsMatch(Url, UrlPattern);
 		}

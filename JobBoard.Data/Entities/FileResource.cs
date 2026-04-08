@@ -14,6 +14,7 @@ namespace JobBoard.Data.Entities
 
 		public FileVisibility Visibility { get; set; }
 
+		public FileCategory? Category { get; set; }
 		public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 	}
 

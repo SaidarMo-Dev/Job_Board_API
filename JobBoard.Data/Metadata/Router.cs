@@ -47,7 +47,9 @@
 
 			public const string PopularCompanies = Prefex + "/popular";
 			public const string CompaniesSummary = Prefex + "/summary";
+
 			public const string UploadCompanyLogo = Prefex + "/{Id}/logo";
+			public const string UploadCompanyBanner = Prefex + "/{Id}/banner";
 
 		}
 		public static class SkillRoute

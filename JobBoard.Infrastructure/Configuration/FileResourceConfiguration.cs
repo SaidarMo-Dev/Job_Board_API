@@ -19,6 +19,13 @@ namespace JobBoard.Infrastructure.Configuration
 
 			builder.HasIndex(x => x.Path).IsUnique();
 
+
+			builder.Property(x => x.Category).HasConversion<string>().IsRequired(false);
+
+			// This index for speed when fetching Company/User files
+			builder.HasIndex(x => new { x.OwnerId, x.OwnerType, x.Category })
+				   .HasDatabaseName("IX_FileResource_Owner_Category");
+
 			builder.ToTable("FileResources");
 		}
 	}

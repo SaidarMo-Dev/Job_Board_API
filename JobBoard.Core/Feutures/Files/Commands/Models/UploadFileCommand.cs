@@ -11,6 +11,8 @@ namespace JobBoard.Core.Feutures.Files.Commands.Models
 	FileOwnerType OwnerType,
 	int OwnerId,
 	FileVisibility Visibility,
-	FilePathType FilePathType) : IRequest<Response<int>>;
+	FilePathType FilePathType,
+	FileCategory FileCategory
+	) : IRequest<Response<int>>;
 
 }

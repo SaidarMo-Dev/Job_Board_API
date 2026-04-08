@@ -1,4 +1,4 @@
-﻿using JobBoard.Core.Authrization.Requirements;
+﻿using JobBoard.Core.Authorization.Policies;
 using JobBoard.Core.Authrization.Resources;
 using JobBoard.Core.Bases;
 using JobBoard.Core.Feutures.Files.Commands.Models;
@@ -53,6 +53,7 @@ namespace JobBoard.Core.Feutures.Files.Commands.Handlers
 			{
 				OwnerType = request.OwnerType,
 				OwnerId = request.OwnerId,
+				Category = request.FileCategory,
 
 			};
 
@@ -62,7 +63,7 @@ namespace JobBoard.Core.Feutures.Files.Commands.Handlers
 			var isAuthorized = await _authorizationService.AuthorizeAsync(
 				_currentUserService.GetCurrentUserPrincipal(),
 				uploadResource,
-				new FileOwnerRequirement()
+				AuthorizationPolicies.IsFileOwner
 				);
 
 			if (!isAuthorized.Succeeded)
@@ -72,7 +73,7 @@ namespace JobBoard.Core.Feutures.Files.Commands.Handlers
 
 			// Get existing file (if any)
 			var existingFile = await _fileResourceService
-				.GetByOwnerAsync(request.OwnerType, request.OwnerId);
+				.GetByOwnerAsync(request.OwnerType, request.OwnerId, request.FileCategory);
 
 			// BUSINESS RULE: Application resume is immutable
 			if (request.OwnerType == FileOwnerType.Applications && existingFile is not null)
@@ -108,6 +109,7 @@ namespace JobBoard.Core.Feutures.Files.Commands.Handlers
 						OwnerType = request.OwnerType,
 						OwnerId = request.OwnerId,
 						Visibility = request.Visibility,
+						Category = request.FileCategory
 					};
 
 					fileResource = await _fileResourceService.AddAsync(fileResource);

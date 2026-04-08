@@ -87,7 +87,8 @@ namespace JobBoard.Core.Feutures.Applications.Commands.Handler
 						FileOwnerType.Applications,
 						application.ApplicationId,
 						FileVisibility.Private,
-						FilePathType.UuidFileName
+						FilePathType.UuidFileName,
+						FileCategory.Document
 					)
 				);
 

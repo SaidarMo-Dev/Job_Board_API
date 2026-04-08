@@ -58,12 +58,20 @@ namespace JobBoard.Service.Implementations
 		public async Task<FileResource> GetByIdAsync(int Id)
 			=> await _fileResourceRepository.FindByIdAsync(Id);
 
-		public async Task<FileResource> GetByOwnerAsync(FileOwnerType ownerType, int ownerId)
+		public async Task<FileResource> GetByOwnerAsync(FileOwnerType ownerType, int ownerId, FileCategory category)
 		{
-			return await _fileResourceRepository.GetTableAsNoTracking()
-				.FirstOrDefaultAsync(fr => fr.OwnerType == ownerType && fr.OwnerId == ownerId);
+			var result = await _fileResourceRepository.GetTableAsNoTracking()
+				.FirstOrDefaultAsync(fr => fr.OwnerType == ownerType &&
+				fr.OwnerId == ownerId &&
+				fr.Category == category
+				);
 
+			return result;
+		}
 
+		public IQueryable<FileResource> GetFileResourcesQueryable()
+		{
+			return _fileResourceRepository.GetTableAsNoTracking();
 		}
 
 		public async Task<List<(int Id, string Path)>> GetPathByIdsAsync(IEnumerable<int> ids)

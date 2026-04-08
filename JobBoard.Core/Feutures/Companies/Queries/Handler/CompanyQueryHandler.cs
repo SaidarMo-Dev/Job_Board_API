@@ -6,6 +6,7 @@ using JobBoard.Core.Feutures.Companies.Queries.Models;
 using JobBoard.Core.Feutures.Companies.Queries.Results;
 using JobBoard.Core.Resources;
 using JobBoard.Core.Wrapers;
+using JobBoard.Data.enums;
 using JobBoard.Infrastructure.Extentions.Queries.Companies;
 using JobBoard.Service.Abstractions;
 using MediatR;
@@ -28,6 +29,7 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 		private readonly IMapper _mapper;
 		private readonly IJobService _jobService;
 		private readonly IFileUrlResolver _fileUrlResolver;
+		private readonly IFileResourceService _fileResourceService;
 		private static readonly List<PropertyInfo> _cachedCompanyProperties =
 	typeof(GetSingleCompanyQueryResponse).GetProperties().ToList();
 
@@ -38,7 +40,8 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 			IMapper mapper,
 			IStringLocalizer<SharedResources> stringLocalizer,
 			IJobService jobService,
-			IFileUrlResolver fileUrlResolver
+			IFileUrlResolver fileUrlResolver,
+			IFileResourceService fileResourceService
 			)
 
 			: base(stringLocalizer)
@@ -47,6 +50,7 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 			_mapper = mapper;
 			_jobService = jobService;
 			_fileUrlResolver = fileUrlResolver;
+			_fileResourceService = fileResourceService;
 		}
 		#endregion
 
@@ -139,6 +143,22 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 				})
 				.ToDictionaryAsync(x => x.CompanyId);              // Convert to dictionary for fast lookup
 
+
+			//Define what we are looking for
+			var targetCategories = new[] { FileCategory.Logo, FileCategory.Banner };
+
+			// Fetch only the specific files we need in ONE trip
+			var allFiles = await _fileResourceService
+				.GetFileResourcesQueryable()
+				.Where(f => companyIds.Contains(f.OwnerId)
+						 && f.OwnerType == FileOwnerType.Companies
+						 && (f.Category == FileCategory.Logo || f.Category == FileCategory.Banner)
+						)
+				.ToListAsync();
+
+			var lookup = allFiles.ToLookup(f => f.OwnerId);
+
+
 			// Merge job stats and resolve company logos
 			foreach (var company in result.data)
 			{
@@ -153,8 +173,17 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 					company.TotalOpenJobs = 0;
 				}
 
+				// lookup[Id] returns all files for this company (Logo + Banner)
+				var companyFiles = lookup[company.CompanyId];
+
 				// Resolve the full URL for the company logo
-				company.LogoUrl = _fileUrlResolver.ResolveCompanyLogo(company.LogoUrl);
+				company.LogoUrl = _fileUrlResolver.ResolveCompanyLogo(companyFiles
+					.FirstOrDefault(f => f.Category == FileCategory.Logo)?.Path);
+
+				// Resolve the full URL for the company banner
+				company.BannerUrl = _fileUrlResolver.ResolveCompanyBanner(companyFiles
+					.FirstOrDefault(f => f.Category == FileCategory.Banner)?.Path);
+
 			}
 
 			// Return the final paginated list with stats and resolved logos
@@ -186,8 +215,8 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 			var result = _mapper.Map<GetSingleCompanyQueryResponse>(company);
 
 
-			result.LogoUrl =
-				_fileUrlResolver.ResolveCompanyLogo(company.LogoFile != null ? company.LogoFile.Path : null);
+			//result.LogoUrl =
+			//	_fileUrlResolver.ResolveCompanyLogo(company.LogoFile != null ? company.LogoFile.Path : null);
 
 			return Success(result);
 

@@ -14,7 +14,7 @@ namespace JobBoard.Data.Entities
 
 		// Classification
 		public string? Industry { get; set; }
-		public string? CompanySize { get; set; } // e.g. 1-10, 11-50
+		public string? CompanySize { get; set; } // e.g. 0-50, 51-500
 
 		public int? FoundedYear { get; set; }
 
@@ -30,9 +30,6 @@ namespace JobBoard.Data.Entities
 
 		public string Location { get; set; } = default!;
 
-		// Media
-		public int? LogoFileId { get; set; }
-		public string? BannerUrl { get; set; }
 
 		public string? PhoneNumber { get; set; }
 		public required string Email { get; set; }
@@ -43,18 +40,17 @@ namespace JobBoard.Data.Entities
 		public bool IsFeatured { get; set; } = false;
 		public bool IsVerified { get; set; } = false;
 
+		// Auditing
+		public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+		public DateTime? UpdatedAt { get; set; }
+
+
 		// Ownership
 		public int CreatedByUserId { get; set; }
 
 		// Navigations
 		public ICollection<JobListing>? JobListings { get; set; }
 		public User CreatedByUser { get; set; } = default!;
-
-		public FileResource? LogoFile { get; set; }
-
-		// Auditing
-		public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-		public DateTime? UpdatedAt { get; set; }
 
 		public ICollection<CompanyIndustry> CompanyIndustries { get; set; } = new List<CompanyIndustry>();
 

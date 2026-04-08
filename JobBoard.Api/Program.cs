@@ -152,11 +152,11 @@ using (var scope = app.Services.CreateScope())
 }
 #endregion
 
-using (var scope = app.Services.CreateScope())
-{
-	var context = scope.ServiceProvider.GetRequiredService<appDbContext>();
-	context.Database.Migrate();
-}
+//using (var scope = app.Services.CreateScope())
+//{
+//	var context = scope.ServiceProvider.GetRequiredService<appDbContext>();
+//	context.Database.Migrate();
+//}
 
 #region Seeders
 using (var service = app.Services.CreateScope())

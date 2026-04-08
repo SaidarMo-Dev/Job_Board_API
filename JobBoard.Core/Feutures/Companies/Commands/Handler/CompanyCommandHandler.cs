@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using JobBoard.Core.Authorization.Policies;
 using JobBoard.Core.Bases;
+using JobBoard.Core.Common.Helpers;
 using JobBoard.Core.Feutures.Companies.Commands.Models;
 using JobBoard.Core.Feutures.Files.Commands.Models;
 using JobBoard.Core.Resources;
@@ -16,7 +17,8 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 	public class CompanyCommandHandler : ResponseHandler, IRequestHandler<AddCompanyCommand, Response<int>>,
 										IRequestHandler<UpdateCompanyCommand, Response<int>>,
 										IRequestHandler<DeleteCompanyCommand, Response<string>>,
-										IRequestHandler<SetCompanyLogoCommand, Response<string>>
+										IRequestHandler<SetCompanyLogoCommand, Response<string>>,
+										IRequestHandler<UploadCompanyBannerCommand, Response<string>>
 	{
 		#region Fields 
 		private readonly ICompanyService _companyService;
@@ -51,10 +53,23 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 		// addNew Handler
 		public async Task<Response<int>> Handle(AddCompanyCommand request, CancellationToken cancellationToken)
 		{
+
 			var company = _mapper.Map<Company>(request);
 
+			if (string.IsNullOrWhiteSpace(company.Slug))
+			{
+				company.Slug = SlugHelper.Normalize(request.CompanyName);
+			}
+			else
+			{
+				company.Slug = SlugHelper.Normalize(company.Slug);
+			}
+
 			company.CreatedByUserId = _currentUserService.GetCurrentUserId();
+			company.CreatedAt = DateTime.UtcNow;
+
 			await _companyService.AddAsync(company);
+
 			return Created(company.CompanyId);
 		}
 
@@ -111,12 +126,22 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 
 			if (company is null) return BadRequest("Target company not found");
 
+			var isAuthorized = await _authorizationService.AuthorizeAsync(
+			_currentUserService.GetCurrentUserPrincipal(),
+			company,
+			AuthorizationPolicies.IsCompanyCreator);
+
+
+			if (!isAuthorized.Succeeded)
+				return Forbidden<string>("You can't change company logo");
+
 			var result = await _mediator.Send(new UploadFileCommand(
 				request.Logo,
 				Data.enums.FileOwnerType.Companies,
 				request.CompanyId,
 				Data.enums.FileVisibility.Public,
-				Data.enums.FilePathType.UuidFileName));
+				Data.enums.FilePathType.UuidFileName,
+				Data.enums.FileCategory.Logo));
 
 			if (!result.succeeded)
 			{
@@ -128,10 +153,46 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 				};
 			}
 
-			company.LogoFileId = result.data;
-			await _companyService.UpdateAsync(company);
 
 			return Success("Company logo updated successfully");
+		}
+
+		public async Task<Response<string>> Handle(UploadCompanyBannerCommand request, CancellationToken cancellationToken)
+		{
+			var company = await _companyService.GetCompanyByIdAsync(request.CompanyId);
+
+			if (company is null) return BadRequest("Target company not found");
+
+			var isAuthorized = await _authorizationService.AuthorizeAsync(
+				_currentUserService.GetCurrentUserPrincipal(),
+				company,
+				AuthorizationPolicies.IsCompanyCreator);
+
+
+			if (!isAuthorized.Succeeded)
+				return Forbidden<string>("You can't change company banner");
+
+
+			var result = await _mediator.Send(new UploadFileCommand(
+				request.File,
+				Data.enums.FileOwnerType.Companies,
+				request.CompanyId,
+				Data.enums.FileVisibility.Public,
+				Data.enums.FilePathType.UuidFileName,
+				Data.enums.FileCategory.Banner
+				));
+
+			if (!result.succeeded)
+			{
+				return new Response<string>
+				{
+					statusCode = result.statusCode,
+					succeeded = false,
+					message = result.message
+				};
+			}
+
+			return Success("Company banner updated successfully");
 		}
 		#endregion
 	}

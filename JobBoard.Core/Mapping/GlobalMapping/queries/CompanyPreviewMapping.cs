@@ -9,9 +9,7 @@ namespace JobBoard.Core.Mapping.GlobalMapping
 		{
 			CreateMap<Company, CompanyPreviewDto>()
 			.ForMember(dest => dest.CompanyId, opt => opt.MapFrom(src => src.CompanyId))
-			.ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.CompanyName))
-			.ForMember(dest => dest.LogoUrl, opt =>
-				opt.MapFrom(src => src.LogoFile != null ? src.LogoFile.Path : null));
+			.ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.CompanyName));
 
 		}
 	}

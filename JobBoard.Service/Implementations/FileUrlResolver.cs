@@ -21,5 +21,15 @@ namespace JobBoard.Service.Implementations
 				_storageService.GetBucket(FileOwnerType.Companies),
 				path);
 		}
+
+		public string? ResolveCompanyBanner(string? path)
+		{
+			if (string.IsNullOrWhiteSpace(path))
+				return null;
+
+			return _storageService.GetPublicUrl(
+				_storageService.GetBucket(FileOwnerType.Companies),
+				path);
+		}
 	}
 }

@@ -22,6 +22,7 @@
 
 		// Media
 		public string? LogoUrl { get; set; }
+		public string? BannerUrl { get; set; }
 
 
 		// Flags

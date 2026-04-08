@@ -61,10 +61,6 @@ namespace JobBoard.Infrastructure.Configuration
 				   .HasMaxLength(255)
 				   .IsRequired(false);
 
-			builder.Property(x => x.BannerUrl)
-				   .HasMaxLength(255)
-				   .IsRequired(false);
-
 			builder.Property(x => x.Email)
 				   .HasMaxLength(255)
 				   .IsRequired();
@@ -87,18 +83,13 @@ namespace JobBoard.Infrastructure.Configuration
 
 			builder.Property(x => x.Location)
 				   .HasMaxLength(255)
-				   .IsRequired();
+				   .IsRequired(false);
 
 			// Relations
 			builder.HasOne(x => x.CreatedByUser)
 				.WithMany(x => x.CreatedCompanies)
 				.HasForeignKey(x => x.CreatedByUserId)
 				.OnDelete(DeleteBehavior.NoAction);
-
-			builder.HasOne(x => x.LogoFile)
-				.WithMany()
-				.HasForeignKey(x => x.LogoFileId)
-				.OnDelete(DeleteBehavior.Restrict);
 
 			builder.ToTable("Companies");
 		}

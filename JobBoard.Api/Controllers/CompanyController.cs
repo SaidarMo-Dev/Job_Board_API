@@ -1,5 +1,4 @@
 ﻿using JobBoard.Api.Bases;
-using JobBoard.Core.Authorization.Policies;
 using JobBoard.Core.Feutures.Companies.Commands.Models;
 using JobBoard.Core.Feutures.Companies.Queries.Models;
 using JobBoard.Data.Metadata;
@@ -170,7 +169,6 @@ namespace JobBoard.Api.Controllers
 			Description = "Upload company logo",
 			OperationId = "UploadCompanyLogo")]
 
-		[Authorize(Policy = AuthorizationPolicies.IsCompanyCreator)]
 		[HttpPut(Router.CompanyRoute.UploadCompanyLogo)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		public async Task<IActionResult> UploadCompanyLogo([FromRoute] int Id, [FromForm] UploadCompanyLogoRequest request)
@@ -178,6 +176,17 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(new SetCompanyLogoCommand { CompanyId = Id, Logo = request.Logo }));
 		}
 
+		[SwaggerOperation(
+			Summary = "Upload company banner",
+			Description = "Upload company banner",
+			OperationId = "UploadCompanyBanner")]
+
+		[HttpPut(Router.CompanyRoute.UploadCompanyBanner)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<IActionResult> UploadCompanyBanner([FromRoute] int Id, [FromForm] UploadCompanyBannerRequest request)
+		{
+			return NewResult(await Mediator.Send(new UploadCompanyBannerCommand(Id, request.Banner)));
+		}
 
 	}
 }

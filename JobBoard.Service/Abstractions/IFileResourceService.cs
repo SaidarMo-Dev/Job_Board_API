@@ -26,7 +26,7 @@ namespace JobBoard.Service.Abstractions
 		/// <param name="ownerType">The the owner type.</param>
 		/// <param name="ownerId">The ID of the owner.</param>
 		/// <returns>The <see cref="FileResource"/> entity if found; otherwise, null.</returns>
-		Task<FileResource> GetByOwnerAsync(FileOwnerType ownerType, int ownerId);
+		Task<FileResource> GetByOwnerAsync(FileOwnerType ownerType, int ownerId, FileCategory category);
 
 		/// <summary>
 		/// Updates an existing fileResource asynchronously.
@@ -43,5 +43,6 @@ namespace JobBoard.Service.Abstractions
 		Task<bool> DeleteAsync(FileResource fileResource);
 		Task<List<(int Id, string Path)>> GetPathByIdsAsync(IEnumerable<int> ids);
 
+		IQueryable<FileResource> GetFileResourcesQueryable();
 	}
 }

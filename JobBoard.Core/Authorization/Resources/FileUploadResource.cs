@@ -6,5 +6,6 @@ namespace JobBoard.Core.Authrization.Resources
 	{
 		public FileOwnerType OwnerType { get; init; }
 		public int OwnerId { get; init; }
+		public FileCategory Category { get; init; }
 	}
 }

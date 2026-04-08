@@ -140,7 +140,6 @@ namespace JobBoard.Service.Implementations
 		public async Task<Company> GetCompanyBySlugAsync(string slug)
 		{
 			var result = await _companyRepository.GetTableAsNoTracking()
-				.Include(c => c.LogoFile)
 				.FirstOrDefaultAsync(c => c.Slug == slug);
 
 			return result;
@@ -152,6 +151,13 @@ namespace JobBoard.Service.Implementations
 			var result = _companyRepository.GetTableAsNoTracking().Where(c => c.IsFeatured);
 
 			return result;
+		}
+
+		public async Task<bool> IsSlugExist(string slug)
+		{
+			var result = await _companyRepository.GetTableAsNoTracking().FirstOrDefaultAsync(c => c.Slug == slug);
+
+			return result != null;
 		}
 
 		#endregion
