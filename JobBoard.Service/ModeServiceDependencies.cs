@@ -54,6 +54,7 @@ namespace JobBoard.Service
 			services.AddMemoryCache();
 
 			services.AddScoped<ISignedUrlCache, MemorySignedUrlCache>();
+			services.AddScoped<ICompanyFileStitcher, CompanyFileStitcher>();
 
 			return services;
 		}

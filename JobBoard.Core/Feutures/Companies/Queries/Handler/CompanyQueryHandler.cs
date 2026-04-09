@@ -6,7 +6,6 @@ using JobBoard.Core.Feutures.Companies.Queries.Models;
 using JobBoard.Core.Feutures.Companies.Queries.Results;
 using JobBoard.Core.Resources;
 using JobBoard.Core.Wrapers;
-using JobBoard.Data.enums;
 using JobBoard.Infrastructure.Extentions.Queries.Companies;
 using JobBoard.Service.Abstractions;
 using MediatR;
@@ -30,6 +29,7 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 		private readonly IJobService _jobService;
 		private readonly IFileUrlResolver _fileUrlResolver;
 		private readonly IFileResourceService _fileResourceService;
+		private readonly ICompanyFileStitcher _stitcher;
 		private static readonly List<PropertyInfo> _cachedCompanyProperties =
 	typeof(GetSingleCompanyQueryResponse).GetProperties().ToList();
 
@@ -41,7 +41,8 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 			IStringLocalizer<SharedResources> stringLocalizer,
 			IJobService jobService,
 			IFileUrlResolver fileUrlResolver,
-			IFileResourceService fileResourceService
+			IFileResourceService fileResourceService,
+			ICompanyFileStitcher stitcher
 			)
 
 			: base(stringLocalizer)
@@ -51,6 +52,7 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 			_jobService = jobService;
 			_fileUrlResolver = fileUrlResolver;
 			_fileResourceService = fileResourceService;
+			_stitcher = stitcher;
 		}
 		#endregion
 
@@ -91,6 +93,7 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 						partialResponse[property.Name.ToLower()] = property.GetValue(fullCompanyResponse);
 					}
 				}
+
 
 				return Success<object>(partialResponse);
 			}
@@ -144,19 +147,14 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 				.ToDictionaryAsync(x => x.CompanyId);              // Convert to dictionary for fast lookup
 
 
-			//Define what we are looking for
-			var targetCategories = new[] { FileCategory.Logo, FileCategory.Banner };
+			// handle only banner and logo for companies using stitcher service
 
-			// Fetch only the specific files we need in ONE trip
-			var allFiles = await _fileResourceService
-				.GetFileResourcesQueryable()
-				.Where(f => companyIds.Contains(f.OwnerId)
-						 && f.OwnerType == FileOwnerType.Companies
-						 && (f.Category == FileCategory.Logo || f.Category == FileCategory.Banner)
-						)
-				.ToListAsync();
-
-			var lookup = allFiles.ToLookup(f => f.OwnerId);
+			await _stitcher.AttachLogosAndBannersAsync(
+				result.data,
+				c => c.CompanyId,           // Drill down to the company ID
+				(c, url) => c.LogoUrl = url, // Drill down to set the URL
+				(c, url) => c.BannerUrl = url,
+				cancellationToken);
 
 
 			// Merge job stats and resolve company logos
@@ -172,17 +170,6 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 					company.TotalJobs = 0;                        // No jobs found
 					company.TotalOpenJobs = 0;
 				}
-
-				// lookup[Id] returns all files for this company (Logo + Banner)
-				var companyFiles = lookup[company.CompanyId];
-
-				// Resolve the full URL for the company logo
-				company.LogoUrl = _fileUrlResolver.ResolveCompanyLogo(companyFiles
-					.FirstOrDefault(f => f.Category == FileCategory.Logo)?.Path);
-
-				// Resolve the full URL for the company banner
-				company.BannerUrl = _fileUrlResolver.ResolveCompanyBanner(companyFiles
-					.FirstOrDefault(f => f.Category == FileCategory.Banner)?.Path);
 
 			}
 
@@ -214,9 +201,13 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 
 			var result = _mapper.Map<GetSingleCompanyQueryResponse>(company);
 
+			// handle company logo and banner
 
-			//result.LogoUrl =
-			//	_fileUrlResolver.ResolveCompanyLogo(company.LogoFile != null ? company.LogoFile.Path : null);
+			await _stitcher.AttachLogoAndBannerAsync
+				(result,
+				result.CompanyId,
+				(c, url) => c.LogoUrl = url,
+				(c, url) => c.BannerUrl = url);
 
 			return Success(result);
 
@@ -231,13 +222,13 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 
 			if (result.data is null) return result;
 
-			foreach (var job in result.data)
-			{
-				job.Company.LogoUrl =
-					_fileUrlResolver.ResolveCompanyLogo(job.Company.LogoUrl);
-			}
 
 
+			await _stitcher.AttachLogosAsync(
+				result.data,
+				j => j.Company.CompanyId,           // Drill down to the company ID
+				(j, url) => j.Company.LogoUrl = url, // Drill down to set the URL
+				cancellationToken);
 
 			return result;
 		}
@@ -252,11 +243,12 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 
 			if (result.data is null) return result;
 
-			foreach (var company in result.data)
-			{
-				company.LogoUrl =
-					_fileUrlResolver.ResolveCompanyLogo(company.LogoUrl);
-			}
+
+			await _stitcher.AttachLogosAsync(
+				result.data,
+				j => j.CompanyId,           // Drill down to the company ID
+				(j, url) => j.LogoUrl = url, // Drill down to set the URL
+				cancellationToken);
 
 			return result;
 		}
