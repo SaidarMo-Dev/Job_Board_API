@@ -3,44 +3,12 @@
   "WorkspaceRootPath": "C:\\Projects\\Job_Board_API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CF1BC049-6506-4CA2-93DC-CC0E7D8BD67E}|JobBoard.Service\\JobBoard.Service.csproj|c:\\projects\\job_board_api\\jobboard.service\\implementations\\companyfilestitcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF1BC049-6506-4CA2-93DC-CC0E7D8BD67E}|JobBoard.Service\\JobBoard.Service.csproj|solutionrelative:jobboard.service\\implementations\\companyfilestitcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF1BC049-6506-4CA2-93DC-CC0E7D8BD67E}|JobBoard.Service\\JobBoard.Service.csproj|c:\\projects\\job_board_api\\jobboard.service\\abstractions\\icompanyfilestitcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF1BC049-6506-4CA2-93DC-CC0E7D8BD67E}|JobBoard.Service\\JobBoard.Service.csproj|solutionrelative:jobboard.service\\abstractions\\icompanyfilestitcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\companies\\queries\\handler\\companyqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\companies\\queries\\handler\\companyqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\companies\\commands\\models\\addcompanycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\companies\\commands\\models\\addcompanycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\companies\\commands\\models\\uploadcompanybannerrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\companies\\commands\\models\\uploadcompanybannerrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\mapping\\companymapping\\queriesmapping\\singlecompanymapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\mapping\\companymapping\\queriesmapping\\singlecompanymapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\mapping\\companymapping\\queriesmapping\\getlistcompaniesquerymapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\mapping\\companymapping\\queriesmapping\\getlistcompaniesquerymapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\companies\\commands\\handler\\companycommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\companies\\commands\\handler\\companycommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|c:\\projects\\job_board_api\\jobboard.api\\controllers\\companycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F41A1E-50FB-41EE-A07D-CB23F6064388}|JobBoard.Api\\JobBoard.Api.csproj|solutionrelative:jobboard.api\\controllers\\companycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{79D9DDE7-61D3-45DB-8E5A-81646E3C13E2}|JobBoard.Data\\JobBoard.Data.csproj|c:\\projects\\job_board_api\\jobboard.data\\metadata\\router.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{79D9DDE7-61D3-45DB-8E5A-81646E3C13E2}|JobBoard.Data\\JobBoard.Data.csproj|solutionrelative:jobboard.data\\metadata\\router.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|c:\\projects\\job_board_api\\jobboard.core\\feutures\\companies\\commands\\models\\updatecompanycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0A22666-7CA5-4234-93B0-019D31986F19}|JobBoard.Core\\JobBoard.Core.csproj|solutionrelative:jobboard.core\\feutures\\companies\\commands\\models\\updatecompanycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -63,129 +31,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ICompanyFileStitcher.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Abstractions\\ICompanyFileStitcher.cs",
-              "RelativeDocumentMoniker": "JobBoard.Service\\Abstractions\\ICompanyFileStitcher.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Abstractions\\ICompanyFileStitcher.cs",
-              "RelativeToolTip": "JobBoard.Service\\Abstractions\\ICompanyFileStitcher.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAlwBEAAAAHAAAAAAAAAA==",
+              "Title": "UpdateCompanyCommand.cs",
+              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Companies\\Commands\\Models\\UpdateCompanyCommand.cs",
+              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Companies\\Commands\\Models\\UpdateCompanyCommand.cs",
+              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Companies\\Commands\\Models\\UpdateCompanyCommand.cs",
+              "RelativeToolTip": "JobBoard.Core\\Feutures\\Companies\\Commands\\Models\\UpdateCompanyCommand.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAxwCIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-09T14:28:25.735Z",
+              "WhenOpened": "2026-04-09T21:45:55.974Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "CompanyFileStitcher.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Implementations\\CompanyFileStitcher.cs",
-              "RelativeDocumentMoniker": "JobBoard.Service\\Implementations\\CompanyFileStitcher.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Service\\Implementations\\CompanyFileStitcher.cs",
-              "RelativeToolTip": "JobBoard.Service\\Implementations\\CompanyFileStitcher.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAtwFsAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-09T14:07:36.532Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "SingleCompanyMapping.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Mapping\\CompanyMapping\\Queriesmapping\\SingleCompanyMapping.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Mapping\\CompanyMapping\\Queriesmapping\\SingleCompanyMapping.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Mapping\\CompanyMapping\\Queriesmapping\\SingleCompanyMapping.cs",
-              "RelativeToolTip": "JobBoard.Core\\Mapping\\CompanyMapping\\Queriesmapping\\SingleCompanyMapping.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-08T22:07:30.054Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Router.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Data\\Metadata\\Router.cs",
-              "RelativeDocumentMoniker": "JobBoard.Data\\Metadata\\Router.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Data\\Metadata\\Router.cs",
-              "RelativeToolTip": "JobBoard.Data\\Metadata\\Router.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAgwDMAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-08T17:24:35.581Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UploadCompanyBannerRequest.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Companies\\Commands\\Models\\UploadCompanyBannerRequest.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Companies\\Commands\\Models\\UploadCompanyBannerRequest.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Companies\\Commands\\Models\\UploadCompanyBannerRequest.cs",
-              "RelativeToolTip": "JobBoard.Core\\Feutures\\Companies\\Commands\\Models\\UploadCompanyBannerRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-08T17:23:13.571Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "CompanyController.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\Controllers\\CompanyController.cs",
-              "RelativeDocumentMoniker": "JobBoard.Api\\Controllers\\CompanyController.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Api\\Controllers\\CompanyController.cs",
-              "RelativeToolTip": "JobBoard.Api\\Controllers\\CompanyController.cs",
-              "ViewState": "AgIAAKEAAAAAAAAAAAApwKoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-08T16:50:56.382Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CompanyQueryHandler.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Companies\\Queries\\Handler\\CompanyQueryHandler.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Companies\\Queries\\Handler\\CompanyQueryHandler.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Companies\\Queries\\Handler\\CompanyQueryHandler.cs",
-              "RelativeToolTip": "JobBoard.Core\\Feutures\\Companies\\Queries\\Handler\\CompanyQueryHandler.cs",
-              "ViewState": "AgIAAMMAAAAAAAAAAAAkwM0AAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T22:52:54.988Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "GetListCompaniesQueryMapping.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Mapping\\CompanyMapping\\Queriesmapping\\GetListCompaniesQueryMapping.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Mapping\\CompanyMapping\\Queriesmapping\\GetListCompaniesQueryMapping.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Mapping\\CompanyMapping\\Queriesmapping\\GetListCompaniesQueryMapping.cs",
-              "RelativeToolTip": "JobBoard.Core\\Mapping\\CompanyMapping\\Queriesmapping\\GetListCompaniesQueryMapping.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T22:35:25.032Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
               "Title": "CompanyCommandHandler.cs",
               "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Companies\\Commands\\Handler\\CompanyCommandHandler.cs",
               "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Companies\\Commands\\Handler\\CompanyCommandHandler.cs",
               "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Companies\\Commands\\Handler\\CompanyCommandHandler.cs",
               "RelativeToolTip": "JobBoard.Core\\Feutures\\Companies\\Commands\\Handler\\CompanyCommandHandler.cs",
-              "ViewState": "AgIAAGEAAAAAAAAAAAApwIcAAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAIAxwIQAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T14:19:14.214Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AddCompanyCommand.cs",
-              "DocumentMoniker": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Companies\\Commands\\Models\\AddCompanyCommand.cs",
-              "RelativeDocumentMoniker": "JobBoard.Core\\Feutures\\Companies\\Commands\\Models\\AddCompanyCommand.cs",
-              "ToolTip": "C:\\Projects\\Job_Board_API\\JobBoard.Core\\Feutures\\Companies\\Commands\\Models\\AddCompanyCommand.cs",
-              "RelativeToolTip": "JobBoard.Core\\Feutures\\Companies\\Commands\\Models\\AddCompanyCommand.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAgwBAAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T14:13:56.579Z",
+              "WhenOpened": "2026-04-09T17:53:58.552Z",
               "EditorCaption": ""
             }
           ]

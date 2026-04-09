@@ -9,6 +9,7 @@ using JobBoard.Service.Abstractions;
 using JobBoard.Service.Authentication.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 
 namespace JobBoard.Core.Feutures.Companies.Commands.Handler
@@ -79,11 +80,16 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 		// update handler
 		public async Task<Response<int>> Handle(UpdateCompanyCommand request, CancellationToken cancellationToken)
 		{
-
-			var company = await _companyService.GetCompanyByIdAsync(request.CompanyId);
+			// Fetch with Tracking and Include
+			var company = await _companyService.GetCompaniesQueryable()
+				.AsTracking()
+				.Where(c => c.CompanyId == request.CompanyId)
+				.Include(c => c.CompanyIndustries)
+				.FirstOrDefaultAsync();
 
 			if (company == null) return NotFound<int>("There is no Company to update! Make sure to enter the correct Id");
 
+			// Authorization
 			var isAuthorized = await _authorizationService.AuthorizeAsync(
 				_currentUserService.GetCurrentUserPrincipal(),
 				company,
@@ -95,6 +101,36 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 			company = _mapper.Map(request, company);
 			company.UpdatedAt = DateTime.UtcNow;
 
+			// Update company industries
+			// Identify the IDs to process
+			var newIds = request.IndustryIds?.Distinct().ToList() ?? new List<int>();
+			var currentIds = company.CompanyIndustries.Select(ci => ci.IndustryId).ToList();
+
+			// Remove industries that are NOT in the new list
+			var toRemove = company.CompanyIndustries
+				.Where(ci => !newIds.Contains(ci.IndustryId))
+				.ToList();
+
+			foreach (var rel in toRemove)
+			{
+				company.CompanyIndustries.Remove(rel);
+			}
+
+			// Add industries that are in the new list but NOT currently linked
+			var toAdd = newIds
+				.Where(id => !currentIds.Contains(id))
+				.Select(id => new CompanyIndustry
+				{
+					CompanyId = company.CompanyId,
+					IndustryId = id
+				});
+
+			foreach (var rel in toAdd)
+			{
+				company.CompanyIndustries.Add(rel);
+			}
+
+			// Persist
 			await _companyService.UpdateAsync(company);
 
 			return Success(request.CompanyId);

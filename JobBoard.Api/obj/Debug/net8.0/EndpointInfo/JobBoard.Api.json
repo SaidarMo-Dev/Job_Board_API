@@ -9912,10 +9912,11 @@
             "type": "string",
             "nullable": true
           },
-          "industries": {
+          "industryIds": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             },
             "nullable": true
           }
