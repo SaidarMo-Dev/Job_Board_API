@@ -34,5 +34,7 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Models
 		public required string Email { get; set; }
 		public string? Fax { get; set; }
 
+		public List<int> IndustryIds { get; set; } = new();
+
 	}
 }

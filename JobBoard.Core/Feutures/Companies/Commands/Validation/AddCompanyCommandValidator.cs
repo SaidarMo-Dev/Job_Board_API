@@ -3,16 +3,19 @@ using JobBoard.Core.Common.Helpers;
 using JobBoard.Core.Feutures.Companies.Commands.Models;
 using JobBoard.Core.Helpers;
 using JobBoard.Service.Abstractions;
+using Microsoft.EntityFrameworkCore;
 
 namespace JobBoard.Core.Feutures.Companies.Commands.Validation
 {
 	public class AddCompanyCommandValidator : AbstractValidator<AddCompanyCommand>
 	{
 		private readonly ICompanyService _companyService;
+		private readonly IIndustryService _industryService;
 
-		public AddCompanyCommandValidator(ICompanyService companyService)
+		public AddCompanyCommandValidator(ICompanyService companyService, IIndustryService industryService)
 		{
 			_companyService = companyService;
+			_industryService = industryService;
 			AddValidations();
 			AddCustomValidation();
 
@@ -104,6 +107,30 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Validation
 
 			RuleFor(x => x.Fax)
 				.Must(Util.IsValidePhoneNumber).When(x => !string.IsNullOrEmpty(x.Fax));
+
+			RuleFor(x => x.IndustryIds)
+				.MustAsync(async (industryIds, ct) =>
+				{
+					// If the list is null or empty, it's valid (because industries are optional)
+					if (industryIds == null || !industryIds.Any())
+						return true;
+
+					// Remove duplicates from the request to ensure accurate count comparison
+					var uniqueRequestIds = industryIds.Distinct().ToList();
+
+					// Verify all unique IDs exist in the database
+					var existingCount = await _industryService.GetIndustriesQueryable()
+						.CountAsync(i => uniqueRequestIds.Contains(i.Id), ct);
+
+					return existingCount == uniqueRequestIds.Count;
+				})
+				.WithMessage("One or more selected industries are invalid.");
+
+
+
+
+
+
 
 		}
 

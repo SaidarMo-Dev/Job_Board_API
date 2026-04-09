@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using JobBoard.Core.Authorization.Policies;
 using JobBoard.Core.Bases;
-using JobBoard.Core.Common.Helpers;
 using JobBoard.Core.Feutures.Companies.Commands.Models;
 using JobBoard.Core.Feutures.Files.Commands.Models;
 using JobBoard.Core.Resources;
@@ -27,6 +26,7 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 		private readonly IAuthorizationService _authorizationService;
 		private readonly ICurrentUserService _currentUserService;
 		private readonly IMediator _mediator;
+		private readonly IIndustryService _industryService;
 
 		#endregion
 
@@ -36,7 +36,8 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 									IStringLocalizer<SharedResources> stringLocalizer,
 									IAuthorizationService authorizationService,
 									ICurrentUserService currentUserService,
-									IMediator mediator
+									IMediator mediator,
+									IIndustryService industryService
 									) : base(stringLocalizer)
 		{
 			_companyService = companyService;
@@ -45,6 +46,7 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 			_authorizationService = authorizationService;
 			_currentUserService = currentUserService;
 			_mediator = mediator;
+			_industryService = industryService;
 		}
 		#endregion
 
@@ -54,16 +56,17 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 		public async Task<Response<int>> Handle(AddCompanyCommand request, CancellationToken cancellationToken)
 		{
 
+
 			var company = _mapper.Map<Company>(request);
 
-			if (string.IsNullOrWhiteSpace(company.Slug))
+			if (request.IndustryIds != null && request.IndustryIds.Count > 0)
 			{
-				company.Slug = SlugHelper.Normalize(request.CompanyName);
+				company.CompanyIndustries = request.IndustryIds.Select(id => new CompanyIndustry
+				{
+					IndustryId = id
+				}).ToList();
 			}
-			else
-			{
-				company.Slug = SlugHelper.Normalize(company.Slug);
-			}
+
 
 			company.CreatedByUserId = _currentUserService.GetCurrentUserId();
 			company.CreatedAt = DateTime.UtcNow;

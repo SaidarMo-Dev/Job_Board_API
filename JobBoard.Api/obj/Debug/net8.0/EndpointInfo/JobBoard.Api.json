@@ -9341,6 +9341,14 @@
           "fax": {
             "type": "string",
             "nullable": true
+          },
+          "industryIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
