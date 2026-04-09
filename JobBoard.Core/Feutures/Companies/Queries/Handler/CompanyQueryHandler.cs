@@ -30,6 +30,7 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 		private readonly IFileUrlResolver _fileUrlResolver;
 		private readonly IFileResourceService _fileResourceService;
 		private readonly ICompanyFileStitcher _stitcher;
+		private readonly ICompanyJobStatsService _companyJobStatsService;
 		private static readonly List<PropertyInfo> _cachedCompanyProperties =
 	typeof(GetSingleCompanyQueryResponse).GetProperties().ToList();
 
@@ -42,7 +43,8 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 			IJobService jobService,
 			IFileUrlResolver fileUrlResolver,
 			IFileResourceService fileResourceService,
-			ICompanyFileStitcher stitcher
+			ICompanyFileStitcher stitcher,
+			ICompanyJobStatsService companyJobStatsService
 			)
 
 			: base(stringLocalizer)
@@ -53,6 +55,7 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 			_fileUrlResolver = fileUrlResolver;
 			_fileResourceService = fileResourceService;
 			_stitcher = stitcher;
+			_companyJobStatsService = companyJobStatsService;
 		}
 		#endregion
 
@@ -122,30 +125,12 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 			// If no companies found, return early
 			if (result.data is null) return result;
 
-			// Extract company IDs from the paginated results
-			// This allows us to fetch job counts only for visible companies
-			var companyIds = result.data
-				.Select(c => c.CompanyId)
-				.ToList();
+			// handle companies jobs stats (total jobs / open jobs )
 
-			// Current UTC time for calculating open jobs
-			var now = DateTime.UtcNow;
-
-			// Fetch job statistics for all companies in a single query
-			// Group by company to get total jobs and open jobs
-			var jobStats = await _jobService.GetJobsQueryable()
-				.Where(j => companyIds.Contains(j.CompanyId))      // Only consider companies on the current page
-				.GroupBy(j => j.CompanyId)
-				.Select(g => new
-				{
-					CompanyId = g.Key,
-					TotalJobs = g.Count(),                          // Total jobs per company
-					OpenJobs = g.Count(j =>
-						j.Status == Data.enums.JobStatusEnum.Active && // Only active jobs
-						j.DateExpired > now)                            // Only jobs that haven't expired
-				})
-				.ToDictionaryAsync(x => x.CompanyId);              // Convert to dictionary for fast lookup
-
+			await _companyJobStatsService.GetCompanyJobStatsAsync(result.data,
+				c => c.CompanyId,
+				(c, count) => c.TotalJobs = count,
+				(c, count) => c.TotalOpenJobs = count);
 
 			// handle only banner and logo for companies using stitcher service
 
@@ -156,22 +141,6 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 				(c, url) => c.BannerUrl = url,
 				cancellationToken);
 
-
-			// Merge job stats and resolve company logos
-			foreach (var company in result.data)
-			{
-				if (jobStats.TryGetValue(company.CompanyId, out var stats))
-				{
-					company.TotalJobs = stats.TotalJobs;          // Assign total jobs
-					company.TotalOpenJobs = stats.OpenJobs;       // Assign open jobs
-				}
-				else
-				{
-					company.TotalJobs = 0;                        // No jobs found
-					company.TotalOpenJobs = 0;
-				}
-
-			}
 
 			// Return the final paginated list with stats and resolved logos
 			return result;
@@ -201,14 +170,31 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 
 			var result = _mapper.Map<GetSingleCompanyQueryResponse>(company);
 
+			// handle company industries
+			var industries = await _companyService.GetCompaniesQueryable()
+				.Where(c => c.CompanyId == company.CompanyId)
+				.Select(c => c.CompanyIndustries
+					.Select(ci => ci.Industry.Name))
+
+				.FirstOrDefaultAsync();
+
+			result.Indusries = industries?.ToList() ?? new List<string>();
+
+			// handle company stats (total Jobs / open jobs)
+
+			await _companyJobStatsService.GetCompanyJobStatsAsync(result,
+			c => c.CompanyId,
+			(c, count) => c.TotalJobs = count,
+			(c, count) => c.TotalOpenJobs = count);
+
 			// handle company logo and banner
 
 			await _stitcher.AttachFilesAsync
-				(result,
-				r => r.CompanyId,
-				(c, url) => c.LogoUrl = url,
-				(c, url) => c.BannerUrl = url,
-				cancellationToken);
+				 (result,
+				 r => r.CompanyId,
+				 (c, url) => c.LogoUrl = url,
+				 (c, url) => c.BannerUrl = url,
+				 cancellationToken);
 
 			return Success(result);
 
@@ -245,7 +231,14 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 
 			if (result.data is null) return result;
 
+			// handle open jobs and total jobs
+			await _companyJobStatsService.GetCompanyJobStatsAsync(result.data,
+			c => c.CompanyId,
+			(c, count) => c.TotalJobs = count,
+			(c, count) => c.TotalOpenJobs = count);
 
+
+			// Attach company logo 
 			await _stitcher.AttachFilesAsync(
 				result.data,
 				j => j.CompanyId,
