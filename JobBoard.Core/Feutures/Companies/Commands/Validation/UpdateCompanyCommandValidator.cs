@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using JobBoard.Core.Common.Helpers;
 using JobBoard.Core.Feutures.Companies.Commands.Models;
 using JobBoard.Core.Helpers;
 using JobBoard.Service.Abstractions;
@@ -20,54 +21,78 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Validation
 		public void AddValidations()
 		{
 			RuleFor(x => x.CompanyName)
-				.NotEmpty().WithMessage("{PropertyName} Cannot be Empty.")
-				.NotNull().WithMessage("{PropertyName} cannot be Null");
+			.NotEmpty()
+			.MaximumLength(200);
 
+			RuleFor(x => x.Slug)
+				.MaximumLength(150);
 
-			RuleFor(x => x.Location)
-				.NotEmpty().WithMessage("{PropertyName} Cannot be Empty.")
-				.NotNull().WithMessage("{PropertyName} cannot be Null");
+			RuleFor(x => x.ShortDescription)
+				.NotEmpty()
+				.MaximumLength(500);
 
+			RuleFor(x => x.Description)
+				.MaximumLength(1000);
 
-			RuleFor(x => x.PhoneNumber)
-				.NotEmpty().WithMessage("{PropertyName} : Cannot be Empty.")
-				.NotNull().WithMessage("{PropertyName} cannot be Null");
-
+			RuleFor(x => x.FoundedYear)
+				.InclusiveBetween(1800, DateTime.Now.Year)
+				.When(x => x.FoundedYear.HasValue);
 
 			RuleFor(x => x.Email)
-				.NotEmpty().WithMessage("{PropertyName} : Cannot be Empty.")
-				.NotNull().WithMessage("{PropertyName} cannot be Null");
-
-
-			RuleFor(x => x.Fax)
-				.NotEmpty().WithMessage("{PropertyName} : Cannot be Empty.")
-				.NotNull().WithMessage("{PropertyName} cannot be Null");
+				.NotEmpty()
+				.EmailAddress();
 
 		}
 
 		public void AddCustomValidations()
 		{
-			RuleFor(x => x.CompanyName)
-				.MustAsync(async (comp, key, cancellationToken) => !await _companyService.IsExistByNameExcludeSelfAsync(comp.CompanyId, key))
-			.WithMessage("{PropertyName} already Exist!");
+			RuleFor(x => x.Slug)
+				.CustomAsync(async (slug, context, cancellationToken) =>
+				{
+					// Determine which value to use
+					var rawValue = string.IsNullOrWhiteSpace(slug)
+						? context.InstanceToValidate.CompanyName
+						: slug;
 
+					var normalizedSlug = SlugHelper.Normalize(rawValue);
+
+					// Check for empty/invalid result
+					if (string.IsNullOrWhiteSpace(normalizedSlug))
+					{
+						context.AddFailure("Slug", "Could not generate a valid slug from the name or slug provided.");
+						return;
+					}
+
+					// Check for uniqueness in DB
+					var exists = await _companyService.IsSlugExistExcludeSelf(normalizedSlug, context.InstanceToValidate.CompanyId);
+					if (exists)
+					{
+						context.AddFailure("Slug", "This slug (or the one generated from the company name) is already taken.");
+					}
+				});
+
+			// Uniqueness Checks
+			RuleFor(x => x.CompanyName)
+				.MustAsync(async (companyToValidate, name, token) => !await _companyService.IsExistByNameExcludeSelfAsync(companyToValidate.CompanyId, name))
+				.WithMessage("Company Name already exists.");
+
+
+			// URL Validations
 			RuleFor(x => x.WebsiteUrl)
-				.Must(key => Util.IsValideUrl(key))
-				.WithMessage("{PropertyName} Is Invalide");
+				.Must(Util.IsValideUrl).WithMessage("Invalid Website URL.");
+
+			RuleFor(x => x.LinkedInUrl)
+				.Must(Util.IsValideUrl).When(x => !string.IsNullOrEmpty(x.LinkedInUrl))
+				.WithMessage("Invalid LinkedIn URL.");
+
 
 			RuleFor(x => x.PhoneNumber)
-				.Must(key => Util.IsValidePhoneNumber(key))
-				.WithMessage("{PropertyName} Is Invalide");
-
-
-			RuleFor(x => x.Email)
-				.Must(key => Util.IsValideEmail(key))
-				.WithMessage("{PropertyName} Is Invalide");
-
+				.Must(key => string.IsNullOrEmpty(key) ? true : Util.IsValidePhoneNumber(key))
+				.WithMessage("{PropertyName} is invalid");
 
 			RuleFor(x => x.Fax)
-				.Must(key => Util.IsValidePhoneNumber(key))
-				.WithMessage("{PropertyName} Is Invalide");
+				.Must(key => string.IsNullOrEmpty(key) ? true : Util.IsValidePhoneNumber(key))
+				.WithMessage("{PropertyName} is invalid");
 
 
 		}

@@ -96,5 +96,6 @@ namespace JobBoard.Service.Abstractions
 		IQueryable<Company> GetFeaturedCompanies();
 
 		Task<bool> IsSlugExist(string slug);
+		Task<bool> IsSlugExistExcludeSelf(string slug, int id);
 	}
 }

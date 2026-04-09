@@ -79,7 +79,7 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 
 			var company = await _companyService.GetCompanyByIdAsync(request.CompanyId);
 
-			if (company == null) return NotFound<int>("There is no Company to Ipdate! Make sure to enter the correct Id");
+			if (company == null) return NotFound<int>("There is no Company to update! Make sure to enter the correct Id");
 
 			var isAuthorized = await _authorizationService.AuthorizeAsync(
 				_currentUserService.GetCurrentUserPrincipal(),
@@ -89,8 +89,8 @@ namespace JobBoard.Core.Feutures.Companies.Commands.Handler
 			if (!isAuthorized.Succeeded)
 				return Forbidden<int>(_stringLocalizer[SharedResourcesKeys.NoAccess]);
 
-
 			company = _mapper.Map(request, company);
+			company.UpdatedAt = DateTime.UtcNow;
 
 			await _companyService.UpdateAsync(company);
 

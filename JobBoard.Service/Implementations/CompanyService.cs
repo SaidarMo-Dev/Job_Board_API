@@ -155,7 +155,15 @@ namespace JobBoard.Service.Implementations
 
 		public async Task<bool> IsSlugExist(string slug)
 		{
+
 			var result = await _companyRepository.GetTableAsNoTracking().FirstOrDefaultAsync(c => c.Slug == slug);
+
+			return result != null;
+		}
+
+		public async Task<bool> IsSlugExistExcludeSelf(string slug, int id)
+		{
+			var result = await _companyRepository.GetTableAsNoTracking().FirstOrDefaultAsync(c => c.Slug == slug && c.CompanyId != id);
 
 			return result != null;
 		}
