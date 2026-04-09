@@ -149,7 +149,7 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 
 			// handle only banner and logo for companies using stitcher service
 
-			await _stitcher.AttachLogosAndBannersAsync(
+			await _stitcher.AttachFilesAsync(
 				result.data,
 				c => c.CompanyId,           // Drill down to the company ID
 				(c, url) => c.LogoUrl = url, // Drill down to set the URL
@@ -203,11 +203,12 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 
 			// handle company logo and banner
 
-			await _stitcher.AttachLogoAndBannerAsync
+			await _stitcher.AttachFilesAsync
 				(result,
-				result.CompanyId,
+				r => r.CompanyId,
 				(c, url) => c.LogoUrl = url,
-				(c, url) => c.BannerUrl = url);
+				(c, url) => c.BannerUrl = url,
+				cancellationToken);
 
 			return Success(result);
 
@@ -224,10 +225,11 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 
 
 
-			await _stitcher.AttachLogosAsync(
+			await _stitcher.AttachFilesAsync(
 				result.data,
-				j => j.Company.CompanyId,           // Drill down to the company ID
-				(j, url) => j.Company.LogoUrl = url, // Drill down to set the URL
+				j => j.Company.CompanyId,
+				(j, url) => j.Company.LogoUrl = url,
+				null,
 				cancellationToken);
 
 			return result;
@@ -244,10 +246,11 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 			if (result.data is null) return result;
 
 
-			await _stitcher.AttachLogosAsync(
+			await _stitcher.AttachFilesAsync(
 				result.data,
-				j => j.CompanyId,           // Drill down to the company ID
-				(j, url) => j.LogoUrl = url, // Drill down to set the URL
+				j => j.CompanyId,
+				(j, url) => j.LogoUrl = url,
+				null,
 				cancellationToken);
 
 			return result;

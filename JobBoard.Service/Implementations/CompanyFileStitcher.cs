@@ -16,81 +16,55 @@ namespace JobBoard.Service.Implementations
 			_urlResolver = urlResolver;
 		}
 
-		public async Task AttachLogosAndBannersAsync<T>(IEnumerable<T> items, Func<T, int> idSelector, Action<T, string?> urlLogoSetter, Action<T, string?> urlBannerSetter, CancellationToken ct = default)
+
+		public async Task AttachFilesAsync<T>(
+		IEnumerable<T> items,
+		Func<T, int> idSelector,
+		Action<T, string?>? logoSetter = null,
+		Action<T, string?>? bannerSetter = null,
+		CancellationToken ct = default)
 		{
 			var itemList = items?.ToList();
 			if (itemList == null || !itemList.Any()) return;
 
-			// Get unique IDs using the provided selector
+			// Determine which categories we actually need to fetch
+			var categories = new List<FileCategory?>();
+			if (logoSetter != null) categories.Add(FileCategory.Logo);
+			if (bannerSetter != null) categories.Add(FileCategory.Banner);
+
+			if (!categories.Any()) return;
+
 			var companyIds = itemList.Select(idSelector).Distinct().ToList();
 
-			// Batch fetch from DB
-			var logos = await _fileService.GetFileResourcesQueryable()
+			// Single DB Query
+			var allFiles = await _fileService.GetFileResourcesQueryable()
 				.Where(f => companyIds.Contains(f.OwnerId)
 						 && f.OwnerType == FileOwnerType.Companies
-						 && (f.Category == FileCategory.Logo || f.Category == FileCategory.Banner))
+						 && categories.Contains(f.Category))
 				.ToListAsync(ct);
 
-			var lookup = logos.ToLookup(f => f.OwnerId);
+			var lookup = allFiles.ToLookup(f => f.OwnerId);
 
-			// Assign using the provided setter
 			foreach (var item in itemList)
 			{
-				var logoPath = lookup[idSelector(item)].FirstOrDefault(f => f.Category == FileCategory.Logo)?.Path;
-				var bannerPath = lookup[idSelector(item)].FirstOrDefault(f => f.Category == FileCategory.Banner)?.Path;
+				var companyFiles = lookup[idSelector(item)];
 
-				urlLogoSetter(item, _urlResolver.ResolveCompanyLogo(logoPath));
-				urlBannerSetter(item, _urlResolver.ResolveCompanyLogo(bannerPath));
+				if (logoSetter != null)
+				{
+					var path = companyFiles.FirstOrDefault(f => f.Category == FileCategory.Logo)?.Path;
+					logoSetter(item, _urlResolver.ResolveCompanyLogo(path));
+				}
 
+				if (bannerSetter != null)
+				{
+					var path = companyFiles.FirstOrDefault(f => f.Category == FileCategory.Banner)?.Path;
+					bannerSetter(item, _urlResolver.ResolveCompanyBanner(path));
+				}
 			}
 		}
 
-		public async Task AttachLogosAsync<T>(
-			IEnumerable<T> items,
-			Func<T, int> idSelector,
-			Action<T, string?> urlSetter,
-			CancellationToken ct = default)
-		{
-			var itemList = items?.ToList();
-			if (itemList == null || !itemList.Any()) return;
-
-			// Get unique IDs using the provided selector
-			var companyIds = itemList.Select(idSelector).Distinct().ToList();
-
-			// Batch fetch from DB
-			var logos = await _fileService.GetFileResourcesQueryable()
-				.Where(f => companyIds.Contains(f.OwnerId)
-						 && f.OwnerType == FileOwnerType.Companies
-						 && f.Category == FileCategory.Logo)
-				.ToListAsync(ct);
-
-			var lookup = logos.ToLookup(f => f.OwnerId);
-
-			// Assign using the provided setter
-			foreach (var item in itemList)
-			{
-				var path = lookup[idSelector(item)].FirstOrDefault()?.Path;
-				urlSetter(item, _urlResolver.ResolveCompanyLogo(path));
-			}
-		}
-
-		public async Task AttachLogoAndBannerAsync<T>(T item, int Id, Action<T, string?> urlLogoSetter, Action<T, string?> urlBannerSetter, CancellationToken ct = default)
-		{
-			if (item == null) return;
-
-			var companyFiles = _fileService.GetFileResourcesQueryable()
-			.Where(f => f.OwnerId == Id &&
-				f.OwnerType == FileOwnerType.Companies &&
-				(f.Category == FileCategory.Banner || f.Category == FileCategory.Logo));
-
-			// Extract paths
-
-			var logoPath = (await companyFiles.FirstOrDefaultAsync(f => f.Category == FileCategory.Logo))?.Path;
-			var bannerPath = (await companyFiles.FirstOrDefaultAsync(f => f.Category == FileCategory.Banner))?.Path;
-
-			urlLogoSetter(item, _urlResolver.ResolveCompanyLogo(logoPath));
-			urlBannerSetter(item, _urlResolver.ResolveCompanyBanner(bannerPath));
-
-		}
+		// Single item implementation:
+		public Task AttachFilesAsync<T>(T item, Func<T, int> idSelector, Action<T, string?>? logoSetter = null, Action<T, string?>? bannerSetter = null, CancellationToken ct = default)
+			=> AttachFilesAsync(new[] { item }, idSelector, logoSetter, bannerSetter, ct);
 	}
 }
