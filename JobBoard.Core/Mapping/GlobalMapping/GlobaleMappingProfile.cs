@@ -11,6 +11,7 @@ namespace JobBoard.Core.Mapping.GlobalMapping
 			GetCategoryDtoMapping();
 			MapCompanyPreview();
 			MapGlobalJobResponse();
+			MapIndustryDto();
 		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using JobBoard.Api.Bases;
+using JobBoard.Core.Feutures.Companies.Queries.Models;
 using JobBoard.Core.Feutures.Employer.Queries.Models;
 using JobBoard.Data.Metadata;
 using Microsoft.AspNetCore.Authorization;
@@ -39,6 +40,21 @@ namespace JobBoard.Api.Controllers
 		{
 			return Ok(await Mediator.Send(query));
 		}
+
+
+		[SwaggerOperation(
+					Summary = "Get employer company",
+					Description = "Get current employer company.",
+					OperationId = "GetEmployerCompany"
+				)]
+
+		[HttpGet(Router.EmployerRoute.EmplyoerCompany)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<IActionResult> GetmployerCompany()
+		{
+			return NewResult(await Mediator.Send(new GetEmployerCompanyQuery()));
+		}
+
 
 	}
 }

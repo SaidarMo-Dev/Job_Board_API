@@ -220,6 +220,7 @@
 
 			public const string dashboard = Prefex;
 			public const string PostedJobs = Prefex + "/posted-jobs";
+			public const string EmplyoerCompany = Prefex + "/company-profile";
 		}
 
 

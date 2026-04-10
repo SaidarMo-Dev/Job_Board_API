@@ -21,7 +21,8 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 						IRequestHandler<GetCompaniesSummaryQuery, PaginatedResponse<GetCompaniesSummaryQueryResponse>>,
 						IRequestHandler<GetCompanyBySlug, Response<GetSingleCompanyQueryResponse>>,
 						IRequestHandler<GetCompanyJobs, PaginatedResponse<GlobalJobResponseDto>>,
-						IRequestHandler<GetFeaturedCompaniesQuery, PaginatedResponse<GetSingleCompanyQueryResponse>>
+						IRequestHandler<GetFeaturedCompaniesQuery, PaginatedResponse<GetSingleCompanyQueryResponse>>,
+						IRequestHandler<GetEmployerCompanyQuery, Response<GetEmployerCompanyQueryResponse>>
 	{
 		#region Fields
 		private readonly ICompanyService _companyService;
@@ -247,6 +248,26 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 				cancellationToken);
 
 			return result;
+		}
+
+		public async Task<Response<GetEmployerCompanyQueryResponse>> Handle(GetEmployerCompanyQuery request, CancellationToken cancellationToken)
+		{
+			var company = await _companyService.GetEmployerCompany();
+
+			if (company == null) return NotFound<GetEmployerCompanyQueryResponse>("company not found");
+
+			var result = _mapper.Map<GetEmployerCompanyQueryResponse>(company);
+
+			// handle company logo and banner
+
+			await _stitcher.AttachFilesAsync
+				 (result,
+				 r => r.CompanyId,
+				 (c, url) => c.LogoUrl = url,
+				 (c, url) => c.BannerUrl = url,
+				 cancellationToken);
+
+			return Success(result);
 		}
 
 		#endregion

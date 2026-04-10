@@ -2,6 +2,7 @@
 using JobBoard.Data.enums;
 using JobBoard.Infrastructure.Abstractions;
 using JobBoard.Service.Abstractions;
+using JobBoard.Service.Authentication.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace JobBoard.Service.Implementations
@@ -10,12 +11,15 @@ namespace JobBoard.Service.Implementations
 	{
 		#region Fields
 		private readonly ICompanyRepository _companyRepository;
+		private readonly ICurrentUserService _currentUserService;
 		#endregion
 
 		#region Constructors
-		public CompanyService(ICompanyRepository companyRepository)
+		public CompanyService(ICompanyRepository companyRepository,
+			ICurrentUserService currentUserService)
 		{
-			this._companyRepository = companyRepository;
+			_companyRepository = companyRepository;
+			_currentUserService = currentUserService;
 		}
 
 		#endregion
@@ -166,6 +170,19 @@ namespace JobBoard.Service.Implementations
 			var result = await _companyRepository.GetTableAsNoTracking().FirstOrDefaultAsync(c => c.Slug == slug && c.CompanyId != id);
 
 			return result != null;
+		}
+
+		public async Task<Company> GetEmployerCompany()
+		{
+			var userId = _currentUserService.GetCurrentUserId();
+
+			var company = await _companyRepository.GetTableAsNoTracking()
+				.Where(c => c.CreatedByUserId == userId)
+				.Include(x => x.CompanyIndustries).ThenInclude(x => x.Industry)
+				.OrderByDescending(x => x.CreatedAt)
+				.FirstOrDefaultAsync();
+
+			return company;
 		}
 
 		#endregion
