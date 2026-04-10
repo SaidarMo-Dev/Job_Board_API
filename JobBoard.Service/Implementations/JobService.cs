@@ -36,6 +36,13 @@ namespace JobBoard.Service.Implementations
 		#region Methods
 		public async Task<string> AddNewJobAsync(JobListing entity)
 		{
+			var userRoles = await _currentUserService.GetCurrentUserRoles();
+
+			if (userRoles.Contains("Admin"))
+				entity.Status = Data.enums.JobStatusEnum.Active;
+			else
+				entity.Status = Data.enums.JobStatusEnum.Pending;
+
 			await _jobRepository.AddAsync(entity);
 			return "Success";
 		}

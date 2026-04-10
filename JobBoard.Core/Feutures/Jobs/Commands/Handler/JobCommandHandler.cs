@@ -67,43 +67,19 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 			// get created user
 			job.CreatedByUserId = _currentUserService.GetCurrentUserId();
 
-			// if admin job approved directly else job waitin to approved
 
-			var userRoles = await _currentUserService.GetCurrentUserRoles();
+			// Adding Job skills
 
-			if (userRoles.Contains("Admin"))
-				job.Status = Data.enums.JobStatusEnum.Active;
-			else
-				job.Status = Data.enums.JobStatusEnum.Pending;
+			job.JobSkills = request.skillIds?.Select(id => new JobSkill { SkillId = id }).ToList()
+							?? new List<JobSkill>();
 
-			// add job 
-			var result = await _jobService.AddNewJobAsync(job);
+			// Add job categories
+
+			job.jobCategories = request.CategoryIds?.Select(id => new JobCategory { CategoryId = id }).ToList()
+								?? new List<JobCategory>();
 
 
-			// adding Job skills and job categories
-			if (job.JobId != 0)
-			{
-				var jobSkills = new HashSet<JobSkill>();
-				var Jobcategories = new HashSet<JobCategory>();
-
-				foreach (int id in request.skillIds)
-				{
-					var Exist = _skillService.IsExistById(id);
-					if (Exist)
-						jobSkills.Add(new JobSkill { JobListingId = job.JobId, SkillId = id });
-				}
-				await _jobSkillService.AddRangeAsync(jobSkills);
-
-				foreach (int Id in request.skillIds)
-				{
-					var Exist = _categoryService.IsExistById(Id);
-					if (Exist)
-						Jobcategories.Add(new JobCategory { JobListingId = job.JobId, CategoryId = Id });
-				}
-
-				await _jobCategoryService.AddRangeAsync(Jobcategories);
-
-			}
+			await _jobService.AddNewJobAsync(job);
 
 			return Success(job.JobId);
 
