@@ -86,6 +86,13 @@ namespace JobBoard.Service.Implementations
 
 		public async Task<JobListing> UpdateAsync(JobListing job)
 		{
+			var userRoles = await _currentUserService.GetCurrentUserRoles();
+
+			if (userRoles.Contains("Admin"))
+				job.Status = JobStatusEnum.Active;
+			else
+				job.Status = JobStatusEnum.Pending;
+
 			await _jobRepository.UpdateAsync(job);
 			return job;
 		}
@@ -119,7 +126,7 @@ namespace JobBoard.Service.Implementations
 			var result = await _jobRepository.GetTableAsNoTracking()
 								.Include(x => x.JobSkills)
 								.Include(x => x.jobCategories)
-								.Where(x => x.JobId.Equals(Id))
+								.Where(x => x.JobId == Id)
 								.FirstOrDefaultAsync();
 
 			return result;

@@ -15,11 +15,12 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Responses
 		public string? MinSalary { get; set; }
 		public string? ExperienceLevel { get; set; }
 		public required string DatePosted { get; set; }
+		public DateTime DateExpired { get; set; }
 		public required string Status { get; set; }
 		public required string CretaedByUser { get; set; }
 
-		public List<SkillDto> Skills { get; set; }
-		public List<CategoryDto> Categories { get; set; }
+		public List<SkillDto> Skills { get; set; } = new List<SkillDto>();
+		public List<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
 
 	}
 }

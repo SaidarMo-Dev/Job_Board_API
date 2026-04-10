@@ -67,7 +67,6 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Validations
 		{
 			// Collection Validation
 			RuleFor(x => x.skillIds)
-				.NotEmpty().WithMessage("At least one skill is required.")
 				.Must(x => x.Count <= 20)
 				.WithMessage("You cannot select more than 20 skills.")
 				.MustAsync(async (skillIds, ct) =>

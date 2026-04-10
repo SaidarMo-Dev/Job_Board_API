@@ -9948,13 +9948,16 @@
           "jobType": {
             "$ref": "#/components/schemas/JobTypeEnum"
           },
+          "experienceLevel": {
+            "$ref": "#/components/schemas/ExperienceLevelEnum"
+          },
           "minSalary": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           },
           "maxSalary": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           },
           "dateExpired": {
             "type": "string",

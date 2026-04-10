@@ -88,65 +88,63 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 
 		public async Task<Response<string>> Handle(UpdateJobCommand request, CancellationToken cancellationToken)
 		{
-			var Oldjob = await _jobService.GetJobByIdWithEncludeSkillsAndCategoriesAsync(request.Id);
+			// Fetch the job including the collections (Ensure these are loaded!)
+			var job = await _jobService.GetJobByIdWithEncludeSkillsAndCategoriesAsync(request.Id);
 
-			if (Oldjob == null) return NotFound<string>($"Job With Id = {request.Id} Not Found");
+			if (job == null) return NotFound<string>($"Job With Id = {request.Id} Not Found");
 
+			// Authorization check
 			var isAuthorized = await _authorizationService.AuthorizeAsync(
-			_currentUserService.GetCurrentUserPrincipal(),
-			Oldjob, AuthorizationPolicies.IsJobCreator);
+				_currentUserService.GetCurrentUserPrincipal(),
+				job, AuthorizationPolicies.IsJobCreator);
 
-			if (!isAuthorized.Succeeded)
-				return Forbidden<string>("Access denied");
+			if (!isAuthorized.Succeeded) return Forbidden<string>("Access denied");
 
-			var newJob = _mapper.Map(request, Oldjob);
+			// Map basic properties from request to the existing tracked entity
+			_mapper.Map(request, job);
 
-			if (!newJob.DateExpired.HasValue)
-				newJob.DateExpired = Oldjob.DateExpired;
+			// Update Skills via Collection Manipulation 
+			// Remove items that are no longer in the request
+			var skillsToRemove = job.JobSkills
+				.Where(js => !request.SkillIds.Contains(js.SkillId))
+				.ToList();
 
-			await _jobService.UpdateAsync(newJob);
-
-			// update job Skills and categories
-
-
-			// update job skills
-			foreach (var Id in request.SkillIds)
+			foreach (var skill in skillsToRemove)
 			{
-				bool Exist = await _jobSkillService.IsExistById(request.Id, Id);
-
-				if (!Exist && _skillService.IsExistById(Id))
+				job.JobSkills.Remove(skill);
+			}
+			// Add skills that are in the request but not yet in the entity
+			var existingSkillIds = job.JobSkills.Select(js => js.SkillId).ToHashSet();
+			foreach (var skillId in request.SkillIds)
+			{
+				if (!existingSkillIds.Contains(skillId))
 				{
-					await _jobSkillService.AddAsync(new JobSkill { JobListingId = newJob.JobId, SkillId = Id });
+					job.JobSkills.Add(new JobSkill { SkillId = skillId });
 				}
 			}
 
-			foreach (var item in Oldjob.JobSkills)
+			// Update Categories via Collection Manipulation
+			// Remove items that are no longer in the request
+			var categoriesToRemove = job.jobCategories
+				.Where(jc => !request.CategoryIds.Contains(jc.CategoryId))
+				.ToList();
+
+			foreach (var category in categoriesToRemove)
 			{
-				if (!request.SkillIds.Contains(item.SkillId))
+				job.jobCategories.Remove(category);
+			}
+			// Add categories that are in the request but not yet in the entity
+			var existingCategoryIds = job.jobCategories.Select(jc => jc.CategoryId).ToHashSet();
+			foreach (var catId in request.CategoryIds)
+			{
+				if (!existingCategoryIds.Contains(catId))
 				{
-					await _jobSkillService.DeleteAsync(item);
+					job.jobCategories.Add(new JobCategory { CategoryId = catId });
 				}
 			}
 
-
-			// update JobCategories
-			foreach (var Id in request.CategoryIds)
-			{
-				bool Exist = await _jobCategoryService.IsExistById(request.Id, Id);
-
-				if (!Exist && _categoryService.IsExistById(Id))
-				{
-					await _jobCategoryService.AddAsync(new JobCategory { JobListingId = newJob.JobId, CategoryId = Id });
-				}
-			}
-
-			foreach (var item in Oldjob.jobCategories)
-			{
-				if (!request.SkillIds.Contains(item.CategoryId))
-				{
-					await _jobCategoryService.DeleteAsync(item);
-				}
-			}
+			// Save once. EF Core handles the inserts and deletes for the join tables automatically.
+			await _jobService.UpdateAsync(job);
 
 			return Success<string>();
 
