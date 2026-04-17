@@ -15,5 +15,16 @@ namespace JobBoard.Core.Common.Helpers
 				_ => "0-50"
 			};
 		}
+
+		public static CompanySize? GetCompanySizeFromString(string? size)
+		{
+			return size switch
+			{
+				"0-50" => CompanySize.Small,
+				"51-500" => CompanySize.Medium,
+				"500+" => CompanySize.Large,
+				_ => CompanySize.Small
+			};
+		}
 	}
 }
