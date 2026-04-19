@@ -115,8 +115,9 @@ namespace JobBoard.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 
-		public async Task<IActionResult> UpdateCompany([FromBody] UpdateCompanyCommand request)
+		public async Task<IActionResult> UpdateCompany([FromRoute] int Id, [FromBody] UpdateCompanyCommand request)
 		{
+			request.CompanyId = Id;
 			return NewResult(await Mediator.Send(request));
 		}
 
