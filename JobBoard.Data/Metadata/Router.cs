@@ -41,7 +41,7 @@
 			public const string GetBySlug = Prefex + "/{slug}";
 			public const string GetJobsBySlug = Prefex + "/{slug}/jobs";
 			public const string Create = Prefex;
-			public const string Update = Prefex;
+			public const string Update = Prefex + "/{Id}";
 			public const string DeleteById = Prefex + Single;
 			public const string Jobs = Prefex + Single + "/Jobs";
 
