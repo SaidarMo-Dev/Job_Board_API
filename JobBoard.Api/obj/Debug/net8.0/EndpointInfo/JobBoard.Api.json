@@ -9434,10 +9434,6 @@
             "type": "string",
             "nullable": true
           },
-          "companyId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "location": {
             "type": "string",
             "nullable": true

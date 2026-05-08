@@ -98,5 +98,7 @@ namespace JobBoard.Service.Abstractions
 		Task<bool> IsSlugExist(string slug);
 		Task<bool> IsSlugExistExcludeSelf(string slug, int id);
 		Task<Company> GetEmployerCompany();
+
+		Task<int> GetCurrentUserCompanyIdAsync();
 	}
 }

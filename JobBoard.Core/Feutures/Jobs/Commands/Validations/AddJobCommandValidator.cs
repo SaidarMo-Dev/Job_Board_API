@@ -32,11 +32,6 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Validations
 			RuleFor(x => x.Description)
 				.MaximumLength(5000).WithMessage("Description is too long.");
 
-			RuleFor(x => x.CompanyId)
-				.GreaterThan(0).WithMessage("A valid Company is required.")
-				.MustAsync(async (key, cancellationToken) => await _companyService.IsExistByIdAsync(key))
-				.WithMessage("There is no Company With The Id you entered");
-
 			RuleFor(x => x.Location)
 				.NotEmpty().WithMessage("Location is required.");
 

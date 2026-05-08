@@ -185,6 +185,18 @@ namespace JobBoard.Service.Implementations
 			return company;
 		}
 
+		public async Task<int> GetCurrentUserCompanyIdAsync()
+		{
+			var companyId = await _companyRepository.GetTableAsNoTracking()
+				.Where(c => c.CreatedByUserId == _currentUserService.GetCurrentUserId())
+				.Select(c => (int?)c.CompanyId)
+				.FirstOrDefaultAsync()
+				?? throw new Exception("You must create a company first.");
+
+			return companyId;
+
+		}
+
 		#endregion
 	}
 }

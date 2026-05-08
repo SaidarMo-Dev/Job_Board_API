@@ -8,7 +8,6 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Models
 	{
 		public required string Title { get; set; }
 		public string? Description { get; set; }
-		public int CompanyId { get; set; }
 		public required string Location { get; set; }
 		public JobTypeEnum JobType { get; set; }
 		public double MinSalary { get; set; }

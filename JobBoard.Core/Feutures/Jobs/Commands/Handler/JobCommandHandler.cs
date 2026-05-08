@@ -28,6 +28,7 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 		private readonly ICategoryService _categoryService;
 		private readonly IAuthorizationService _authorizationService;
 		private readonly ICurrentUserService _currentUserService;
+		private readonly ICompanyService _companyService;
 
 		#endregion
 
@@ -40,7 +41,8 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 							ICategoryService categoryService,
 							IStringLocalizer<SharedResources> stringLocalizer,
 							IAuthorizationService authorizationService,
-							ICurrentUserService currentUserService
+							ICurrentUserService currentUserService,
+							ICompanyService companyService
 
 			) : base(stringLocalizer)
 		{
@@ -52,6 +54,7 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 			_categoryService = categoryService;
 			_authorizationService = authorizationService;
 			_currentUserService = currentUserService;
+			_companyService = companyService;
 		}
 
 		#endregion
@@ -67,6 +70,8 @@ namespace JobBoard.Core.Feutures.Jobs.Commands.Handler
 			// get created user
 			job.CreatedByUserId = _currentUserService.GetCurrentUserId();
 
+			// Get Employer company id
+			job.CompanyId = await _companyService.GetCurrentUserCompanyIdAsync();
 
 			// Adding Job skills
 
