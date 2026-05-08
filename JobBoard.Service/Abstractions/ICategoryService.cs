@@ -95,6 +95,6 @@ namespace JobBoard.Service.Abstractions
 		/// <returns>
 		/// An <see cref="List{T}"/> of <see cref="Category"/>.
 		/// </returns>
-		Task<List<Category>> GetPopularCategoriesAsync();
+		Task<List<Category>> GetPopularCategoriesAsync(int take = 5);
 	}
 }

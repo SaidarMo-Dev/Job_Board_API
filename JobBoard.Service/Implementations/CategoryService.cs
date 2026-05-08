@@ -139,7 +139,7 @@ namespace JobBoard.Service.Implementations
 
 		}
 
-		public async Task<List<Category>> GetPopularCategoriesAsync()
+		public async Task<List<Category>> GetPopularCategoriesAsync(int take = 5)
 		{
 			var cutOffDate = DateTime.UtcNow.AddDays(-30);
 
@@ -150,7 +150,7 @@ namespace JobBoard.Service.Implementations
 				JobsCount = c.JobCategories.Where(x => x.jobListing.DatePosted >= cutOffDate && x.jobListing.Status == JobStatusEnum.Active).Count()
 			})
 				.OrderByDescending(x => x.JobsCount)
-				.Take(10)
+				.Take(take)
 				.Select(c =>
 					new Category
 					{
