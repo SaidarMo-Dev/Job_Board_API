@@ -59,26 +59,6 @@ builder.Services.AddHangfireServer();
 
 #endregion
 
-#region Cors configurations
-
-builder.Services.AddCors(options =>
-{
-	options.AddPolicy("iLinkApiCors", builder =>
-	{
-
-		builder.WithOrigins(
-			"http://localhost:5173"
-			)
-
-		.AllowAnyMethod()
-		.AllowAnyHeader()
-		.AllowCredentials();
-
-	});
-});
-
-#endregion
-
 #region  Dependencies 
 
 builder.Services.AddInfrastuctureDependencies()
@@ -137,7 +117,26 @@ builder.Services.AddSerilog();
 
 #endregion
 
+#region Cors configurations
+var corsSettings = builder.Configuration
+	.GetSection("Cors")
+	.Get<CorsSettings>() ?? new();
 
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy("iLinkApiCors", builder =>
+	{
+
+		builder.WithOrigins(corsSettings.AllowedOrigins)
+
+		.AllowAnyMethod()
+		.AllowAnyHeader()
+		.AllowCredentials();
+
+	});
+});
+
+#endregion
 
 var app = builder.Build();
 
@@ -152,11 +151,12 @@ using (var scope = app.Services.CreateScope())
 }
 #endregion
 
-//using (var scope = app.Services.CreateScope())
-//{
-//	var context = scope.ServiceProvider.GetRequiredService<appDbContext>();
-//	context.Database.Migrate();
-//}
+using (var scope = app.Services.CreateScope())
+{
+	var context = scope.ServiceProvider.GetRequiredService<appDbContext>();
+	await context.Database.MigrateAsync();
+}
+
 
 #region Seeders
 using (var service = app.Services.CreateScope())

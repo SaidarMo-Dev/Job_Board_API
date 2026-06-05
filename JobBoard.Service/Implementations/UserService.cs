@@ -114,7 +114,6 @@ namespace JobBoard.Service.Implementations
 			}
 
 			try
-
 			{
 				_backgroundJobClient.Enqueue<IEmailService>(emailService => emailService.SendEmailAsync(
 					user.Email!,

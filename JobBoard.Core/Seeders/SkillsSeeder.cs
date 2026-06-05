@@ -9,12 +9,12 @@ public static class SkillSeeder
 
 		var skills = new List<Skill>
 		{
-			new Skill { Name = "C#", Description = "A modern, object-oriented programming language developed by Microsoft." },
-			new Skill { Name = "JavaScript", Description = "A scripting language primarily used for creating interactive web interfaces." },
-			new Skill { Name = "SQL", Description = "A language used for querying and managing data in relational databases." },
-			new Skill { Name = "React", Description = "A JavaScript library for building fast and interactive user interfaces." },
-			new Skill { Name = "ASP.NET Core", Description = "A cross-platform, high-performance framework for building modern web applications." },
-			new Skill { Name = "Flutter", Description = "A cross-platform, high-performance framework for building modern mobile applications." },
+			new Skill { Name = "C#",NormalizedName= "C#", Description = "A modern, object-oriented programming language developed by Microsoft." },
+			new Skill { Name = "JavaScript",NormalizedName = "JAVASCRIPT", Description = "A scripting language primarily used for creating interactive web interfaces." },
+			new Skill { Name = "SQL",NormalizedName= "SQL", Description = "A language used for querying and managing data in relational databases." },
+			new Skill { Name = "React",NormalizedName ="REACT", Description = "A JavaScript library for building fast and interactive user interfaces." },
+			new Skill { Name = "ASP.NET Core", NormalizedName = "ASP.NET Core", Description = "A cross-platform, high-performance framework for building modern web applications." },
+			new Skill { Name = "Flutter", NormalizedName = "FlUTTER", Description = "A cross-platform, high-performance framework for building modern mobile applications." },
 		};
 
 		await context.skills.AddRangeAsync(skills);

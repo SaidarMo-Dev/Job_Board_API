@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v8.0": {
       "JobBoard.Api/1.0.0": {
         "dependencies": {
+          "AutoMapper": "14.0.0",
           "JobBoard.Core": "1.0.0",
           "JobBoard.Infrastructure": "1.0.0",
           "JobBoard.Service": "1.0.0",

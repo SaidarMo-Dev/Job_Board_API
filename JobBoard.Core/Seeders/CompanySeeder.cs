@@ -12,44 +12,25 @@ namespace JobBoard.Core.Seeders
 			{
 				new Company
 				{
-					CompanyName = "TechNovaxy Inc",
-					Description = "A leading software company focused on enterprise-grade solutions and cloud infrastructure.",
-					WebsiteUrl = "https://www.technovaxy.com",
-					Location = "New York, NY",
-					PhoneNumber = "212-555-1001",
-					Email = "info@technovaxy.com",
-					Fax = "212-555-1002",
-					CreatedByUserId = 1,
-					CreatedAt = DateTime.UtcNow,
-					Slug = "tech-novaxy"
-				},
-				new Company
-				{
 
-					CompanyName = "Designity Solutions",
-					Description = "Creative agency delivering high-end UX/UI design, branding, and visual identity services.",
-					WebsiteUrl = "https://www.designity.com",
-					Location = "Los Angeles, CA",
-					PhoneNumber = "310-555-2001",
-					Email = "contact@designify.com",
-					Fax = "310-555-2002",
-					CreatedAt = DateTime.UtcNow,
-					CreatedByUserId = 1,
-					Slug = "designity"
-				},
-				new Company
-				{
-
-					CompanyName = "DataSolve Corp Df",
-					Description = "Analytics and AI-driven consulting company solving complex business data problems globally.",
-					WebsiteUrl = "https://www.datasolvedf.com",
-					Location = "Chicago, IL",
-					PhoneNumber = "312-555-3001",
-					Email = "support@datasolvedf.com",
-					Fax = "312-555-3002",
-					CreatedByUserId = 1,
-					CreatedAt = DateTime.UtcNow,
-					Slug = "data-solve"
+					CompanyName = "Nebula Stream",
+					Slug = "nebula-stream",
+					Description = "A next-generation real-time data processing platform for IoT devices.",
+					ShortDescription = "Real-time IoT data solutions.",
+					Industry = "Technology",
+					CompanySize = "11-50",
+					FoundedYear = 2022,
+					WebsiteUrl = "https://nebula-stream.io",
+					LinkedInUrl = "https://linkedin.com/company/nebulastream",
+					Email = "contact@nebula-stream.io",
+					Country = "USA",
+					City = "San Francisco",
+					Address = "101 California St, Ste 2710",
+					Location = "San Francisco, CA",
+					IsFeatured = true,
+					IsVerified = true,
+					CreatedAt = DateTime.UtcNow.AddMonths(-6),
+					CreatedByUserId = 1
 				}
 			};
 

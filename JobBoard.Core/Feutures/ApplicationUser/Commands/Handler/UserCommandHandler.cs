@@ -70,12 +70,10 @@ namespace JobBoard.Core.Feutures.ApplicationUser.Commands.Handler
 		public async Task<Response<int>> Handle(AddUserCommand request, CancellationToken cancellationToken)
 		{
 
-			// verify the username and email to be unique
+			// verify the email to be unique
 			var Exist = await _userManager.Users.AnyAsync(x => x.Email == request.Email);
 
 			if (Exist) return BadRequest<int>(_stringLocalizer[SharedResourcesKeys.EmailExist]);
-
-			if (Exist) return BadRequest<int>("Username Already Exits");
 
 			// map request with user
 			var user = _mapper.Map<User>(request);

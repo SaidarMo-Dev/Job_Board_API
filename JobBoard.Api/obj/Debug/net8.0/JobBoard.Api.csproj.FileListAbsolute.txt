@@ -387,12 +387,6 @@ C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\scopedcss\bundle\JobBoar
 C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\staticwebassets.build.json
 C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\staticwebassets.development.json
 C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\staticwebassets\msbuild.JobBoard.Api.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\staticwebassets\msbuild.JobBoard.Api.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\staticwebassets\msbuild.build.JobBoard.Api.props
-C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.JobBoard.Api.props
-C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.JobBoard.Api.props
-C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\JobBoard.B270E713.Up2Date
 C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\JobBoard.Api.dll
@@ -457,3 +451,8 @@ C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\Supabase.Realtime.dll
 C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\Supabase.Storage.dll
 C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\System.Reactive.dll
 C:\Projects\Job_Board_API\JobBoard.Api\bin\Debug\net8.0\Websocket.Client.dll
+C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\rjimswa.dswa.cache.json
+C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+C:\Projects\Job_Board_API\JobBoard.Api\obj\Debug\net8.0\staticwebassets.build.json.cache

@@ -120,6 +120,10 @@ namespace JobBoard.Infrastructure
 					}
 				});
 			});
+			// Cors configuration registration
+
+			services.Configure<CorsSettings>(
+			configuration.GetSection("Cors"));
 			return services;
 		}
 	}

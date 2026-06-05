@@ -7604,6 +7604,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "AutoMapper >= 14.0.0",
       "JobBoard.Core >= 1.0.0",
       "JobBoard.Infrastructure >= 1.0.0",
       "JobBoard.Service >= 1.0.0",
@@ -7668,12 +7669,16 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "AutoMapper": {
+            "target": "Package",
+            "version": "[14.0.0, )"
+          },
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
@@ -7716,8 +7721,20 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.314/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'AutoMapper' 14.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-rvv3-g6hj-g44x",
+      "libraryId": "AutoMapper",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }
