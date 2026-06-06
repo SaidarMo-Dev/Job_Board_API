@@ -165,6 +165,24 @@ namespace JobBoard.Core.Feutures.Jobs.Queries.Handler
 			var jobsQueryable = _jobService.GetRecommendationJobs(_currentUserService.GetCurrentUser());
 
 
+			var result = await _mapper.ProjectTo<JobResponseDto>(jobsQueryable).ToListAsync();
+
+			if (result == null)
+				return Success(new List<JobResponseDto>());
+
+			foreach (var job in result)
+			{
+
+				if (!string.IsNullOrEmpty(job.Company.LogoUrl))
+				{
+					job.Company.LogoUrl =
+						_storageService.GetPublicUrl(
+							_storageService.GetBucket(FileOwnerType.Companies),
+							job.Company.LogoUrl);
+				}
+
+			}
+
 			return Success(await _mapper.ProjectTo<JobResponseDto>(jobsQueryable).ToListAsync());
 
 

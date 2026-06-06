@@ -137,7 +137,7 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(new DeleteCompanyCommand(Id)));
 		}
 
-
+		[AllowAnonymous]
 		[SwaggerOperation(
 			Summary = "Get popular companies",
 			Description = "get most popular companies.",

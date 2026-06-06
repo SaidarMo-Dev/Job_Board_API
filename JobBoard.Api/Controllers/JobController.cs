@@ -10,7 +10,7 @@ namespace JobBoard.Api.Controllers
 {
 	[ApiController]
 
-	[Authorize(Roles = "Admin,Employer")]
+	[Authorize]
 
 	[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -98,6 +98,7 @@ namespace JobBoard.Api.Controllers
 			Description = "Creates a new job entry with the provided job details.",
 			OperationId = "AddNewJob")]
 
+		[Authorize(Roles = "Admin,Employer")]
 		[HttpPost(Router.JobRoute.Create)]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -107,6 +108,7 @@ namespace JobBoard.Api.Controllers
 			return NewResult(await Mediator.Send(request));
 		}
 
+		[Authorize(Roles = "Admin,Employer")]
 		[SwaggerOperation(
 			Summary = "Update a job",
 			Description = "Updates an existing job with the provided information.",
@@ -121,6 +123,7 @@ namespace JobBoard.Api.Controllers
 		}
 
 
+		[Authorize(Roles = "Admin,Employer")]
 		[SwaggerOperation(
 			Summary = "Delete a job",
 			Description = "Deletes a job identified by its unique ID.",
@@ -140,7 +143,7 @@ namespace JobBoard.Api.Controllers
 			Description = "Retrieves all jobs posted by a specific company identified by its ID.",
 			OperationId = "GetCompanyJobs")]
 
-		[Authorize]
+
 		[HttpGet(Router.CompanyRoute.Jobs)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		public async Task<IActionResult> GetCompanyJobs([FromRoute] int Id)
@@ -162,8 +165,6 @@ namespace JobBoard.Api.Controllers
 		}
 
 
-
-		[Authorize]
 		[SwaggerOperation(
 			Summary = "Get recommendation jobs",
 			Description = "Retreives recommendation jobs for loged user",
@@ -171,12 +172,14 @@ namespace JobBoard.Api.Controllers
 
 		[HttpGet(Router.JobRoute.Recommendations)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+
 		public async Task<IActionResult> GetRecommendationJobs()
 		{
 			return NewResult(await Mediator.Send(new GetRecommendationJobsQuery()));
 		}
 
-		[Authorize]
+		[Authorize(Roles = "Admin,Employer")]
 		[SwaggerOperation(
 			Summary = "Get job applicants summary",
 			Description = "Retreives applicants for a job",
