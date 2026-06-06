@@ -182,7 +182,7 @@ namespace JobBoard.Api.Controllers
 			Description = "Upload company banner",
 			OperationId = "UploadCompanyBanner")]
 
-		[HttpGet(Router.CompanyRoute.UploadCompanyBanner)]
+		[HttpPut(Router.CompanyRoute.UploadCompanyBanner)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		public async Task<IActionResult> UploadCompanyBanner([FromRoute] int Id, [FromForm] UploadCompanyBannerRequest request)
 		{
@@ -196,7 +196,7 @@ namespace JobBoard.Api.Controllers
 		Description = "Get Company Statistics",
 		OperationId = "GetCompanyStatistics")]
 
-		[HttpPut(Router.CompanyRoute.Statistics)]
+		[HttpGet(Router.CompanyRoute.Statistics)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		public async Task<IActionResult> GetStatistics()
 		{
