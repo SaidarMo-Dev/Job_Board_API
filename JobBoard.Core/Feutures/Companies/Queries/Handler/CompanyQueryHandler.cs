@@ -22,7 +22,8 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 						IRequestHandler<GetCompanyBySlug, Response<GetSingleCompanyQueryResponse>>,
 						IRequestHandler<GetCompanyJobs, PaginatedResponse<GlobalJobResponseDto>>,
 						IRequestHandler<GetFeaturedCompaniesQuery, PaginatedResponse<GetSingleCompanyQueryResponse>>,
-						IRequestHandler<GetEmployerCompanyQuery, Response<GetEmployerCompanyQueryResponse>>
+						IRequestHandler<GetEmployerCompanyQuery, Response<GetEmployerCompanyQueryResponse>>,
+						IRequestHandler<GetCompanyStatisticsQuery, Response<GetStatisticsQueryResponse>>
 	{
 		#region Fields
 		private readonly ICompanyService _companyService;
@@ -32,6 +33,7 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 		private readonly IFileResourceService _fileResourceService;
 		private readonly ICompanyFileStitcher _stitcher;
 		private readonly ICompanyJobStatsService _companyJobStatsService;
+		private readonly IIndustryService _industryService;
 		private static readonly List<PropertyInfo> _cachedCompanyProperties =
 	typeof(GetSingleCompanyQueryResponse).GetProperties().ToList();
 
@@ -45,7 +47,9 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 			IFileUrlResolver fileUrlResolver,
 			IFileResourceService fileResourceService,
 			ICompanyFileStitcher stitcher,
-			ICompanyJobStatsService companyJobStatsService
+			ICompanyJobStatsService companyJobStatsService,
+			IIndustryService industryService
+
 			)
 
 			: base(stringLocalizer)
@@ -57,6 +61,7 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 			_fileResourceService = fileResourceService;
 			_stitcher = stitcher;
 			_companyJobStatsService = companyJobStatsService;
+			_industryService = industryService;
 		}
 		#endregion
 
@@ -268,6 +273,22 @@ namespace JobBoard.Core.Feutures.Companies.Queries.Handler
 				 cancellationToken);
 
 			return Success(result);
+		}
+
+		public Task<Response<GetStatisticsQueryResponse>> Handle(GetCompanyStatisticsQuery request, CancellationToken cancellationToken)
+		{
+			var totalOpenJobs = _jobService.GetJobsQueryable()
+				.Count(j => j.Status == Data.enums.JobStatusEnum.Active);
+
+			var totalCompanies = _companyService.GetCompaniesQueryable().Count();
+			var totalIndustries = _industryService.GetIndustriesQueryable().Count();
+
+			return Task.FromResult(Success(new GetStatisticsQueryResponse
+			{
+				TotalCompanies = totalCompanies,
+				TotalOpenJobs = totalOpenJobs,
+				TotalIndustries = totalIndustries
+			}));
 		}
 
 		#endregion

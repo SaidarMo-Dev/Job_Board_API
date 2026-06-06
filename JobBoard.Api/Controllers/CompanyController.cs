@@ -182,11 +182,25 @@ namespace JobBoard.Api.Controllers
 			Description = "Upload company banner",
 			OperationId = "UploadCompanyBanner")]
 
-		[HttpPut(Router.CompanyRoute.UploadCompanyBanner)]
+		[HttpGet(Router.CompanyRoute.UploadCompanyBanner)]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		public async Task<IActionResult> UploadCompanyBanner([FromRoute] int Id, [FromForm] UploadCompanyBannerRequest request)
 		{
 			return NewResult(await Mediator.Send(new UploadCompanyBannerCommand(Id, request.Banner)));
+		}
+
+
+		[AllowAnonymous]
+		[SwaggerOperation(
+		Summary = "Get Company Statistics",
+		Description = "Get Company Statistics",
+		OperationId = "GetCompanyStatistics")]
+
+		[HttpPut(Router.CompanyRoute.Statistics)]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<IActionResult> GetStatistics()
+		{
+			return NewResult(await Mediator.Send(new GetCompanyStatisticsQuery()));
 		}
 
 	}

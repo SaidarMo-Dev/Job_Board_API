@@ -50,6 +50,7 @@
 
 			public const string UploadCompanyLogo = Prefex + "/{Id}/logo";
 			public const string UploadCompanyBanner = Prefex + "/{Id}/banner";
+			public const string Statistics = Prefex + "/statistics";
 
 		}
 		public static class SkillRoute

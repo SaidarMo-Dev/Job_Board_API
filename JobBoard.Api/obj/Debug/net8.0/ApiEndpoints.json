@@ -3349,6 +3349,40 @@
   },
   {
     "ContainingType": "JobBoard.Api.Controllers.CompanyController",
+    "Method": "GetStatistics",
+    "RelativePath": "Api/V1/companies/statistics",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 403
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoard.Api.Controllers.CompanyController",
     "Method": "GetCompaniesSummary",
     "RelativePath": "Api/V1/companies/summary",
     "HttpMethod": "GET",
